@@ -5,10 +5,10 @@ import { drawPlayerOutline } from "./pose-outline.js";
 const MODEL_URL = "/models/";
 
 const CLASS_TO_POSE = {
-  "Right Hip": "rightHip",
-  "Left Hip": "leftHip",
-  "Right Hand": "rightHand",
-  "Left Hand": "leftHand",
+  "Right Hip": "leftHip",
+  "Left Hip": "rightHip",
+  "Right Hand": "leftHand",
+  "Left Hand": "rightHand",
   "Default": "default",
   // "Start/Stop": "startStop",
 };

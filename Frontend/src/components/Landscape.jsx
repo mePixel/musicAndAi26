@@ -13,7 +13,7 @@ export function Landscape({ audio }) {
       renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
       container.appendChild(renderer.domElement);
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color('#04090c');
+      scene.background = new THREE.Color('#eee8ff');
       const camera = new THREE.PerspectiveCamera(48, 1, .1, 180);
       camera.position.set(0, 8, 30); camera.lookAt(0, 0, -28);
       // Dense points form the surface; there are no solid faces or wire lines.
@@ -44,8 +44,8 @@ export function Landscape({ audio }) {
           varying float distanceToCamera;
           void main() {
             vec3 p = position;
-            float wave = p.x*.12 + p.z*.09 - time*1.6;
-            p.y += sin(wave)*(1.6 + energy*2.5) + cos(p.z*.16-time)*.7;
+            float wave = p.x*.12 + p.z*.09 - time*2.2;
+            p.y += sin(wave)*(2.2 + energy*3.0) + cos(p.z*.16-time)*.7;
             p.x += cos(wave)*.65;
             p.z += sin(wave*.7)*.45;
             vec4 view = modelViewMatrix * vec4(p, 1.0);
@@ -65,8 +65,8 @@ export function Landscape({ audio }) {
             if (radius > .5) discard;
             float dotShape = 1.0-smoothstep(.32,.5,radius);
             float fog = 1.0-smoothstep(30.0,135.0,distanceToCamera);
-            vec3 teal = mix(vec3(.035,.24,.27),vec3(.24,.78,.67),brightness);
-            gl_FragColor = vec4(teal, dotShape*fog*brightness);
+            vec3 danceColor = mix(vec3(.12,.20,.95),vec3(1.0,.06,.52),brightness);
+            gl_FragColor = vec4(danceColor, dotShape*fog*brightness);
           }
         `,
       });

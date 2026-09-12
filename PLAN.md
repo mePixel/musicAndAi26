@@ -1,5 +1,45 @@
 # Bodybeat — webcam rhythm game
 
+The poster character now mirrors live PoseNet joint positions when its camera is
+enabled, with smoothed, mirrored arms, head, torso, and visible legs. This does not
+depend on recognizing one of the five named poses. Uncertain joints return to a
+resting position; lost/stale tracking clears the live pose, and camera-off restores
+the demo. Motion pause and reduced-motion preferences still apply. Three focused
+mapping tests and simulated browser checks pass for mirroring, distance/position
+normalization, uncertain joints, live wrist movement, pause/resume, loss of input,
+and camera-off cleanup. Physical full-body matching still needs a human playtest.
+
+Main-screen poster redesign: yellow/pink street-poster composition, transparent
+drummer photograph, self-hosted display fonts, real track waveforms, and a circular
+Play control. Idle motion follows selected BPM. “Make the poster move” explicitly
+enables a mirrored camera preview; shoulder positions move the artwork and confirmed
+poses trigger stamps and directional reactions. Keyboard selection, leaving the
+screen, and hiding the tab release the camera. Motion can be paused and respects
+reduced-motion preferences. The game and practice retain their existing behavior.
+Production build and desktop/mobile browser checks pass (1440×1000, 390×844):
+song/input selection, keyboard game entry/return, instructions, no overflow or
+runtime errors. Simulated recognition verifies all five pose reactions, lost-input
+clearing, motion controls, camera denial, and cleanup on Keyboard selection.
+Live camera remained in its loading/permission state and was stopped; physical
+pose reactions and audible timing still need a playtest. Tests: 14 pass, with the
+pre-existing removed `classifyPose` import failure in `pose.test.js` unchanged.
+
+Recognition feedback: gameplay and practice now outline the player's head, torso,
+and visible limbs in the confirmed move's color (including Start / Pause).
+The colored edge also casts a soft inner glow, clipped to the body and fading
+to a transparent center so the camera image stays visible. Build and simulated
+browser checks verify the inward fade, move color, transparent center/exterior,
+all five recognition colors, clearing, and desktop/mobile camera views.
+The outline approximates the body from PoseNet joints; it is not pixel-level
+segmentation. It follows the existing 100 ms confirmation, remains while the pose
+is recognized, and clears on uncertain input, lost tracking, or camera shutdown.
+Build and browser checks pass for all five colors, color replacement, transparent
+interiors, lost/uncertain clearing, mirrored gameplay, and desktop/mobile practice
+using simulated model output. A live webcam check produced landmarks without JS
+errors, but both arms were not tracked, so physical pose/outline alignment remains
+to be playtested. `npm test`: 14 pass; the existing `pose.test.js` still fails by
+importing the removed `classifyPose` export.
+
 Latest palette update: brighter orange transport controls, saturated yellow/blue/pink/teal
 pose colors shared by the demo, guide, chart, and game notes, plus a lime waveform
 on a deep violet display. Build, contrast checks, and design detector pass. Browser

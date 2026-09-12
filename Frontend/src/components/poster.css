@@ -1,0 +1,122 @@
+@font-face { font-family: 'Poster Condensed'; src: url('/fonts/barlow-condensed-black-italic.ttf') format('truetype'); font-weight: 900; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Poster Marker'; src: url('/fonts/permanent-marker.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+
+.poster-home {
+  --paper: #fff638; --ink: #11100f; --pink: #ff279c; --cream: #fffdf0;
+  --background: var(--paper); --foreground: var(--ink); --muted-foreground: #393316;
+  --primary: var(--pink); --primary-foreground: var(--ink); --ring: var(--ink);
+  --body-x: 0px; --body-y: 0px;
+  background: var(--paper); color: var(--ink); min-height: 100svh; overflow: clip;
+}
+.poster-home ::selection { background: var(--ink); color: var(--paper); }
+.poster-home button:focus-visible, .poster-home a:focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; box-shadow: none; }
+.poster-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 3%; position: relative; z-index: 5; }
+.poster-brand { color: var(--ink); display: flex; align-items: center; font-weight: 900; letter-spacing: -.04em; font-size: clamp(30px,2.6vw,38px); line-height: 1; text-decoration: none; }
+.poster-brand svg { width: 37px; height: 37px; color: #92074f; transform: rotate(15deg); }
+.poster-header nav { display: flex; gap: 28px; }
+.poster-header nav button { border: 0; background: transparent; border-radius: 0; box-shadow: none; padding: 8px 0; height: 40px; color: var(--ink); font-size: 15px; font-weight: 650; text-decoration: underline; text-underline-offset: 8px; }
+.poster-header nav button:hover { text-decoration-thickness: 3px; }
+.poster-stage { position: relative; min-height: 580px; height: clamp(580px, calc(100svh - 282px), 850px); isolation: isolate; }
+.poster-title { position: absolute; top: 10%; left: 5%; z-index: 2; width: 55%; margin: 0; font-family: 'Poster Condensed', sans-serif; font-weight: 900; font-style: italic; font-size: clamp(90px, 11.3vw, 175px); line-height: .96; letter-spacing: -.035em; transform: rotate(-2deg); transform-origin: 20% 30%; pointer-events: none; }
+.poster-title span { display: block; white-space: nowrap; }
+.poster-title span:nth-child(2) { margin-left: 1%; }
+.poster-title span:last-child { font-size: .59em; margin-top: 12px; }
+.poster-title span:last-child::after { content: ''; display: block; margin: 15px 0 0 36%; width: 49%; height: 7px; background: var(--pink); clip-path: polygon(0 20%,100% 0,96% 100%,2% 85%); }
+.poster-art { position: absolute; z-index: 3; left: 35%; top: 6%; width: 41%; height: 94%; pointer-events: none; transform: translate(var(--body-x), var(--body-y)); transition: transform 160ms linear; }
+.poster-scribble { font-family: 'Poster Marker', cursive; font-size: clamp(14px,1.25vw,19px); line-height: 1.05; transform: rotate(2deg); }
+.scribble-top { position: absolute; z-index: 4; left: 38%; top: 4%; color: #840545; }
+.poster-controls { position: absolute; z-index: 4; right: 3%; top: 3%; text-align: center; }
+.poster-controls [data-slot='toggle-group'] { border: 1.5px solid var(--ink); border-radius: 999px; gap: 0; padding: 3px; }
+.poster-controls [data-slot='toggle-group-item'] { padding: 12px 20px; height: 42px; border-radius: 999px; color: var(--ink); gap: 10px; background: transparent; }
+.poster-controls [aria-pressed='true'] { background: var(--ink); color: var(--cream); }
+.poster-controls p { margin-top: 10px; font-size: 11px; font-weight: 550; }
+.poster-play-area { position: absolute; z-index: 4; right: 4%; top: 31%; width: 20%; text-align: center; }
+.poster-home .poster-play { width: 100%; height: auto; aspect-ratio: 1; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; gap: 18px; color: var(--ink); background: var(--pink); white-space: normal; border: 0; transition: transform 220ms ease-out, background 220ms; box-shadow: none; }
+.poster-home .poster-play:hover { transform: scale(1.025); background: #ff54b0; animation-play-state: paused; }
+.poster-play > svg:first-child { width: 22%; height: 22%; fill: currentColor; stroke-width: 1; }
+.poster-play > svg:last-child { position: absolute; width: 32px; height: 32px; right: 17%; bottom: 22%; }
+.poster-play span { font-family: 'Poster Marker', cursive; font-size: clamp(26px, 2.6vw,42px); line-height: .96; transform: rotate(-3deg); }
+.poster-play-caption { display: block; margin-top: 14px; font-size: 12px; font-weight: 650; }
+.poster-camera { position: absolute; z-index: 5; bottom: 4%; right: 2.5%; width: 25%; text-align: center; }
+.poster-camera-copy button { font-size: 13px; font-weight: 750; gap: 8px; text-decoration: underline; text-underline-offset: 4px; color: var(--ink); background: var(--paper); border-radius: 4px; }
+.poster-camera-copy p { font-size: 11px; line-height: 1.4; margin-top: 4px; background: var(--paper); }
+.poster-camera-preview { width: 100px; aspect-ratio: 4/3; position: relative; border: 2px solid var(--ink); background: var(--ink); border-radius: 7px; overflow: hidden; flex-shrink: 0; }
+.poster-camera-preview video, .poster-camera-preview canvas { position: absolute; inset: 0; width: 100%; height: 100%; transform: scaleX(-1); }
+.camera-is-on { display: flex; align-items: center; gap: 8px; width: 31%; right: 1.5%; }
+.camera-is-on .poster-camera-copy { flex: 1; }
+.camera-is-on .poster-camera-copy button { font-size: 12px; }
+.pose-stamp { position: absolute; z-index: 6; left: 54%; top: 45%; padding: 10px 16px; background: var(--cream); color: var(--ink); font: 24px 'Poster Marker', cursive; opacity: 0; pointer-events: none; }
+[data-burst='a'] .pose-stamp { animation: pose-pop-a 800ms ease-out; }
+[data-burst='b'] .pose-stamp { animation: pose-pop-b 800ms ease-out; }
+.poster-tracks { position: relative; z-index: 6; }
+.poster-tracks > [data-slot='toggle-group'] { display: grid; grid-template-columns: 1fr 1fr; width: 100%; gap: 0; border-radius: 0; }
+.poster-track { display: flex; min-width: 0; white-space: normal; text-align: left; justify-content: flex-start; border-radius: 0; padding: 18px 4%; height: 124px; gap: 24px; background: var(--cream); color: var(--ink); border: 0; }
+.poster-track[aria-pressed='true'] { background: var(--pink); color: var(--ink); }
+.poster-track:hover { background: #ffe3f2; }.poster-track[aria-pressed='true']:hover { background: #ff54b0; }
+.poster-track-number { font: italic 900 clamp(52px,5.4vw,80px)/1 'Poster Condensed', sans-serif; letter-spacing: -.04em; }
+.poster-track-info { display: flex; flex-direction: column; gap: 5px; }
+.poster-track-info strong { font: italic 900 clamp(25px,2.6vw,38px)/1 'Poster Condensed', sans-serif; white-space: nowrap; }
+.poster-track-info > span { font-size: 14px; font-weight: 550; white-space: nowrap; }
+.poster-track-info small { display: flex; align-items: center; gap: 4px; font-size: 9px; font-weight: 800; letter-spacing: .07em; }
+.poster-track-info small svg { width: 12px; height: 12px; }
+.poster-track[aria-pressed='true'] .poster-track-info > span,
+.poster-track[aria-pressed='true'] .poster-track-info small { background: var(--cream); align-self: flex-start; padding: 1px 4px; }
+.poster-track .poster-wave { width: 18%; height: 45px; margin-left: auto; fill: var(--ink); flex-shrink: 1; }
+.poster-track .track-arrow { width: 25px; height: 25px; flex-shrink: 0; }
+.poster-footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 12px 3%; min-height: 65px; background: var(--paper); position: relative; z-index: 6; }
+.poster-footer > p { font-size: 10px; letter-spacing: .12em; font-weight: 800; }
+.poster-footer > span { font-size: 11px; }
+.poster-utilities { display: flex; align-items: center; gap: 14px; }
+.poster-utilities button { color: var(--ink); font-size: 11px; background: transparent; }
+.poster-utilities > svg { width: 16px; height: 16px; }
+.poster-utilities [data-slot='slider'] { width: 75px; }
+.poster-utilities [data-slot='slider-range'] { background: var(--ink); }
+.poster-utilities [data-slot='slider-track'] { background: #b9ae19; }
+.poster-utilities [data-slot='slider-thumb'] { background: var(--cream); border-color: var(--ink); }
+.poster-error { background: var(--cream); color: #820029; padding: 16px 3%; }
+@keyframes pose-pop-a { 0% { opacity: 0; transform: translateY(6px); } 20%,70% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-6px); } }
+@keyframes pose-pop-b { 0% { opacity: 0; transform: translateY(6px); } 20%,70% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-6px); } }
+.poster-home[data-motion='off'] *, .poster-home[data-motion='off'] *::after { animation: none !important; transition: none !important; }
+.poster-home[data-motion='off'] .poster-art { transform: none; rotate: none; }
+@media (min-width: 1650px) { .poster-title { top: 10%; }.poster-art { left: 35%; width: 41%; }.poster-play-area { width: 20%; } }
+@media (max-width: 1000px) {
+  .poster-stage { height: 620px; }
+  .poster-title { top: 12%; font-size: 13vw; }
+  .poster-art { left: 35%; width: 44%; top: 10%; height: 90%; }
+  .poster-play-area { top: 35%; width: 23%; }
+  .poster-scribble { left: 37%; top: 2%; }
+  .poster-track { gap: 12px; padding: 16px 5%; height: 135px; }
+  .poster-track .poster-wave { display: none; }
+  .poster-track .track-arrow { margin-left: auto; }
+  .poster-camera { width: 30%; right: 1%; }.camera-is-on { flex-direction: column; bottom: 2%; }
+  .poster-footer > span { display: none; }
+}
+@media (max-width: 600px) {
+  .poster-header { padding: 20px 5% 12px; }.poster-header nav { gap: 16px; }.poster-header nav button { font-size: 12px; }
+  .poster-brand { font-size: 32px; }.poster-brand svg { width: 23px; height: 23px; }
+  .poster-stage { height: 590px; min-height: 0; }
+  .poster-title { top: 12%; left: 5%; width: 90%; font-size: 23vw; line-height: .96; }
+  .poster-title span:last-child { font-size: .7em; margin-top: 6px; }.poster-title span:last-child::after { height: 9px; margin-top: 7px; }
+  .poster-art { left: 36%; top: 29%; width: 62%; height: 65%; }
+  .scribble-top { display: none; }
+  .poster-controls { top: 0; right: 5%; left: 5%; display: flex; align-items: center; gap: 12px; text-align: left; }
+  .poster-controls [data-slot='toggle-group-item'] { font-size: 12px; height: 36px; padding: 8px 12px; gap: 6px; }
+  .poster-controls p { font-size: 10px; margin: 0; max-width: 95px; }
+  .poster-play-area { top: 58%; right: auto; left: 5%; width: 34%; }
+  .poster-home .poster-play { gap: 8px; }.poster-play span { font-size: 28px; }.poster-play > svg:last-child { width: 22px; height: 22px; right: 14%; }
+  .poster-play-caption { font-size: 10px; background: var(--paper); padding: 4px; margin-top: 8px; }
+  .poster-camera { left: 4%; right: auto; bottom: 1%; width: 90%; display: flex; justify-content: flex-start; text-align: left; gap: 10px; flex-direction: row; background: var(--paper); padding: 6px; }
+  .poster-camera-preview { width: 72px; }.camera-is-on .poster-camera-copy { flex: initial; }.poster-camera-copy p { padding-left: 10px; }
+  .poster-tracks > [data-slot='toggle-group'] { grid-template-columns: 1fr; }
+  .poster-track { height: 114px; padding: 12px 5%; gap: 16px; }.poster-track-number { font-size: 62px; }.poster-track-info strong { font-size: 30px; }.poster-track-info > span { font-size: 12px; }
+  .poster-track .poster-wave { display: block; width: 20%; height: 35px; }.poster-track .track-arrow { display: none; }
+  .poster-footer { flex-wrap: wrap; padding: 14px 5%; gap: 6px; justify-content: center; }.poster-footer > p { width: 100%; text-align: center; font-size: 9px; }
+  .pose-stamp { left: 30%; top: 48%; font-size: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .poster-home *, .poster-home *::after { animation: none !important; transition: none !important; }.poster-home .poster-art { transform: none; rotate: none; } }
+
+.poster-art .pose-dancer { width: 100%; height: 100%; display: flex; align-items: center; }
+.poster-art .pose-dancer > svg { width: 100%; height: 100%; max-height: none; overflow: visible; }
+.poster-art .pose-dancer > svg > g { fill: var(--ink); stroke: var(--ink); }
+.poster-art .pose-dancer > svg > .avatar-trail-white { fill: #fffdf0; stroke: #fffdf0; }
+.poster-art .pose-dancer > svg > .avatar-trail-pink { fill: var(--pink); stroke: var(--pink); }

@@ -6,34 +6,34 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  color-scheme: dark;
-  --background: #071114;
-  --foreground: #e6f5f1;
-  --card: #102326;
-  --card-foreground: #e6f5f1;
-  --popover: #102326;
-  --popover-foreground: #e6f5f1;
-  --primary: #86e5cf;
-  --primary-foreground: #071114;
-  --secondary: #102326;
-  --secondary-foreground: #e6f5f1;
-  --muted: #1c3437;
-  --muted-foreground: #b9d2ce;
-  --accent: #1c3437;
-  --accent-foreground: #e6f5f1;
-  --destructive: #ffb5ab;
-  --border: #526e70;
-  --input: #789693;
-  --ring: #86e5cf;
+  color-scheme: light;
+  --background: #eee8ff;
+  --foreground: #281345;
+  --card: #ffffff;
+  --card-foreground: #281345;
+  --popover: #ffffff;
+  --popover-foreground: #281345;
+  --primary: #ffe44d;
+  --primary-foreground: #281345;
+  --secondary: #f6f0ff;
+  --secondary-foreground: #281345;
+  --muted: #e5d9f7;
+  --muted-foreground: #584267;
+  --accent: #f0dcff;
+  --accent-foreground: #281345;
+  --destructive: #9f1647;
+  --border: #b49ace;
+  --input: #8869a6;
+  --ring: #a51975;
   --radius: .3rem;
-  --stage: #071114;
-  --panel: #102326;
-  --action-ink: #86e5cf;
-  --display: #102326;
-  --display-text: #e6f5f1;
-  --display-muted: #b9d2ce;
-  --display-line: #526e70;
-  --waveform: #86e5cf;
+  --stage: #231148;
+  --panel: #ffffff;
+  --action-ink: #a51975;
+  --display: #342068;
+  --display-text: #ffffff;
+  --display-muted: #e9dcff;
+  --display-line: #9475b9;
+  --waveform: #ffe44d;
 }
 
 @theme inline {
@@ -468,31 +468,28 @@ html { scrollbar-color: var(--input) var(--background); }
 
 }
 
-/* Reference background: a near-black field of teal mountain particles. */
-.music-landscape { background: #04090c; }
-.app > .site-header, .app > .site-footer { color: #d9eeea; }
-.app > .site-header { border-color: #253437; }
+/* Dance-floor palette: lilac daylight, hot pink, electric blue, and yellow. */
+.music-landscape { background: #eee8ff; }
+.music-landscape::after { content: ""; position: absolute; inset: 0; background: rgb(238 232 255 / 82%); }
+.app > .site-header, .app > .site-footer { color: #281345; }
+.app > .site-header { border-color: #c8b3e2; }
+.app > .site-header [data-slot="button"] { color: var(--foreground); }
+.wordmark > svg { color: #a51975; }
 .record-page .page-heading h1, .record-page .library-label h2,
-.record-page .learn-poses h2 { color: #d9eeea; }
+.record-page .learn-poses h2 { color: #281345; }
+.record-page .page-heading h1 span { color: #81074e; }
 .record-page .page-heading p, .record-page .library-label > span,
 .record-page .learn-poses > p, .app .footer-inner > p,
-.app .volume-value { color: #b3c8c6; }
-.pose-dancer > svg > g { fill: #bdeee0; stroke: #bdeee0; }
-
-.app > .site-header [data-slot="button"] { color: var(--foreground); }
-.record-page .page-heading h1 span { color: #ff784c; }
-
-/* Unified teal surfaces and coral transport, with high-contrast text. */
-.music-landscape::after { content: ""; position: absolute; inset: 0; background: rgb(4 9 12 / 75%); }
-.record-page { --panel: #102326; }
-.record-page .song-row[aria-pressed="true"] { background: #203b3d; border-color: #86e5cf; }
-.record-page .song-row:hover { background: #203b3d; }
-.record-page .track-display { background: #102326; color: #e6f5f1; }
-.record-page .page-heading h1 span { color: #86e5cf; }
-.record-page .waveform svg { fill: #86e5cf; }
+.app .volume-value { color: #281345; }
+.pose-dancer > svg > g { fill: #a51975; stroke: #a51975; }
+.record-page { --panel: #ffffff; }
+.record-page .song-row[aria-pressed="true"] { background: #fce0f2; border-color: #a51975; }
+.record-page .song-row:hover { background: #f0dcff; }
+.record-page .track-display { background: #342068; color: #ffffff; }
+.record-page .waveform svg { fill: #ffe44d; }
 .record-page .learn-poses .pose-guide > div { color: #071114; }
-.record-page .track-selected { color: #86e5cf; }
-.record-page .track-index { color: #b9d2ce; }
-.record-page .song-row[aria-pressed="true"] .track-index { color: #071114; background: #86e5cf; }
-
-.record-page .display-lane > div { background: #29484b; }
+.record-page .track-selected { color: #a51975; }
+.record-page .track-index { color: #584267; }
+.record-page .song-row[aria-pressed="true"] .track-index { color: #281345; background: #ffe44d; }
+.record-page .display-lane > div { background: #604480; }
+.record-page .play-song { font-weight: 750; }

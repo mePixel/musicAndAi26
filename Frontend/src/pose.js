@@ -1,4 +1,6 @@
 import * as tmPose from "@teachablemachine/pose";
+import { poses, controlPose } from "./poses.js";
+import { drawPlayerOutline } from "./pose-outline.js";
 
 const MODEL_URL = "/models/";
 
@@ -96,7 +98,7 @@ function getTracked(keypoints) {
   });
 }
 
-function drawPoseOverlay(ctx, canvas, pose) {
+function drawPoseOverlay(ctx, canvas, mask, pose, recognizedPose) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   if (!pose?.keypoints) {
@@ -104,6 +106,11 @@ function drawPoseOverlay(ctx, canvas, pose) {
   }
 
   const keypoints = pose.keypoints;
+  const move = recognizedPose === controlPose.id
+    ? controlPose
+    : poses.find(move => move.id === recognizedPose);
+
+  if (move) drawPlayerOutline(ctx, mask, keypoints, move.color);
 
   const connections = [
     [5, 6], // shoulders
@@ -164,6 +171,7 @@ export function createCamera(video, overlay, onFrame, onError) {
 
   const latch = createPoseLatch();
   const ctx = overlay.getContext("2d");
+  const outlineMask = document.createElement("canvas");
 
   function clear() {
     ctx.clearRect(0, 0, overlay.width, overlay.height);
@@ -287,18 +295,16 @@ export function createCamera(video, overlay, onFrame, onError) {
             try {
               const { pose, posenetOutput } = await model.estimatePose(video); // webcam
 
+              if (ownGeneration !== generation) return;
+
               const tracked = getTracked(pose?.keypoints);
-
-              clear();
-
-              if (pose) {
-                drawPoseOverlay(ctx, overlay, pose);
-              }
 
               let detectedPose = null;
 
               if (tracked) {
                 const predictions = await model.predict(posenetOutput); // actual output / classes
+
+                if (ownGeneration !== generation) return;
 
                 const best = getBestPrediction(predictions);
 
@@ -309,8 +315,11 @@ export function createCamera(video, overlay, onFrame, onError) {
 
               const latched = latch.update(detectedPose, now);
 
+              drawPoseOverlay(ctx, overlay, outlineMask, pose, latched.pose);
+
               onFrame({
                 tracked,
+                keypoints: pose?.keypoints ?? [],
 
                 pose: latched.pose,
 

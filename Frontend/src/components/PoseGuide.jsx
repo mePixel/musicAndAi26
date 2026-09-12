@@ -10,7 +10,7 @@ export function PoseIcon({ pose }) {
 
 export function PoseGuide() {
   return <><div className="pose-guide">
-    {poses.map((pose,i) => <div key={pose.id} style={{ '--pose-color': pose.color }}>
+    {poses.slice(0,4).map((pose,i) => <div key={pose.id} style={{ '--pose-color': pose.color }}>
       <PoseIcon pose={pose} />
       <span>{pose.short}</span><kbd>{i+1}</kbd>
     </div>)}

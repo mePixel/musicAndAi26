@@ -1,0 +1,223 @@
+/* The poster palette also belongs to session screens and portalled dialogs. */
+.app, .practice-page, .game-instructions {
+  --paper: #fff638;
+  --ink: #11100f;
+  --pink: #ff279c;
+  --cream: #fffdf0;
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--cream);
+  --card-foreground: var(--ink);
+  --popover: var(--cream);
+  --popover-foreground: var(--ink);
+  --primary: var(--pink);
+  --primary-foreground: var(--ink);
+  --secondary: var(--cream);
+  --secondary-foreground: var(--ink);
+  --muted: #eeeadd;
+  --muted-foreground: #454034;
+  --accent: #ffe0f0;
+  --accent-foreground: var(--ink);
+  --border: var(--ink);
+  --input: var(--ink);
+  --ring: var(--ink);
+  --destructive: #9b174e;
+  --stage: var(--ink);
+  --radius: .5rem;
+  background: var(--background);
+  color: var(--foreground);
+}
+:is(.app, .practice-page, .game-instructions) [data-slot="button"] { font-weight: 700; min-height: 40px; }
+:is(.app, .practice-page, .game-instructions) button:focus-visible { outline: 3px solid var(--foreground); outline-offset: 3px; box-shadow: none; }
+.session-header { position: relative; z-index: 30; display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 76px; padding: 16px 3%; background: var(--paper); border-bottom: 2px solid var(--ink); }
+.session-brand { display: inline-flex; align-items: center; font-size: 34px; font-weight: 900; letter-spacing: -.04em; line-height: 1; }
+.session-brand svg { color: #92074f; width: 32px; height: 32px; transform: rotate(15deg); }
+.session-header-actions { display: flex; align-items: center; gap: 24px; }
+.session-label { font-size: 11px; font-weight: 750; text-transform: uppercase; letter-spacing: .08em; }
+.session-header h1 { font: italic 900 32px/1 'Poster Condensed', sans-serif; text-transform: uppercase; }
+.session-header h1:focus { outline: none; }
+.session-header button { border-radius: 999px; background: var(--paper); min-height: 40px; font-weight: 700; }
+.app .session-header { min-height: 48px; padding: 8px 20px; }
+.app .session-brand { font-size: 27px; }
+.game-page { width: calc(100% - 32px); padding: 8px 0; }
+.game-topbar { display: grid; grid-template-columns: minmax(0, 1fr) 350px; align-items: center; gap: 24px; margin-bottom: 12px; }
+.game-toolbar { margin-bottom: 0; }
+.game-columns { grid-template-columns: minmax(0, 1fr) 184px; gap: 12px; }
+.game-columns[data-input="keyboard"] { grid-template-columns: minmax(0, 1fr); }
+.game-columns[data-input="keyboard"] .camera-panel { display: none; }
+.playing-title h1 { font: italic 900 clamp(30px, 3vw, 42px)/1.05 'Poster Condensed', sans-serif; }
+.playing-title p { font-size: 12px; font-weight: 650; letter-spacing: .08em; margin-top: 6px; }
+.game-toolbar [data-slot="button"], .game-progress [data-slot="button"] { background: var(--cream); border-radius: 999px; }
+.score-strip { background: var(--cream); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); padding: 8px 0; margin-bottom: 0; overflow: hidden; }
+.score-strip span { text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+.score-strip strong { font: italic 900 38px/1 'Poster Condensed', sans-serif; }
+.score-strip > div:first-child { position: relative; }
+.score-strip > div:first-child::after { content: ''; width: 30px; height: 4px; background: var(--pink); margin-top: 4px; transform: rotate(-4deg); }
+.time-readout strong, .time-readout #elapsed, .time-readout .duration { font: 700 16px/1.3 'Geist Variable', sans-serif; letter-spacing: 0; }
+.highway-panel {
+  --background: var(--ink); --foreground: var(--cream);
+  --muted: #292623; --muted-foreground: #d1cbbc; --border: #9a9588;
+  --ring: var(--paper); --destructive: #ffaad8;
+  border: 2px solid var(--ink); border-radius: 12px;
+  height: max(420px, calc(100dvh - 240px));
+}
+.lane-controls { padding: 0 3.5% 12px; }
+.lane-controls span { font-size: clamp(14px, 1.7vw, 24px); font-weight: 750; }
+.lane-controls [data-slot="button"] { width: 64px; height: 48px; font-size: 22px; color: var(--paper); }
+.lane-controls [data-slot="button"]:not(:disabled):hover { background: var(--paper); color: var(--ink); }
+.stage-overlay h2 { font: italic 900 clamp(34px, 4vw, 54px)/1 'Poster Condensed', sans-serif; text-transform: uppercase; color: var(--paper); }
+.stage-overlay > svg { width: 32px; height: 32px; color: var(--pink); }
+.highway-panel [data-slot="alert"] { --destructive: #9b174e; background: var(--cream); }
+.countdown p { color: var(--cream); font: 26px/1.2 'Poster Marker', cursive; transform: rotate(-4deg); }
+.countdown strong { font: italic 900 130px/.95 'Poster Condensed', sans-serif; color: var(--paper); text-shadow: 7px 4px 0 #b8176a; }
+.judgement { font: clamp(36px, 4vw, 64px)/1 'Poster Marker', cursive; color: var(--paper); text-shadow: 2px 2px var(--ink); transform: rotate(-4deg); }
+.judgement[data-kind="Good"] { color: #ffaad8; }
+.judgement:not([data-kind="Miss"]) { animation: hit-cheer 500ms cubic-bezier(.16,1,.3,1) both; text-shadow: 0 0 24px #ff279c80, 3px 3px var(--ink); }
+@keyframes hit-cheer {
+  0% { opacity: 0; transform: translateY(12px) rotate(-6deg) scale(.8); }
+  25% { opacity: 1; transform: translateY(0) rotate(-4deg) scale(1.1); }
+  100% { opacity: 1; transform: translateY(-8px) rotate(-4deg) scale(1); }
+}
+.camera-panel { background: var(--cream); border: 2px solid var(--ink); border-radius: 12px; padding: 12px; align-self: start; }
+.camera-heading h2 { font: italic 900 28px/1 'Poster Condensed', sans-serif; text-transform: uppercase; }
+.camera-heading > span { font-weight: 650; }
+.camera-preview { background: var(--paper); border: 1px solid var(--ink); border-radius: 8px; min-height: 0; aspect-ratio: 3/4; }
+.camera-preview [data-slot="empty"] { padding: 16px; }
+.camera-preview [data-slot="empty-media"] { background: var(--pink); color: var(--ink); border: 1px solid var(--ink); }
+.camera-preview [data-slot="empty-title"] { font-weight: 800; }
+.camera-preview[data-enabled="true"] { --background: var(--ink); }
+.detected-pose { background: var(--paper); color: var(--ink); font-weight: 750; border: 1px solid var(--ink); }
+.game-progress [data-slot="progress"] { background: var(--cream); border: 1px solid var(--ink); height: 12px; }
+.game-progress [data-slot="progress-indicator"] { background: var(--ink); }
+.game-progress { margin-top: 8px; }
+.results { --background: var(--cream); --foreground: var(--ink); --muted-foreground: #454034; --border: var(--ink); background: var(--cream); color: var(--ink); border-top: 8px solid var(--pink); }
+.results h2 { color: var(--ink); }
+.results .result-score { font: italic 900 clamp(64px, 7vw, 88px)/.9 'Poster Condensed', sans-serif; padding: 0 18px 5px; background: var(--paper); transform: rotate(-3deg); margin: 6px 0 0; }
+.results > p:first-child { font-weight: 700; }
+.results dl { border-top: 1px solid var(--ink); padding-top: 12px; margin: 6px 0 10px; }
+.results dd { font-weight: 800; }
+.results .inline-actions [data-slot="button"] { border: 1px solid var(--ink); border-radius: 999px; font-size: 19px; }
+.app .site-footer { border-top: 2px solid var(--ink); }
+.app .footer-inner { max-width: none; min-height: 40px; padding: 6px 20px; }
+.app .volume-field [data-slot="slider-track"] { background: var(--cream); border: 1px solid var(--ink); }
+.app .volume-field [data-slot="slider-range"] { background: var(--ink); }
+
+.game-instructions { background: var(--cream); border: 2px solid var(--ink); border-radius: 12px; padding: 24px; box-shadow: 8px 8px 0 var(--pink); max-height: calc(100dvh - 40px); overflow-y: auto; }
+.game-instructions [data-slot="dialog-title"] { font: italic 900 52px/1 'Poster Condensed', sans-serif; text-transform: uppercase; padding-right: 20px; }
+.game-instructions .pose-guide { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 12px 0; }
+.game-instructions .pose-guide > div { display: flex; flex-direction: column; gap: 8px; padding: 12px 2px; background: var(--paper); border: 1px solid var(--ink); border-radius: 6px; color: var(--ink); }
+.game-instructions .pose-guide svg { width: 48px; height: 48px; color: var(--ink); }
+.game-instructions .pose-guide span { font-size: 12px; font-weight: 750; }
+.game-instructions .pose-guide kbd { color: var(--ink); border-color: var(--ink); background: var(--cream); }
+.game-instructions .instructions { gap: 12px; }
+.game-instructions .instructions li::marker { font-weight: 900; color: var(--ink); }
+.game-instructions .instructions strong { font-weight: 800; }
+.game-instructions [data-slot="dialog-footer"] { margin: 0 -24px -24px; padding: 16px 24px; background: var(--paper); border-top: 2px solid var(--ink); }
+.game-instructions [data-slot="dialog-footer"] button { min-width: 140px; min-height: 44px; font-size: 19px; font-weight: 700; border: 1px solid var(--ink); border-radius: 999px; }
+
+.practice-page { background: var(--ink); }
+.practice-page .session-header { min-height: 80px; }
+.practice-stage { inset: 96px 20px 20px; }
+.practice-status { background: var(--paper); color: var(--ink); border: 2px solid var(--ink); border-radius: 12px; box-shadow: 5px 5px 0 var(--pink); padding: 12px 24px; }
+.practice-status h2 { font: italic 900 32px/1.1 'Poster Condensed', sans-serif; }
+.practice-status p { font-size: 13px; color: #454034; }
+.practice-status[data-bright="true"] { background: var(--ink); color: var(--cream); border-color: var(--cream); box-shadow: 5px 5px 0 var(--pink); }
+.practice-status[data-bright="true"] p { color: #d1cbbc; }
+.practice-status-icon { border-radius: 50%; color: var(--ink); }
+.practice-message { background: var(--cream); border: 2px solid var(--ink); border-top: 8px solid var(--pink); border-radius: 12px; box-shadow: 6px 6px 0 var(--paper); }
+.practice-message [data-slot="empty-title"] { font: italic 900 34px/1 'Poster Condensed', sans-serif; }
+.practice-message [data-slot="button"] { border: 1px solid var(--ink); border-radius: 999px; font-size: 19px; }
+.practice-feedback { background: var(--cream); color: var(--ink); border: 2px solid var(--ink); border-radius: 12px; box-shadow: 5px 5px 0 var(--pink); }
+.practice-feedback-handle { opacity: 1; color: var(--ink); }
+.practice-poses li { border: 1px solid transparent; }
+.practice-poses li[data-detected="true"] { background: var(--paper); border-color: var(--ink); box-shadow: 2px 2px 0 var(--pink); }
+.practice-poses span { font-weight: 750; }
+
+@media (max-width: 1100px) {
+  .game-topbar { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .score-strip { padding: 4px 0; }
+  .highway-panel { height: max(420px, calc(100dvh - 300px)); }
+}
+@media (max-width: 760px) {
+  .session-header { min-height: 64px; padding: 12px 16px; gap: 12px; }
+  .session-brand { font-size: 27px; }
+  .session-brand svg { width: 25px; height: 25px; }
+  .session-header-actions { gap: 10px; }
+  .session-label { max-width: 140px; font-size: 9px; text-align: right; }
+  .session-header h1 { font-size: 24px; }
+  .playing-title h1 { font-size: 32px; }
+  .game-toolbar { grid-template-columns: auto 1fr; gap: 12px 8px; }
+  .game-toolbar .inline-actions { flex-wrap: nowrap; gap: 6px; }
+  .game-toolbar [data-slot="button"] { padding-inline: 8px; font-size: 12px; gap: 4px; }
+  .game-columns { grid-template-columns: 1fr; }
+  .highway-panel { height: max(440px, calc(100dvh - 280px)); }
+  .lane-controls [data-slot="button"] { width: 48px; height: 44px; font-size: 20px; }
+  .score-strip strong { font-size: 32px; }
+  .time-readout strong, .time-readout #elapsed, .time-readout .duration { font-size: 13px; }
+  .camera-panel { gap: 8px 16px; }
+  .camera-heading h2 { font-size: 24px; }
+  .stage-overlay { gap: 10px; padding: 16px; }
+  .stage-overlay h2 { font-size: 36px; }
+  .results { gap: 6px; }
+  .results .result-score { font-size: 62px; }
+  .results dl { padding-top: 6px; margin: 0 0 4px; }
+  .practice-page .session-header { flex-wrap: wrap; min-height: 106px; }
+  .practice-page .session-header-actions { flex: 1 1 100%; justify-content: space-between; }
+  .practice-stage { inset: 122px 12px 16px; }
+  .practice-status { padding: 10px 12px; max-width: 96%; width: max-content; }
+  .practice-status h2 { font-size: 25px; }
+  .game-instructions { padding: 20px; }
+  .game-instructions [data-slot="dialog-title"] { font-size: 44px; }
+  .game-instructions [data-slot="dialog-footer"] { margin: 0 -20px -20px; padding: 16px 20px; }
+}
+@media (max-height: 600px) and (min-width: 761px) {
+  .practice-page .session-header { min-height: 64px; padding-block: 8px; }
+  .practice-stage { inset: 76px 12px 12px; }
+  .practice-status { padding: 8px 16px; }
+  .practice-status h2 { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.app, .practice-page, .game-instructions) *,
+  :is(.app, .practice-page, .game-instructions) *::before,
+  :is(.app, .practice-page, .game-instructions) *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* Four incoming pose cues converge around the player's poster character. */
+.rhythm-stage .canvas-wrap { isolation: isolate; }
+.game-character { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.game-character::before { content: ''; position: absolute; width: 32%; height: 65%; max-width: 340px; background: var(--paper); border-radius: 50%; }
+.game-character .pose-dancer { position: relative; width: 34%; max-width: 360px; height: 80%; display: grid; place-items: center; }
+.game-character .pose-dancer > svg { width: 100%; height: 100%; overflow: visible; }
+.game-character .pose-dancer > svg > g { fill: var(--ink); stroke: var(--ink); }
+.game-character .avatar-trail-white { fill: var(--cream) !important; stroke: var(--cream) !important; }
+.game-character .avatar-trail-pink { fill: var(--pink) !important; stroke: var(--pink) !important; }
+.stage-instruction { position: absolute; top: 20px; left: 30%; right: 30%; color: #d1cbbc; text-align: center; font-size: 13px; line-height: 1.5; pointer-events: none; }
+.stage-instruction strong { color: var(--cream); font-weight: 650; }
+.corner-controls > div { position: absolute; z-index: 1; }
+.corner-controls [data-corner="leftChest"] { top: 20px; left: 20px; }
+.corner-controls [data-corner="rightChest"] { top: 20px; right: 20px; }
+.corner-controls [data-corner="leftHip"] { bottom: 20px; left: 20px; }
+.corner-controls [data-corner="rightHip"] { bottom: 20px; right: 20px; }
+.corner-controls [data-slot="button"] { padding: 10px 16px; border: 1px solid var(--cue-color); background: #11100f; color: var(--cue-color); font-size: 16px; border-radius: 8px; }
+.corner-controls [data-slot="button"]:disabled { opacity: 1; }
+.corner-controls [data-slot="button"]:not(:disabled):hover { color: var(--ink); background: var(--cue-color); }
+.corner-controls kbd { font: inherit; font-weight: 800; border: 0; background: none; }
+.character-status { position: absolute; bottom: 26px; left: 29%; right: 29%; text-align: center; color: var(--cream); font-size: 13px; }
+.rhythm-stage .judgement { top: auto; bottom: 16%; z-index: 2; }
+.rhythm-stage .stage-overlay { z-index: 3; }
+.rhythm-stage .stage-overlay:not(.results) { background: #11100fdb; }
+.rhythm-stage .countdown { background: #11100f80 !important; }
+@media (max-width: 760px) {
+  .corner-controls [data-slot="button"] { padding: 8px 10px; font-size: 12px; gap: 6px; }
+  .corner-controls [data-corner="leftChest"] { top: 12px; left: 12px; }
+  .corner-controls [data-corner="rightChest"] { top: 12px; right: 12px; }
+  .corner-controls [data-corner="leftHip"] { bottom: 12px; left: 12px; }
+  .corner-controls [data-corner="rightHip"] { bottom: 12px; right: 12px; }
+  .stage-instruction { top: 66px; left: 20%; right: 20%; font-size: 12px; }
+  .game-character::before { height: 43%; width: 34%; }
+  .game-character .pose-dancer { width: 38%; }
+  .character-status { bottom: 68px; left: 15%; right: 15%; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-character .avatar-trail { display: none; }
+}

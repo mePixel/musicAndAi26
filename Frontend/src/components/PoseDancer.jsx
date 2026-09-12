@@ -20,7 +20,7 @@ function HeadDetails({ nodeRef, trail = false }) {
   </g>;
 }
 
-export function PoseDancer({ paused = false, live = false, cameraFrame }) {
+export function PoseDancer({ paused = false, live = false, cameraFrame, keyboardFrame, gameplay = false }) {
   const [index, setIndex] = useState(0);
   const armNodes = useRef([]);
   const body = useRef(null);
@@ -60,9 +60,17 @@ export function PoseDancer({ paused = false, live = false, cameraFrame }) {
       const delta = last === null ? 16 : Math.min(now - last, 50);
       if (last !== null) elapsed.current += Math.min(now - last, 50);
       last = now;
-      if (live) {
+      if (live || keyboardFrame) {
         const frame = cameraFrame?.current;
-        const target = frame && now - frame.time < 500 ? mapAvatar(frame.keypoints) || restingAvatar : restingAvatar;
+        let target = frame && now - frame.time < 500 ? mapAvatar(frame.keypoints) || restingAvatar : restingAvatar;
+        const key = keyboardFrame?.current;
+        if (!live && key && now - key.time < 450) {
+          const poseIndex = sequence.findIndex(pose => pose.id === key.pose);
+          if (poseIndex >= 0) {
+            const [left, right] = armPoses[poseIndex];
+            target = { ...restingAvatar, leftElbow: left.slice(2,4), leftWrist: left.slice(4), rightElbow: right.slice(2,4), rightWrist: right.slice(4) };
+          }
+        }
         const blend = 1 - Math.exp(-delta / 65);
         for (const key of Object.keys(target)) joints.current[key] = joints.current[key].map((v, axis) => v + (target[key][axis] - v) * blend);
         const p = joints.current;
@@ -101,7 +109,7 @@ export function PoseDancer({ paused = false, live = false, cameraFrame }) {
       last = null;
       history.length = 0;
       updateTrails(performance.now());
-      if (!paused && !preference.matches && !document.hidden) frameId = requestAnimationFrame(tick);
+      if (!paused && (!preference.matches || gameplay) && !document.hidden) frameId = requestAnimationFrame(tick);
     }
     update();
     preference.addEventListener('change', update);
@@ -111,12 +119,12 @@ export function PoseDancer({ paused = false, live = false, cameraFrame }) {
       preference.removeEventListener('change', update);
       document.removeEventListener('visibilitychange', update);
     };
-  }, [paused, live, cameraFrame]);
+  }, [paused, live, cameraFrame, keyboardFrame, gameplay]);
   const pose = sequence[index];
   // Keep each arm on the same side while interpolating between poses.
   const arms = armPoses[0];
-  return <section className="pose-dancer" aria-label={live ? 'Character mirroring your camera movements' : 'Animated demonstration of the game poses'}>
-    <svg viewBox="0 0 80 76" role="img" aria-label={live ? 'Your movement' : pose.label}>
+  return <section className="pose-dancer" aria-label={live ? 'Character mirroring your camera movements' : keyboardFrame ? 'Character following your pose controls' : 'Animated demonstration of the game poses'}>
+    <svg viewBox="0 0 80 76" role="img" aria-label={live || keyboardFrame ? 'Your movement' : pose.label}>
       {['white', 'pink'].map((color, index) => <g key={color} className={`avatar-trail avatar-trail-${color}`} transform={`translate(${index === 0 ? 8 : 4} 0)`} aria-hidden="true" strokeLinecap="round" strokeLinejoin="round">
         <g ref={node => { trailNodes.current[index] = node; }} transform="translate(8 0)">
           <circle cx="32" cy="11" r="6" stroke="none" />

@@ -90,3 +90,25 @@ test('both authored charts give a player time to move and finish before the audi
     assert.ok(song.notes.at(-1).time + .3 < song.duration);
   }
 });
+
+test('corner cues converge on their targets exactly at the audio beat on every viewport', async () => {
+  const { cueCorners, cuePosition } = await import('./game.js');
+  const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-9);
+  for (const [width, height] of [[1200, 660], [354, 440]]) {
+    for (const [pose, [side, level]] of Object.entries(cueCorners)) {
+      const incoming = cuePosition(pose, 2.5, width, height);
+      assert.equal(incoming.x, incoming.origin.x);
+      assert.equal(incoming.y, incoming.origin.y);
+      assert.equal(Math.sign(incoming.x - width / 2), side);
+      assert.equal(Math.sign(incoming.y - height / 2), level);
+      const onBeat = cuePosition(pose, 0, width, height);
+      close(onBeat.x, onBeat.target.x);
+      close(onBeat.y, onBeat.target.y);
+      const halfway = cuePosition(pose, 1.25, width, height);
+      close(halfway.x, (incoming.x + onBeat.x) / 2);
+      close(halfway.y, (incoming.y + onBeat.y) / 2);
+      const late = cuePosition(pose, -.3, width, height);
+      assert.ok(Math.abs(late.x - width/2) < Math.abs(onBeat.x - width/2));
+    }
+  }
+});

@@ -6,6 +6,7 @@ import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/
 import { Spinner } from '@/components/ui/spinner';
 import { PracticeFeedback } from './components/PracticeFeedback/index.jsx';
 import { PoseIcon } from './components/PoseGuide.jsx';
+import { BrandHeader } from './components/BrandHeader.jsx';
 import { createCamera } from './pose.js';
 import { createPracticeSoundTrigger } from './audio.js';
 import { poses, controlPose } from './poses.js';
@@ -73,13 +74,15 @@ export function Practice({ audio, onExit }) {
   return <main className="practice-page" aria-labelledby="practice-heading">
     <video ref={video} autoPlay muted playsInline className="practice-video" aria-label="Mirrored live camera" />
     <canvas ref={overlay} className="practice-skeleton" aria-hidden="true" />
-    <h1 id="practice-heading" ref={heading} tabIndex={-1} className="sr-only">Practice poses</h1>
+    <BrandHeader>
+      <h1 id="practice-heading" ref={heading} tabIndex={-1}>Practice poses</h1>
+      <Button variant="outline" onClick={onExit}>
+        <ArrowLeft data-icon="inline-start" />
+        <span>Back to songs</span>
+      </Button>
+    </BrandHeader>
 
     <div className="practice-stage">
-      <Button variant="outline" onClick={onExit} className="practice-back">
-        <ArrowLeft data-icon="inline-start" />
-        <span className="practice-back-label">Back to songs</span>
-      </Button>
 
       {phase === 'ready' ? <div className="practice-status" data-bright={cameraState.bright} role="status" aria-live="polite" aria-atomic="true">
         {detected ? <span className="practice-status-icon" style={{ backgroundColor: detected.color }}><PoseIcon pose={detected} /></span> : null}

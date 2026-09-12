@@ -46,6 +46,18 @@ export const poses = [
       [32, 23, 44, 31, 32, 30],
     ],
   },
+
+  {
+    id: "doubleHips",
+    label: "Double Hips",
+    short: "Hands down",
+    color: "#e36414",
+
+    arms: [
+      [32, 23, 20, 31, 18, 43],
+      [32, 23, 44, 31, 46, 43],
+    ]
+  }
 ];
 
 export const controlPose = {

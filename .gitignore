@@ -2,3 +2,4 @@ node_modules/
 dist/
 Frontend/public/wasm/
 .DS_Store
+.claude/

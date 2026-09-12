@@ -49,7 +49,7 @@ export const poses = [
 
   {
     id: "doubleHips",
-    label: "Double Hips",
+    label: "Hands down",
     short: "Hands down",
     color: "#e36414",
 

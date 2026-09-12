@@ -3,6 +3,7 @@ const hitSamples = {
   leftHip: '/audio/snare.WAV',
   rightChest: '/audio/ crash.mp3',
   leftChest: '/audio/bass.wav',
+  doubleHips: '/audio/bass.wav' // if needed - change
 };
 
 export function createPracticeSoundTrigger(play) {

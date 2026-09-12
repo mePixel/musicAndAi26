@@ -7,6 +7,7 @@ const CLASS_TO_POSE = {
   "Left hand - left hip": "leftHip",
   "Right hand - chest/shoulder": "rightChest",
   "Left hand - chest/shoulder": "leftChest",
+  "Double hips": "doubleHips",
   "Start/Stop": "startStop",
 };
 

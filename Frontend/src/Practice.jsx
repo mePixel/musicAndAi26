@@ -16,6 +16,7 @@ const instructions = {
   rightHip: 'Right hand on your right hip — hi-hat.',
   leftChest: 'Left hand at your chest or shoulder — bass.',
   rightChest: 'Right hand at your chest or shoulder — crash.',
+  doubleHips: 'Both hands down - ...', // change to what it should be
   startStop: 'Starts, pauses, or resumes the rhythm game. No instrument sound.',
 };
 

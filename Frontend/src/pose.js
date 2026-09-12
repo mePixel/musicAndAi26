@@ -9,12 +9,68 @@ const CLASS_TO_POSE = {
   "Left hand - left hip": "leftHip",
   "Right hand - chest/shoulder": "rightChest",
   "Left hand - chest/shoulder": "leftChest",
+  "Double hips": "doubleHips",
   "Start/Stop": "startStop",
 };
 
 const MIN_CLASS_CONFIDENCE = 0.65;
 const MIN_KEYPOINT_CONFIDENCE = 0.45;
 const POSE_HOLD_MS = 100;
+
+const BRIGHTNESS_SAMPLE_SIZE = 16;
+const BRIGHTNESS_CENTER_MARGIN = 4; // exclude this margin from each edge as "the player"
+const BRIGHTNESS_ON = 150; // median 0-255 luminance to flip to "bright"
+const BRIGHTNESS_OFF = 120; // to flip back to "dark" (hysteresis avoids flicker)
+
+function createBrightnessSampler() {
+  const canvas = document.createElement("canvas");
+  canvas.width = BRIGHTNESS_SAMPLE_SIZE;
+  canvas.height = BRIGHTNESS_SAMPLE_SIZE;
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  let bright = false;
+
+  return {
+    update(video) {
+      ctx.drawImage(video, 0, 0, BRIGHTNESS_SAMPLE_SIZE, BRIGHTNESS_SAMPLE_SIZE);
+
+      const { data } = ctx.getImageData(
+        0,
+        0,
+        BRIGHTNESS_SAMPLE_SIZE,
+        BRIGHTNESS_SAMPLE_SIZE,
+      );
+
+      // Sample the border ring around the centered player (not just the corners,
+      // which can land on a single dark object like an outlet or a shadow) and
+      // take the median rather than the mean, so a few dark pixels in an
+      // otherwise bright room don't outweigh the wall.
+      const values = [];
+
+      for (let y = 0; y < BRIGHTNESS_SAMPLE_SIZE; y++) {
+        const inCenterRow = y >= BRIGHTNESS_CENTER_MARGIN && y < BRIGHTNESS_SAMPLE_SIZE - BRIGHTNESS_CENTER_MARGIN;
+
+        for (let x = 0; x < BRIGHTNESS_SAMPLE_SIZE; x++) {
+          const inCenterCol = x >= BRIGHTNESS_CENTER_MARGIN && x < BRIGHTNESS_SAMPLE_SIZE - BRIGHTNESS_CENTER_MARGIN;
+          if (inCenterRow && inCenterCol) continue;
+
+          const i = (y * BRIGHTNESS_SAMPLE_SIZE + x) * 4;
+          values.push(data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114);
+        }
+      }
+
+      values.sort((a, b) => a - b);
+      const luminance = values[Math.floor(values.length / 2)];
+
+      if (luminance >= BRIGHTNESS_ON) {
+        bright = true;
+      } else if (luminance <= BRIGHTNESS_OFF) {
+        bright = false;
+      }
+
+      return bright;
+    },
+  };
+}
 
 export function createPoseLatch() {
   let candidate = null;
@@ -172,6 +228,7 @@ export function createCamera(video, overlay, onFrame, onError) {
   const latch = createPoseLatch();
   const ctx = overlay.getContext("2d");
   const outlineMask = document.createElement("canvas");
+  const brightness = createBrightnessSampler();
 
   function clear() {
     ctx.clearRect(0, 0, overlay.width, overlay.height);
@@ -201,6 +258,7 @@ export function createCamera(video, overlay, onFrame, onError) {
       tracked: false,
       pose: null,
       event: null,
+      bright: false,
     });
   }
 
@@ -293,6 +351,8 @@ export function createCamera(video, overlay, onFrame, onError) {
             lastNewFrame = now;
 
             try {
+              const bright = brightness.update(video);
+
               const { pose, posenetOutput } = await model.estimatePose(video); // webcam
 
               if (ownGeneration !== generation) return;
@@ -324,6 +384,8 @@ export function createCamera(video, overlay, onFrame, onError) {
                 pose: latched.pose,
 
                 event: latched.event,
+
+                bright,
               });
             } catch (error) {
               console.error("Teachable Machine prediction error:", error);
@@ -343,6 +405,7 @@ export function createCamera(video, overlay, onFrame, onError) {
               tracked: false,
               pose: latched.pose,
               event: latched.event,
+              bright: brightness.update(video),
             });
           }
 

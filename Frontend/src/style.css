@@ -193,50 +193,84 @@ html { scrollbar-color: var(--input) var(--background); }
 .results dd { font-size: 20px; margin: 2px 0 0; font-variant-numeric: tabular-nums; }
 .results h2:focus { outline: none; }
 
-.practice-page { position: relative; height: 100dvh; min-height: 480px; overflow: hidden; background: #111a15; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; gap: 20px; }
-.practice-video, .practice-skeleton { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform: scaleX(-1); pointer-events: none; }
-.practice-toolbar { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; background: var(--background); border-radius: var(--radius); padding: 12px 16px; }
-.practice-toolbar h1 { font-size: 18px; font-weight: 600; letter-spacing: -.025em; }
-.practice-toolbar h1:focus { outline: none; }
-.practice-toolbar > p { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted-foreground); }
-.practice-toolbar > p svg { width: 16px; height: 16px; }
+.practice-page { position: relative; height: 100dvh; min-height: 480px; overflow: hidden; background: #111a15; }
+.practice-video, .practice-skeleton { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); pointer-events: none; }
+.practice-stage { position: absolute; inset: 20px; display: flex; flex-direction: column; min-height: 0; }
+
+.practice-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  gap: 0;
+  overflow: hidden;
+}
+.practice-back-label {
+  display: inline-block;
+  max-width: 0;
+  margin-left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width .25s ease, margin-left .25s ease, opacity .15s ease;
+}
+.practice-back:hover .practice-back-label,
+.practice-back:focus-visible .practice-back-label {
+  max-width: 160px;
+  margin-left: 8px;
+  opacity: 1;
+}
+
+.practice-status {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: min(560px, 92%);
+  background: var(--background);
+  border-radius: var(--radius);
+  padding: 16px 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+  text-align: center;
+  transition: background .25s ease, color .25s ease;
+}
+.practice-status h2 { font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
+.practice-status p { color: var(--muted-foreground); font-size: 15px; margin-top: 4px; }
+.practice-status-icon { display: grid; place-items: center; width: 48px; height: 48px; flex-shrink: 0; border-radius: var(--radius); color: var(--foreground); }
+.practice-status-icon svg { width: 34px; height: 34px; }
+
+/* The live camera feed can be a lot brighter than this dark page background — flip to a dark
+   pill with light text so the status stays readable against a bright/washed-out room. */
+.practice-status[data-bright="true"] {
+  background: #000;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+}
+.practice-status[data-bright="true"] p { color: rgba(255, 255, 255, .72); }
+
 .practice-message { position: relative; width: min(440px, 100%); margin: auto; border-radius: var(--radius); background: var(--background); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .practice-message [data-slot="empty"] { padding: 12px; }
-.practice-feedback { position: relative; align-self: center; width: min(660px, 100%); background: var(--background); border-radius: var(--radius); padding: 16px; }
-.practice-detected { min-height: 64px; display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 16px; text-align: center; }
-.practice-detected h2 { font-size: clamp(22px, 3vw, 30px); line-height: 1.2; font-weight: 600; letter-spacing: -.025em; }
-.practice-detected p { color: var(--muted-foreground); font-size: 13px; margin-top: 6px; }
-.practice-pose-icon { display: grid; place-items: center; width: 64px; height: 64px; flex-shrink: 0; border-radius: var(--radius); color: var(--foreground); }
-.practice-pose-icon svg { width: 52px; height: 52px; }
-.practice-poses { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; list-style: none; padding: 0; margin: 0; }
-.practice-poses li { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: var(--radius); padding: 10px 4px; }
-.practice-poses li[data-detected="true"] { background: var(--pose-color); color: var(--foreground); }
-.practice-poses svg { width: 42px; height: 42px; }
-.practice-poses span { font-size: 13px; font-weight: 500; text-align: center; }
-.practice-caption { color: var(--muted-foreground); text-align: center; font-size: 12px; margin-top: 12px; }
 
 @media (max-width: 600px) {
-  .practice-page { padding: 12px; gap: 12px; }
-  .practice-toolbar { padding: 10px; gap: 12px; }
-  .practice-toolbar h1 { font-size: 16px; }
-  .practice-toolbar > p { display: none; }
-  .practice-feedback { padding: 12px; }
-  .practice-detected { gap: 10px; }
-  .practice-pose-icon { width: 48px; height: 48px; }
-  .practice-pose-icon svg { width: 40px; height: 40px; }
-  .practice-poses { gap: 4px; }
-  .practice-poses span { font-size: 11px; }
-  .practice-caption { font-size: 11px; }
+  .practice-stage { inset: 12px; }
+  .practice-status { padding: 10px 16px; gap: 10px; }
+  .practice-status h2 { font-size: 17px; }
+  .practice-status p { font-size: 12px; }
+  .practice-status-icon { width: 36px; height: 36px; }
+  .practice-status-icon svg { width: 26px; height: 26px; }
 }
 
 @media (max-height: 600px) and (min-width: 601px) {
-  .practice-page { min-height: 320px; padding: 12px; gap: 12px; }
-  .practice-toolbar { padding: 8px 12px; }
-  .practice-feedback { padding: 10px; }
-  .practice-detected { min-height: 0; margin-bottom: 8px; }
-  .practice-detected h2 { font-size: 22px; }
-  .practice-pose-icon, .practice-poses svg, .practice-caption { display: none; }
-  .practice-poses li { padding: 6px 4px; }
+  .practice-page { min-height: 320px; }
+  .practice-stage { inset: 12px; }
+  .practice-status { padding: 8px 16px; }
+  .practice-status h2 { font-size: 17px; }
+  .practice-status-icon { display: none; }
 }
 
 @media (max-width: 1050px) {

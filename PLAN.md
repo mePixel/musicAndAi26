@@ -1,122 +1,177 @@
-# Sound maps — hackathon website plan
+# Body Beat — hackathon website plan
 
-Status: proposed MVP; no application has been built yet.
+Status: proposed pivot; no application has been built yet.
 
-## The idea
+## The game
 
-A browser soundboard: choose a sound map, then click, tap, or press number keys
-to play its sounds. Switch maps to reuse the same buttons for another collection.
+A Guitar Hero-style rhythm game controlled by your body. Pick a song, stand in
+front of the webcam, and match incoming pose cues as they reach the hit line.
+A hit triggers a short sound, a flash, and points. The backing song keeps
+playing through misses.
 
-Working assumption: a map is a named set of button assignments. The shared sound
-library can be larger than any map. A sound can appear in several maps or remain
-unassigned everywhere. Removing an assignment never removes the sound itself.
+A song map now means a beat chart: a timeline connecting moments in a track to
+poses. Each song has its own chart. This replaces the previous sound library,
+button grid, and editable pad maps.
 
-## One screen
+Working assumptions: one player, a laptop webcam, upper-body movements, and
+short bundled tracks. Hand positions mean where the hands and arms are relative
+to the body; individual finger gestures are outside this MVP.
 
-- **Top bar:** map selector, New map, Rename, and Edit map.
-- **Main area:** nine large pads in a 3 × 3 grid, numbered 1–9 from left to right.
-  Each shows its sound name and a brief visual response when triggered.
-- **Sound library:** all bundled sounds, each with a Preview button. Indicate
-  which are assigned in the active map and which are available to assign.
-- **Playback controls:** master volume and Stop all.
+## What the player sees
 
-On narrow screens, put the library below the pads. Use readable labels, visible
-keyboard focus, and real buttons. Keep styling to a clear pad grid, strong
-contrast, and one accent color; no decorative animation system.
+- A four-lane note highway. Notes emerge near the top, grow as they fly toward
+  the player, and cross a fixed hit line near the bottom.
+- Each lane represents a pose. Notes and targets show a simple human pose
+  pictogram, label, and distinct color; color alone is not the cue.
+- A mirrored webcam panel shows the human player with a light skeleton overlay,
+  the detected pose, and a tracking indicator.
+- Score, combo, song progress, and brief Perfect / Good / Miss feedback.
+- Before play: song selection, Enable camera, pose practice, and Start.
+  After play: hits, misses, best combo, and Retry / Choose song.
 
-## Interactions
+Use a dark stage, bright readable cues, and small hit bursts. Draw the highway
+and flying notes on a 2D canvas with simple perspective math. The visible human
+is the webcam player; cue figures can be small SVGs.
 
-1. Start with three editable presets, such as Drums, Percussion, and Effects,
-   backed by a small bundled library of roughly 12 short samples. Leave empty
-   pads in at least one preset and some library sounds unassigned in every map.
-2. In normal mode, a pad or its number key plays its assigned sample once.
-   Different hits can overlap, including repeated hits on the same pad.
-   Empty pads do nothing and display “Unassigned.”
-3. Enable Edit map, select a pad, then choose a sound from the library to assign
-   or replace it. Clear removes that pad's assignment. Preview only auditions
-   the sound. Number shortcuts are inactive in edit mode and while typing in a
-   field; holding a key does not repeatedly trigger audio.
-4. New map creates a named map with nine empty pads. Rename edits its label.
-   Changes affect only that map and save automatically in this browser.
-5. Switching maps stops current playback and replaces all nine assignments.
-   Stop all stops pad playback and library previews. Volume applies to both.
-6. Reload restores maps, the active map, and volume from local storage. If saving
-   is unavailable, keep the current session usable and show a short message.
+## Four poses
+
+| Lane | Pose | Initial recognition rule |
+| --- | --- | --- |
+| 1 | Left hand up | Left wrist above its shoulder; right hand lowered |
+| 2 | Right hand up | Right wrist above its shoulder; left hand lowered |
+| 3 | Both hands up | Both wrists above their shoulders |
+| 4 | Arms spread | Both arms extended outward around shoulder height |
+
+Use shoulders, elbows, and wrists, with distances relative to shoulder width.
+Leave a clear margin between raised, spread, and lowered positions. Treat
+intermediate positions as no pose; check Both hands up before single-hand poses.
+Tune simple thresholds on the demo laptop. Left/right mean the player's
+anatomical left/right; mirror preview and cue figures consistently and confirm
+this during practice.
+
+A pose must remain stable for about 100 ms before it counts. Emit one event
+on entry using the song time when the pose is confirmed. Holding it emits no
+more events. Confidently recognizing both arms down or another pose rearms it;
+an uncertain or dropped frame does not. Avoid jitter-induced hits.
+
+## Play loop and timing
+
+1. Select a song and load its audio, chart, pose model, and runtime assets.
+2. Enable the camera. Show framing guidance and practice all four poses with
+   immediate sounds and lane highlights. Allow Start when tracking is ready.
+3. Give a three-second countdown, then play. Show each note about 2.5 seconds
+   before its target time so the player can prepare.
+4. Compare each pose-entry event with the closest unjudged note for that pose.
+   Within ±150 ms is Perfect (100 points); within ±300 ms is Good (50 points).
+   Consume one note, increment combo, flash its lane, and play that pose's short
+   hit sound. These are starting values to tune during playtesting.
+5. A note more than 300 ms late becomes Miss and resets combo. Unmatched poses
+   do nothing; intermediate movements do not incur extra penalties.
+6. Show results at the end. Retry resets playback, notes, pose latches, and score.
+
+Use one audio clock for the backing track, note positions, and hit judging.
+Calculate position from chart time minus current song time on every animation
+frame; do not advance time by accumulating frame deltas. The full track plays
+continuously, with quiet hit sounds layered on top.
+
+Provide master volume and Stop / Restart. Lost tracking shows “Step into frame”
+and disables pose input; the song continues and overdue notes miss. Stop the
+round when the tab becomes hidden. Returning to selection releases the camera.
+Keys 1–4 provide a simple keyboard test mode through the same judging function;
+ignore held-key repeats and typing in fields.
+
+## Songs and maps
+
+Ship two tracks of roughly 30–60 seconds with manually timed charts. Use original
+or freely usable bundled audio and retain required attribution. No music account,
+beat detection, or Guitar Hero file import is needed.
+
+Beginner charts have notes at least one second apart, the first note at three
+seconds or later, no simultaneous notes, and no consecutive identical poses.
+Make one full song playable before adding the second.
+
+```js
+const songs = [
+  {
+    id: 'first-groove',
+    title: 'First Groove',
+    audioUrl: '/audio/first-groove.mp3',
+    notes: [
+      { time: 3.0, pose: 'leftUp' },
+      { time: 4.5, pose: 'rightUp' },
+      { time: 6.0, pose: 'bothUp' },
+      { time: 7.5, pose: 'spread' },
+    ],
+  },
+];
+```
+
+Times are seconds from audio start. Keep charts sorted and note results in
+session memory. Four fixed pose-to-lane and pose-to-sound assignments are enough.
+No database or persistent score storage is required.
 
 ## Small implementation
 
-Use Vite's vanilla JavaScript setup, ordinary CSS, and native Web Audio in
-`Frontend/`. Vite supplies development and production build commands; keep its
-default configuration. See the [Vite guide](https://vite.dev/guide/).
-Leave the existing `Backend/` scaffold alone.
+Use Vite, vanilla JavaScript, CSS, Canvas 2D, and Web Audio. Add only
+`@mediapipe/tasks-vision` for tracking, using the pretrained Pose Landmarker Lite
+model in video mode for one person. Bundle the model and matching WASM assets.
+Google's [Pose Landmarker web guide](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/web_js)
+documents the package, model loading, video inference, and body landmarks.
+
+Request video only and process it locally, without recording or uploading frames.
+Camera access requires browser permission and HTTPS or localhost; see
+[MDN's camera API documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia).
+Request access through Enable camera and show a useful message if permission,
+hardware, or asset loading prevents play.
+
+Start at a modest camera resolution and about 15–20 pose evaluations per second,
+using each video frame at most once. Animate notes with `requestAnimationFrame`.
+Inference is synchronous and can block the main thread. Measure on the demo
+laptop; add one inference worker only if visible stutter requires it, following
+[Google's threading guidance](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/web_js#run_the_task).
+No worker framework or performance infrastructure up front.
 
 ```text
 Frontend/
-  index.html            page structure
-  package.json          dev, build, preview scripts; Vite dev dependency
+  index.html
+  package.json          Vite scripts and the pose-tracking dependency
   src/
-    main.js             UI, keyboard events, map edits, local storage
-    audio.js            sample loading, play, stop all, master volume
-    data.js             sound catalog and preset maps
-    style.css           layout and interaction states
-  public/sounds/        small bundled audio files
+    main.js             screen controls and round lifecycle
+    pose.js             webcam, landmarks, four-pose classification
+    game.js             audio clock, note canvas, hit judging, score
+    songs.js            song metadata and hand-authored charts
+    style.css
+  public/
+    audio/              tracks and short hit sounds
+    models/             pretrained pose model
+    wasm/               matching MediaPipe runtime assets
 ```
 
-Keep one sound catalog and one saved state object. A map needs no separate
-collection table: its nonempty slots define its collection.
-
-```js
-const sounds = [
-  { id: 'kick', name: 'Kick', url: '/sounds/kick.wav' },
-  { id: 'clap', name: 'Clap', url: '/sounds/clap.wav' },
-];
-
-const state = {
-  activeMapId: 'drums',
-  volume: 0.7,
-  maps: [
-    {
-      id: 'drums',
-      name: 'Drums',
-      slots: ['kick', 'clap', null, null, null, null, null, null, null],
-    },
-  ],
-};
-```
-
-Pad positions and number keys are fixed; slot values are sound IDs or `null`.
-Save this state as JSON under one local-storage key. Audio buffers, currently
-playing sources, and temporary UI selections stay in memory.
-
-Use one audio context and one master gain node. Create or resume the context
-from a user interaction; decode the short samples into reusable buffers and
-show loading or unavailable states until each sample can play. These choices
-follow [MDN's Web Audio guidance](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Best_practices).
-Create a fresh source for each hit and track playing sources for Stop all.
-Avoid delayed playback from a previous map when loading completes.
+Use ordinary functions and a small state object. Leave `Backend/` unused.
 
 ## Build order
 
-1. Make one bundled sample play from one button in the browser.
-2. Add the nine pads, keyboard input, preset map switching, volume, and Stop all.
-3. Add library previews, editing assignments, new/renamed maps, and local saving.
-4. Style the screen, check the demo flow, and document the actual run commands.
+1. Prove the input: webcam preview, detect one raised hand, trigger one sound.
+2. Prove the game: one song, flying notes, audio timing, keyboard hit judging.
+3. Connect pose events to judging; add all four poses and practice feedback.
+   Tune the timing and thresholds with a human playing.
+4. Add the second chart, selection, results, and load/error states. Finish
+   styling and document the actual run commands.
 
 ## Done means
 
-- A teammate can install dependencies and run the app with the README commands.
-- Each preset plays real audio; the same pad plays different sounds across maps.
-- At least one sound remains in the library without being assigned to a pad.
-- Preview, assign, replace, and clear work; editing one map leaves others intact.
-- New and renamed maps and their assignments survive a reload.
-- Empty pads stay silent; typing and held keys do not cause unintended playback.
-- Rapid hits overlap; Stop all, volume, and stopping on map switch work audibly.
-- A failed sample shows a useful state while other samples remain playable.
-- The layout works on a laptop and a narrow viewport, and the build passes.
+- A player can enable the camera, practice each pose, choose a song, and finish it.
+- Left/right cues match the mirrored presentation and all four poses are usable.
+- Correct poses near the beat trigger sounds, visible hits, points, and combo.
+- Wrong poses and late inputs cannot score; each note is judged at most once.
+- Holding a pose or briefly losing tracking cannot generate repeated hits.
+- Notes and audio stay aligned through a full track and after Restart.
+- Both songs have playable charts with enough time to change poses.
+- Stop silences playback; leaving gameplay releases the camera; Retry starts clean.
+- Camera/model/audio errors explain what happened and missing tracking is visible.
+- The production build passes. Verify with a real webcam and audible playback
+  on the demo laptop; keyboard-only checks are insufficient.
 
-## Scope boundary
-
-The MVP uses bundled samples and local saving. Skip uploads, recording, AI sound
-generation, looping, sequencing, BPM sync, effects, waveforms, drag-and-drop,
-accounts, sharing, and server storage. Add none of these unless the user changes
-the scope. Do not build hooks or placeholder abstractions for them.
+Keep the MVP here: no full dance recognition, finger tracking, custom training,
+3D character, multiplayer, chart editor, uploads, automatic song mapping,
+accounts, or backend. Add none of these without a scope change.

@@ -1,5 +1,48 @@
 # Bodybeat — webcam rhythm game
 
+Merge integration: the current model uses Left Hand / Right Hand for the upper
+corner cues and Default for playback control. The corner renderer, controls, and
+300 ms camera grace now use those IDs consistently. Build and browser checks
+with simulated camera input pass for all four cues, grace scoring, and Default
+playback control. The full suite has 23 passing tests and three existing failures:
+the four-entry pose assumption, removed classifier import, and an old chest-pose
+ID in the practice-audio test. Real webcam movement was not rechecked for this merge.
+
+Camera scoring now remembers the last confident instrument pose for 0.3 seconds
+when it matches the next unjudged cue. Fresh detections refresh that memory, so
+an early pose can wait for the normal hit window and survive brief uncertain or
+missing tracking. A different recognized pose cancels it; scoring consumes the
+entry, so a held pose cannot score another note. Pause/resume clears pending
+input, and restart creates fresh memory. Keyboard input is unchanged. The avatar
+still follows live joints independently of this scoring grace period.
+
+Seven focused grace-period tests and the production build pass. A browser check
+using real decoded audio and simulated camera frames verifies a buffered hit,
+stale/wrong-pose rejection, pause clearing, restart, and exit without runtime
+errors. Full `npm test`:
+24 pass, with the same two baseline failures described below. Physical timing
+and recognition comfort still need a human playtest.
+
+The game now centers the homepage character with four diagonal cue paths. Chest
+cues arrive from the upper corners; hip cues arrive from the lower corners, with
+rings beside the character marking the beat. The character mirrors live camera
+joints, including movements without a named pose, and rests on lost/stale input.
+Keyboard pose controls also animate it briefly. In gameplay, reduced motion
+suppresses decorative trails and bursts while keeping direct player movement.
+Audio timing and scoring rules are unchanged. The instructions describe the new corner targets.
+
+Verification for this change (2026-09-13): production build passes. Browser checks
+at 1440×1000 and 390×844 verify the character, incoming cues, timed keyboard
+scoring, repeated-hit protection, pause/resume, restart, exit, and no horizontal
+overflow or JavaScript errors. Simulated camera frames through the real avatar
+mapper verify raw wrist movement, Start / Pause game entry, tracking loss, reduced
+motion, and camera cleanup. The new cue-position test passes. Full `npm test`:
+17 pass; the same two baseline failures remain (removed `classifyPose` import and
+a test expecting four entries in the now-five-entry pose metadata). A brief
+real-webcam check received 640×480 video with no runtime errors, but was still loading the
+model when stopped; physical full-body movement and audible timing still need
+a human playtest.
+
 The poster character now mirrors live PoseNet joint positions when its camera is
 enabled, with smoothed, mirrored arms, head, torso, and visible legs. This does not
 depend on recognizing one of the five named poses. Uncertain joints return to a
@@ -91,7 +134,8 @@ needs to try all four physical poses in the new practice screen.
 ## The game
 
 A Guitar Hero-style rhythm game controlled by your body. Pick a song, stand in
-front of the webcam, and match incoming pose cues as they reach the hit line.
+front of the webcam, and match incoming pose cues as they reach the rings beside
+the central character.
 A hit triggers a short sound, a flash, and points. The backing song keeps
 playing through misses.
 
@@ -105,10 +149,13 @@ to the body; individual finger gestures are outside this MVP.
 
 ## What the player sees
 
-- A four-lane note highway. Notes emerge near the top, grow as they fly toward
-  the player, and cross a fixed hit line near the bottom.
-- Each lane represents a pose. Notes and targets show a simple human pose
-  pictogram, label, and distinct color; color alone is not the cue.
+- The homepage character stands in the middle and mirrors the player’s live
+  joints. Keyboard inputs briefly animate the corresponding pose.
+- Four diagonal paths bring cues toward rings beside the character: left/right
+  chest from the upper left/right corners, left/right hip from the lower
+  left/right corners. Cues reach their rings at their authored audio timestamps.
+- Notes and targets show a pose pictogram and distinct color, with labeled
+  corner controls; color alone is not the cue.
 - A mirrored webcam panel shows the human player with a light skeleton overlay,
   the detected pose, and a tracking indicator.
 - Score, combo, song progress, and brief Perfect / Good / Miss feedback.
@@ -123,9 +170,10 @@ to the body; individual finger gestures are outside this MVP.
   Arms down and missing tracking have their own feedback. Retry handles camera
   or model errors; Back to songs, Escape, and hiding the tab release the camera.
 
-Use silver surfaces, orange shadcn transport controls, and vibrant pose cues. Draw the highway
-and flying notes on a 2D canvas with simple perspective math. The visible human
-is the webcam player; cue figures can be small SVGs.
+Use the homepage’s yellow, pink, cream, and dark poster palette with shadcn
+controls. Draw diagonal paths and flying cues on Canvas 2D; reuse the homepage’s
+SVG character with smoothed, mirrored joint tracking. Keep the webcam preview
+available beside the game. Missing tracking clears the character’s live pose.
 
 ## Four poses
 
@@ -145,7 +193,9 @@ this during playtesting.
 
 A pose must remain stable for about 100 ms before it counts. Emit one event
 on entry using the song time when the pose is confirmed. Holding it emits no
-more events. Confidently recognizing both arms down or another pose rearms it;
+more events. In the game, retain an unconsumed entry for the next matching cue
+while confident detections continue and for 300 ms afterward. Judge it once the
+normal hit window opens; a different pose cancels the pending entry. Confidently recognizing both arms down or another pose rearms it;
 an uncertain or dropped frame does not. Avoid jitter-induced hits.
 
 ## Play loop and timing
@@ -158,7 +208,7 @@ an uncertain or dropped frame does not. Avoid jitter-induced hits.
    before its target time so the player can prepare.
 4. Compare each pose-entry event with the closest unjudged note for that pose.
    Within ±150 ms is Perfect (100 points); within ±300 ms is Good (50 points).
-   Consume one note, increment combo, flash its lane, and play that pose's short
+   Consume one note, increment combo, flash its target ring, and play that pose's short
    hit sound. These are starting values to tune during playtesting.
 5. A note more than 300 ms late becomes Miss and resets combo. Unmatched poses
    do nothing; intermediate movements do not incur extra penalties.
@@ -170,7 +220,8 @@ frame; do not advance time by accumulating frame deltas. The full track plays
 continuously, with quiet hit sounds layered on top.
 
 Provide master volume and Pause / Resume / Stop / Restart / Back to songs. Lost tracking shows “Step into frame”
-and disables pose input; the song continues and overdue notes miss. Stop the
+and disables new pose input; an already-matching pending entry retains its
+300 ms grace period. The song continues and overdue notes miss. Stop the
 round when the tab becomes hidden. Returning to selection and finishing a track
 release the camera.
 Keys 1–4 provide a simple keyboard test mode through the same judging function;
@@ -238,7 +289,7 @@ Frontend/
     Practice.jsx        full-viewport camera and live pose feedback
     components/ui/      shadcn source components
     pose.js             webcam, landmarks, four-pose classification
-    game.js             note canvas, hit judging, score
+    game.js             corner cue canvas, hit judging, score
     audio.js            audio clock, track playback, synthesized hit sounds
     poses.js            pose metadata and cue pictograms
     songs.js            song metadata and hand-authored charts
@@ -266,6 +317,10 @@ Use ordinary functions and a small state object. Leave `Backend/` unused.
 
 - A player can choose a song and input mode, press Play, and finish the track.
 - Left/right cues match the mirrored presentation and all four poses are usable.
+- The homepage character stays centered, follows live joints without waiting for
+  pose classification, and returns to rest when tracking is lost or stale.
+- Chest cues arrive from upper corners and hip cues from lower corners; all four
+  reach their target rings on the audio beat, including after pause/resume.
 - Correct poses near the beat trigger sounds, visible hits, points, and combo.
 - Wrong poses and late inputs cannot score; each note is judged at most once.
 - Holding a pose or briefly losing tracking cannot generate repeated hits.

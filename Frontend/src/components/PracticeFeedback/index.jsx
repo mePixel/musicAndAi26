@@ -86,7 +86,7 @@ export function PracticeFeedback({ detected }) {
       <ul className="practice-poses" aria-label="Poses to try">
         {poses.map(pose => <li key={pose.id} data-detected={detected?.id === pose.id} style={{ '--pose-color': pose.color }}>
           <PoseIcon pose={pose} />
-          <span>{pose.label}</span>
+          <span title={pose.label}>{pose.short}</span>
           {detected?.id === pose.id ? <span className="sr-only">Detected</span> : null}
         </li>)}
       </ul>

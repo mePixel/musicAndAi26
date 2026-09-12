@@ -80,7 +80,7 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
     const camera = createCamera(video.current,overlay.current,data => {
       if (!active) return;
       tracked = data.tracked;
-      cameraFrame.current = data.tracked ? { keypoints: data.keypoints, time: performance.now() } : null;
+      cameraFrame.current = data.tracked ? { keypoints: data.keypoints, pose: data.pose, time: performance.now() } : null;
       setCameraState(previous => previous.tracked === data.tracked && previous.pose === data.pose ? previous : { ...previous, tracked:data.tracked, pose:data.pose });
       if (input !== 'camera') return;
       if (status === 'framing' && data.tracked && data.pose === controlPose.id) begin();

@@ -41,6 +41,15 @@ export function PoseDancer({ paused = false, live = false, cameraFrame, keyboard
     const preference = matchMedia('(prefers-reduced-motion: reduce)');
     let frameId, last = null, shown = -1;
     const history = [];
+    function colorCharacter(poseId) {
+      if (!gameplay) return;
+      const selected = poses.find(pose => pose.id === poseId && pose.id !== controlPose.id);
+      const id = selected?.id ?? '';
+      if (body.current.dataset.pose === id) return;
+      body.current.dataset.pose = id;
+      body.current.style.fill = selected?.color ?? '';
+      body.current.style.stroke = selected?.color ?? '';
+    }
     function updateTrails(now) {
       history.push({ time: now, transform: body.current.getAttribute('transform'),
         head: [head.current.getAttribute('cx'), head.current.getAttribute('cy')],
@@ -62,8 +71,10 @@ export function PoseDancer({ paused = false, live = false, cameraFrame, keyboard
       last = now;
       if (live || keyboardFrame) {
         const frame = cameraFrame?.current;
-        let target = frame && now - frame.time < 500 ? mapAvatar(frame.keypoints) || restingAvatar : restingAvatar;
+        const freshFrame = frame && now - frame.time < 500 ? frame : null;
+        let target = freshFrame ? mapAvatar(freshFrame.keypoints) || restingAvatar : restingAvatar;
         const key = keyboardFrame?.current;
+        colorCharacter(live ? freshFrame?.pose : key && now - key.time < 450 ? key.pose : null);
         if (!live && key && now - key.time < 450) {
           const poseIndex = sequence.findIndex(pose => pose.id === key.pose);
           if (poseIndex >= 0) {
@@ -106,6 +117,7 @@ export function PoseDancer({ paused = false, live = false, cameraFrame, keyboard
     }
     function update() {
       cancelAnimationFrame(frameId);
+      if (paused) colorCharacter(null);
       last = null;
       history.length = 0;
       updateTrails(performance.now());
@@ -134,7 +146,7 @@ export function PoseDancer({ paused = false, live = false, cameraFrame, keyboard
           <HeadDetails trail />
         </g>
       </g>)}
-      <g ref={body} transform="translate(8 0)" fill="#202039" stroke="#202039" strokeLinecap="round" strokeLinejoin="round">
+      <g ref={body} className="avatar-body" transform="translate(8 0)" fill="#202039" stroke="#202039" strokeLinecap="round" strokeLinejoin="round">
         <circle ref={head} cx="32" cy="11" r="6" stroke="none" />
         <path ref={torso} d="M25 23 Q32 19 39 23 L37 41 Q32 45 27 41 Z" strokeWidth="3" />
         <path ref={legs} d="M29 40 L26 49 L22 61 M35 40 L38 49 L42 61" fill="none" strokeWidth="7" />

@@ -171,6 +171,11 @@ function drawPoseOverlay(ctx, canvas, pose) {
     [5, 11], // left torso
     [6, 12], // right torso
     [11, 12], // hips
+
+    [11, 13], // left thigh
+    [13, 15], // left shin
+    [12, 14], // right thigh
+    [14, 16], // right shin
   ];
 
   ctx.strokeStyle = "#d9ff70";

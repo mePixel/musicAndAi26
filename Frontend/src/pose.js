@@ -130,22 +130,13 @@ function getTracked(keypoints) {
     return false;
   }
 
-  const required = [
-    "leftShoulder",
-    "rightShoulder",
-    "leftElbow",
-    "rightElbow",
-    "leftWrist",
-    "rightWrist",
-  ];
+  const required = ["leftShoulder", "rightShoulder", "leftHip", "rightHip"];
 
   const indexes = {
     leftShoulder: 5,
     rightShoulder: 6,
-    leftElbow: 7,
-    rightElbow: 8,
-    leftWrist: 9,
-    rightWrist: 10,
+    leftHip: 11,
+    rightHip: 12,
   };
 
   return required.every((name) => {
@@ -366,16 +357,12 @@ export function createCamera(video, overlay, onFrame, onError) {
 
               let detectedPose = null;
 
-              if (tracked) {
-                const predictions = await model.predict(posenetOutput); // actual output / classes
+              const predictions = await model.predict(posenetOutput); // actual output / classes
 
-                if (ownGeneration !== generation) return;
+              const best = getBestPrediction(predictions);
 
-                const best = getBestPrediction(predictions);
-
-                if (best && best.probability >= MIN_CLASS_CONFIDENCE) {
-                  detectedPose = CLASS_TO_POSE[best.className] ?? null;
-                }
+              if (tracked && best && best.probability >= MIN_CLASS_CONFIDENCE) {
+                detectedPose = CLASS_TO_POSE[best.className] ?? null;
               }
 
               const latched = latch.update(detectedPose, now);

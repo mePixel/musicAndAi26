@@ -128,10 +128,9 @@ function getTracked(keypoints) {
     return false;
   }
 
-  const required = ["nose", "leftShoulder", "rightShoulder", "leftHip", "rightHip"];
+  const required = ["leftShoulder", "rightShoulder", "leftHip", "rightHip"];
 
   const indexes = {
-    nose: 0,
     leftShoulder: 5,
     rightShoulder: 6,
     leftHip: 11,

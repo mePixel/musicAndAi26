@@ -1,16 +1,16 @@
 const hitSamples = {
   rightHip: '/audio/hi hat (1).WAV',
   leftHip: '/audio/snare.WAV',
-  rightChest: '/audio/ crash.mp3',
-  leftChest: '/audio/bass.wav',
-  doubleHips: '/audio/bass.wav' // if needed - change
+  rightHand: '/audio/ crash.mp3',
+  leftHand: '/audio/bass.wav',
+  default: ''
 };
 
 export function createPracticeSoundTrigger(play) {
   let lastHit = -Infinity, lastPose = null;
   return ({ tracked, pose }, now) => {
     if (!tracked || !pose) return;
-    if (pose === 'startStop') { lastPose = pose; return; }
+    if (pose === 'default') { lastPose = pose; return; }
     if (!Object.hasOwn(hitSamples, pose) || pose === lastPose || now - lastHit < 600) return;
     lastHit = now;
     lastPose = pose;
@@ -70,7 +70,7 @@ export function createAudio() {
       return analyser;
     },
     async loadHits() {
-      await Promise.all(Object.values(hitSamples).map(url => load(url).catch(() => {
+      await Promise.all(Object.values(hitSamples).filter(Boolean).map(url => load(url).catch(() => {
         throw new Error(`The hit sound ${url.split('/').pop().trim()} could not load. Try again.`);
       })));
     },

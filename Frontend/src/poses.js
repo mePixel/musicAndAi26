@@ -1,7 +1,7 @@
 export const poses = [
   {
     id: "leftHip",
-    label: "Left hand — left hip",
+    label: "Left Hip",
     short: "Left hip",
     color: "#ffd12e",
 
@@ -13,7 +13,7 @@ export const poses = [
 
   {
     id: "rightHip",
-    label: "Right hand — right hip",
+    label: "Right hip",
     short: "Right hip",
     color: "#49b6ff",
 
@@ -24,9 +24,9 @@ export const poses = [
   },
 
   {
-    id: "leftChest",
-    label: "Left hand — chest/shoulder",
-    short: "Left chest",
+    id: "leftHand",
+    label: "Left Hand",
+    short: "Left Hand",
     color: "#ff6f98",
 
     arms: [
@@ -36,9 +36,9 @@ export const poses = [
   },
 
   {
-    id: "rightChest",
-    label: "Right hand — chest/shoulder",
-    short: "Right chest",
+    id: "rightHand",
+    label: "Right Hand",
+    short: "Right Hand",
     color: "#27deb2",
 
     arms: [
@@ -48,27 +48,27 @@ export const poses = [
   },
 
   {
-    id: "doubleHips",
-    label: "Double hips",
-    short: "Hands down",
+    id: "default",
+    label: "Default",
+    short: "Default",
     color: "#e36414",
 
     arms: [
       [32, 23, 20, 31, 18, 43],
       [32, 23, 44, 31, 46, 43],
-    ]
-  }
+    ],
+  },
 ];
 
 export const controlPose = {
-  id: "startStop",
-  label: "Start / Pause",
-  short: "Start / Pause",
-  color: "#b896ff",
+  id: "default",
+  label: "Default",
+  short: "Default",
+  color: "#e36414",
 
   arms: [
-    [32, 23, 20, 31, 18, 23],
-    [32, 23, 44, 31, 46, 23],
+    [32, 23, 20, 31, 18, 43],
+    [32, 23, 44, 31, 46, 43],
   ],
 };
 

@@ -43,10 +43,10 @@ test('only the currently held pose plays after cooldown, never an abandoned pose
 test('missing tracking and silent poses do not consume the training cooldown', () => {
   const played = [], trigger = createPracticeSoundTrigger(pose => played.push(pose));
   trigger({ tracked: false, pose: 'leftHip' }, 0);
-  trigger({ tracked: true, pose: 'startStop' }, 10);
+  trigger({ tracked: true, pose: 'default' }, 10);
   trigger({ tracked: true, pose: 'rightHip' }, 20);
   assert.deepEqual(played, ['rightHip']);
-  trigger({ tracked: true, pose: 'startStop' }, 1000);
+  trigger({ tracked: true, pose: 'default' }, 1000);
   trigger({ tracked: true, pose: 'rightHip' }, 1100);
   assert.deepEqual(played, ['rightHip', 'rightHip']);
 });

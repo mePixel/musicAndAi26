@@ -4,7 +4,7 @@ export function createPlaybackGestureTrigger(toggle) {
   let armed = true, lastToggle = -Infinity;
   return ({ tracked, pose }, now) => {
     if (!tracked || !pose) return;
-    if (pose !== 'startStop') { armed = true; return; }
+    if (pose !== 'default') { armed = true; return; }
     if (!armed || now - lastToggle < 1000) return;
     armed = false; lastToggle = now;
     toggle();

@@ -5,12 +5,12 @@ import { drawPlayerOutline } from "./pose-outline.js";
 const MODEL_URL = "/models/";
 
 const CLASS_TO_POSE = {
-  "Right hand - right hip": "rightHip",
-  "Left hand - left hip": "leftHip",
-  "Right hand - chest/shoulder": "rightChest",
-  "Left hand - chest/shoulder": "leftChest",
-  "Double hips": "doubleHips",
-  "Start/Stop": "startStop",
+  "Right Hip": "rightHip",
+  "Left Hip": "leftHip",
+  "Right Hand": "rightHand",
+  "Left Hand": "leftHand",
+  "Default": "default",
+  // "Start/Stop": "startStop",
 };
 
 const MIN_CLASS_CONFIDENCE = 0.65;
@@ -360,6 +360,13 @@ export function createCamera(video, overlay, onFrame, onError) {
               const predictions = await model.predict(posenetOutput); // actual output / classes
 
               const best = getBestPrediction(predictions);
+
+              // TEMP DEBUG: remove once distance/confidence issue is diagnosed
+              console.log(
+                "tracked=%s %s",
+                tracked,
+                predictions.map(p => `${p.className}: ${(p.probability * 100).toFixed(0)}%`).join("  "),
+              );
 
               if (tracked && best && best.probability >= MIN_CLASS_CONFIDENCE) {
                 detectedPose = CLASS_TO_POSE[best.className] ?? null;

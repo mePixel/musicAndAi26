@@ -9,35 +9,35 @@ const chart = [{ time: 3, pose: 'leftUp' }, { time: 4.25, pose: 'rightUp' }];
 test('playback accepts a recognized control pose without needing a new entry event', () => {
   let toggles = 0;
   const trigger = createPlaybackGestureTrigger(() => toggles++);
-  trigger({ tracked: true, pose: 'startStop', event: null }, 100);
-  trigger({ tracked: true, pose: 'startStop', event: null }, 2000);
+  trigger({ tracked: true, pose: 'default', event: null }, 100);
+  trigger({ tracked: true, pose: 'default', event: null }, 2000);
   assert.equal(toggles, 1, 'holding the control must toggle only once');
 });
 
 test('a control pose held through cooldown toggles after it expires', () => {
   let toggles = 0;
   const trigger = createPlaybackGestureTrigger(() => toggles++);
-  trigger({ tracked: true, pose: 'startStop' }, 100);
+  trigger({ tracked: true, pose: 'default' }, 100);
   trigger({ tracked: true, pose: 'leftHip' }, 300);
-  trigger({ tracked: true, pose: 'startStop', event: 'startStop' }, 500);
+  trigger({ tracked: true, pose: 'default', event: 'default' }, 500);
   assert.equal(toggles, 1);
-  trigger({ tracked: true, pose: 'startStop', event: null }, 1100);
-  trigger({ tracked: true, pose: 'startStop', event: null }, 3000);
+  trigger({ tracked: true, pose: 'default', event: null }, 1100);
+  trigger({ tracked: true, pose: 'default', event: null }, 3000);
   assert.equal(toggles, 2);
 });
 
 test('tracking flicker cannot rearm playback; abandoned controls are not queued', () => {
   let toggles = 0;
   const trigger = createPlaybackGestureTrigger(() => toggles++);
-  trigger({ tracked: true, pose: 'startStop' }, 100);
+  trigger({ tracked: true, pose: 'default' }, 100);
   trigger({ tracked: false, pose: null }, 200);
   trigger({ tracked: true, pose: null }, 250);
-  trigger({ tracked: true, pose: 'startStop' }, 1500);
+  trigger({ tracked: true, pose: 'default' }, 1500);
   assert.equal(toggles, 1);
   trigger({ tracked: true, pose: 'leftHip' }, 1600);
-  trigger({ tracked: true, pose: 'startStop' }, 1700);
+  trigger({ tracked: true, pose: 'default' }, 1700);
   trigger({ tracked: true, pose: 'rightHip' }, 1800);
-  trigger({ tracked: true, pose: 'startStop' }, 1900);
+  trigger({ tracked: true, pose: 'default' }, 1900);
   trigger({ tracked: false, pose: null }, 3000);
   trigger({ tracked: true, pose: 'rightHip' }, 3100);
   assert.equal(toggles, 2);
@@ -45,7 +45,7 @@ test('tracking flicker cannot rearm playback; abandoned controls are not queued'
 
 test('Start / Pause is a control, never an instrument lane or chart note', () => {
   assert.equal(poses.length, 4);
-  assert.equal(controlPose.id, 'startStop');
+  assert.equal(controlPose.id, 'default');
   assert.equal(poses.some(pose => pose.id === controlPose.id), false);
   for (const song of songs) {
     assert(song.notes.every(note => poses.some(pose => pose.id === note.pose)));

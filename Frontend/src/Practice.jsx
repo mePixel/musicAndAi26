@@ -15,10 +15,10 @@ const practicePoses = [...poses, controlPose];
 const instructions = {
   leftHip: 'Left hand on your left hip — snare.',
   rightHip: 'Right hand on your right hip — hi-hat.',
-  leftChest: 'Left hand at your chest or shoulder — bass.',
-  rightChest: 'Right hand at your chest or shoulder — crash.',
-  doubleHips: 'Both hands down - ...', // change to what it should be
-  startStop: 'Starts, pauses, or resumes the rhythm game. No instrument sound.',
+  leftHand: 'Left hand at your chest or shoulder — bass.',
+  rightHand: 'Right hand at your chest or shoulder — crash.',
+  default: 'Both hands down - ...', // change to what it should be
+  // startStop: 'Starts, pauses, or resumes the rhythm game. No instrument sound.',
 };
 
 export function Practice({ audio, onExit }) {

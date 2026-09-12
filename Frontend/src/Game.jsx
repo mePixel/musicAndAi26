@@ -75,7 +75,7 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
       if (['framing', 'playing', 'paused'].includes(status)) {
         handleControlPose(data, performance.now());
       }
-      if (data.tracked && data.event && data.event !== 'startStop') hit(data.event);
+      if (data.tracked && data.event && data.event !== 'default') hit(data.event);
     },fail);
 
     async function prepare() {

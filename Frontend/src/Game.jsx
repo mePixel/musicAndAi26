@@ -7,7 +7,7 @@ import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/
 import { Spinner } from '@/components/ui/spinner';
 import { poses, controlPose } from './poses.js';
 import { createCamera } from './pose.js';
-import { createRound, createStage, createPlaybackGestureTrigger, createCameraPoseGrace, expireNotes, judge } from './game.js';
+import { createRound, createStage, createCameraPoseGrace, expireNotes, judge } from './game.js';
 import { PoseDancer } from './components/PoseDancer.jsx';
 import { formatTime } from '@/lib/utils';
 
@@ -58,7 +58,6 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
       }
     }
     transport.current = togglePlayback;
-    const handleControlPose = createPlaybackGestureTrigger(togglePlayback);
 
     function showHit(poseId, note) {
       stage.flash(poses.findIndex(pose => pose.id === poseId), Boolean(note));
@@ -84,9 +83,7 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
       cameraFrame.current = data.tracked ? { keypoints: data.keypoints, time: performance.now() } : null;
       setCameraState(previous => previous.tracked === data.tracked && previous.pose === data.pose ? previous : { ...previous, tracked:data.tracked, pose:data.pose });
       if (input !== 'camera') return;
-      if (['framing', 'playing', 'paused'].includes(status)) {
-        handleControlPose(data, performance.now());
-      }
+      if (status === 'framing' && data.tracked && data.pose === controlPose.id) begin();
       if (status === 'playing') cameraGrace.update(data, audio.songTime());
     },fail);
 
@@ -200,7 +197,7 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
             {input === 'camera' ? <Button variant="outline" onClick={onUseKeyboard}>Use keyboard instead</Button> : null}
           </div> : null}
           {phase === 'playing' && hud.countdown > 0 ? <div className="stage-overlay countdown" role="status"><p>Get ready</p><strong>{hud.countdown}</strong></div> : null}
-          {phase === 'paused' ? <div className="stage-overlay" role="status"><Pause aria-hidden="true" /><h2>Paused</h2><p>{input === 'camera' ? `Make an instrument pose, then ${controlPose.label} again to resume. You can also use the Resume button.` : 'Press Resume to continue from this beat.'}</p></div> : null}
+          {phase === 'paused' ? <div className="stage-overlay" role="status"><Pause aria-hidden="true" /><h2>Paused</h2><p>Press Resume to continue from this beat.</p></div> : null}
           {phase === 'playing' && hud.judgement ? <div key={`${hud.hits}-${hud.judgement}`} className="judgement" role="status" data-kind={hud.judgement}>{hud.judgement}</div> : null}
           {phase === 'error' ? <div className="stage-overlay">
             <Alert variant="destructive"><AlertTitle>Couldn’t start the game</AlertTitle><AlertDescription>{error}</AlertDescription></Alert>
@@ -222,7 +219,7 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
           {!cameraState.enabled ? <Empty><EmptyHeader><EmptyMedia variant="icon">{input === 'camera' ? <Camera /> : <Keyboard />}</EmptyMedia><EmptyTitle>{input === 'camera' ? phase === 'finished' ? 'Camera off' : 'Camera preview' : 'Use keys 1–4'}</EmptyTitle><EmptyDescription>{input === 'camera' ? 'Your video appears here.' : 'Press a key as its cue reaches its ring. You can tap the buttons, too.'}</EmptyDescription></EmptyHeader></Empty> : null}
           {cameraState.enabled ? <span className="detected-pose">{cameraState.tracked ? detected?.label ?? 'Ready' : 'Step into frame'}</span> : null}
         </div>
-        <p>{input === 'camera' ? `The ${controlPose.label} pose controls playback. The four instrument poses score notes.` : 'Left hip · Right hip · Left hand · Right hand'}</p>
+        <p>{input === 'camera' ? `The ${controlPose.label} pose starts the round. Use the Pause and Resume buttons to control playback.` : 'Left hip · Right hip · Left hand · Right hand'}</p>
       </aside>
     </div>
     <div className="game-progress"><Progress id="progress" value={Math.min(hud.elapsed/song.duration*100,100)} aria-label="Song progress" /><Button variant="outline" onClick={onExit}><Square data-icon="inline-start" />Stop</Button></div>

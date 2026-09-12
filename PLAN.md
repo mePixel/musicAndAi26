@@ -1,5 +1,13 @@
 # Bodybeat — webcam rhythm game
 
+Pose-controlled pausing and resuming are disabled. The Default pose only starts
+a camera round from the framing screen. Once the round starts, Pause and Resume
+are controlled exclusively by the on-screen buttons, including during countdown.
+Build and simulated-camera browser checks pass: poses cannot pause countdown or
+playback or resume a paused round; manual buttons and scoring grace still work.
+Tests: 21 pass; the existing classifier-import and practice-audio pose-ID failures
+remain. Physical camera input and audible timing were not rechecked.
+
 Merge integration: the current model uses Left Hand / Right Hand for the upper
 corner cues and Default for playback control. The corner renderer, controls, and
 300 ms camera grace now use those IDs consistently. Build and browser checks
@@ -161,7 +169,7 @@ to the body; individual finger gestures are outside this MVP.
 - Score, combo, song progress, and brief Perfect / Good / Miss feedback.
 - First page: song selection, Camera / Keyboard, a short pose guide, and Play.
 - Play opens the game, loads the selected song, and requests the camera if used.
-  In Camera mode, make Start / Pause once tracking is ready to begin the countdown.
+  In Camera mode, make the Default pose once tracking is ready to begin the countdown.
   Results offer Retry / Choose song.
 - Practice poses opens a full-viewport mirrored camera with a skeleton overlay,
   the detected stance, and a guide that highlights the matching pose. Practice
@@ -202,7 +210,7 @@ an uncertain or dropped frame does not. Avoid jitter-induced hits.
 
 1. Select a song and input mode, then press Play to open the game screen.
 2. Load audio and, for Camera mode, the pose model and webcam. Show framing
-   guidance; in Camera mode, begin the countdown on the Start / Pause gesture
+   guidance; in Camera mode, begin the countdown on the Default pose
    once both arms are tracked.
 3. Give a three-second countdown, then play. Show each note about 2.5 seconds
    before its target time so the player can prepare.
@@ -306,7 +314,7 @@ Use ordinary functions and a small state object. Leave `Backend/` unused.
 
 1. The first page presents both songs, input choice, instructions, and Play.
 2. Play mounts the game and loads audio and any camera resources. Camera mode
-   waits for Start / Pause; Keyboard mode starts its three-second countdown
+   waits for the Default pose; Keyboard mode starts its three-second countdown
    once loading finishes.
 3. Pose entries or keys feed the same timing and scoring functions. Canvas
    animation uses the audio clock; React updates the surrounding controls.

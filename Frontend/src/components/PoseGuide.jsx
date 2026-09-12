@@ -14,5 +14,5 @@ export function PoseGuide() {
       <PoseIcon pose={pose} />
       <span>{pose.short}</span><kbd>{i+1}</kbd>
     </div>)}
-  </div><p>Use the {controlPose.label} gesture to start, pause, or resume the game. Make an instrument pose before using it again.</p></>;
+  </div><p>Use the {controlPose.label} pose to start the game. Pause and resume with the on-screen buttons.</p></>;
 }

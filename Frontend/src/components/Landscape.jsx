@@ -13,73 +13,65 @@ export function Landscape({ audio }) {
       renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
       container.appendChild(renderer.domElement);
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color('#dce8ee');
-      const camera = new THREE.PerspectiveCamera(50, 1, .1, 160);
-      camera.position.set(0, 13, 24); camera.lookAt(0, 5, -22);
-      const geometry = new THREE.PlaneGeometry(130, 130, 160, 160);
-      geometry.rotateX(-Math.PI / 2);
-      const points = geometry.attributes.position;
-      const peak = (x, z, px, pz, height, width) => height * Math.exp(-((x-px)**2 + (z-pz)**2) / width);
-      for (let i = 0; i < points.count; i++) {
-        const x = points.getX(i), z = points.getZ(i);
-        const mountains = peak(x,z,-25,-12,24,230) + peak(x,z,13,-26,32,260) + peak(x,z,40,-5,21,180);
-        const ridge = Math.sin(x*.7 + z*.35)*Math.sin(z*.55) + .45*Math.sin(x*1.7-z*.8);
-        points.setY(i, mountains + ridge * Math.min(2, mountains*.16) + Math.sin(x*.1)*1.2);
+      scene.background = new THREE.Color('#04090c');
+      const camera = new THREE.PerspectiveCamera(48, 1, .1, 180);
+      camera.position.set(0, 8, 30); camera.lookAt(0, 0, -28);
+      // Dense points form the surface; there are no solid faces or wire lines.
+      const count = 230, positions = new Float32Array(count * count * 3);
+      for (let row = 0; row < count; row++) {
+        for (let col = 0; col < count; col++) {
+          const x = (col / (count - 1) - .5) * 145;
+          const z = (row / (count - 1) - .5) * 130;
+          const ridge = Math.sin(x * .09 + z * .045) * 3.5
+            + Math.sin(x * .19 - z * .07) * 1.9
+            + Math.sin(x * .39 + z * .23) * .65;
+          const peaks = 9 * Math.exp(-((z + 22) ** 2) / 200)
+            * (.65 + .35 * Math.sin(x * .13));
+          const i = (row * count + col) * 3;
+          positions[i] = x; positions[i + 1] = ridge + peaks; positions[i + 2] = z;
+        }
       }
-      geometry.computeVertexNormals();
-      // World-space procedural textures: grass at the foothills, stratified
-      // stone on steep faces, and granular snow above the snowline.
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       const material = new THREE.ShaderMaterial({
-        uniforms: { energy: { value: 0 } },
+        transparent: true, depthWrite: false,
+        uniforms: { energy: { value: 0 }, time: { value: 0 }, pixelRatio: { value: renderer.getPixelRatio() } },
         vertexShader: `
           uniform float energy;
-          varying vec3 terrainPoint;
-          varying vec3 terrainNormal;
+          uniform float time;
+          uniform float pixelRatio;
+          varying float brightness;
           varying float distanceToCamera;
           void main() {
             vec3 p = position;
-            p.y *= 1.0 + energy * 0.055;
-            terrainPoint = p;
-            terrainNormal = normal;
+            float wave = p.x*.12 + p.z*.09 - time*1.6;
+            p.y += sin(wave)*(1.6 + energy*2.5) + cos(p.z*.16-time)*.7;
+            p.x += cos(wave)*.65;
+            p.z += sin(wave*.7)*.45;
             vec4 view = modelViewMatrix * vec4(p, 1.0);
-            distanceToCamera = length(view.xyz);
+            distanceToCamera = -view.z;
+            brightness = .55 + .45*smoothstep(-4.0, 13.0, p.y);
+            brightness *= .85 + .15*sin(p.x*7.3+p.z*4.7);
+            brightness = clamp(brightness * (1.0 + energy*.7), 0.0, 1.0);
+            gl_PointSize = clamp(240.0 / max(10.0,-view.z), 3.0, 5.5) * pixelRatio;
             gl_Position = projectionMatrix * view;
           }
         `,
         fragmentShader: `
-          varying vec3 terrainPoint;
-          varying vec3 terrainNormal;
+          varying float brightness;
           varying float distanceToCamera;
-          float hash(vec3 p) { return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453); }
-          float noise(vec3 p) {
-            vec3 i=floor(p), f=fract(p); f=f*f*(3.0-2.0*f);
-            return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),
-                           mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),
-                       mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),
-                           mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);
-          }
           void main() {
-            vec3 p=terrainPoint, n=normalize(terrainNormal);
-            float grain=noise(p*9.0)*.5+noise(p*24.0)*.25+noise(p*2.0)*.25;
-            float strata=sin(p.y*5.0+noise(p*.7)*5.0)*.05;
-            vec3 grass=mix(vec3(.20,.30,.17),vec3(.43,.49,.27),grain);
-            vec3 rock=mix(vec3(.29,.29,.27),vec3(.57,.54,.48),grain)+strata;
-            vec3 snow=mix(vec3(.77,.84,.88),vec3(.98,.98,.94),grain);
-            float steep=1.0-abs(n.y);
-            vec3 color=mix(grass,rock,smoothstep(.15,.5,steep)+smoothstep(8.0,17.0,p.y)*(1.0-smoothstep(.15,.5,steep)));
-            float snowline=smoothstep(18.0,23.0,p.y+noise(p*.45)*3.0)*(1.0-smoothstep(.35,.75,steep));
-            color=mix(color,snow,snowline);
-            float light=.48+.52*max(0.0,dot(n,normalize(vec3(-.6,.9,.4))));
-            color*=light;
-            float fog=smoothstep(35.0,125.0,distanceToCamera);
-            gl_FragColor=vec4(mix(color,vec3(.863,.910,.933),fog),1.0);
-            #include <tonemapping_fragment>
-            #include <colorspace_fragment>
+            float radius = length(gl_PointCoord - .5);
+            if (radius > .5) discard;
+            float dotShape = 1.0-smoothstep(.32,.5,radius);
+            float fog = 1.0-smoothstep(30.0,135.0,distanceToCamera);
+            vec3 teal = mix(vec3(.035,.24,.27),vec3(.24,.78,.67),brightness);
+            gl_FragColor = vec4(teal, dotShape*fog*brightness);
           }
         `,
       });
-      const terrain = new THREE.Mesh(geometry, material);
-      terrain.position.set(0, -5, -20); scene.add(terrain);
+      const terrain = new THREE.Points(geometry, material);
+      terrain.position.set(0, 0, -25); scene.add(terrain);
       const bins = new Uint8Array(128);
       const reduced = matchMedia('(prefers-reduced-motion: reduce)');
       let frame = 0, last = 0, energy = 0;
@@ -95,10 +87,11 @@ export function Landscape({ audio }) {
             bass /= 17 * 255;
           }
           energy += (bass - energy) * .15;
-          const time = reduced.matches ? 0 : now * .00012;
+          const time = reduced.matches ? 0 : now * .0007;
           material.uniforms.energy.value = energy;
           camera.position.x = Math.sin(time * .4) * 1.2;
-          camera.lookAt(0, 5, -22);
+          material.uniforms.time.value = time;
+          camera.lookAt(0, 0, -28);
           renderer.render(scene, camera);
         }
         if (!reduced.matches) frame = requestAnimationFrame(draw);

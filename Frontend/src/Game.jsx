@@ -56,7 +56,21 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
       tracked = data.tracked;
       setCameraState(previous => previous.tracked === data.tracked && previous.pose === data.pose ? previous : { ...previous, tracked:data.tracked, pose:data.pose });
       if (status === 'framing') begin();
-      if (data.event && input === 'camera') hit(data.event);
+      
+      if (data.event && input === 'camera') hit(data.event); // "line above"
+
+      // if we want start/stop pose to start/end the visuals, then we should change the line above to this:
+      // if (data.event && input === 'camera') {
+      //   if (data.event === 'startStop') {
+      //     if (status === 'framing') {
+      //       begin();
+      //     }
+
+      //     return;
+      //   }
+
+      //   hit(data.event);
+      // }
     },fail);
 
     async function prepare() {

@@ -7,14 +7,14 @@
 
 :root {
   color-scheme: light;
-  --background: #dde1df;
+  --background: #e5e8ee;
   --foreground: #222923;
   --card: #f7f8f4;
   --card-foreground: #222923;
   --popover: #f7f8f4;
   --popover-foreground: #222923;
-  --primary: #c34626;
-  --primary-foreground: #ffffff;
+  --primary: #fa541c;
+  --primary-foreground: #26170e;
   --secondary: #e0e4e0;
   --secondary-foreground: #222923;
   --muted: #d4d9d4;
@@ -24,10 +24,16 @@
   --destructive: #b12e23;
   --border: #b9c0b9;
   --input: #a4ada4;
-  --ring: #c34626;
+  --ring: #be360c;
   --radius: .3rem;
   --stage: #18221e;
-  --panel: #edf0ea;
+  --panel: #f3f5f8;
+  --action-ink: #be360c;
+  --display: #241343;
+  --display-text: #f4eeff;
+  --display-muted: #c9bcdf;
+  --display-line: #655080;
+  --waveform: #d0ff24;
 }
 
 @theme inline {
@@ -71,7 +77,7 @@ html { scrollbar-color: var(--input) var(--background); }
 .site-header { border-bottom: 1px solid var(--border); }
 .header-inner { max-width: 1200px; height: 76px; padding: 0 32px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
 .wordmark { display: flex; align-items: center; gap: 12px; font-size: 27px; font-weight: 750; letter-spacing: -.04em; }
-.wordmark > svg { width: 27px; height: 27px; color: var(--primary); stroke-width: 2.5; }
+.wordmark > svg { width: 27px; height: 27px; color: var(--action-ink); stroke-width: 2.5; }
 .song-page { width: min(1136px, calc(100% - 64px)); margin: auto; padding: 30px 0 32px; flex: 1; }
 .page-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
 .page-heading h1 { font-size: 30px; line-height: 1.2; letter-spacing: -.035em; font-weight: 650; }
@@ -89,21 +95,21 @@ html { scrollbar-color: var(--input) var(--background); }
 .track-name strong { font-size: 19px; font-weight: 650; letter-spacing: -.025em; line-height: 1.2; }
 .track-name > span { font-size: 12px; font-weight: 400; color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
 .track-name > span > span { margin: 0 5px; }
-.track-selected { color: var(--primary); }
-.track-display { padding: 22px 24px 18px; border-radius: 6px; background: #202d27; color: #e4ede1; box-shadow: inset 0 2px 5px #0005; }
+.track-selected { color: var(--action-ink); }
+.track-display { padding: 22px 24px 18px; border-radius: 6px; background: var(--display); color: var(--display-text); box-shadow: inset 0 2px 5px #0005; }
 .display-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .display-heading h2 { font-size: 27px; letter-spacing: -.025em; font-weight: 550; }
 .display-heading > span { display: flex; gap: 7px; align-items: baseline; font-size: 25px; font-family: ui-monospace, monospace; }
-.display-heading small { font-size: 10px; font-family: var(--font-sans); color: #b2c3b6; }
-.track-display > p { color: #b2c3b6; font-size: 12px; margin-top: 2px; }
+.display-heading small { font-size: 10px; font-family: var(--font-sans); color: var(--display-muted); }
+.track-display > p { color: var(--display-muted); font-size: 12px; margin-top: 2px; }
 .waveform { padding: 20px 0 16px; animation: display-change 180ms ease-out; }
-.waveform svg { width: 100%; height: 78px; display: block; fill: #c9d7b7; }
-.waveform-center { stroke: #4c6053; stroke-width: .6; }
-.waveform-times { display: flex; justify-content: space-between; color: #b2c3b6; font-family: ui-monospace, monospace; font-size: 10px; margin-top: 7px; }
-.display-chart { display: grid; gap: 5px; padding-top: 12px; border-top: 1px solid #4c6053; }
+.waveform svg { width: 100%; height: 78px; display: block; fill: var(--waveform); }
+.waveform-center { stroke: var(--display-line); stroke-width: .6; }
+.waveform-times { display: flex; justify-content: space-between; color: var(--display-muted); font-family: ui-monospace, monospace; font-size: 10px; margin-top: 7px; }
+.display-chart { display: grid; gap: 5px; padding-top: 12px; border-top: 1px solid var(--display-line); }
 .display-lane { display: flex; align-items: center; gap: 12px; }
-.display-lane > span { color: #b2c3b6; font-size: 9px; width: 45px; flex-shrink: 0; }
-.display-lane > div { position: relative; height: 5px; flex: 1; background: #314439; }
+.display-lane > span { color: var(--display-muted); font-size: 9px; width: 45px; flex-shrink: 0; }
+.display-lane > div { position: relative; height: 5px; flex: 1; background: #493263; }
 .display-lane i { position: absolute; width: 4px; height: 5px; }
 .sampler > [data-slot="separator"] { margin-top: 22px; }
 .play-setup { display: flex; align-items: center; gap: 24px; padding: 22px 0 0; }
@@ -311,6 +317,153 @@ html { scrollbar-color: var(--input) var(--background); }
   .waveform { padding-bottom: 0; }
 }
 
+/* Song selection: amplify the existing rhythm-console language. */
+.song-page .page-heading { align-items: center; margin-bottom: 28px; }
+.song-page .page-heading h1 { font-size: clamp(40px, 5.5vw, 80px); font-weight: 750; line-height: 1; letter-spacing: -.04em; }
+.song-page .page-heading h1 span { color: var(--primary); }
+.song-page .page-heading p { max-width: 230px; font-size: 16px; line-height: 1.5; }
+.song-page .sampler-top { grid-template-columns: minmax(260px, .8fr) minmax(0, 1.4fr); align-items: stretch; }
+.song-page .song-row { min-height: 104px; }
+.song-page .track-name strong { font-size: 24px; }
+.song-page .track-index { border: 0; width: 32px; height: 40px; font-size: 20px; }
+.song-page .track-display { display: flex; flex-direction: column; justify-content: space-between; }
+.song-page .display-heading h2 { font-size: 30px; font-weight: 650; }
+.song-page .waveform svg { height: 100px; }
+.song-page .play-song { min-width: 320px; font-size: 19px; height: 64px; }
+.song-page .play-song > svg { width: 24px; height: 24px; }
+.song-page .learn-poses { padding-top: 24px; }
+.song-page .learn-poses h2 { font-size: 24px; letter-spacing: -.025em; font-weight: 650; }
+.song-page .learn-poses .pose-guide { gap: 12px; padding: 16px 0; }
+.song-page .learn-poses .pose-guide > div { position: relative; grid-template-columns: 1fr; justify-items: center; gap: 8px; padding: 16px; background: var(--pose-color); }
+.song-page .learn-poses .pose-guide svg { width: 80px; height: 80px; }
+.song-page .learn-poses .pose-guide span { font-size: 16px; font-weight: 600; }
+.song-page .learn-poses .pose-guide kbd { position: absolute; top: 12px; left: 12px; }
+.song-page .learn-poses .pose-guide > div { animation: pose-invitation 600ms cubic-bezier(.16,1,.3,1) both; }
+.song-page .learn-poses .pose-guide > div:nth-child(2) { animation-delay: 120ms; }
+.song-page .learn-poses .pose-guide > div:nth-child(3) { animation-delay: 240ms; }
+.song-page .learn-poses .pose-guide > div:nth-child(4) { animation-delay: 360ms; }
+.song-page .learn-poses > p { font-size: 12px; }
+@keyframes pose-invitation {
+  from { transform: translateY(12px); opacity: .65; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@media (max-width: 760px) {
+  .song-page .page-heading { display: block; }
+  .song-page .page-heading p { max-width: none; margin-top: 12px; font-size: 14px; }
+  .song-page .track-name strong { font-size: 20px; }
+  .song-page .display-heading h2 { font-size: 24px; }
+  .song-page .waveform svg { height: 78px; }
+  .song-page .play-song { min-width: 210px; font-size: 16px; }
+  .song-page .learn-poses h2 { font-size: 20px; }
+  .song-page .learn-poses .pose-guide svg { width: 64px; height: 64px; }
+  .song-page .learn-poses .pose-guide span { font-size: 14px; }
+}
+@media (max-width: 640px) {
+  .song-page .sampler-top { grid-template-columns: 1fr; }
+  .song-page .song-row { min-height: 76px; }
+  .song-page .learn-poses-heading { align-items: flex-start; flex-direction: column; gap: 12px; }
+  .song-page .learn-poses .pose-guide > div { padding: 12px; }
+}
+
+/* Decorative vinyl beside the real audio waveform. */
+.record-preview { display: flex; align-items: center; gap: 20px; }
+.record-preview .waveform { min-width: 0; flex: 1; }
+.spinning-record { width: 140px; height: 140px; flex: 0 0 auto; animation: record-turn 8s linear infinite; }
+@keyframes record-turn { to { transform: rotate(360deg); } }
+@media (max-width: 760px) {
+  .record-preview { gap: 12px; }
+  .spinning-record { width: 88px; height: 88px; }
+}
+
+/* Record-led selection: a turntable and a compact transport desk. */
+.record-page { width: min(1200px, calc(100% - 64px)); position: relative; padding-top: 36px; }
+.record-page .page-heading { margin-bottom: 32px; padding-left: 54%; min-height: 150px; display: block; }
+.record-page .page-heading h1 { font-size: clamp(48px, 5.5vw, 76px); line-height: .98; }
+.record-page .page-heading p { max-width: none; margin-top: 18px; font-size: 16px; }
+.record-page .sampler { padding: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.record-page .sampler-top { display: flex; flex-direction: column; gap: 0; }
+.record-page .song-library { margin-left: 54%; margin-bottom: 24px; }
+.record-page .library-label { margin-bottom: 10px; }
+.record-page .song-row { min-height: 76px; padding: 14px 16px; }
+.record-page .track-name strong { font-size: 20px; }
+.record-page .track-name { gap: 4px; }
+.record-page .track-display { margin-left: 54%; padding: 16px 20px; }
+.record-page .display-heading h2 { font-size: 20px; }
+.record-page .display-heading > span { font-size: 20px; }
+.record-page .record-preview { display: block; }
+.record-page .spinning-record { position: absolute; left: 0; top: 36px; width: 48%; height: auto; filter: drop-shadow(0 20px 18px #17221b30); }
+.record-page .waveform { padding: 12px 0 8px; }
+.record-page .waveform svg { height: 48px; }
+.record-page .display-chart { gap: 6px; padding-top: 10px; }
+.record-page .display-lane > span { width: 70px; font-size: 11px; white-space: nowrap; }
+.record-page .display-lane i { height: 6px; width: 5px; }
+.record-page .play-setup { margin-top: 28px; padding: 20px 24px; background: var(--panel); border-radius: 6px; }
+.record-page .play-song { min-width: 320px; }
+.record-page .sampler > [data-slot="separator"] { display: none; }
+.record-page .learn-poses { padding-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+.record-page .learn-poses-heading { grid-column: 1; grid-row: 1; }
+.record-page .learn-poses h2 { font-size: 15px; }
+.record-page .learn-poses .pose-guide { grid-column: 2; grid-row: 1 / 4; padding: 0; gap: 8px; align-self: center; }
+.record-page .learn-poses .pose-guide > div { background: var(--pose-color); padding: 0; gap: 4px; animation: none; }
+.record-page .learn-poses .pose-guide svg { width: 32px; height: 32px; }
+.record-page .learn-poses .pose-guide span { font-size: 11px; }
+.record-page .learn-poses .pose-guide kbd { display: none; }
+.record-page .learn-poses > p { grid-column: 1; font-size: 12px; }
+@media (max-width: 760px) {
+ .record-page { width: calc(100% - 32px); padding-top: 24px; }
+ .record-page .page-heading { padding-left: 46%; min-height: max(180px, 42vw); margin-bottom: 20px; }
+ .record-page .page-heading h1 { font-size: clamp(32px, 6vw, 48px); }
+ .record-page .page-heading p { font-size: 13px; margin-top: 12px; }
+ .record-page .spinning-record { width: 42%; top: 24px; }
+ .record-page .song-library, .record-page .track-display { margin-left: 0; }
+ .record-page .song-library { margin-bottom: 16px; }
+ .record-page .play-setup { margin-top: 16px; padding: 16px; }
+ .record-page .play-song { min-width: 0; }
+ .record-page .learn-poses { display: block; }
+ .record-page .learn-poses-heading { flex-direction: row; align-items: center; }
+ .record-page .learn-poses .pose-guide { grid-template-columns: repeat(4,minmax(0,1fr)); padding: 16px 0; }
+ .record-page .learn-poses > p { margin-top: 4px; }
+}
+@media (max-width: 400px) {
+ .record-page .page-heading { min-height: 155px; }
+ .record-page .page-heading h1 { font-size: 32px; }
+}
+
+.app { isolation: isolate; }
+.music-landscape { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.music-landscape canvas { display: block; width: 100%; height: 100%; }
+.record-page { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 6%; align-items: start; }
+.record-page .record-stage { grid-column: 1; grid-row: 1 / 3; align-self: center; }
+.record-page .record-stage .spinning-record { position: static; width: 100%; height: auto; display: block; }
+.record-page .page-heading { grid-column: 2; grid-row: 1; padding-left: 0; margin: 0; min-height: 0; }
+.record-page .sampler, .record-page .sampler-top { display: contents; }
+.record-page .song-library { grid-column: 2; grid-row: 2; margin: 0; }
+.record-page .track-display { grid-column: 1; grid-row: 3; margin: 0; width: 100%; }
+.record-page .play-setup { grid-column: 2; grid-row: 3; margin: 0; flex-direction: column; align-items: stretch; padding: 24px; align-self: stretch; justify-content: center; }
+.record-page .play-song { width: 100%; min-width: 0; }
+.record-page .learn-poses { grid-column: 1 / -1; grid-row: 4; padding-top: 0; }
+.record-page [data-slot="alert"] { grid-column: 1 / -1; }
+@media (max-width: 760px) {
+ .record-page { gap: 20px; }
+ .record-page .record-stage { grid-column: 1; grid-row: 1; }
+ .record-page .page-heading { grid-column: 2; grid-row: 1; align-self: center; }
+ .record-page .song-library { grid-column: 1 / -1; grid-row: 2; }
+ .record-page .track-display { grid-column: 1 / -1; grid-row: 3; }
+ .record-page .play-setup { grid-column: 1 / -1; grid-row: 4; }
+ .record-page .learn-poses { grid-row: 5; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* Colorful pose demonstration, replacing the vinyl centerpiece. */
+.record-page { --panel: #f3f5f8; }
+.pose-dancer { background: transparent; padding: 0; }
+.pose-dancer > svg { display: block; width: 100%; max-height: 400px; }
+.dancer-arm { transition: none; }
+.record-page .song-row[aria-pressed="true"] { background: #ffe0bf; border-color: var(--action-ink); }
+.record-page .page-heading h1 span { color: var(--action-ink); }
+@media (max-width: 760px) {
+
 }

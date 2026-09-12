@@ -1,5 +1,34 @@
 # Bodybeat — webcam rhythm game
 
+Latest palette update: brighter orange transport controls, saturated yellow/blue/pink/teal
+pose colors shared by the demo, guide, chart, and game notes, plus a lime waveform
+on a deep violet display. Build, contrast checks, and design detector pass. Browser
+checks at 1280×720 and 390×844 covered track/input selection, keyboard game entry,
+and return to songs with no console errors. Webcam and audible timing were not
+retested for this color-only change.
+
+Main-screen bolder pass: larger headline and waveform, full-color pose pads with
+a single staggered entrance, and a larger Play control. Scoped to song selection.
+Production build and design detector pass. In-app browser checks at 1440×900
+and 390×844 covered layout, track/input selection, keyboard game entry, return
+to songs, and instructions. No browser errors observed. Camera input and audible
+timing were not re-tested for this visual-only change.
+
+Latest playback update: the four instrument lanes are left hip (snare), right hip
+(hi-hat), left chest (bass), and right chest (crash). The model's `Start/Stop`
+class is a separate Start / Pause control, with no note, score, or instrument
+sound. In Camera mode it starts the countdown, pauses, or resumes the round;
+Keyboard mode starts automatically. Pause freezes the song clock and notes,
+including during the countdown, and leaves the camera active for resuming.
+Holding the gesture does not repeat; show an instrument pose to rearm it.
+Controls have a one-second cooldown; a control held through the cooldown acts
+once it expires, without needing another pose-entry event.
+Pause/Resume buttons provide the same control. Browser checks with simulated
+pose input and real decoded audio verified these transitions, timing, scoring,
+restart, and exit. Fourteen focused tests and the build pass; the older pose test
+file still imports the removed `classifyPose` export. Physical gesture control
+and audible pause/resume timing still need a human playtest.
+
 Status: implemented. Scope is the rhythm game only. The production build and
 nine focused tests pass. The latest UI uses React and customized shadcn controls,
 with a separate song-selection page and focused game screen. Browser checks
@@ -45,7 +74,8 @@ to the body; individual finger gestures are outside this MVP.
 - Score, combo, song progress, and brief Perfect / Good / Miss feedback.
 - First page: song selection, Camera / Keyboard, a short pose guide, and Play.
 - Play opens the game, loads the selected song, and requests the camera if used.
-  The countdown begins once tracking is ready. Results offer Retry / Choose song.
+  In Camera mode, make Start / Pause once tracking is ready to begin the countdown.
+  Results offer Retry / Choose song.
 - Practice poses opens a full-viewport mirrored camera with a skeleton overlay,
   the detected stance, and a guide that highlights the matching pose. Practice
   always uses the camera, independently of the game input choice, with no song,
@@ -53,7 +83,7 @@ to the body; individual finger gestures are outside this MVP.
   Arms down and missing tracking have their own feedback. Retry handles camera
   or model errors; Back to songs, Escape, and hiding the tab release the camera.
 
-Use white surfaces, neutral shadcn controls, and pastel pose cues. Draw the highway
+Use silver surfaces, orange shadcn transport controls, and vibrant pose cues. Draw the highway
 and flying notes on a 2D canvas with simple perspective math. The visible human
 is the webcam player; cue figures can be small SVGs.
 
@@ -82,7 +112,8 @@ an uncertain or dropped frame does not. Avoid jitter-induced hits.
 
 1. Select a song and input mode, then press Play to open the game screen.
 2. Load audio and, for Camera mode, the pose model and webcam. Show framing
-   guidance and begin the countdown when both arms are tracked.
+   guidance; in Camera mode, begin the countdown on the Start / Pause gesture
+   once both arms are tracked.
 3. Give a three-second countdown, then play. Show each note about 2.5 seconds
    before its target time so the player can prepare.
 4. Compare each pose-entry event with the closest unjudged note for that pose.
@@ -98,7 +129,7 @@ Calculate position from chart time minus current song time on every animation
 frame; do not advance time by accumulating frame deltas. The full track plays
 continuously, with quiet hit sounds layered on top.
 
-Provide master volume and Stop / Restart / Back to songs. Lost tracking shows “Step into frame”
+Provide master volume and Pause / Resume / Stop / Restart / Back to songs. Lost tracking shows “Step into frame”
 and disables pose input; the song continues and overdue notes miss. Stop the
 round when the tab becomes hidden. Returning to selection and finishing a track
 release the camera.
@@ -183,8 +214,9 @@ Use ordinary functions and a small state object. Leave `Backend/` unused.
 ## Implemented flow
 
 1. The first page presents both songs, input choice, instructions, and Play.
-2. Play mounts the game, loads audio and any camera resources, then starts a
-   three-second countdown once the selected input is ready.
+2. Play mounts the game and loads audio and any camera resources. Camera mode
+   waits for Start / Pause; Keyboard mode starts its three-second countdown
+   once loading finishes.
 3. Pose entries or keys feed the same timing and scoring functions. Canvas
    animation uses the audio clock; React updates the surrounding controls.
 4. Results show hits, misses, and best combo. Retry creates a fresh round;

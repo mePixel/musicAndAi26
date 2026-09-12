@@ -1,19 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, Camera, Keyboard, RotateCcw, Square } from 'lucide-react';
+import { ArrowLeft, Camera, Keyboard, Pause, Play, RotateCcw, Square } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/components/ui/empty';
 import { Spinner } from '@/components/ui/spinner';
-import { poses } from './poses.js';
+import { poses, controlPose } from './poses.js';
 import { createCamera } from './pose.js';
-import { createRound, createHighway, expireNotes, judge } from './game.js';
+import { createRound, createHighway, createPlaybackGestureTrigger, expireNotes, judge } from './game.js';
 import { formatTime } from '@/lib/utils';
 
 const initialHud = { score:0, combo:0, elapsed:0, countdown:3, judgement:'', hits:0, misses:0, bestCombo:0 };
 
 export function Game({ song, input, audio, onExit, onUseKeyboard }) {
   const canvas = useRef(null), video = useRef(null), overlay = useRef(null), trigger = useRef(() => {});
+  const transport = useRef(() => {});
   const [attempt,setAttempt] = useState(0);
   const [phase,setPhase] = useState('loading');
   const [hud,setHud] = useState(initialHud);
@@ -36,18 +37,33 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
 
     function begin() {
       if (!active || !buffer || !cameraReady || (input === 'camera' && !tracked) || !['loading','framing'].includes(status)) return;
-      camera.reset(); audio.startTrack(buffer); status = 'playing'; setPhase('playing');
+      audio.startTrack(buffer); status = 'playing'; setPhase('playing');
     }
+
+    function togglePlayback() {
+      if (!active) return;
+      if (status === 'framing') { begin(); return; }
+      if (status === 'playing') {
+        audio.pause(); status = 'paused'; setPhase('paused');
+        setHud(previous => ({ ...previous, elapsed: Math.max(0, audio.songTime()), judgement: '' }));
+      } else if (status === 'paused') {
+        audio.resume(); status = 'playing'; setPhase('playing');
+        judgement = ''; feedbackUntil = 0;
+      }
+    }
+    transport.current = togglePlayback;
+    const handleControlPose = createPlaybackGestureTrigger(togglePlayback);
 
     function hit(poseId) {
       if (!active || status !== 'playing') return;
       const time = audio.songTime();
       if (time < 0) return;
       const index = poses.findIndex(pose => pose.id === poseId);
+      if (index < 0) return;
       highway.flash(index);
       expireNotes(round,time);
       const note = judge(round,poseId,time);
-      if (note) { audio.hit(index); judgement = note.result; feedbackUntil = performance.now()+500; }
+      if (note) { audio.hit(poseId); judgement = note.result; feedbackUntil = performance.now()+500; }
     }
     trigger.current = hit;
 
@@ -55,22 +71,11 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
       if (!active) return;
       tracked = data.tracked;
       setCameraState(previous => previous.tracked === data.tracked && previous.pose === data.pose ? previous : { ...previous, tracked:data.tracked, pose:data.pose });
-      if (status === 'framing') begin();
-      
-      if (data.event && input === 'camera') hit(data.event); // "line above"
-
-      // if we want start/stop pose to start/end the visuals, then we should change the line above to this:
-      // if (data.event && input === 'camera') {
-      //   if (data.event === 'startStop') {
-      //     if (status === 'framing') {
-      //       begin();
-      //     }
-
-      //     return;
-      //   }
-
-      //   hit(data.event);
-      // }
+      if (input !== 'camera') return;
+      if (['framing', 'playing', 'paused'].includes(status)) {
+        handleControlPose(data, performance.now());
+      }
+      if (data.tracked && data.event && data.event !== 'startStop') hit(data.event);
     },fail);
 
     async function prepare() {
@@ -80,18 +85,20 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
         const [loaded,enabled] = await Promise.all([
           audio.load(song.audioUrl),
           input === 'camera' ? camera.start() : Promise.resolve(false),
+          audio.loadHits(),
         ]);
         if (!active) return;
         buffer = loaded; duration = buffer.duration; cameraReady = input === 'keyboard' || enabled;
         setCameraState(previous => ({ ...previous, enabled }));
-        status = 'framing'; setPhase('framing'); begin();
+        status = 'framing'; setPhase('framing'); camera.reset();
+        if (input === 'keyboard') begin();
       } catch (error) { fail(error.message || 'The track could not start. Please try again.'); }
     }
     prepare();
 
     function draw(now) {
       if (!active) return;
-      let time = 0;
+      let time = status === 'paused' ? audio.songTime() : 0;
       if (status === 'playing') {
         time = audio.songTime();
         if (!audio.running) { fail('Audio was interrupted. Restart the track to continue.'); }
@@ -107,7 +114,8 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
           }
         }
       }
-      highway.draw(time,status === 'playing' ? round.notes : [],status === 'playing');
+      const hasRound = status === 'playing' || status === 'paused';
+      highway.draw(time,hasRound ? round.notes : [],hasRound);
       frame = requestAnimationFrame(draw);
     }
     frame = requestAnimationFrame(draw);
@@ -124,7 +132,7 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
     document.addEventListener('visibilitychange',hidden);
     window.addEventListener('pagehide',leavePage);
     return () => {
-      active = false; cancelAnimationFrame(frame); trigger.current = () => {};
+      active = false; cancelAnimationFrame(frame); trigger.current = () => {}; transport.current = () => {};
       audio.stop(); camera.stop();
       document.removeEventListener('keydown',keydown);
       document.removeEventListener('visibilitychange',hidden);
@@ -135,12 +143,17 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
   useEffect(() => { if (phase === 'finished') resultHeading.current?.focus(); },[phase]);
 
   const waiting = phase === 'loading' || phase === 'framing';
-  const detected = poses.find(pose => pose.id === cameraState.pose);
+  const detected = cameraState.pose === controlPose.id ? controlPose : poses.find(pose => pose.id === cameraState.pose);
   return <main className="game-page">
     <nav className="game-toolbar" aria-label="Game controls">
       <Button variant="outline" onClick={onExit}><ArrowLeft data-icon="inline-start" /><span>Back to songs</span></Button>
       <div className="playing-title"><h1>{song.title}</h1><p>{song.bpm} BPM</p></div>
-      <Button variant="outline" onClick={() => setAttempt(value => value+1)} disabled={waiting}><RotateCcw data-icon="inline-start" /><span>Restart</span></Button>
+      <div className="inline-actions">
+        {phase === 'playing' || phase === 'paused' ? <Button variant="outline" onClick={() => transport.current()}>
+          {phase === 'paused' ? <Play data-icon="inline-start" /> : <Pause data-icon="inline-start" />}{phase === 'paused' ? 'Resume' : 'Pause'}
+        </Button> : null}
+        <Button variant="outline" onClick={() => setAttempt(value => value+1)} disabled={waiting}><RotateCcw data-icon="inline-start" /><span>Restart</span></Button>
+      </div>
     </nav>
     <div className="score-strip" aria-label="Round score">
       <div><span>Score</span><strong id="score">{hud.score.toLocaleString()}</strong></div>
@@ -153,11 +166,12 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
           <canvas ref={canvas} aria-label="Flying notes travel toward the hit line. Use the four pose controls below." />
           {waiting ? <div className="stage-overlay" role="status">
             {phase === 'loading' ? <Spinner /> : <Camera aria-hidden="true" />}
-            <h2>{phase === 'loading' ? input === 'camera' ? 'Opening your camera' : 'Loading your track' : 'Step into frame'}</h2>
-            <p>{phase === 'loading' && input === 'camera' ? 'Allow camera access in your browser to continue.' : phase === 'framing' ? 'Keep your shoulders and hands visible. The countdown starts when you’re ready.' : 'Your song is almost ready.'}</p>
+            <h2>{phase === 'loading' ? input === 'camera' ? 'Opening your camera' : 'Loading your track' : cameraState.tracked ? 'Ready to start' : 'Step into frame'}</h2>
+            <p>{phase === 'loading' && input === 'camera' ? 'Allow camera access in your browser to continue.' : phase === 'framing' ? 'Keep your shoulders and hands visible, then make the Start / Pause gesture to begin.' : 'Your song is almost ready.'}</p>
             {input === 'camera' ? <Button variant="outline" onClick={onUseKeyboard}>Use keyboard instead</Button> : null}
           </div> : null}
           {phase === 'playing' && hud.countdown > 0 ? <div className="stage-overlay countdown" role="status"><p>Get ready</p><strong>{hud.countdown}</strong></div> : null}
+          {phase === 'paused' ? <div className="stage-overlay" role="status"><Pause aria-hidden="true" /><h2>Paused</h2><p>{input === 'camera' ? 'Make an instrument pose, then Start / Pause again to resume. You can also use the Resume button.' : 'Press Resume to continue from this beat.'}</p></div> : null}
           {phase === 'playing' && hud.judgement ? <div className="judgement" role="status" data-kind={hud.judgement}>{hud.judgement}</div> : null}
           {phase === 'error' ? <div className="stage-overlay">
             <Alert variant="destructive"><AlertTitle>Couldn’t start the game</AlertTitle><AlertDescription>{error}</AlertDescription></Alert>
@@ -182,7 +196,7 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
           {!cameraState.enabled ? <Empty><EmptyHeader><EmptyMedia variant="icon">{input === 'camera' ? <Camera /> : <Keyboard />}</EmptyMedia><EmptyTitle>{input === 'camera' ? phase === 'finished' ? 'Camera off' : 'Camera preview' : 'Use keys 1–4'}</EmptyTitle><EmptyDescription>{input === 'camera' ? 'Your video appears here.' : 'Press a key as its note reaches the line. You can tap the buttons, too.'}</EmptyDescription></EmptyHeader></Empty> : null}
           {cameraState.enabled ? <span className="detected-pose">{cameraState.tracked ? detected?.label ?? 'Ready' : 'Step into frame'}</span> : null}
         </div>
-        <p>{input === 'camera' ? 'Keep your hands visible in the camera.' : 'Left up · Right up · Both up · Arms out'}</p>
+        <p>{input === 'camera' ? 'Start / Pause controls playback. The four instrument poses score notes.' : 'Left hip · Right hip · Left chest · Right chest'}</p>
       </aside>
     </div>
     <div className="game-progress"><Progress id="progress" value={Math.min(hud.elapsed/song.duration*100,100)} aria-label="Song progress" /><Button variant="outline" onClick={onExit}><Square data-icon="inline-start" />Stop</Button></div>

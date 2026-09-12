@@ -6,16 +6,20 @@ import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/
 import { Spinner } from '@/components/ui/spinner';
 import { PoseIcon } from './components/PoseGuide.jsx';
 import { createCamera } from './pose.js';
-import { poses } from './poses.js';
+import { createPracticeSoundTrigger } from './audio.js';
+import { poses, controlPose } from './poses.js';
+
+const practicePoses = [...poses, controlPose];
 
 const instructions = {
-  leftUp: 'Left hand above your shoulder, right hand down.',
-  rightUp: 'Right hand above your shoulder, left hand down.',
-  bothUp: 'Both hands above your shoulders.',
-  spread: 'Both arms straight out at shoulder height.',
+  leftHip: 'Left hand on your left hip — snare.',
+  rightHip: 'Right hand on your right hip — hi-hat.',
+  leftChest: 'Left hand at your chest or shoulder — bass.',
+  rightChest: 'Right hand at your chest or shoulder — crash.',
+  startStop: 'Starts, pauses, or resumes the rhythm game. No instrument sound.',
 };
 
-export function Practice({ onExit }) {
+export function Practice({ audio, onExit }) {
   const video = useRef(null), overlay = useRef(null), heading = useRef(null);
   const [attempt, setAttempt] = useState(0);
   const [phase, setPhase] = useState('loading');
@@ -23,41 +27,43 @@ export function Practice({ onExit }) {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    let active = true;
+    let active = true, soundsReady = false;
+    const playSound = createPracticeSoundTrigger(audio.hit);
     setPhase('loading'); setError('');
     setCameraState({ tracked: false, pose: null });
 
     function fail(message) {
       if (!active) return;
-      camera.stop(); setError(message); setPhase('error');
+      soundsReady = false; camera.stop(); audio.stop(); setError(message); setPhase('error');
     }
 
     const camera = createCamera(video.current, overlay.current, ({ tracked, pose }) => {
       if (!active) return;
       setCameraState(previous => previous.tracked === tracked && previous.pose === pose ? previous : { tracked, pose });
+      if (soundsReady) playSound({ tracked, pose }, performance.now());
     }, fail);
 
-    camera.start().then(enabled => {
-      if (active && enabled) setPhase('ready');
+    Promise.all([camera.start(), audio.loadHits()]).then(([enabled]) => {
+      if (active && enabled) { soundsReady = true; camera.reset(); setPhase('ready'); }
     }).catch(error => fail(error.message));
 
     function keydown(event) { if (event.key === 'Escape') onExit(); }
-    function leavePage() { camera.stop(); }
+    function leavePage() { soundsReady = false; camera.stop(); audio.stop(); }
     function hidden() { if (document.hidden) { leavePage(); onExit(); } }
     document.addEventListener('keydown', keydown);
     document.addEventListener('visibilitychange', hidden);
     window.addEventListener('pagehide', leavePage);
     return () => {
-      active = false; camera.stop();
+      active = false; leavePage();
       document.removeEventListener('keydown', keydown);
       document.removeEventListener('visibilitychange', hidden);
       window.removeEventListener('pagehide', leavePage);
     };
-  }, [attempt, onExit]);
+  }, [attempt, audio, onExit]);
 
   useEffect(() => { heading.current?.focus(); }, []);
 
-  const detected = phase === 'ready' && cameraState.tracked ? poses.find(pose => pose.id === cameraState.pose) : null;
+  const detected = phase === 'ready' && cameraState.tracked ? practicePoses.find(pose => pose.id === cameraState.pose) : null;
   const status = detected ? detected.label : !cameraState.tracked ? 'Step into frame' : cameraState.pose === 'neutral' ? 'Arms down' : 'Try a pose';
   const hint = detected ? instructions[detected.id] : !cameraState.tracked
     ? 'Keep both shoulders, elbows, and hands visible.'
@@ -86,10 +92,10 @@ export function Practice({ onExit }) {
     {phase === 'error' ? <div className="practice-message">
       <Alert variant="destructive">
         <Camera aria-hidden="true" />
-        <AlertTitle>Camera unavailable</AlertTitle>
+        <AlertTitle>Training unavailable</AlertTitle>
         <AlertDescription>{error}</AlertDescription>
       </Alert>
-      <Button onClick={() => setAttempt(value => value + 1)}><RotateCcw data-icon="inline-start" />Retry camera</Button>
+      <Button onClick={() => setAttempt(value => value + 1)}><RotateCcw data-icon="inline-start" />Retry training</Button>
     </div> : null}
 
     <section className="practice-feedback" aria-label="Pose feedback">
@@ -98,13 +104,13 @@ export function Practice({ onExit }) {
         <div><h2>{status}</h2><p>{hint}</p></div>
       </div> : null}
       <ul className="practice-poses" aria-label="Poses to try">
-        {poses.map(pose => <li key={pose.id} data-detected={detected?.id === pose.id} style={{ '--pose-color': pose.color }}>
+        {practicePoses.map(pose => <li key={pose.id} data-detected={detected?.id === pose.id} style={{ '--pose-color': pose.color }}>
           <PoseIcon pose={pose} />
           <span>{pose.label}</span>
           {detected?.id === pose.id ? <span className="sr-only">Detected</span> : null}
         </li>)}
       </ul>
-      <p className="practice-caption">Your left is on the left. Camera video stays on your device.</p>
+      <p className="practice-caption">Hold a pose briefly to play its sound. Change poses to play again; sounds are spaced at least 0.6 seconds apart. Camera video stays on your device.</p>
     </section>
   </main>;
 }

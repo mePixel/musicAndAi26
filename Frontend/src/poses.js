@@ -3,7 +3,7 @@ export const poses = [
     id: "leftHip",
     label: "Left hand — left hip",
     short: "Left hip",
-    color: "#f5d28b",
+    color: "#ffd12e",
 
     arms: [
       [32, 23, 44, 31, 48, 43],
@@ -15,7 +15,7 @@ export const poses = [
     id: "rightHip",
     label: "Right hand — right hip",
     short: "Right hip",
-    color: "#b8d6f4",
+    color: "#49b6ff",
 
     arms: [
       [32, 23, 20, 31, 16, 43],
@@ -27,7 +27,7 @@ export const poses = [
     id: "leftChest",
     label: "Left hand — chest/shoulder",
     short: "Left chest",
-    color: "#f3b4bc",
+    color: "#ff6f98",
 
     arms: [
       [32, 23, 20, 31, 30, 30],
@@ -39,26 +39,26 @@ export const poses = [
     id: "rightChest",
     label: "Right hand — chest/shoulder",
     short: "Right chest",
-    color: "#a2d4ce",
+    color: "#27deb2",
 
     arms: [
       [32, 23, 20, 31, 18, 43],
       [32, 23, 44, 31, 32, 30],
     ],
   },
-
-  {
-    id: "startStop",
-    label: "Start / Stop",
-    short: "Start / Stop",
-    color: "#d7b8f4",
-
-    arms: [
-      [32, 23, 20, 31, 18, 23],
-      [32, 23, 44, 31, 46, 23],
-    ],
-  },
 ];
+
+export const controlPose = {
+  id: "startStop",
+  label: "Start / Pause",
+  short: "Start / Pause",
+  color: "#b896ff",
+
+  arms: [
+    [32, 23, 20, 31, 18, 23],
+    [32, 23, 44, 31, 46, 23],
+  ],
+};
 
 export function drawPose(ctx, pose, x, y, size, color) {
   ctx.save();
@@ -67,7 +67,7 @@ export function drawPose(ctx, pose, x, y, size, color) {
   ctx.scale(size / 64, size / 64);
 
   ctx.strokeStyle = color;
-  ctx.lineWidth = 3.8;
+  ctx.lineWidth = 5.5;
   ctx.lineCap = "round";
   ctx.lineJoin = "round";
 

@@ -1,5 +1,16 @@
 import { poses, drawPose } from './poses.js';
 
+export function createPlaybackGestureTrigger(toggle) {
+  let armed = true, lastToggle = -Infinity;
+  return ({ tracked, pose }, now) => {
+    if (!tracked || !pose) return;
+    if (pose !== 'startStop') { armed = true; return; }
+    if (!armed || now - lastToggle < 1000) return;
+    armed = false; lastToggle = now;
+    toggle();
+  };
+}
+
 export function createRound(notes) {
   return { notes: notes.map(note => ({ ...note, result: null })), score: 0, combo: 0, bestCombo: 0, hits: 0, misses: 0 };
 }

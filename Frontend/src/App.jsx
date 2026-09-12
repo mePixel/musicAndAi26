@@ -9,6 +9,8 @@ import { Separator } from '@/components/ui/separator';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Spinner } from '@/components/ui/spinner';
 import { PoseGuide } from './components/PoseGuide.jsx';
+import { PoseDancer } from './components/PoseDancer.jsx';
+import { Landscape } from './components/Landscape.jsx';
 import { Game } from './Game.jsx';
 import { Practice } from './Practice.jsx';
 import { createAudio } from './audio.js';
@@ -51,25 +53,27 @@ export function App() {
     document.title = screen === 'songs' ? 'Bodybeat — Choose a song' : screen === 'practice' ? 'Practice — Bodybeat' : `${song.title} — Bodybeat`;
   },[screen,song.title]);
 
-  async function play() {
+  async function play(nextScreen = 'game') {
     setStarting(true); setError('');
     try {
       await audio.ensure();
-      setScreen('game'); window.scrollTo(0,0);
-    } catch { setError('Sound could not start. Please try Play again.'); }
+      setScreen(nextScreen); window.scrollTo(0,0);
+    } catch { setError('Sound could not start. Please try again.'); }
     finally { setStarting(false); }
   }
 
-  if (screen === 'practice') return <Practice onExit={exitGame} />;
+  if (screen === 'practice') return <Practice audio={audio} onExit={exitGame} />;
 
   return <div className="app">
+    <Landscape audio={audio} />
     <header className="site-header">
       <div className="header-inner"><span className="wordmark"><AudioLines aria-hidden="true" />bodybeat</span>{screen === 'songs' ? <Instructions /> : null}</div>
     </header>
-    {screen === 'songs' ? <main className="song-page">
+    {screen === 'songs' ? <main className="song-page record-page">
+      <div className="record-stage"><PoseDancer /></div>
       <div className="page-heading">
-        <h1>Choose a song</h1>
-        <p>Pick a track. Match the poses on the beat.</p>
+        <h1>Your body.<br /><span>Your beat.</span></h1>
+        <p>Pick a track. Get on your feet.<br />Move to the music.</p>
       </div>
       <div className="sampler">
       <div className="sampler-top">
@@ -98,7 +102,7 @@ export function App() {
             </FieldContent>
           </Field>
         </FieldGroup>
-        <Button size="lg" className="play-song" onClick={play} disabled={starting}>
+        <Button size="lg" className="play-song" onClick={() => play()} disabled={starting}>
           {starting ? <Spinner data-icon="inline-start" /> : <Play data-icon="inline-start" />}<span>{starting ? 'Starting…' : `Play ${song.title}`}</span>
         </Button>
       </section>
@@ -107,7 +111,7 @@ export function App() {
       <section className="learn-poses" aria-labelledby="pose-heading">
         <div className="learn-poses-heading">
           <h2 id="pose-heading">Four poses. One beat.</h2>
-          <Button variant="outline" onClick={() => { setScreen('practice'); window.scrollTo(0,0); }} disabled={starting}>
+          <Button variant="outline" onClick={() => play('practice')} disabled={starting}>
             <Camera data-icon="inline-start" />Practice poses
           </Button>
         </div>

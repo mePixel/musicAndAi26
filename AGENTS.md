@@ -5,12 +5,11 @@
 Build a small webcam rhythm game for a hackathon. Flying notes cue body and hand
 poses; the player matches them on the beat to trigger hit sounds, visual feedback,
 and points. Each song has a hand-authored timeline of pose cues. Read
-[PLAN.md](PLAN.md) for the proposed behavior and build order.
+[PLAN.md](PLAN.md) for the game behavior and verification status.
 
-The current repository contains only README scaffolding in `Frontend/` and
-`Backend/`. There is no application, package manifest, or test runner yet.
-The initial task is planning and documentation; implement when the user asks.
-Update this paragraph when implementation changes that state.
+The implementation lives in `Frontend/`, with two bundled original tracks and
+the pretrained pose model. `Backend/` is unused. The current scope is only the
+rhythm game; MIDI and a separate instrument mode were explicitly dropped.
 
 ## Keep the build small
 
@@ -53,9 +52,9 @@ Update this paragraph when implementation changes that state.
 ## Verification and completion
 
 - For documentation changes, check the diff, links, and consistency; no app tests.
-- Once implemented, use `cd Frontend && npm run dev` for the browser demo and
-  `cd Frontend && npm run build` for the production build. These are planned
-  commands, not commands available in the initial scaffold.
+- Use `cd Frontend && npm run dev` for the browser demo, `npm test` for the focused
+  Node tests, and `npm run build` for the production build. Run `npm install`
+  first; its postinstall step copies the matching MediaPipe WASM assets locally.
 - Exercise the affected user journey and the relevant acceptance checks in
   `PLAN.md`. Check audible timing and real webcam pose input. Keyboard input can
   verify the game loop but cannot establish that body tracking works.

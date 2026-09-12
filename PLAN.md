@@ -1,6 +1,12 @@
-# Body Beat — hackathon website plan
+# Bodybeat — webcam rhythm game
 
-Status: proposed pivot; no application has been built yet.
+Status: implemented. Scope is the rhythm game only. The production build and
+nine focused tests pass. Browser checks cover keyboard scoring, song selection,
+results, restart, instructions, and desktop/mobile layouts. A live camera round
+showed the mirrored skeleton, pose recognition, and scoring through completion.
+The human playtest confirmed that the music feels in sync and all four poses
+trigger reliably. MediaPipe emitted internal OpenGL/projection warnings during
+camera use; no JavaScript errors were observed.
 
 ## The game
 
@@ -138,11 +144,13 @@ Frontend/
   src/
     main.js             screen controls and round lifecycle
     pose.js             webcam, landmarks, four-pose classification
-    game.js             audio clock, note canvas, hit judging, score
+    game.js             note canvas, hit judging, score
+    audio.js            audio clock, track playback, synthesized hit sounds
+    poses.js            pose metadata and cue pictograms
     songs.js            song metadata and hand-authored charts
     style.css
   public/
-    audio/              tracks and short hit sounds
+    audio/              two original tracks
     models/             pretrained pose model
     wasm/               matching MediaPipe runtime assets
 ```

@@ -6,26 +6,28 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #18181b;
-  --card: #ffffff;
-  --card-foreground: #18181b;
-  --popover: #ffffff;
-  --popover-foreground: #18181b;
-  --primary: #18181b;
+  color-scheme: light;
+  --background: #dde1df;
+  --foreground: #222923;
+  --card: #f7f8f4;
+  --card-foreground: #222923;
+  --popover: #f7f8f4;
+  --popover-foreground: #222923;
+  --primary: #c34626;
   --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #27272a;
-  --muted: #f4f4f5;
-  --muted-foreground: #65656f;
-  --accent: #f0f0f2;
-  --accent-foreground: #18181b;
-  --destructive: #b42318;
-  --border: #e4e4e7;
-  --input: #d4d4d8;
-  --ring: #71717a;
-  --radius: .5rem;
-  --stage: #f7f7f8;
+  --secondary: #e0e4e0;
+  --secondary-foreground: #222923;
+  --muted: #d4d9d4;
+  --muted-foreground: #59635b;
+  --accent: #f7f8f4;
+  --accent-foreground: #222923;
+  --destructive: #b12e23;
+  --border: #b9c0b9;
+  --input: #a4ada4;
+  --ring: #c34626;
+  --radius: .3rem;
+  --stage: #18221e;
+  --panel: #edf0ea;
 }
 
 @theme inline {
@@ -63,51 +65,76 @@
   button, input { font: inherit; }
 }
 
+::selection { background: var(--primary); color: var(--primary-foreground); }
+html { scrollbar-color: var(--input) var(--background); }
 .app { min-height: 100dvh; display: flex; flex-direction: column; }
 .site-header { border-bottom: 1px solid var(--border); }
-.header-inner { max-width: 1280px; height: 72px; padding: 0 32px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
-.wordmark { font-size: 20px; font-weight: 650; letter-spacing: -.045em; }
-.song-page { width: min(960px, calc(100% - 64px)); margin: 0 auto; padding: 56px 0 40px; flex: 1; }
-.page-heading { text-align: center; margin-bottom: 40px; }
-.page-heading h1 { font-size: clamp(30px, 3.5vw, 40px); line-height: 1.2; letter-spacing: -.045em; font-weight: 600; }
-.page-heading p { margin-top: 12px; color: var(--muted-foreground); font-size: 17px; }
-.track-head, .song-row { display: grid; grid-template-columns: 72px minmax(0,1fr) 120px 86px; align-items: center; gap: 18px; }
-.track-head { color: var(--muted-foreground); padding: 0 18px 12px; font-size: 13px; font-weight: 500; }
-.track-head > :first-child { padding-left: 30px; }
-.song-row { width: 100%; }
-.track-index { display: flex; align-items: center; gap: 16px; color: var(--muted-foreground); font-size: 13px; font-variant-numeric: tabular-nums; }
-.track-index > svg { width: 18px; height: 18px; }
-.song-row[aria-pressed="true"] .track-index { color: var(--foreground); }
-.track-name { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-.track-name strong { font-size: 16px; font-weight: 600; line-height: 1.3; }
-.track-name > span { font-size: 14px; font-weight: 400; line-height: 1.4; color: var(--muted-foreground); }
-.track-tempo, .track-length { font-size: 14px; font-weight: 400; font-variant-numeric: tabular-nums; }
-.song-page > [data-slot="separator"] { margin-top: 24px; }
-.play-setup { display: flex; align-items: center; gap: 32px; padding: 30px 0 6px; }
-.play-setup [data-slot="field"] { gap: 28px; align-items: flex-start; }
-.play-setup [data-slot="field-label"] { padding-top: 9px; flex: 0 0 auto; }
+.header-inner { max-width: 1200px; height: 76px; padding: 0 32px; margin: auto; display: flex; align-items: center; justify-content: space-between; }
+.wordmark { display: flex; align-items: center; gap: 12px; font-size: 27px; font-weight: 750; letter-spacing: -.04em; }
+.wordmark > svg { width: 27px; height: 27px; color: var(--primary); stroke-width: 2.5; }
+.song-page { width: min(1136px, calc(100% - 64px)); margin: auto; padding: 30px 0 32px; flex: 1; }
+.page-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.page-heading h1 { font-size: 30px; line-height: 1.2; letter-spacing: -.035em; font-weight: 650; }
+.page-heading p { color: var(--muted-foreground); font-size: 14px; }
+.sampler { padding: 26px; border-radius: 14px; background: var(--panel); box-shadow: 0 12px 32px #17221b16, inset 0 1px 0 #ffffff; }
+.sampler-top { display: grid; grid-template-columns: minmax(260px, .8fr) minmax(0, 1.4fr); gap: 28px; }
+.song-library { min-width: 0; }
+.library-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.library-label h2 { font-size: 13px; font-weight: 650; }
+.library-label > span { font-size: 11px; color: var(--muted-foreground); }
+.song-row { display: grid; grid-template-columns: 32px minmax(0,1fr) 18px; gap: 14px; width: 100%; }
+.track-index { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--muted-foreground); border: 1px solid var(--input); width: 32px; height: 32px; display: grid; place-items: center; border-radius: 3px; }
+.song-row[aria-pressed="true"] .track-index { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
+.track-name { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.track-name strong { font-size: 19px; font-weight: 650; letter-spacing: -.025em; line-height: 1.2; }
+.track-name > span { font-size: 12px; font-weight: 400; color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
+.track-name > span > span { margin: 0 5px; }
+.track-selected { color: var(--primary); }
+.track-display { padding: 22px 24px 18px; border-radius: 6px; background: #202d27; color: #e4ede1; box-shadow: inset 0 2px 5px #0005; }
+.display-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.display-heading h2 { font-size: 27px; letter-spacing: -.025em; font-weight: 550; }
+.display-heading > span { display: flex; gap: 7px; align-items: baseline; font-size: 25px; font-family: ui-monospace, monospace; }
+.display-heading small { font-size: 10px; font-family: var(--font-sans); color: #b2c3b6; }
+.track-display > p { color: #b2c3b6; font-size: 12px; margin-top: 2px; }
+.waveform { padding: 20px 0 16px; animation: display-change 180ms ease-out; }
+.waveform svg { width: 100%; height: 78px; display: block; fill: #c9d7b7; }
+.waveform-center { stroke: #4c6053; stroke-width: .6; }
+.waveform-times { display: flex; justify-content: space-between; color: #b2c3b6; font-family: ui-monospace, monospace; font-size: 10px; margin-top: 7px; }
+.display-chart { display: grid; gap: 5px; padding-top: 12px; border-top: 1px solid #4c6053; }
+.display-lane { display: flex; align-items: center; gap: 12px; }
+.display-lane > span { color: #b2c3b6; font-size: 9px; width: 45px; flex-shrink: 0; }
+.display-lane > div { position: relative; height: 5px; flex: 1; background: #314439; }
+.display-lane i { position: absolute; width: 4px; height: 5px; }
+.sampler > [data-slot="separator"] { margin-top: 22px; }
+.play-setup { display: flex; align-items: center; gap: 24px; padding: 22px 0 0; }
+.play-setup [data-slot="field"] { gap: 24px; align-items: flex-start; }
+.play-setup [data-slot="field-label"] { padding-top: 8px; flex: 0 0 auto; }
 .play-setup [data-slot="field-content"] { gap: 8px; }
-.play-setup [data-slot="toggle-group-item"] { min-width: 108px; }
-.play-song { min-width: 225px; }
-.learn-poses { padding-top: 24px; }
-.learn-poses h2 { font-size: 15px; font-weight: 600; }
-.pose-guide { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; padding: 18px 32px 16px; }
+.play-setup [data-slot="toggle-group-item"] { min-width: 104px; }
+.play-song { min-width: 244px; }
+.learn-poses { padding-top: 20px; }
+.learn-poses h2 { font-size: 13px; font-weight: 600; }
+.learn-poses-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.pose-guide { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; padding: 16px 0 12px; }
 .pose-guide > div { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.pose-guide svg { width: 58px; height: 58px; }
-.pose-guide span { font-size: 14px; }
-.pose-guide kbd { font-size: 12px; width: 24px; height: 26px; display: grid; place-items: center; border: 1px solid var(--input); border-radius: 4px; color: var(--muted-foreground); }
-.learn-poses > p { text-align: center; color: var(--muted-foreground); font-size: 14px; margin-top: 2px; }
-.site-footer { border-top: 1px solid var(--border); }
-.footer-inner { max-width: 1280px; margin: auto; min-height: 64px; padding: 12px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.footer-inner > p { display: flex; align-items: center; gap: 8px; color: var(--muted-foreground); font-size: 12px; }
+.pose-guide svg { width: 44px; height: 44px; }
+.pose-guide span { font-size: 12px; }
+.pose-guide kbd { font-family: ui-monospace, monospace; font-size: 11px; width: 22px; height: 23px; display: grid; place-items: center; border: 1px solid var(--input); border-radius: 3px; color: var(--muted-foreground); }
+.learn-poses .pose-guide > div { display: grid; grid-template-columns: 48px 1fr auto; gap: 12px; padding: 16px; border-radius: 5px; background: color-mix(in srgb, var(--pose-color) 38%, var(--panel)); color: var(--foreground); }
+.learn-poses .pose-guide kbd { border-color: color-mix(in srgb, var(--foreground) 30%, transparent); color: var(--foreground); }
+.learn-poses > p { color: var(--muted-foreground); font-size: 11px; }
+.site-footer { margin-top: auto; }
+.footer-inner { max-width: 1200px; margin: auto; min-height: 52px; padding: 10px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.footer-inner > p { display: flex; align-items: center; gap: 8px; color: var(--muted-foreground); font-size: 11px; }
 .footer-inner svg { width: 16px; height: 16px; }
 .volume-field { width: 190px; }
 .volume-field [data-slot="field"] { gap: 12px; }
 .volume-field [data-slot="field-label"] { flex: 0 0 auto; }
-.volume-value { color: var(--muted-foreground); font-size: 12px; min-width: 32px; font-variant-numeric: tabular-nums; }
+.volume-value { color: var(--muted-foreground); font-size: 11px; min-width: 32px; font-variant-numeric: tabular-nums; }
 .instructions { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 14px; font-size: 14px; color: var(--muted-foreground); }
 .instructions strong { color: var(--foreground); font-weight: 500; }
 .muted-copy { color: var(--muted-foreground); font-size: 14px; line-height: 1.6; }
+@keyframes display-change { from { opacity: .65; } to { opacity: 1; } }
 
 .game-page { width: min(1280px, calc(100% - 64px)); margin: auto; flex: 1; padding: 20px 0 18px; }
 .game-toolbar { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 12px; margin-bottom: 20px; }
@@ -120,12 +147,12 @@
 .score-strip > div { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1px; }
 .score-strip > div + div { border-left: 1px solid var(--border); }
 .score-strip span { color: var(--muted-foreground); font-size: 13px; }
-.score-strip strong { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.score-strip strong { font-family: ui-monospace, monospace; font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.3; }
 .score-strip .time-readout { justify-content: center; }
 .time-readout strong, .time-readout #elapsed, .time-readout .duration { font-size: 16px; }
 .time-readout #elapsed { color: var(--foreground); }
 .game-columns { display: grid; grid-template-columns: minmax(0,1fr) 260px; gap: 18px; }
-.highway-panel { min-width: 0; height: clamp(350px, calc(100dvh - 330px), 720px); display: flex; flex-direction: column; background: var(--stage); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.highway-panel { --background: #18221e; --foreground: #e4ede1; --muted: #293b30; --muted-foreground: #b2c3b6; --border: #4c6053; --destructive: #ffb3a4; color: var(--foreground); min-width: 0; height: clamp(350px, calc(100dvh - 330px), 720px); display: flex; flex-direction: column; background: var(--stage); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .canvas-wrap { flex: 1; position: relative; min-height: 200px; }
 .canvas-wrap > canvas { width: 100%; height: 100%; display: block; position: absolute; inset: 0; }
 .lane-controls { display: grid; grid-template-columns: repeat(4,1fr); padding: 0 5.5% 16px; }
@@ -147,45 +174,104 @@
 .camera-preview { min-height: 200px; aspect-ratio: 3/4; background: var(--muted); position: relative; border-radius: 5px; overflow: hidden; display: flex; }
 .camera-preview video, .camera-preview > canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform: scaleX(-1); }
 .camera-preview:not([data-enabled="true"]) video, .camera-preview:not([data-enabled="true"]) > canvas { visibility: hidden; }
-.camera-preview[data-enabled="true"] { background: var(--foreground); }
+.camera-preview[data-enabled="true"] { background: var(--background); }
 .camera-panel > p { color: var(--muted-foreground); font-size: 12px; margin-top: 12px; }
 .detected-pose { position: absolute; left: 8px; right: 8px; bottom: 8px; border-radius: 4px; padding: 5px 8px; font-size: 12px; text-align: center; background: var(--background); color: var(--foreground); }
 .game-progress { display: flex; align-items: center; gap: 24px; margin-top: 16px; }
 .game-progress > [data-slot="progress"] { flex: 1; }
 .inline-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .results { gap: 8px; }
-.results .result-score { margin-top: 12px; font-size: 48px; font-weight: 600; line-height: 1; letter-spacing: -.05em; }
+.results .result-score { margin-top: 12px; font-size: 48px; font-weight: 600; line-height: 1; letter-spacing: -.035em; }
 .results dl { display: flex; gap: 28px; margin: 14px 0 12px; }
 .results dt { color: var(--muted-foreground); font-size: 12px; }
 .results dd { font-size: 20px; margin: 2px 0 0; font-variant-numeric: tabular-nums; }
 .results h2:focus { outline: none; }
 
+.practice-page { position: relative; height: 100dvh; min-height: 480px; overflow: hidden; background: #111a15; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; gap: 20px; }
+.practice-video, .practice-skeleton { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transform: scaleX(-1); pointer-events: none; }
+.practice-toolbar { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; background: var(--background); border-radius: var(--radius); padding: 12px 16px; }
+.practice-toolbar h1 { font-size: 18px; font-weight: 600; letter-spacing: -.025em; }
+.practice-toolbar h1:focus { outline: none; }
+.practice-toolbar > p { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted-foreground); }
+.practice-toolbar > p svg { width: 16px; height: 16px; }
+.practice-message { position: relative; width: min(440px, 100%); margin: auto; border-radius: var(--radius); background: var(--background); padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.practice-message [data-slot="empty"] { padding: 12px; }
+.practice-feedback { position: relative; align-self: center; width: min(660px, 100%); background: var(--background); border-radius: var(--radius); padding: 16px; }
+.practice-detected { min-height: 64px; display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 16px; text-align: center; }
+.practice-detected h2 { font-size: clamp(22px, 3vw, 30px); line-height: 1.2; font-weight: 600; letter-spacing: -.025em; }
+.practice-detected p { color: var(--muted-foreground); font-size: 13px; margin-top: 6px; }
+.practice-pose-icon { display: grid; place-items: center; width: 64px; height: 64px; flex-shrink: 0; border-radius: var(--radius); color: var(--foreground); }
+.practice-pose-icon svg { width: 52px; height: 52px; }
+.practice-poses { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; list-style: none; padding: 0; margin: 0; }
+.practice-poses li { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: var(--radius); padding: 10px 4px; }
+.practice-poses li[data-detected="true"] { background: var(--pose-color); color: var(--foreground); }
+.practice-poses svg { width: 42px; height: 42px; }
+.practice-poses span { font-size: 13px; font-weight: 500; text-align: center; }
+.practice-caption { color: var(--muted-foreground); text-align: center; font-size: 12px; margin-top: 12px; }
+
+@media (max-width: 600px) {
+  .practice-page { padding: 12px; gap: 12px; }
+  .practice-toolbar { padding: 10px; gap: 12px; }
+  .practice-toolbar h1 { font-size: 16px; }
+  .practice-toolbar > p { display: none; }
+  .practice-feedback { padding: 12px; }
+  .practice-detected { gap: 10px; }
+  .practice-pose-icon { width: 48px; height: 48px; }
+  .practice-pose-icon svg { width: 40px; height: 40px; }
+  .practice-poses { gap: 4px; }
+  .practice-poses span { font-size: 11px; }
+  .practice-caption { font-size: 11px; }
+}
+
+@media (max-height: 600px) and (min-width: 601px) {
+  .practice-page { min-height: 320px; padding: 12px; gap: 12px; }
+  .practice-toolbar { padding: 8px 12px; }
+  .practice-feedback { padding: 10px; }
+  .practice-detected { min-height: 0; margin-bottom: 8px; }
+  .practice-detected h2 { font-size: 22px; }
+  .practice-pose-icon, .practice-poses svg, .practice-caption { display: none; }
+  .practice-poses li { padding: 6px 4px; }
+}
+
+@media (max-width: 1050px) {
+  .sampler-top { grid-template-columns: minmax(240px, .8fr) minmax(0, 1.25fr); gap: 20px; }
+  .sampler { padding: 22px; }
+  .learn-poses .pose-guide > div { grid-template-columns: 36px 1fr auto; padding: 12px; gap: 8px; }
+  .learn-poses .pose-guide svg { width: 36px; height: 36px; }
+}
+
 @media (max-width: 760px) {
-  .header-inner { height: 60px; padding: 0 20px; }
-  .song-page { width: calc(100% - 40px); padding-top: 38px; }
-  .page-heading { margin-bottom: 32px; }
-  .page-heading p { font-size: 15px; }
-  .track-head, .song-row { grid-template-columns: 24px minmax(0,1fr) 65px 40px; gap: 12px; }
-  .track-head { padding: 0 12px 10px; font-size: 12px; }
-  .track-head > :first-child { padding-left: 0; }
-  .track-index > span { display: none; }
-  .track-name strong { font-size: 15px; }
-  .track-name > span { font-size: 12px; }
-  .track-tempo, .track-length { font-size: 12px; }
-  .play-setup { align-items: stretch; flex-direction: column; gap: 20px; padding-top: 24px; }
-  .play-setup [data-slot="field"] { gap: 20px; }
+  .header-inner { height: 64px; padding: 0 20px; }
+  .wordmark { font-size: 24px; }
+  .song-page { width: calc(100% - 32px); padding: 24px 0; }
+  .page-heading { display: block; margin-bottom: 20px; }
+  .page-heading h1 { font-size: 27px; }
+  .page-heading p { font-size: 13px; margin-top: 6px; }
+  .sampler { padding: 18px; }
+  .sampler-top { grid-template-columns: 1fr; gap: 20px; }
+  .library-label { margin-bottom: 10px; }
+  .track-display { padding: 18px; }
+  .display-heading h2 { font-size: 23px; }
+  .waveform { padding: 16px 0 12px; }
+  .waveform svg { height: 60px; }
+  .play-setup { align-items: stretch; flex-direction: column; gap: 18px; padding-top: 20px; }
+  .play-setup [data-slot="field"] { gap: 16px; }
+  .play-setup [data-slot="toggle-group-item"] { min-width: 92px; }
+  .play-setup [data-slot="field-description"] { font-size: 12px; }
   .play-song { width: 100%; }
-  .pose-guide { gap: 8px; padding: 20px 0; }
-  .pose-guide svg { width: 48px; height: 48px; }
-  .pose-guide span { font-size: 12px; }
-  .footer-inner { padding: 16px 20px; gap: 16px; flex-wrap: wrap; }
+  .learn-poses .pose-guide { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
+  .learn-poses .pose-guide > div { grid-template-columns: 32px 1fr auto; gap: 6px; padding: 10px; }
+  .learn-poses .pose-guide svg { width: 32px; height: 32px; }
+  .learn-poses .pose-guide span { font-size: 11px; }
+  .learn-poses .pose-guide kbd { width: 18px; height: 20px; }
+  .footer-inner { padding: 12px 20px; gap: 16px; flex-wrap: wrap; }
   .footer-inner > p { font-size: 11px; }
   .game-page { width: calc(100% - 32px); padding-top: 14px; }
   .game-toolbar { grid-template-columns: 1fr auto; gap: 12px; margin-bottom: 14px; }
   .playing-title { grid-row: 1; grid-column: 1/-1; }
   .game-toolbar > :first-child, .game-toolbar > :last-child { grid-row: 2; }
   .score-strip { padding: 9px 0; }
-  .score-strip strong { font-size: 22px; }
+  .score-strip strong { font-family: ui-monospace, monospace; font-size: 22px; }
   .time-readout strong, .time-readout #elapsed, .time-readout .duration { font-size: 13px; }
   .game-columns { grid-template-columns: 1fr; gap: 16px; }
   .highway-panel { height: clamp(340px, calc(100dvh - 306px), 640px); }
@@ -203,10 +289,26 @@
 }
 
 @media (max-width: 390px) {
-  .song-page { width: calc(100% - 32px); }
-  .track-head, .song-row { grid-template-columns: 20px minmax(0,1fr) 51px 34px; gap: 8px; }
-  .track-name > span { max-width: 145px; }
-  .track-tempo span { font-size: 10px; }
+  .sampler { padding: 14px; }
+  .learn-poses-heading { gap: 8px; }
+  .learn-poses h2 { font-size: 11px; }
+  .display-heading h2 { font-size: 21px; }
+  .track-name strong { font-size: 18px; }
+}
+
+@media (min-width: 641px) and (max-width: 760px) {
+  .sampler-top { grid-template-columns: minmax(230px, .9fr) minmax(0, 1.2fr); gap: 18px; }
+  .track-display { padding: 16px; }
+  .display-heading h2 { font-size: 21px; }
+  .display-heading > span { font-size: 20px; gap: 4px; }
+  .play-setup { flex-direction: row; gap: 20px; }
+  .play-song { width: auto; min-width: 210px; }
+}
+
+@media (max-width: 640px) {
+  .song-row { min-height: 76px; padding-top: 14px; padding-bottom: 14px; }
+  .display-chart { display: none; }
+  .waveform { padding-bottom: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -20,7 +20,9 @@ rhythm game; MIDI and a separate instrument mode were explicitly dropped.
   This supersedes the original no-UI-framework restriction. Keep Canvas 2D,
   native Web Audio, and `@mediapipe/tasks-vision` for the existing game logic.
 - Show song selection first; Play opens a focused game screen. Customize shadcn
-  for clean, readable controls, restrained spacing, and simple neutral surfaces.
+  for clean, readable controls inspired by sampler hardware: a silver panel,
+  orange transport controls, and a dark waveform display. Use real audio waveform
+  and pose-chart previews; avoid decorative generated covers and template-like heroes.
 - Use ordinary functions, arrays, objects, and a small amount of explicit state.
   A little duplication is fine. Extract code when it makes today's code clearer.
 - Build only behavior required by the current task. Do not add future-proofing,

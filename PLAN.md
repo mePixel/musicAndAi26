@@ -10,6 +10,15 @@ The human playtest confirmed that the music feels in sync and all four poses
 trigger reliably. MediaPipe emitted internal OpenGL/projection warnings during
 camera use; no JavaScript errors were observed.
 
+Practice mode is implemented. Browser checks at 1440×900, 390×844, and 844×390
+verified the mirrored camera/skeleton layout, all four pose labels with simulated
+landmarks through the real classifier, neutral/lost tracking, camera and model
+errors, retry, navigation, and camera cleanup including pending permission.
+The bundled MediaPipe model also loaded and processed simulated camera frames.
+The real webcam feed, skeleton, and framing guidance were also checked in the
+in-app browser. The nine focused tests and production build pass. A human still
+needs to try all four physical poses in the new practice screen.
+
 ## The game
 
 A Guitar Hero-style rhythm game controlled by your body. Pick a song, stand in
@@ -37,6 +46,12 @@ to the body; individual finger gestures are outside this MVP.
 - First page: song selection, Camera / Keyboard, a short pose guide, and Play.
 - Play opens the game, loads the selected song, and requests the camera if used.
   The countdown begins once tracking is ready. Results offer Retry / Choose song.
+- Practice poses opens a full-viewport mirrored camera with a skeleton overlay,
+  the detected stance, and a guide that highlights the matching pose. Practice
+  always uses the camera, independently of the game input choice, with no song,
+  countdown, or scoring. The complete camera frame stays visible without cropping.
+  Arms down and missing tracking have their own feedback. Retry handles camera
+  or model errors; Back to songs, Escape, and hiding the tab release the camera.
 
 Use white surfaces, neutral shadcn controls, and pastel pose cues. Draw the highway
 and flying notes on a 2D canvas with simple perspective math. The visible human
@@ -131,7 +146,7 @@ documents the package, model loading, video inference, and body landmarks.
 Request video only and process it locally, without recording or uploading frames.
 Camera access requires browser permission and HTTPS or localhost; see
 [MDN's camera API documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia).
-Request access when the player presses Play in Camera mode and show a useful message if permission,
+Request access when the player presses Play in Camera mode or Practice poses and show a useful message if permission,
 hardware, or asset loading prevents play.
 
 Start at a modest camera resolution and about 15–20 pose evaluations per second,
@@ -149,6 +164,7 @@ Frontend/
     main.jsx            React entry point
     App.jsx             song-selection page and shared controls
     Game.jsx            game screen and round lifecycle
+    Practice.jsx        full-viewport camera and live pose feedback
     components/ui/      shadcn source components
     pose.js             webcam, landmarks, four-pose classification
     game.js             note canvas, hit judging, score
@@ -185,6 +201,9 @@ Use ordinary functions and a small state object. Leave `Backend/` unused.
 - Both songs have playable charts with enough time to change poses.
 - Stop silences playback; leaving gameplay releases the camera; Retry starts clean.
 - Camera/model/audio errors explain what happened and missing tracking is visible.
+- Practice opens from the pose guide, recognizes all four poses, clears stale
+  feedback when tracking is lost, and releases the camera when leaving. Returning
+  to songs preserves the selected track and game input mode.
 - The production build passes. Verify with a real webcam and audible playback
   on the demo laptop; keyboard-only checks are insufficient.
 

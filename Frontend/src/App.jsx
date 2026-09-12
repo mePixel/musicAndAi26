@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Camera, Circle, CircleDot, Play, Volume2 } from 'lucide-react';
+import { AudioLines, Camera, Check, Keyboard, Play, Volume2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog';
@@ -10,8 +10,10 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Spinner } from '@/components/ui/spinner';
 import { PoseGuide } from './components/PoseGuide.jsx';
 import { Game } from './Game.jsx';
+import { Practice } from './Practice.jsx';
 import { createAudio } from './audio.js';
 import { songs } from './songs.js';
+import { TrackDisplay } from './components/TrackDisplay.jsx';
 import { formatTime } from '@/lib/utils';
 
 function Instructions() {
@@ -46,7 +48,7 @@ export function App() {
   const exitGame = useCallback(() => { setScreen('songs'); window.scrollTo(0,0); },[]);
   const useKeyboard = useCallback(() => setInput('keyboard'),[]);
   useEffect(() => {
-    document.title = screen === 'songs' ? 'Bodybeat — Choose a song' : `${song.title} — Bodybeat`;
+    document.title = screen === 'songs' ? 'Bodybeat — Choose a song' : screen === 'practice' ? 'Practice — Bodybeat' : `${song.title} — Bodybeat`;
   },[screen,song.title]);
 
   async function play() {
@@ -58,25 +60,31 @@ export function App() {
     finally { setStarting(false); }
   }
 
+  if (screen === 'practice') return <Practice onExit={exitGame} />;
+
   return <div className="app">
     <header className="site-header">
-      <div className="header-inner"><span className="wordmark">Bodybeat</span>{screen === 'songs' ? <Instructions /> : null}</div>
+      <div className="header-inner"><span className="wordmark"><AudioLines aria-hidden="true" />bodybeat</span>{screen === 'songs' ? <Instructions /> : null}</div>
     </header>
     {screen === 'songs' ? <main className="song-page">
       <div className="page-heading">
         <h1>Choose a song</h1>
         <p>Pick a track. Match the poses on the beat.</p>
       </div>
-      <section aria-label="Song selection">
-        <div className="track-head" aria-hidden="true"><span>#</span><span>Track</span><span>Tempo</span><span>Length</span></div>
-        <ToggleGroup orientation="vertical" spacing={1} variant="track" size="track" className="w-full" value={[songId]} onValueChange={values => { if (values.length) setSongId(values[0]); }} aria-label="Choose a song">
+      <div className="sampler">
+      <div className="sampler-top">
+      <section className="song-library" aria-label="Song selection">
+        <div className="library-label"><h2>Tracks</h2><span>{songs.length} songs</span></div>
+        <ToggleGroup orientation="vertical" spacing={2} variant="track" size="track" className="w-full" value={[songId]} onValueChange={values => { if (values.length) setSongId(values[0]); }} aria-label="Choose a song">
           {songs.map((track,i) => <ToggleGroupItem key={track.id} value={track.id} className="song-row" aria-label={`Select ${track.title}`}>
-            <span className="track-index">{songId === track.id ? <CircleDot /> : <Circle />}<span>{String(i+1).padStart(2,'0')}</span></span>
-            <span className="track-name"><strong>{track.title}</strong><span>{track.mood}</span></span>
-            <span className="track-tempo">{track.bpm}<span> BPM</span></span><span className="track-length">{formatTime(track.duration)}</span>
+            <span className="track-index">{String(i+1).padStart(2,'0')}</span>
+            <span className="track-name"><strong>{track.title}</strong><span>{track.bpm} BPM <span aria-hidden="true">·</span> {formatTime(track.duration)}</span></span>
+            <span className="track-selected" aria-hidden="true">{songId === track.id ? <Check /> : null}</span>
           </ToggleGroupItem>)}
         </ToggleGroup>
       </section>
+      <TrackDisplay song={song} />
+      </div>
       <Separator />
       <section className="play-setup" aria-label="Play setup">
         <FieldGroup className="flex-1">
@@ -84,7 +92,7 @@ export function App() {
             <FieldLabel id="controls-label">Controls</FieldLabel>
             <FieldContent>
               <ToggleGroup spacing={0} variant="outline" value={[input]} onValueChange={values => { if (values.length) setInput(values[0]); }} aria-labelledby="controls-label">
-                <ToggleGroupItem value="camera">Camera</ToggleGroupItem><ToggleGroupItem value="keyboard">Keyboard</ToggleGroupItem>
+                <ToggleGroupItem value="camera"><Camera data-icon="inline-start" />Camera</ToggleGroupItem><ToggleGroupItem value="keyboard"><Keyboard data-icon="inline-start" />Keyboard</ToggleGroupItem>
               </ToggleGroup>
               <FieldDescription>{input === 'camera' ? 'Camera permission is requested when you play.' : 'Press 1–4, or tap the lane buttons.'}</FieldDescription>
             </FieldContent>
@@ -97,10 +105,16 @@ export function App() {
       {error ? <Alert variant="destructive"><AlertDescription>{error}</AlertDescription></Alert> : null}
       <Separator />
       <section className="learn-poses" aria-labelledby="pose-heading">
-        <h2 id="pose-heading">Four poses. One beat.</h2>
+        <div className="learn-poses-heading">
+          <h2 id="pose-heading">Four poses. One beat.</h2>
+          <Button variant="outline" onClick={() => { setScreen('practice'); window.scrollTo(0,0); }} disabled={starting}>
+            <Camera data-icon="inline-start" />Practice poses
+          </Button>
+        </div>
         <PoseGuide />
         <p>Make the pose as its note reaches the line.</p>
       </section>
+      </div>
     </main> : <Game key={`${song.id}-${input}`} song={song} input={input} audio={audio} onExit={exitGame} onUseKeyboard={useKeyboard} />}
     <footer className="site-footer">
       <div className="footer-inner">

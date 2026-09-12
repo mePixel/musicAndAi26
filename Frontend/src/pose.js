@@ -103,7 +103,7 @@ export function createCamera(video, overlay, onFrame, onError) {
               }
               onFrame({ tracked, ...latch.update(classifyPose(landmarks, video.videoWidth/video.videoHeight), now) });
             } catch {
-              stop(); onError('Tracking stopped. Enable the camera again to retry.'); return;
+              stop(); onError('Tracking stopped. Retry the camera to continue.'); return;
             }
           } else if (now - lastNewFrame > 500) {
             clear(); onFrame({ tracked: false, ...latch.update(null, now) });
@@ -111,16 +111,16 @@ export function createCamera(video, overlay, onFrame, onError) {
           frame = requestAnimationFrame(tick);
         }
         frame = requestAnimationFrame(tick);
-        stream.getVideoTracks()[0].onended = () => { stop(); onError('Camera disconnected. Enable the camera to reconnect.'); };
+        stream.getVideoTracks()[0].onended = () => { stop(); onError('Camera disconnected. Reconnect it and try again.'); };
         return true;
       } catch (error) {
         openedStream?.getTracks().forEach(track => track.stop());
         if (ownGeneration !== generation) return false;
         stop();
-        const message = error.name === 'NotAllowedError' ? 'Camera permission was denied. Allow it in your browser, or try Keyboard.'
-          : error.name === 'NotFoundError' ? 'No camera found. Connect a webcam or try Keyboard.'
+        const message = error.name === 'NotAllowedError' ? 'Camera permission was denied. Allow camera access in your browser and try again.'
+          : error.name === 'NotFoundError' ? 'No camera found. Connect a webcam and try again.'
           : error.name === 'NotReadableError' ? 'The camera is busy. Close other camera apps and try again.'
-          : 'Camera or pose model could not load. Try again, or switch to Keyboard.';
+          : 'Camera or pose model could not load. Check your connection and try again.';
         throw new Error(message);
       }
     },

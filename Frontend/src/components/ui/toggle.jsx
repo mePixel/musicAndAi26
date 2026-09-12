@@ -8,11 +8,11 @@ const toggleVariants = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        outline: "border border-input bg-transparent hover:bg-muted",
-        track: "text-left whitespace-normal justify-start bg-background aria-pressed:bg-accent hover:bg-muted/60",
+        outline: "border border-input bg-transparent hover:bg-muted aria-pressed:bg-foreground aria-pressed:text-background",
+        track: "border border-border rounded-md text-left whitespace-normal justify-start bg-secondary aria-pressed:bg-card aria-pressed:border-foreground hover:bg-card",
       },
       size: {
-        track: "h-auto min-h-20 px-[18px] py-4 max-md:px-3",
+        track: "h-auto min-h-22 px-4 py-5",
         default:
           "h-8 min-w-8 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
         sm: "h-7 min-w-7 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",

@@ -3,78 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#101110" />
-    <meta name="description" content="Your body is the controller. A webcam rhythm game with four poses, flying notes, and original music." />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="Choose a song and match the poses on the beat. A webcam rhythm game with four poses and original music." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Bodybeat — Move to the music</title>
+    <title>Bodybeat — Choose a song</title>
   </head>
   <body>
-    <div class="app-shell">
-      <header class="site-header">
-        <a class="brand" href="/" aria-label="Bodybeat home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>bodybeat</a>
-        <button class="button how-button" id="how-button">How to play <span aria-hidden="true">↗</span></button>
-      </header>
-
-      <div class="intro">
-        <h1>Move to the <span>music.</span></h1>
-        <p>Your body is the controller. Find your rhythm.</p>
-      </div>
-
-      <main class="game-layout">
-        <section class="playfield" aria-label="Rhythm game">
-          <header class="playfield-header">
-            <div class="now-playing"><span class="record" aria-hidden="true"></span><div><h2 id="song-title">First Groove</h2><p id="song-meta">96 BPM <span>·</span> 40 SEC</p></div></div>
-            <div class="scoreboard"><div><span>Score</span><strong id="score">00000</strong></div><div><span>Combo</span><strong id="combo">0<small>×</small></strong></div></div>
-          </header>
-
-          <div class="highway-wrap">
-            <canvas id="highway" aria-label="Notes fly down four pose lanes toward the hit line. Pose labels and key controls are below."></canvas>
-            <div class="stage-message" id="stage-message" hidden><span id="stage-kicker">Find your rhythm</span><strong id="countdown">Ready to move?</strong><p id="stage-copy">Choose your track. Take your place.</p></div>
-            <div class="judgement" id="judgement" aria-live="polite"></div>
-            <section class="results" id="results" hidden aria-labelledby="result-heading">
-              <span class="result-icon" aria-hidden="true">✦</span><h2 id="result-heading" tabindex="-1">Nice moves.</h2><p id="result-subtitle">You found your rhythm.</p>
-              <strong class="result-score" id="result-score">0</strong><span class="result-score-label">total points</span>
-              <dl><div><dt>Hits</dt><dd id="result-hits">0</dd></div><div><dt>Misses</dt><dd id="result-misses">0</dd></div><div><dt>Best combo</dt><dd id="result-combo">0×</dd></div></dl>
-              <div class="result-actions"><button class="button primary" id="retry">Play again</button><button class="button" id="choose-song">Choose song</button></div>
-            </section>
-          </div>
-          <div class="lane-labels" id="lane-labels"></div>
-          <div class="progress-row"><span id="elapsed">0:00</span><progress id="progress" value="0" max="40" aria-label="Song progress"></progress><span id="duration">0:40</span><button class="stop-button" id="stop" disabled><span aria-hidden="true">■</span> Stop</button></div>
-        </section>
-
-        <aside class="setup-panel" aria-label="Game setup">
-          <div class="panel-heading"><h2>Your stage</h2><span class="camera-status" id="camera-status">Camera off</span></div>
-          <div class="camera-box" id="camera-box">
-            <video id="camera-video" playsinline muted autoplay aria-label="Mirrored webcam preview"></video>
-            <canvas id="camera-overlay" aria-hidden="true"></canvas>
-            <div class="camera-placeholder" id="camera-placeholder">
-              <svg class="person-icon" viewBox="0 0 100 110" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="50" cy="24" r="15"/><path d="M18 99 V79 C18 32 82 32 82 79 V99 M29 74 V102 M71 74 V102"/></svg>
-              <strong id="camera-title">Step into the frame</strong><p id="camera-copy">Keep your hands and shoulders visible.</p>
-            </div>
-            <span class="detected-pose" id="detected-pose" hidden>Step into frame</span>
-            <button class="button primary camera-action" id="camera-button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="12" height="12" rx="3" fill="currentColor"/><path d="m15 10 6-3v10l-6-3" fill="currentColor"/></svg><span>Enable camera</span></button>
-          </div>
-          <div class="input-switch" role="group" aria-label="Input mode"><button id="input-camera" aria-pressed="true">Camera</button><button id="input-keyboard" aria-pressed="false">Keyboard</button></div>
-          <p class="input-hint" id="input-hint">Raise a hand to try a pose.</p>
-
-          <div class="track-section"><h2>Choose your track</h2><div id="track-list"></div></div>
-          <button class="button primary play-button" id="play" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg><span>Let’s play</span></button>
-          <p class="play-hint" id="play-hint">Enable your camera or choose Keyboard.</p>
-          <p class="error-message" id="error" role="alert" hidden></p>
-        </aside>
-      </main>
-
-      <footer class="footer"><label class="volume-control"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M11 4 5 9H2v6h3l6 5V4Z M15 8c3 2 3 6 0 8 M18 4c6 4 6 12 0 16"/></svg><span>Master volume</span><input id="volume" type="range" min="0" max="100" value="55" aria-label="Master volume"/><output id="volume-value">55%</output></label><p>4 poses. One good time.</p></footer>
-    </div>
-
-    <dialog id="help-dialog" aria-labelledby="help-title">
-      <button class="dialog-close button" id="close-help" aria-label="Close instructions">×</button>
-      <h2 id="help-title">Find your rhythm.</h2><p>Follow the flying figures. Make the matching pose as each note reaches its glowing target.</p>
-      <div id="pose-guide" class="pose-guide"></div>
-      <ol><li><strong>Get in frame.</strong> Enable the camera and step back until both arms fit. The preview acts like a mirror: your left is the left lane.</li><li><strong>Move on the beat.</strong> Enter each pose as the note lands. Lower your arms between repeated poses. Holding a pose won’t score again.</li><li><strong>Make it yours.</strong> Try the poses before starting. Perfect earns 100 points; Good earns 50. Misses reset your combo, but the music keeps going.</li></ol>
-      <p class="help-note">No camera? Choose Keyboard and press 1–4, or tap the four lane controls. Camera frames stay in your browser. Escape stops a round.</p>
-      <button class="button primary" id="got-it">Got it. Let’s move.</button>
-    </dialog>
-    <script type="module" src="/src/main.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,8 +1,10 @@
 # Bodybeat — webcam rhythm game
 
 Status: implemented. Scope is the rhythm game only. The production build and
-nine focused tests pass. Browser checks cover keyboard scoring, song selection,
-results, restart, instructions, and desktop/mobile layouts. A live camera round
+nine focused tests pass. The latest UI uses React and customized shadcn controls,
+with a separate song-selection page and focused game screen. Browser checks
+cover keyboard scoring, song selection, results, restart, the instructions dialog,
+desktop/mobile layouts, and the camera loading/framing state. Before the redesign, a live camera round
 showed the mirrored skeleton, pose recognition, and scoring through completion.
 The human playtest confirmed that the music feels in sync and all four poses
 trigger reliably. MediaPipe emitted internal OpenGL/projection warnings during
@@ -32,10 +34,11 @@ to the body; individual finger gestures are outside this MVP.
 - A mirrored webcam panel shows the human player with a light skeleton overlay,
   the detected pose, and a tracking indicator.
 - Score, combo, song progress, and brief Perfect / Good / Miss feedback.
-- Before play: song selection, Enable camera, pose practice, and Start.
-  After play: hits, misses, best combo, and Retry / Choose song.
+- First page: song selection, Camera / Keyboard, a short pose guide, and Play.
+- Play opens the game, loads the selected song, and requests the camera if used.
+  The countdown begins once tracking is ready. Results offer Retry / Choose song.
 
-Use a dark stage, bright readable cues, and small hit bursts. Draw the highway
+Use white surfaces, neutral shadcn controls, and pastel pose cues. Draw the highway
 and flying notes on a 2D canvas with simple perspective math. The visible human
 is the webcam player; cue figures can be small SVGs.
 
@@ -53,7 +56,7 @@ Leave a clear margin between raised, spread, and lowered positions. Treat
 intermediate positions as no pose; check Both hands up before single-hand poses.
 Tune simple thresholds on the demo laptop. Left/right mean the player's
 anatomical left/right; mirror preview and cue figures consistently and confirm
-this during practice.
+this during playtesting.
 
 A pose must remain stable for about 100 ms before it counts. Emit one event
 on entry using the song time when the pose is confirmed. Holding it emits no
@@ -62,9 +65,9 @@ an uncertain or dropped frame does not. Avoid jitter-induced hits.
 
 ## Play loop and timing
 
-1. Select a song and load its audio, chart, pose model, and runtime assets.
-2. Enable the camera. Show framing guidance and practice all four poses with
-   immediate sounds and lane highlights. Allow Start when tracking is ready.
+1. Select a song and input mode, then press Play to open the game screen.
+2. Load audio and, for Camera mode, the pose model and webcam. Show framing
+   guidance and begin the countdown when both arms are tracked.
 3. Give a three-second countdown, then play. Show each note about 2.5 seconds
    before its target time so the player can prepare.
 4. Compare each pose-entry event with the closest unjudged note for that pose.
@@ -80,9 +83,10 @@ Calculate position from chart time minus current song time on every animation
 frame; do not advance time by accumulating frame deltas. The full track plays
 continuously, with quiet hit sounds layered on top.
 
-Provide master volume and Stop / Restart. Lost tracking shows “Step into frame”
+Provide master volume and Stop / Restart / Back to songs. Lost tracking shows “Step into frame”
 and disables pose input; the song continues and overdue notes miss. Stop the
-round when the tab becomes hidden. Returning to selection releases the camera.
+round when the tab becomes hidden. Returning to selection and finishing a track
+release the camera.
 Keys 1–4 provide a simple keyboard test mode through the same judging function;
 ignore held-key repeats and typing in fields.
 
@@ -118,8 +122,8 @@ No database or persistent score storage is required.
 
 ## Small implementation
 
-Use Vite, vanilla JavaScript, CSS, Canvas 2D, and Web Audio. Add only
-`@mediapipe/tasks-vision` for tracking, using the pretrained Pose Landmarker Lite
+Use Vite, React with JavaScript, customized shadcn/ui, Tailwind CSS, Canvas 2D,
+and Web Audio. Use `@mediapipe/tasks-vision` for tracking, with the pretrained Pose Landmarker Lite
 model in video mode for one person. Bundle the model and matching WASM assets.
 Google's [Pose Landmarker web guide](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/web_js)
 documents the package, model loading, video inference, and body landmarks.
@@ -127,7 +131,7 @@ documents the package, model loading, video inference, and body landmarks.
 Request video only and process it locally, without recording or uploading frames.
 Camera access requires browser permission and HTTPS or localhost; see
 [MDN's camera API documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia).
-Request access through Enable camera and show a useful message if permission,
+Request access when the player presses Play in Camera mode and show a useful message if permission,
 hardware, or asset loading prevents play.
 
 Start at a modest camera resolution and about 15–20 pose evaluations per second,
@@ -142,7 +146,10 @@ Frontend/
   index.html
   package.json          Vite scripts and the pose-tracking dependency
   src/
-    main.js             screen controls and round lifecycle
+    main.jsx            React entry point
+    App.jsx             song-selection page and shared controls
+    Game.jsx            game screen and round lifecycle
+    components/ui/      shadcn source components
     pose.js             webcam, landmarks, four-pose classification
     game.js             note canvas, hit judging, score
     audio.js            audio clock, track playback, synthesized hit sounds
@@ -157,18 +164,19 @@ Frontend/
 
 Use ordinary functions and a small state object. Leave `Backend/` unused.
 
-## Build order
+## Implemented flow
 
-1. Prove the input: webcam preview, detect one raised hand, trigger one sound.
-2. Prove the game: one song, flying notes, audio timing, keyboard hit judging.
-3. Connect pose events to judging; add all four poses and practice feedback.
-   Tune the timing and thresholds with a human playing.
-4. Add the second chart, selection, results, and load/error states. Finish
-   styling and document the actual run commands.
+1. The first page presents both songs, input choice, instructions, and Play.
+2. Play mounts the game, loads audio and any camera resources, then starts a
+   three-second countdown once the selected input is ready.
+3. Pose entries or keys feed the same timing and scoring functions. Canvas
+   animation uses the audio clock; React updates the surrounding controls.
+4. Results show hits, misses, and best combo. Retry creates a fresh round;
+   Back to songs and Stop release resources and return to selection.
 
 ## Done means
 
-- A player can enable the camera, practice each pose, choose a song, and finish it.
+- A player can choose a song and input mode, press Play, and finish the track.
 - Left/right cues match the mirrored presentation and all four poses are usable.
 - Correct poses near the beat trigger sounds, visible hits, points, and combo.
 - Wrong poses and late inputs cannot score; each note is judged at most once.

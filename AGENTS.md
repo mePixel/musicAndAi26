@@ -14,9 +14,13 @@ rhythm game; MIDI and a separate instrument mode were explicitly dropped.
 ## Keep the build small
 
 - Optimize for a working hackathon demo and code a teammate can understand quickly.
-- Use plain JavaScript, HTML, CSS, Canvas 2D, native Web Audio, and Vite in
-  `Frontend/`. Use `@mediapipe/tasks-vision` with a pretrained Pose Landmarker
-  model for webcam tracking. That is the one planned runtime dependency.
+- The user's latest UI redesign request explicitly requires shadcn/ui. Use React
+  with JavaScript/JSX, shadcn components, Tailwind CSS, and Vite in `Frontend/`.
+  Installing their required dependencies is part of that requested migration.
+  This supersedes the original no-UI-framework restriction. Keep Canvas 2D,
+  native Web Audio, and `@mediapipe/tasks-vision` for the existing game logic.
+- Show song selection first; Play opens a focused game screen. Customize shadcn
+  for clean, readable controls, restrained spacing, and simple neutral surfaces.
 - Use ordinary functions, arrays, objects, and a small amount of explicit state.
   A little duplication is fine. Extract code when it makes today's code clearer.
 - Build only behavior required by the current task. Do not add future-proofing,
@@ -24,8 +28,8 @@ rhythm game; MIDI and a separate instrument mode were explicitly dropped.
   injection, schema migrations, or speculative configuration.
 - Keep `Backend/` unused for this MVP. Skip accounts, databases, server APIs,
   cloud storage, analytics, generative AI, and deployment infrastructure.
-- Use native controls, CSS, and a canvas animation loop. No game engine, 3D avatar
-  system, UI framework, state library, or custom machine-learning training.
+- Use shadcn controls, CSS, and a canvas animation loop. No game engine, 3D avatar
+  system, extra state library, or custom machine-learning training.
 - Hand-author short song charts as data. No automatic chart generation, song
   imports, or chart editor. Keep the four supported poses fixed for the demo.
 - Use the song's audio clock for note movement and hit timing. One pose entry

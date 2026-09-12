@@ -1,18 +1,13 @@
 export const poses = [
-  { id: 'leftUp', label: 'Left hand up', short: 'Left up', color: '#d9ff70',
+  { id: 'leftUp', label: 'Left hand up', short: 'Left up', color: '#b8d6f4',
     arms: [[32, 23, 18, 25, 13, 6], [32, 23, 44, 31, 46, 43]] },
-  { id: 'rightUp', label: 'Right hand up', short: 'Right up', color: '#bea7ff',
+  { id: 'rightUp', label: 'Right hand up', short: 'Right up', color: '#f5d28b',
     arms: [[32, 23, 20, 31, 18, 43], [32, 23, 46, 25, 51, 6]] },
-  { id: 'bothUp', label: 'Both hands up', short: 'Both up', color: '#ffb792',
+  { id: 'bothUp', label: 'Both hands up', short: 'Both up', color: '#f3b4bc',
     arms: [[32, 23, 20, 18, 12, 5], [32, 23, 44, 18, 52, 5]] },
-  { id: 'spread', label: 'Arms spread', short: 'Arms out', color: '#87dfee',
+  { id: 'spread', label: 'Arms spread', short: 'Arms out', color: '#a2d4ce',
     arms: [[32, 23, 18, 23, 3, 23], [32, 23, 46, 23, 61, 23]] },
 ];
-
-export function poseSvg(pose) {
-  const arms = pose.arms.map(([x, y, ex, ey, wx, wy]) => `<path d="M${x} ${y} L${ex} ${ey} L${wx} ${wy}"/>`).join('');
-  return `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="32" cy="11" r="5"/><path d="M32 21 V40 M32 40 L22 58 M32 40 L42 58"/>${arms}</svg>`;
-}
 
 export function drawPose(ctx, pose, x, y, size, color) {
   ctx.save(); ctx.translate(x - size / 2, y - size / 2); ctx.scale(size / 64, size / 64);

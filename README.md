@@ -24,10 +24,10 @@ npm run preview
 
 ## Play
 
-1. Enable the camera and grant camera permission. Step back far enough for both
-   arms to fit. Practice left hand up, right hand up, both hands up, and arms out.
-2. Choose **First Groove** (96 BPM, 40 seconds) or **Disco Circuit** (120 BPM,
-   36 seconds), then press **Let's play**.
+1. Choose **First Groove** (96 BPM, 40 seconds) or **Disco Circuit** (120 BPM,
+   36 seconds) on the song-selection page. Choose Camera or Keyboard.
+2. Press **Play** to open the game. In Camera mode, allow camera access and step
+   back until your shoulders and hands fit. Tracking starts the countdown.
 3. Make the matching pose when its note reaches the target. Perfect earns 100
    points and Good earns 50. Misses reset the combo, but the track keeps playing.
 
@@ -36,8 +36,10 @@ deliberately; holding it doesn't score repeatedly. Keep your wrists visible.
 Tracking loss shows a framing prompt while the track continues.
 
 For a quick try without a webcam, choose **Keyboard** and press **1–4**, or tap
-the lane controls. **Escape** or **Stop** ends the round. **Restart track** starts
-with a fresh score and countdown. Switching away from the tab stops a round.
+the lane controls. **Escape**, **Stop**, and **Back to songs** end the round and
+return to selection. **Restart** starts with a fresh score and countdown.
+Switching away from the tab stops a round. The camera is released at the end of
+a track and whenever you leave the game.
 
 Camera access needs HTTPS or localhost and a browser with WebAssembly/WebGL
 support. Chrome or Edge on a laptop is the intended demo setup. Camera frames
@@ -45,15 +47,17 @@ are processed locally; there are no uploads, accounts, or backend calls.
 
 ## Small codebase
 
-- `Frontend/src/main.js`: interface, input, countdown, and round lifecycle.
+- `Frontend/src/App.jsx`: song selection, input choice, instructions, and volume.
+- `Frontend/src/Game.jsx`: game screen, countdown, input, and round lifecycle.
+- `Frontend/src/components/ui/`: customized shadcn components from its official CLI.
 - `Frontend/src/pose.js`: camera, MediaPipe, four-pose rules, and stable-entry latch.
 - `Frontend/src/game.js`: hit windows, score, misses, and canvas note highway.
 - `Frontend/src/audio.js`: audio clock, music playback, and short hit sounds.
 - `Frontend/src/poses.js` and `songs.js`: pose icons and hand-authored charts.
 
-The stack is vanilla JavaScript, CSS, Canvas 2D, Web Audio, Vite, and one runtime
-dependency: MediaPipe Tasks Vision. `Backend/` is unused. No MIDI controller is
-included; this version is just the rhythm game.
+The UI uses React with JavaScript, shadcn/ui (Base UI primitives), Tailwind CSS,
+and Vite. The game stays in small Canvas 2D, Web Audio, and MediaPipe modules.
+`Backend/` is unused; this version is just the rhythm game.
 
 The initial windows are ±150 ms for Perfect and ±300 ms for Good. A pose must
 settle for 100 ms before it triggers. These values can be tuned in `game.js` and
@@ -68,8 +72,8 @@ Regular installation and playback use the existing MP3 files.
 
 - [MediaPipe Pose Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker):
   Google pretrained Lite pose model and Tasks Vision runtime.
-- [Space Grotesk](https://github.com/floriankarsten/space-grotesk):
-  bundled font under the SIL Open Font License, included in `Frontend/public/FONT-LICENSE.txt`.
+- [Geist](https://github.com/vercel/geist-font): bundled locally through
+  `@fontsource-variable/geist`, under the SIL Open Font License.
 
 See [PLAN.md](PLAN.md) for the game design and [AGENTS.md](AGENTS.md) for the
 hackathon scope and agent instructions.

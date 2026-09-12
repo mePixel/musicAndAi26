@@ -39,21 +39,21 @@ export function createHighway(canvas) {
       canvas.width = Math.round(width*dpr); canvas.height = Math.round(height*dpr);
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0,0,width,height);
-    const top = 18, line = height - 85, bottom = height - 25;
+    const top = 12, line = height - 42, bottom = height;
     const topLeft = width * .35, topWidth = width * .3, left = width * .055, roadWidth = width * .89;
     const xAt = (fraction, progress) => topLeft + fraction*topWidth + (left + fraction*roadWidth - topLeft - fraction*topWidth)*progress;
-    ctx.strokeStyle = '#ffffff16'; ctx.lineWidth = 1;
+    ctx.strokeStyle = '#dcdce1'; ctx.lineWidth = 1;
     for (let lane = 0; lane <= 4; lane++) {
       ctx.beginPath(); ctx.moveTo(xAt(lane/4,0),top); ctx.lineTo(xAt(lane/4,1.14),bottom+20); ctx.stroke();
     }
     // Faint time markers make speed readable without adding a second clock.
     for (let n = 0; n < 5; n++) {
       const p = ((n/5 + (running ? Math.max(time,0)*.18 : 0))%1);
-      ctx.strokeStyle = `rgba(255,255,255,${.015 + .035*p})`;
+      ctx.strokeStyle = `rgba(24,24,27,${.015 + .025*p})`;
       const y = top + (line-top)*p;
       ctx.beginPath(); ctx.moveTo(xAt(0,p),y); ctx.lineTo(xAt(1,p),y); ctx.stroke();
     }
-    ctx.strokeStyle = '#dce9d957'; ctx.lineWidth = 1.5;
+    ctx.strokeStyle = '#8e8e98'; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(left,line); ctx.lineTo(left+roadWidth,line); ctx.stroke();
 
     for (const note of notes) {
@@ -65,7 +65,6 @@ export function createHighway(canvas) {
       const y = top + (line-top)*eased, x = xAt((index+.5)/4,eased);
       const size = 21 + 33*p, noteWidth = Math.min(roadWidth/4*.65, size*1.7);
       ctx.save(); ctx.globalAlpha = note.result === 'Miss' ? .25 : Math.min(1,p*3);
-      if (!reducedMotion) { ctx.shadowBlur = 18; ctx.shadowColor = pose.color+'70'; }
       ctx.fillStyle = pose.color; ctx.beginPath(); ctx.roundRect(x-noteWidth/2,y-size/2,noteWidth,size,8); ctx.fill();
       ctx.shadowBlur = 0; drawPose(ctx,pose,x,y,size*.85,'#141711'); ctx.restore();
     }
@@ -73,12 +72,12 @@ export function createHighway(canvas) {
     for (let i = 0; i < 4; i++) {
       const pose = poses[i], x = xAt((i+.5)/4,1), padWidth = roadWidth/4*.81;
       const flash = Math.max(0,1-(performance.now()-flashes[i])/300);
-      ctx.fillStyle = flash ? pose.color+'45' : pose.color+'08'; ctx.strokeStyle = pose.color;
-      ctx.lineWidth = 1.7; ctx.beginPath(); ctx.roundRect(x-padWidth/2,line-29,padWidth,58,10); ctx.fill(); ctx.stroke();
-      drawPose(ctx,pose,x,line,44,pose.color);
+      ctx.fillStyle = flash ? pose.color : '#ffffff60'; ctx.strokeStyle = '#8e8e98';
+      ctx.lineWidth = 1; ctx.beginPath(); ctx.roundRect(x-padWidth/2,line-24,padWidth,48,6); ctx.fill(); ctx.stroke();
+      drawPose(ctx,pose,x,line,36,'#3f3f46');
       if (flash && !reducedMotion) {
         ctx.strokeStyle = pose.color; ctx.globalAlpha = flash*.6; ctx.beginPath();
-        ctx.roundRect(x-padWidth/2-8*(1-flash),line-29-8*(1-flash),padWidth+16*(1-flash),58+16*(1-flash),12); ctx.stroke(); ctx.globalAlpha=1;
+        ctx.roundRect(x-padWidth/2-6*(1-flash),line-24-6*(1-flash),padWidth+12*(1-flash),48+12*(1-flash),8); ctx.stroke(); ctx.globalAlpha=1;
       }
     }
   }

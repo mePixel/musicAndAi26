@@ -1,5 +1,12 @@
 # Bodybeat — webcam rhythm game
 
+Only the black game character takes the current instrument pose’s color or the
+active keyboard pose’s color. Default, missing/stale detection, and expired
+keyboard input restore black. The yellow backdrop, pink and white trails, and
+homepage character stay unchanged. Build and desktop/mobile browser checks
+pass for four instrument colors, Default staying black, unchanged background and
+trails, keyboard input, and color clearing. Physical recognition was not rechecked.
+
 Pose-controlled pausing and resuming are disabled. The Default pose only starts
 a camera round from the framing screen. Once the round starts, Pause and Resume
 are controlled exclusively by the on-screen buttons, including during countdown.

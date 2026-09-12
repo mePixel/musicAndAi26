@@ -260,8 +260,9 @@ export function createCamera(video, overlay, onFrame, onError) {
 
         model = openedModel;
 
-        overlay.width = video.videoWidth;
-        overlay.height = video.videoHeight;
+        // PoseNet reads these attributes to scale keypoints back onto the video.
+        video.width = overlay.width = video.videoWidth;
+        video.height = overlay.height = video.videoHeight;
 
         // MARK: prediction loop
 

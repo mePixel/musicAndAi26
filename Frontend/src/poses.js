@@ -1,8 +1,8 @@
 export const poses = [
   {
-    id: "rightHip",
-    label: "Right hand — right hip",
-    short: "Right hip",
+    id: "leftHip",
+    label: "Left hand — left hip",
+    short: "Left hip",
     color: "#f5d28b",
 
     arms: [
@@ -12,9 +12,9 @@ export const poses = [
   },
 
   {
-    id: "leftHip",
-    label: "Left hand — left hip",
-    short: "Left hip",
+    id: "rightHip",
+    label: "Right hand — right hip",
+    short: "Right hip",
     color: "#b8d6f4",
 
     arms: [
@@ -24,9 +24,9 @@ export const poses = [
   },
 
   {
-    id: "rightChest",
-    label: "Right hand — chest/shoulder",
-    short: "Right chest",
+    id: "leftChest",
+    label: "Left hand — chest/shoulder",
+    short: "Left chest",
     color: "#f3b4bc",
 
     arms: [
@@ -36,9 +36,9 @@ export const poses = [
   },
 
   {
-    id: "leftChest",
-    label: "Left hand — chest/shoulder",
-    short: "Left chest",
+    id: "rightChest",
+    label: "Right hand — chest/shoulder",
+    short: "Right chest",
     color: "#a2d4ce",
 
     arms: [

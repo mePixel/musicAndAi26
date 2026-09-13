@@ -43,21 +43,10 @@ test('loads generated song notes and falls back to authored notes on failure', a
   assert.ok(fallback.error);
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-test('both bundled generated charts load with current playable pose IDs', async () => {
-  for (const song of songs.filter(song => song.beatmapUrl)) {
-=======
-=======
->>>>>>> origin/add-pasted-songs
 test('bundled generated charts load with current playable pose IDs', async () => {
   const generatedSongs = songs.filter(song => song.beatmapUrl);
   assert.ok(generatedSongs.length > 0);
   for (const song of generatedSongs) {
-<<<<<<< HEAD
->>>>>>> origin/add-pasted-songs
-=======
->>>>>>> origin/add-pasted-songs
     const beatmap = JSON.parse(await readFile(new URL(`../public${song.beatmapUrl}`, import.meta.url), 'utf8'));
     const result = await loadSongNotes(song, async () => ({ ok: true, json: async () => beatmap }));
     assert.equal(result.source, 'generated', song.id);
@@ -68,7 +57,9 @@ test('bundled generated charts load with current playable pose IDs', async () =>
 });
 
 test('Feel Good Inc. is bundled with playable cues and a matching full-length WAV', async () => {
-  const song = songs.find(song => song.id === 'feel-good-inc');
+  const matchingSongs = songs.filter(song => song.id === 'feel-good-inc');
+  assert.equal(matchingSongs.length, 1);
+  const [song] = matchingSongs;
   assert.ok(song.generated);
   assert.ok(song.notes.length > 4);
   assert.ok(song.notes.every(note => note.time >= 0 && note.time < song.duration));

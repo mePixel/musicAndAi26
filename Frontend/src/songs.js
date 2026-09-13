@@ -23,14 +23,6 @@ const originalSongs = [
       vocals: encodeURI('/songs/Queen - Another One Bites The Dust/Queen - Another One Bites The Dust [Lyrics] - GlyphoricVibes (youtube)_vocals.wav'),
     },
     notes: [] },
-  { id: 'feel-good-inc', title: 'Feel Good Inc.', bpm: 138, duration: 223, mood: 'A loose, crunchy groove from separated stems.',
-    color: '#8bd6c2', stemUrls: {
-      drums: encodeURI('/songs/Gorillaz - Feel Good Inc./Gorillaz - Feel Good Inc. - Minimal Sounds (youtube)_drums.wav'),
-      bass: encodeURI('/songs/Gorillaz - Feel Good Inc./Gorillaz - Feel Good Inc. - Minimal Sounds (youtube)_bass.wav'),
-      other: encodeURI('/songs/Gorillaz - Feel Good Inc./Gorillaz - Feel Good Inc. - Minimal Sounds (youtube)_other.wav'),
-      vocals: encodeURI('/songs/Gorillaz - Feel Good Inc./Gorillaz - Feel Good Inc. - Minimal Sounds (youtube)_vocals.wav'),
-    },
-    notes: [] },
   { id: 'beast-of-burden', title: 'Beast Of Burden', bpm: 101, duration: 211, mood: 'Laid-back Stones sway from separated stems.',
     color: '#f08c7d', stemUrls: {
       drums: encodeURI('/songs/The Rolling Stones - Beast Of Burden/Beast Of Burden by The Rolling Stones - StonesFan85 (youtube)_drums.wav'),

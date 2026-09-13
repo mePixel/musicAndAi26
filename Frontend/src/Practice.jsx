@@ -40,9 +40,9 @@ export function Practice({ audio, onExit }) {
       soundsReady = false; camera.stop(); audio.stop(); setError(message); setPhase('error');
     }
 
-    const camera = createCamera(video.current, overlay.current, ({ tracked, pose, bright }) => {
+    const camera = createCamera(video.current, overlay.current, ({ tracked, pose, bright, hint }) => {
       if (!active) return;
-      setCameraState(previous => previous.tracked === tracked && previous.pose === pose && previous.bright === bright ? previous : { tracked, pose, bright });
+      setCameraState(previous => previous.tracked === tracked && previous.pose === pose && previous.bright === bright && previous.hint === hint ? previous : { tracked, pose, bright, hint });
     }, fail);
 
     Promise.all([camera.start(), audio.loadHits()]).then(([enabled]) => {
@@ -67,9 +67,7 @@ export function Practice({ audio, onExit }) {
 
   const detected = phase === 'ready' && cameraState.tracked ? practicePoses.find(pose => pose.id === cameraState.pose) : null;
   const status = detected ? detected.label : !cameraState.tracked ? 'Step into frame' : cameraState.pose === 'neutral' ? 'Arms down' : 'Try a pose';
-  const hint = detected ? instructions[detected.id] : !cameraState.tracked
-    ? 'Keep both shoulders, elbows, and hands visible.'
-    : 'Try any pose below and hold it briefly.';
+  const hint = cameraState.hint || (detected ? instructions[detected.id] : 'Try any pose below and hold it briefly.');
 
   return <main className="practice-page" aria-labelledby="practice-heading">
     <video ref={video} autoPlay muted playsInline className="practice-video" aria-label="Mirrored live camera" />

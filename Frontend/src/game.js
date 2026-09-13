@@ -14,13 +14,13 @@ export function judge(round, pose, time) {
   return note;
 }
 
-// One camera pose entry can wait for the next cue. Confidence gaps get 300 ms
-// of grace, but a different pose or a consumed entry cannot claim another cue.
+// Prepare early and score on the beat. Only fresh observations extend the
+// 300 ms scoring grace; the detector's retained visual lock cannot extend it.
 export function createCameraPoseGrace(round) {
   let entered = null, pending = null, lastSeen = -Infinity;
   return {
-    update({ tracked, pose, event }, time) {
-      if (!tracked || !pose || time < 0) return;
+    update({ tracked, pose, event, fresh }, time) {
+      if (!tracked || !pose || fresh === false || time < 0) return;
       if (pose !== entered || event === pose) {
         entered = pose;
         const next = round.notes.find(note => !note.result && time - note.time <= .300001);
@@ -29,7 +29,7 @@ export function createCameraPoseGrace(round) {
       if (pending) lastSeen = time;
     },
     judge(time) {
-      if (!pending || time < 0 || time - lastSeen > .300001) return null;
+      if (!pending || time < pending.time || time - lastSeen > .300001) return null;
       if (pending !== round.notes.find(note => !note.result)) {
         pending = null;
         return null;

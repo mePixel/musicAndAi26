@@ -1,5 +1,22 @@
 # Bodybeat — webcam rhythm game
 
+Recognition playability update (2026-09-13): class-score smoothing, separate
+70% entry / 50% retention thresholds, and 150 ms visual dropout tolerance make
+pose feedback steadier. Per-move joint checks replace the global hip requirement,
+with specific framing hints. Camera poses prepared early now score on the beat;
+only fresh observations refresh the existing 300 ms scoring grace. Mirrored lane
+mapping, one-entry/one-note protection, and keyboard timing are preserved.
+
+Verification: 35 Node tests and the production build pass. Playwright with Chrome
+at 1440×1000 and 390×844 verified practice feedback, moderate-confidence retention,
+hand poses with hips hidden, missing-hand guidance, all four early camera hits
+scoring Perfect on their beats, pause/resume, restart, and exit. Simulated model
+output ran through the real camera loop, recognizer, and game with decoded audio;
+no browser errors or warnings occurred. A separate real-webcam check received
+640×480 video and processed model frames without JavaScript errors, but the active
+hand was not visible. Physical four-pose comfort and audible timing still need a
+human playtest. The existing large-bundle build warning remains.
+
 Only the black game character takes the current instrument pose’s color or the
 active keyboard pose’s color. Default, missing/stale detection, and expired
 keyboard input restore black. The yellow backdrop, pink and white trails, and
@@ -206,12 +223,25 @@ Tune simple thresholds on the demo laptop. Left/right mean the player's
 anatomical left/right; mirror preview and cue figures consistently and confirm
 this during playtesting.
 
-A pose must remain stable for about 100 ms before it counts. Emit one event
-on entry using the song time when the pose is confirmed. Holding it emits no
-more events. In the game, retain an unconsumed entry for the next matching cue
-while confident detections continue and for 300 ms afterward. Judge it once the
-normal hit window opens; a different pose cancels the pending entry. Confidently recognizing both arms down or another pose rearms it;
-an uncertain or dropped frame does not. Avoid jitter-induced hits.
+The current Teachable Machine / PoseNet classifier uses a short (60 ms time
+constant) average of class scores. Enter at 70% confidence after about 100 ms of
+confirmation; retain a confirmed pose down to 50%. Brief uncertain samples can
+keep the visible lock for 150 ms without rearming the same pose. A different
+confirmed pose rearms it; lost tracking alone does not. Reset clears all history.
+Keep the existing mirrored model-class-to-lane mapping.
+
+Both shoulders must be tracked. Each instrument cue additionally requires its
+active elbow and wrist; a hip cue also requires that side's hip. Default needs
+both arms, but no hips. Missing joints produce specific framing guidance in
+practice and gameplay. Model joint names are anatomical; lane names follow the
+existing mirrored screen directions.
+
+In Camera mode, an unconsumed pose entry can wait for the next matching cue.
+Prepare early and hold through the beat: it scores at or after the cue timestamp,
+never at the early edge of the hit window. Only fresh accepted detections refresh
+the 300 ms scoring grace; a retained visual lock does not extend it. A different
+confirmed pose cancels the pending entry. Each entry still consumes at most one
+note. Keyboard timing is unchanged.
 
 ## Play loop and timing
 
@@ -221,8 +251,11 @@ an uncertain or dropped frame does not. Avoid jitter-induced hits.
    once both arms are tracked.
 3. Give a three-second countdown, then play. Show each note about 2.5 seconds
    before its target time so the player can prepare.
-4. Compare each pose-entry event with the closest unjudged note for that pose.
-   Within ±150 ms is Perfect (100 points); within ±300 ms is Good (50 points).
+4. Camera entries wait for the next matching cue and score when its beat arrives
+   while fresh detection or its 300 ms grace remains valid. Late camera entries
+   within 150 ms are Perfect (100 points); within 300 ms are Good (50 points).
+   Keyboard events use the closest unjudged matching note with ±150 ms Perfect
+   and ±300 ms Good windows.
    Consume one note, increment combo, flash its target ring, and play that pose's short
    hit sound. These are starting values to tune during playtesting.
 5. A note more than 300 ms late becomes Miss and resets combo. Unmatched poses

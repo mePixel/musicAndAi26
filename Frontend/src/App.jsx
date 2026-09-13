@@ -24,7 +24,7 @@ function Instructions() {
       <ol className="instructions">
         <li><strong>Choose a song.</strong> Pick Camera or Keyboard, then press Play.</li>
         <li><strong>Get in frame.</strong> Keep both shoulders, elbows, and hands visible. Your character mirrors your movement. Hand cues arrive from the upper corners; hip cues from the lower corners.</li>
-        <li><strong>Move on the beat.</strong> Enter the pose as the note lands. Holding it won’t score again.</li>
+        <li><strong>Meet the beat.</strong> In Camera mode, prepare the pose early and hold it as the note lands. Each pose entry scores only once.</li>
       </ol>
       <p className="muted-copy">Perfect earns 100 points; Good earns 50. Misses reset the combo. In Keyboard mode, press 1–4 or tap the corner buttons. Escape returns to your songs.</p>
       <DialogFooter><DialogClose render={<Button />}>Got it</DialogClose></DialogFooter>

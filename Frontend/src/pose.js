@@ -1,21 +1,12 @@
 import * as tmPose from "@teachablemachine/pose";
 import { poses, controlPose } from "./poses.js";
+import { createPoseRecognizer } from "./pose-recognition.js";
+export { createPoseLatch } from "./pose-recognition.js";
 import { drawPlayerOutline } from "./pose-outline.js";
 
 const MODEL_URL = "/models/";
 
-const CLASS_TO_POSE = {
-  "Right Hip": "leftHip",
-  "Left Hip": "rightHip",
-  "Right Hand": "leftHand",
-  "Left Hand": "rightHand",
-  "Default": "default",
-  // "Start/Stop": "startStop",
-};
-
-const MIN_CLASS_CONFIDENCE = 0.65;
 const MIN_KEYPOINT_CONFIDENCE = 0.45;
-const POSE_HOLD_MS = 100;
 
 const BRIGHTNESS_SAMPLE_SIZE = 16;
 const BRIGHTNESS_CENTER_MARGIN = 4; // exclude this margin from each edge as "the player"
@@ -70,79 +61,6 @@ function createBrightnessSampler() {
       return bright;
     },
   };
-}
-
-export function createPoseLatch() {
-  let candidate = null;
-  let since = 0;
-  let entered = null;
-
-  return {
-    update(pose, now) {
-      if (pose !== candidate) {
-        candidate = pose;
-        since = now;
-      }
-
-      if (!pose || now - since < POSE_HOLD_MS) {
-        return {
-          pose: null,
-          event: null,
-        };
-      }
-
-      const event = pose !== entered ? pose : null;
-
-      entered = pose;
-
-      return {
-        pose,
-        event,
-      };
-    },
-
-    reset() {
-      candidate = null;
-      entered = null;
-      since = 0;
-    },
-  };
-}
-
-function getBestPrediction(predictions) {
-  if (!predictions?.length) {
-    return null;
-  }
-
-  let best = predictions[0];
-
-  for (const prediction of predictions) {
-    if (prediction.probability > best.probability) {
-      best = prediction;
-    }
-  }
-
-  return best;
-}
-
-function getTracked(keypoints) {
-  if (!keypoints?.length) {
-    return false;
-  }
-
-  const required = ["leftShoulder", "rightShoulder", "leftHip", "rightHip"];
-
-  const indexes = {
-    leftShoulder: 5,
-    rightShoulder: 6,
-    leftHip: 11,
-    rightHip: 12,
-  };
-
-  return required.every((name) => {
-    const point = keypoints[indexes[name]];
-    return point && point.score >= MIN_KEYPOINT_CONFIDENCE;
-  });
 }
 
 function drawPoseOverlay(ctx, canvas, mask, pose, recognizedPose) {
@@ -221,7 +139,7 @@ export function createCamera(video, overlay, onFrame, onError) {
   let frame = 0;
   let generation = 0;
 
-  const latch = createPoseLatch();
+  const recognizer = createPoseRecognizer();
   const ctx = overlay.getContext("2d");
   const outlineMask = document.createElement("canvas");
   const brightness = createBrightnessSampler();
@@ -248,7 +166,7 @@ export function createCamera(video, overlay, onFrame, onError) {
 
     clear();
 
-    latch.reset();
+    recognizer.reset();
 
     onFrame({
       tracked: false,
@@ -262,7 +180,7 @@ export function createCamera(video, overlay, onFrame, onError) {
     stop,
 
     reset() {
-      latch.reset();
+      recognizer.reset();
     },
 
     async start() {
@@ -353,39 +271,12 @@ export function createCamera(video, overlay, onFrame, onError) {
 
               if (ownGeneration !== generation) return;
 
-              const tracked = getTracked(pose?.keypoints);
+              const predictions = await model.predict(posenetOutput);
+              if (ownGeneration !== generation) return;
+              const recognized = recognizer.update(predictions, pose?.keypoints, now);
 
-              let detectedPose = null;
-
-              const predictions = await model.predict(posenetOutput); // actual output / classes
-
-              const best = getBestPrediction(predictions);
-
-              // TEMP DEBUG: remove once distance/confidence issue is diagnosed
-              console.log(
-                "tracked=%s %s",
-                tracked,
-                predictions.map(p => `${p.className}: ${(p.probability * 100).toFixed(0)}%`).join("  "),
-              );
-
-              if (tracked && best && best.probability >= MIN_CLASS_CONFIDENCE) {
-                detectedPose = CLASS_TO_POSE[best.className] ?? null;
-              }
-
-              const latched = latch.update(detectedPose, now);
-
-              drawPoseOverlay(ctx, overlay, outlineMask, pose, latched.pose);
-
-              onFrame({
-                tracked,
-                keypoints: pose?.keypoints ?? [],
-
-                pose: latched.pose,
-
-                event: latched.event,
-
-                bright,
-              });
+              drawPoseOverlay(ctx, overlay, outlineMask, pose, recognized.pose);
+              onFrame({ ...recognized, keypoints: pose?.keypoints ?? [], bright });
             } catch (error) {
               console.error("Teachable Machine prediction error:", error);
 
@@ -398,14 +289,8 @@ export function createCamera(video, overlay, onFrame, onError) {
           } else if (now - lastNewFrame > 500) {
             clear();
 
-            const latched = latch.update(null, now);
-
-            onFrame({
-              tracked: false,
-              pose: latched.pose,
-              event: latched.event,
-              bright: brightness.update(video),
-            });
+            const recognized = recognizer.update([], [], now);
+            onFrame({ ...recognized, bright: brightness.update(video) });
           }
 
           frame = requestAnimationFrame(tick);

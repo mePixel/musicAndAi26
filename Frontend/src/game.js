@@ -1,6 +1,8 @@
 import { playablePoses as poses, drawPose } from './poses.js';
 import { timingForMode } from './difficulty.js';
 
+const CUE_TRAVEL_SECONDS = 4.5;
+
 export function createRound(notes) {
   return { notes: notes.map(note => ({ ...note, result: null })), score: 0, combo: 0, bestCombo: 0, hits: 0, misses: 0 };
 }
@@ -16,8 +18,9 @@ export function judge(round, pose, time, mode = 'hard') {
   return note;
 }
 
-// One camera pose entry can wait for the next cue. Confidence gaps get 300 ms
-// of grace, but a different pose or a consumed entry cannot claim another cue.
+// One camera pose entry can wait for the next cue. Confidence gaps get the
+// mode's hit window of grace, but a different pose or a consumed entry cannot
+// claim another cue.
 export function createCameraPoseGrace(round, mode = 'hard') {
   const timing = timingForMode(mode);
   let entered = null, pending = null, lastSeen = -Infinity;
@@ -56,6 +59,11 @@ export function expireNotes(round, time, mode = 'hard') {
   return expired;
 }
 
+export function nextCuePose(round, time, mode = 'hard') {
+  const timing = timingForMode(mode);
+  return round.notes.find(note => !note.result && note.time + timing.good >= time)?.pose ?? null;
+}
+
 // Left/right are screen directions, matching the mirrored player preview.
 export const cueCorners = {
   leftHip: [-1, 1], rightHip: [1, 1],
@@ -66,7 +74,7 @@ export function cuePosition(poseId, secondsUntilBeat, width, height) {
   const [side, level] = cueCorners[poseId];
   const origin = { x: width * (.5 + side * .42), y: height * (.5 + level * .36) };
   const target = { x: width * (.5 + side * .21), y: height * (.5 + level * .17) };
-  const progress = 1 - secondsUntilBeat / 2.5;
+  const progress = 1 - secondsUntilBeat / CUE_TRAVEL_SECONDS;
   return {
     origin, target,
     x: origin.x + (target.x - origin.x) * progress,
@@ -115,12 +123,12 @@ export function createStage(canvas) {
     for (const note of notes) {
       if (note.result === 'Perfect' || note.result === 'Good' || !cueCorners[note.pose]) continue;
       const delta = note.time - time;
-      if (delta > 2.5 || delta < -.3) continue;
+      if (delta > CUE_TRAVEL_SECONDS || delta < -1.2) continue;
       const pose = poses.find(pose => pose.id === note.pose);
       const { x, y } = cuePosition(note.pose, delta, width, height);
       ctx.save(); ctx.globalAlpha = delta < 0 ? Math.max(.25, 1 + delta * 2) : 1;
       ctx.fillStyle = pose.color; ctx.strokeStyle = '#11100f'; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.roundRect(x-size/2, y-size/2, size, size, size*.18); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x, y, size * .5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
       drawPose(ctx, pose, x, y, size*.9, '#11100f');
       ctx.restore();
     }

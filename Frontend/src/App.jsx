@@ -48,7 +48,7 @@ export function App() {
   const [tracks,setTracks] = useState(() => [...songs]);
   const [songId,setSongId] = useState(songs[0].id);
   const [input,setInput] = useState('camera');
-  const [mode,setMode] = useState('medium');
+  const [mode,setMode] = useState('easy');
   const [screen,setScreen] = useState('songs');
   const [volume,setVolume] = useState(55);
   const [starting,setStarting] = useState(false);

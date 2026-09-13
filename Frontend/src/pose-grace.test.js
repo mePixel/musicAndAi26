@@ -8,7 +8,7 @@ function setup(notes = [{ time: 3, pose: 'leftHip' }]) {
 }
 const seen = (pose, event = pose) => ({ tracked: true, pose, event });
 
-test('camera grace keeps a matching early pose through a 300 ms recognition gap', () => {
+test('camera grace keeps a matching early pose through a short recognition gap', () => {
   const { round, grace } = setup();
   grace.update(seen('leftHip'), 2.4);
   assert.equal(grace.judge(2.4), null);
@@ -19,9 +19,9 @@ test('camera grace keeps a matching early pose through a 300 ms recognition gap'
   assert.equal(grace.judge(3), null);
 });
 
-test('camera grace expires after 300 ms without confident detection', () => {
+test('camera grace expires after the hit window without confident detection', () => {
   const { round, grace } = setup();
-  grace.update(seen('leftHip'), 2.399);
+  grace.update(seen('leftHip'), 2.25);
   assert.equal(grace.judge(2.7), null);
   assert.equal(grace.judge(3), null);
   assert.equal(round.score, 0);

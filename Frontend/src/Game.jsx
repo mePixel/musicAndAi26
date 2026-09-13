@@ -7,7 +7,7 @@ import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/
 import { Spinner } from '@/components/ui/spinner';
 import { playablePoses as poses, controlPose } from './poses.js';
 import { createCamera } from './pose.js';
-import { createRound, createStage, createCameraPoseGrace, expireNotes, judge } from './game.js';
+import { createRound, createStage, createCameraPoseGrace, expireNotes, judge, nextCuePose } from './game.js';
 import { PoseDancer } from './components/PoseDancer.jsx';
 import { GAME_MODES, notesForMode } from './difficulty.js';
 import { formatTime } from '@/lib/utils';
@@ -23,6 +23,7 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
   const [phase,setPhase] = useState('loading');
   const [hud,setHud] = useState(initialHud);
   const [cameraState,setCameraState] = useState({ enabled:false, tracked:false, pose:null });
+  const [nextPose,setNextPose] = useState(null);
   const [error,setError] = useState('');
   const resultHeading = useRef(null);
 
@@ -32,6 +33,7 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
     const stage = createStage(canvas.current);
     let cameraGrace = createCameraPoseGrace(round,mode);
     setHud(initialHud); setError(''); setPhase('loading');
+    setNextPose(null);
     cameraFrame.current = null; keyboardFrame.current = null;
     setCameraState({ enabled:false, tracked:false, pose:null });
 
@@ -127,6 +129,8 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
             if (note) showHit(note.pose, note);
           }
           if (now-lastHud >= 80) {
+            const pose = nextCuePose(round,time,mode);
+            setNextPose(previous => previous === pose ? previous : pose);
             setHud({ score:round.score, combo:round.combo, elapsed:Math.max(0,time), countdown:Math.max(0,Math.ceil(-time)), judgement:now < feedbackUntil ? judgement : '' });
             lastHud = now;
           }
@@ -184,7 +188,7 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
       <section className="highway-panel rhythm-stage" aria-label="Corner pose game">
         <div className="canvas-wrap">
           <div className="game-character">
-            <PoseDancer gameplay key={attempt} live={input === 'camera'} cameraFrame={cameraFrame} keyboardFrame={input === 'keyboard' ? keyboardFrame : undefined} paused={phase === 'finished' || phase === 'error'} />
+            <PoseDancer gameplay key={attempt} live={input === 'camera'} cameraFrame={cameraFrame} keyboardFrame={input === 'keyboard' ? keyboardFrame : undefined} previewPose={phase === 'playing' || phase === 'paused' ? nextPose : null} paused={phase === 'finished' || phase === 'error'} />
           </div>
           <canvas ref={canvas} aria-label="Hand cues fly from the upper corners; hip cues from the lower corners. Match the pose as its cue enters the ring beside your character." />
           <p className="stage-instruction">Match the pose<br /><strong>when it meets the ring.</strong></p>
@@ -193,7 +197,7 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
               <Button variant="outline" aria-label={`Play ${pose.label}`} disabled={input !== 'keyboard' || phase !== 'playing'} onClick={() => trigger.current(pose.id)}><kbd>{i+1}</kbd>{pose.short}</Button>
             </div>)}
           </div>
-          {phase === 'playing' && hud.countdown === 0 ? <p className="character-status" role="status">{input === 'camera' ? cameraState.tracked ? detected?.short ?? 'Following your movement' : 'Step into frame' : 'Use keys 1–4 or tap a corner'}</p> : null}
+          {phase === 'playing' && hud.countdown === 0 ? <p className="character-status" role="status">{nextPose ? `Next: ${poses.find(pose => pose.id === nextPose)?.short ?? 'pose'}` : input === 'camera' ? cameraState.tracked ? detected?.short ?? 'Following your movement' : 'Step into frame' : 'Use keys 1–4 or tap a corner'}</p> : null}
           {waiting ? <div className="stage-overlay" role="status">
             {phase === 'loading' ? <Spinner /> : <Camera aria-hidden="true" />}
             <h2>{phase === 'loading' ? input === 'camera' ? 'Opening your camera' : 'Loading your track' : cameraState.tracked ? 'Ready to start' : 'Step into frame'}</h2>

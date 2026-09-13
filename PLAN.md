@@ -129,9 +129,11 @@ and audible pause/resume timing still need a human playtest.
 
 Latest charting/audio update: browser-local stem analysis can add a generated
 song from drums, bass, other, and vocals stems; hit effects now load from the
-pose metadata and use the copied `*_01.wav` samples in `public/audio`. Easy mode
-limits charts to the two hip poses, spaces notes out, and widens the timing
-window while Normal keeps all four lanes.
+pose metadata and use the copied `*_01.wav` samples in `public/audio`. Easy is
+now the default, limits charts to the two hip poses, spaces notes far apart,
+uses a very forgiving hit window, and shows cues much sooner. Medium keeps all
+four lanes but filters dense runs aggressively and uses generous timing so it is
+playable for a hackathon demo.
 
 Status: implemented. Scope is the rhythm game and browser-local chart generation.
 The production build and focused tests pass. The latest UI uses React and customized shadcn controls,

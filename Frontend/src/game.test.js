@@ -79,8 +79,9 @@ test('new rounds do not mutate song charts or retain previous results', () => {
   assert.equal(chart[0].result,undefined);
 });
 test('both authored charts give a player time to move and finish before the audio ends', () => {
-  assert.equal(songs.length,2);
-  for (const song of songs) {
+  const originals = songs.filter(song => !song.generated);
+  assert.equal(originals.length,2);
+  for (const song of originals) {
     assert.ok(song.notes[0].time >= 3);
     for (let i=1;i<song.notes.length;i++) {
       assert.ok(song.notes[i].time-song.notes[i-1].time >= 1);

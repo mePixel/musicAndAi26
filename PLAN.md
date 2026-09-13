@@ -1,5 +1,40 @@
 # Bodybeat — webcam rhythm game
 
+Repeated-pose input: moving the active hand away and returning to the recognized
+position now creates another entry even if the model never changes its class.
+Release requires a visible wrist displacement of 0.3 shoulder widths for at least
+60 ms, followed by a return within 0.15 shoulder widths and normal confirmation.
+Measurements are relative to the same-side hip or shoulder to ignore body
+translation and scale. Missing joints, jitter, and continued holding do not rearm
+input. Only fresh accepted pose observations refresh scoring grace; each entry
+still consumes at most one note.
+Game instructions explain the release-and-return action for repeated cues.
+Verification: 65 Node tests and the build pass. Integration tests cover all four
+repeated poses, movement versus tracking noise, body movement, reset, and slower
+inference. A browser round with simulated joints and a constant Left Hip model
+label scored two consecutive cues after a hand release and return; holding still
+could not score the third cue. No browser errors or warnings occurred. Physical
+repeat timing and audible playback still need a human playtest.
+
+Left Hip tuning reverted after the stricter checks prevented recognition during
+play. Left Hip again uses the shared 70% entry / 50% retention thresholds, without
+the extra wrist-distance or elbow-angle gate. Joint visibility checks and the
+repeated-pose release/return behavior remain.
+
+Feel Good Inc. is now the third bundled song. The supplied Minimal Sounds stems
+were prepared into a drumless backing WAV (bass + other + vocals), a saved pose
+chart generated from the drums stem with the existing browser generator, and a
+real RMS waveform preview. It appears in song selection after every reload and
+uses the regular Easy / Medium / Hard flow without uploading or reanalyzing stems.
+The original stem files remain available; the new backing WAV uses existing LFS
+rules. Backing duration is 222.824 seconds.
+
+Verification: all 55 Node tests and the production build pass. Desktop/mobile
+browser checks verified song selection and waveform, persistence in the bundled
+list after refresh, real WAV decoding, keyboard scoring, pause/resume, restart,
+and return to songs, with no browser errors or warnings. Audible timing and a
+physical camera playthrough of this track still need a human check.
+
 Character behavior restored from `ae74ab91ea6f40bec47b14cde4e239bad3a598cf`:
 the rhythm-mode character mirrors live joints and takes the current recognized
 pose's color. Keyboard input animates the selected pose briefly; missing input
@@ -177,7 +212,8 @@ pose metadata and use the copied `*_01.wav` samples in `public/audio`. Easy is
 now the default, limits charts to the two hip poses, spaces notes far apart,
 uses a very forgiving hit window, and shows cues much sooner. Medium keeps all
 four lanes but filters dense runs aggressively and uses generous timing so it is
-playable for a hackathon demo.
+playable for a hackathon demo. Filtered-out notes stay silent; percussion samples play only
+when the player successfully hits a visible cue.
 
 Status: implemented. Scope is the rhythm game and browser-local chart generation.
 The production build and focused tests pass. The latest UI uses React and customized shadcn controls,
@@ -260,7 +296,7 @@ The current Teachable Machine / PoseNet classifier uses a short (60 ms time
 constant) average of class scores. Enter at 70% confidence after about 100 ms of
 confirmation; retain a confirmed pose down to 50%. Brief uncertain samples can
 keep the visible lock for 150 ms without rearming the same pose. A different
-confirmed pose rearms it; lost tracking alone does not. Reset clears all history.
+confirmed pose or a visible release and return rearms it; lost tracking alone does not. Reset clears all history.
 Keep the existing mirrored model-class-to-lane mapping.
 
 Both shoulders must be tracked. Each instrument cue additionally requires its

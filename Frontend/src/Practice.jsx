@@ -39,8 +39,9 @@ export function Practice({ audio, onExit }) {
       soundsReady = false; camera.stop(); audio.stop(); setError(message); setPhase('error');
     }
 
-    const camera = createCamera(video.current, overlay.current, ({ tracked, pose, bright, hint }) => {
+    const camera = createCamera(video.current, overlay.current, ({ tracked, pose, bright, hint, fresh }) => {
       if (!active) return;
+      if (soundsReady && fresh !== false) playSound({ tracked, pose }, performance.now());
       setCameraState(previous => previous.tracked === tracked && previous.pose === pose && previous.bright === bright && previous.hint === hint ? previous : { tracked, pose, bright, hint });
     }, fail);
 

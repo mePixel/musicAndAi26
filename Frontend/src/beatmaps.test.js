@@ -44,7 +44,7 @@ test('loads generated song notes and falls back to authored notes on failure', a
 });
 
 test('both bundled generated charts load with current playable pose IDs', async () => {
-  for (const song of songs) {
+  for (const song of songs.filter(song => song.beatmapUrl)) {
     const beatmap = JSON.parse(await readFile(new URL(`../public${song.beatmapUrl}`, import.meta.url), 'utf8'));
     const result = await loadSongNotes(song, async () => ({ ok: true, json: async () => beatmap }));
     assert.equal(result.source, 'generated', song.id);
@@ -52,4 +52,18 @@ test('both bundled generated charts load with current playable pose IDs', async 
     assert.equal(result.notes.length, beatmap.events.length, song.id);
     assert.ok(result.notes.length > 0, song.id);
   }
+});
+
+test('Feel Good Inc. is bundled with playable cues and a matching full-length WAV', async () => {
+  const song = songs.find(song => song.id === 'feel-good-inc');
+  assert.ok(song.generated);
+  assert.ok(song.notes.length > 4);
+  assert.ok(song.notes.every(note => note.time >= 0 && note.time < song.duration));
+  assert.ok(song.notes.every((note, index) => index === 0 || note.time >= song.notes[index - 1].time));
+  const wav = await readFile(new URL(`../public${song.audioUrl}`, import.meta.url));
+  assert.equal(wav.toString('ascii',0,4),'RIFF');
+  assert.equal(wav.toString('ascii',8,12),'WAVE');
+  // Prepared PCM WAV: its data length and byte rate must match the chart duration.
+  const duration = wav.readUInt32LE(40) / wav.readUInt32LE(28);
+  assert.ok(Math.abs(duration - song.duration) < .01);
 });

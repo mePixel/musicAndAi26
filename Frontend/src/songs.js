@@ -1,7 +1,9 @@
 import { playablePoses as poses } from './poses.js';
+import feelGoodBeatmap from './feel-good-inc.json' with { type: 'json' };
+import { beatmapToNotes } from './browserBeatmap.js';
 
 // Authored in seconds against the bundled original recordings.
-export const songs = [
+const originalSongs = [
   { id: 'first-groove', title: 'First Groove', bpm: 96, duration: 40, mood: 'Warm bass. Easy moves.',
     color: '#d9ff70', audioUrl: '/audio/first-groove.mp3', beatmapUrl: '/beatmaps/first-groove.generated.json',
     notes: [[3.75,0],[5,1],[6.25,2],[7.5,3],[10,0],[11.25,2],[12.5,1],[13.75,3],
@@ -14,3 +16,16 @@ export const songs = [
       [21,0],[22,1],[23,2],[24,3],[25,2],[26,0],[27,3],[28,1],
       [30,2],[31,3],[32,0],[33,1],[34,2]] },
 ].map(song => ({ ...song, notes: song.notes.map(([time, index]) => ({ time, pose: poses[index].id })) }));
+
+// Prepared from the supplied stems with the same chart generator as uploads.
+export const songs = [...originalSongs, {
+  id: 'feel-good-inc',
+  title: 'Gorillaz — Feel Good Inc.',
+  bpm: feelGoodBeatmap.metadata.bpm,
+  duration: feelGoodBeatmap.metadata.duration,
+  mood: 'Minimal Sounds version · drumless backing.',
+  color: '#8bd6c2',
+  audioUrl: '/audio/feel-good-inc-backing.wav',
+  notes: beatmapToNotes(feelGoodBeatmap),
+  generated: true,
+}];

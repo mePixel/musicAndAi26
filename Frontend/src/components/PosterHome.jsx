@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Camera, CameraOff, Check, Keyboard, Pause, Play, Upload, Volume2, Zap } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Camera, CameraOff, Check, Keyboard, Pause, Play, Upload, Volume2, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Slider } from '@/components/ui/slider';
@@ -14,6 +14,8 @@ import './poster.css';
 export function PosterHome({ song, tracks, onSong, input, onInput, mode, onMode, onUpload, uploading, onPlay, onPractice, starting, error, instructions, volume, onVolume }) {
   const root = useRef(null), video = useRef(null), overlay = useRef(null), uploadInput = useRef(null);
   const cameraFrame = useRef(null);
+  const trackList = useRef(null);
+  const [trackEdges, setTrackEdges] = useState({ start: true, end: tracks.length <= 2 });
   const [cameraOn, setCameraOn] = useState(false);
   const [cameraPhase, setCameraPhase] = useState('off');
   const [cameraError, setCameraError] = useState('');
@@ -69,6 +71,24 @@ export function PosterHome({ song, tracks, onSong, input, onInput, mode, onMode,
     };
   }, [cameraOn]);
 
+  function updateTrackEdges() {
+    const list = trackList.current;
+    if (list) setTrackEdges({ start: list.scrollLeft <= 1, end: list.scrollLeft + list.clientWidth >= list.scrollWidth - 1 });
+  }
+
+  useEffect(() => {
+    const list = trackList.current;
+    const observer = new ResizeObserver(updateTrackEdges);
+    observer.observe(list);
+    updateTrackEdges();
+    return () => observer.disconnect();
+  }, [tracks.length]);
+
+  function scrollTracks(direction) {
+    const list = trackList.current;
+    list.scrollBy({ left: direction * list.clientWidth / 2, behavior: motion ? 'smooth' : 'instant' });
+  }
+
   function toggleCamera() {
     if (cameraOn) { setCameraOn(false); setCameraPhase('off'); }
     else { onInput('camera'); setCameraOn(true); }
@@ -100,7 +120,6 @@ export function PosterHome({ song, tracks, onSong, input, onInput, mode, onMode,
         <div className="poster-play-area">
           <Button className="poster-play" onClick={onPlay} disabled={starting} aria-label={`Play ${song.title}`}><Play aria-hidden="true" /><span>{starting ? 'One sec…' : <>LET’S<br />PLAY</>}</span><ArrowUpRight aria-hidden="true" /></Button>
           <span className="poster-play-caption">{song.title} · {song.bpm} BPM</span>
-        </div>
         <div className={`poster-camera ${cameraOn ? 'camera-is-on' : ''}`}>
           {cameraOn && <div className="poster-camera-preview"><video ref={video} muted playsInline aria-label="Mirrored camera preview" /><canvas ref={overlay} aria-hidden="true" /></div>}
           <div className="poster-camera-copy">
@@ -108,10 +127,13 @@ export function PosterHome({ song, tracks, onSong, input, onInput, mode, onMode,
             <p role="status">{cameraOn ? (cameraPhase === 'error' ? cameraError : status) : 'Enable camera. Move. Watch it react.'}</p>
           </div>
         </div>
+        </div>
         <div className="pose-stamp" aria-hidden="true">{move?.short || 'FEEL THE BEAT!'}</div>
       </section>
       <section className="poster-tracks" aria-label="Choose a song">
-        <ToggleGroup value={[song.id]} onValueChange={values => { if (values.length) onSong(values[0]); }} aria-label="Choose a song">
+        <div className="poster-track-carousel">
+        <Button className="track-scroll" variant="ghost" aria-label="Previous tracks" disabled={trackEdges.start} onClick={() => scrollTracks(-1)}><ChevronLeft /></Button>
+        <ToggleGroup ref={trackList} onScroll={updateTrackEdges} className="poster-track-list" value={[song.id]} onValueChange={values => { if (values.length) onSong(values[0]); }} aria-label="Choose a song">
           {tracks.map((track, index) => {
             const waveform = waveforms[track.id] ?? waveforms['first-groove'] ?? [];
             return <ToggleGroupItem className="poster-track" key={track.id} value={track.id} aria-label={`Select ${track.title}`}>
@@ -122,6 +144,8 @@ export function PosterHome({ song, tracks, onSong, input, onInput, mode, onMode,
           </ToggleGroupItem>;
           })}
         </ToggleGroup>
+        <Button className="track-scroll" variant="ghost" aria-label="Next tracks" disabled={trackEdges.end} onClick={() => scrollTracks(1)}><ChevronRight /></Button>
+        </div>
         <div className="poster-upload">
           <input ref={uploadInput} type="file" accept="audio/*" multiple webkitdirectory="" directory="" onChange={onUpload} hidden />
           <Button variant="ghost" onClick={() => uploadInput.current?.click()} disabled={uploading || starting}>

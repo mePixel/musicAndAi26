@@ -35,7 +35,7 @@ function Instructions() {
       <ol className="instructions">
         <li><strong>Choose a song.</strong> Pick Camera or Keyboard, then press Play.</li>
         <li><strong>Get in frame.</strong> Keep both shoulders, elbows, and hands visible. Your character mirrors your movement. Hand cues arrive from the upper corners; hip cues from the lower corners.</li>
-        <li><strong>Meet the beat.</strong> In Camera mode, prepare the pose early and hold it as the note lands. Each pose entry scores only once.</li>
+        <li><strong>Meet the beat.</strong> In Camera mode, prepare the pose early and hold it as the note lands. For repeated cues, move your hand away and back. Holding still scores only once.</li>
       </ol>
       <p className="muted-copy">Perfect earns 100 points; Good earns 50. Misses reset the combo. In Keyboard mode, press 1–4 or tap the corner buttons. Escape returns to your songs.</p>
       <DialogFooter><DialogClose render={<Button />}>Got it</DialogClose></DialogFooter>
@@ -121,8 +121,7 @@ export function App() {
     onVolume={next => { setVolume(next); audio.setVolume(next / 100); }} />;
 
   return <div className="app">
-    <BrandHeader><span className="session-label">Your body. Your instrument.</span></BrandHeader>
-    <Game key={`${song.id}-${input}-${mode}`} song={song} input={input} mode={mode} audio={audio} onExit={exitGame} onUseKeyboard={useKeyboard} />
+    <Game key={`${song.id}-${input}-${mode}`} song={song} input={input} mode={mode} audio={audio} onExit={exitGame} onUseKeyboard={useKeyboard} sidebarHeader={<BrandHeader><span className="session-label">Your body. Your instrument.</span></BrandHeader>} sidebarUtilities={
     <footer className="site-footer">
       <div className="footer-inner">
         <p><Camera aria-hidden="true" />Camera video stays on your device.</p>
@@ -134,6 +133,6 @@ export function App() {
           </Field>
         </FieldGroup>
       </div>
-    </footer>
+    </footer>} />
   </div>;
 }

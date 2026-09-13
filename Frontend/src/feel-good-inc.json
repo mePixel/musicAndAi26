@@ -1,0 +1,7625 @@
+{
+  "version": 1,
+  "metadata": {
+    "title": "Gorillaz — Feel Good Inc. (Minimal Sounds)",
+    "duration": 222.824,
+    "bpm": 138.52,
+    "difficulty": "medium",
+    "seed": 42,
+    "poseCount": 4,
+    "generatedIn": "prepared with browserBeatmap.js",
+    "timingSource": "separated-drums-stem-onsets",
+    "stemNames": [
+      "bass",
+      "drums",
+      "other",
+      "vocals"
+    ],
+    "instruments": [
+      "snare",
+      "hiHat",
+      "bass",
+      "crash"
+    ],
+    "quantized": true,
+    "gridSubdivision": 2,
+    "gridStepSeconds": 0.216575224,
+    "gridPhaseSeconds": 0.117325,
+    "gridConfidence": 0.967
+  },
+  "poses": [
+    "leftHip",
+    "rightHip",
+    "leftHand",
+    "rightHand"
+  ],
+  "events": [
+    {
+      "id": 0,
+      "time": 1.633352,
+      "sourceTime": 1.53542,
+      "gridIndex": 7,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.01
+    },
+    {
+      "id": 1,
+      "time": 6.181431,
+      "sourceTime": 6.17941,
+      "gridIndex": 28,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.645
+    },
+    {
+      "id": 2,
+      "time": 6.398006,
+      "sourceTime": 6.394195,
+      "gridIndex": 29,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.633
+    },
+    {
+      "id": 3,
+      "time": 6.614582,
+      "sourceTime": 6.611882,
+      "gridIndex": 30,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.682
+    },
+    {
+      "id": 4,
+      "time": 6.831157,
+      "sourceTime": 6.829569,
+      "gridIndex": 31,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.627
+    },
+    {
+      "id": 5,
+      "time": 7.047732,
+      "sourceTime": 7.053061,
+      "gridIndex": 32,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.984
+    },
+    {
+      "id": 6,
+      "time": 7.264307,
+      "sourceTime": 7.262041,
+      "gridIndex": 33,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.574
+    },
+    {
+      "id": 7,
+      "time": 7.480883,
+      "sourceTime": 7.479728,
+      "gridIndex": 34,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.957
+    },
+    {
+      "id": 8,
+      "time": 7.697458,
+      "sourceTime": 7.720635,
+      "gridIndex": 35,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.544
+    },
+    {
+      "id": 9,
+      "time": 7.914033,
+      "sourceTime": 7.938322,
+      "gridIndex": 36,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.473
+    },
+    {
+      "id": 10,
+      "time": 8.130608,
+      "sourceTime": 8.135692,
+      "gridIndex": 37,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 11,
+      "time": 8.347184,
+      "sourceTime": 8.344671,
+      "gridIndex": 38,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 12,
+      "time": 8.563759,
+      "sourceTime": 8.576871,
+      "gridIndex": 39,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.624
+    },
+    {
+      "id": 13,
+      "time": 8.780334,
+      "sourceTime": 8.78585,
+      "gridIndex": 40,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.956
+    },
+    {
+      "id": 14,
+      "time": 8.996909,
+      "sourceTime": 9.003537,
+      "gridIndex": 41,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.63
+    },
+    {
+      "id": 15,
+      "time": 9.213484,
+      "sourceTime": 9.212517,
+      "gridIndex": 42,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 16,
+      "time": 9.43006,
+      "sourceTime": 9.444717,
+      "gridIndex": 43,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.473
+    },
+    {
+      "id": 17,
+      "time": 9.646635,
+      "sourceTime": 9.644989,
+      "gridIndex": 44,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.574
+    },
+    {
+      "id": 18,
+      "time": 9.86321,
+      "sourceTime": 9.868481,
+      "gridIndex": 45,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.985
+    },
+    {
+      "id": 19,
+      "time": 10.079785,
+      "sourceTime": 10.07746,
+      "gridIndex": 46,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.984
+    },
+    {
+      "id": 20,
+      "time": 10.296361,
+      "sourceTime": 10.292245,
+      "gridIndex": 47,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.589
+    },
+    {
+      "id": 21,
+      "time": 10.512936,
+      "sourceTime": 10.518639,
+      "gridIndex": 48,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.977
+    },
+    {
+      "id": 22,
+      "time": 10.729511,
+      "sourceTime": 10.727619,
+      "gridIndex": 49,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.567
+    },
+    {
+      "id": 23,
+      "time": 10.946086,
+      "sourceTime": 10.945306,
+      "gridIndex": 50,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 24,
+      "time": 11.162661,
+      "sourceTime": 11.162993,
+      "gridIndex": 51,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.465
+    },
+    {
+      "id": 25,
+      "time": 11.379237,
+      "sourceTime": 11.400998,
+      "gridIndex": 52,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.427
+    },
+    {
+      "id": 26,
+      "time": 11.595812,
+      "sourceTime": 11.60127,
+      "gridIndex": 53,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.96
+    },
+    {
+      "id": 27,
+      "time": 11.812387,
+      "sourceTime": 11.810249,
+      "gridIndex": 54,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 28,
+      "time": 12.028962,
+      "sourceTime": 12.025034,
+      "gridIndex": 55,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.613
+    },
+    {
+      "id": 29,
+      "time": 12.245538,
+      "sourceTime": 12.251429,
+      "gridIndex": 56,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.971
+    },
+    {
+      "id": 30,
+      "time": 12.462113,
+      "sourceTime": 12.460408,
+      "gridIndex": 57,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.628
+    },
+    {
+      "id": 31,
+      "time": 12.678688,
+      "sourceTime": 12.678095,
+      "gridIndex": 58,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 32,
+      "time": 12.895263,
+      "sourceTime": 12.910295,
+      "gridIndex": 59,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.474
+    },
+    {
+      "id": 33,
+      "time": 13.111838,
+      "sourceTime": 13.107664,
+      "gridIndex": 60,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.637
+    },
+    {
+      "id": 34,
+      "time": 13.328414,
+      "sourceTime": 13.334059,
+      "gridIndex": 61,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.993
+    },
+    {
+      "id": 35,
+      "time": 13.544989,
+      "sourceTime": 13.543039,
+      "gridIndex": 62,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 36,
+      "time": 13.761564,
+      "sourceTime": 13.757823,
+      "gridIndex": 63,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.61
+    },
+    {
+      "id": 37,
+      "time": 13.978139,
+      "sourceTime": 13.984218,
+      "gridIndex": 64,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.952
+    },
+    {
+      "id": 38,
+      "time": 14.194715,
+      "sourceTime": 14.190295,
+      "gridIndex": 65,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.534
+    },
+    {
+      "id": 39,
+      "time": 14.41129,
+      "sourceTime": 14.410884,
+      "gridIndex": 66,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.972
+    },
+    {
+      "id": 40,
+      "time": 14.627865,
+      "sourceTime": 14.651791,
+      "gridIndex": 67,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.484
+    },
+    {
+      "id": 41,
+      "time": 14.84444,
+      "sourceTime": 14.866576,
+      "gridIndex": 68,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.522
+    },
+    {
+      "id": 42,
+      "time": 15.061015,
+      "sourceTime": 15.066848,
+      "gridIndex": 69,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.99
+    },
+    {
+      "id": 43,
+      "time": 15.277591,
+      "sourceTime": 15.275828,
+      "gridIndex": 70,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 44,
+      "time": 15.494166,
+      "sourceTime": 15.508027,
+      "gridIndex": 71,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.651
+    },
+    {
+      "id": 45,
+      "time": 15.710741,
+      "sourceTime": 15.717007,
+      "gridIndex": 72,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.993
+    },
+    {
+      "id": 46,
+      "time": 15.927316,
+      "sourceTime": 15.934694,
+      "gridIndex": 73,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.613
+    },
+    {
+      "id": 47,
+      "time": 16.143892,
+      "sourceTime": 16.143673,
+      "gridIndex": 74,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 48,
+      "time": 16.360467,
+      "sourceTime": 16.372971,
+      "gridIndex": 75,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.472
+    },
+    {
+      "id": 49,
+      "time": 16.577042,
+      "sourceTime": 16.576145,
+      "gridIndex": 76,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.55
+    },
+    {
+      "id": 50,
+      "time": 16.793617,
+      "sourceTime": 16.799637,
+      "gridIndex": 77,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.923
+    },
+    {
+      "id": 51,
+      "time": 17.010192,
+      "sourceTime": 17.008617,
+      "gridIndex": 78,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 52,
+      "time": 17.226768,
+      "sourceTime": 17.226304,
+      "gridIndex": 79,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.819
+    },
+    {
+      "id": 53,
+      "time": 17.443343,
+      "sourceTime": 17.452698,
+      "gridIndex": 80,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.912
+    },
+    {
+      "id": 54,
+      "time": 17.659918,
+      "sourceTime": 17.655873,
+      "gridIndex": 81,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.579
+    },
+    {
+      "id": 55,
+      "time": 17.876493,
+      "sourceTime": 17.876463,
+      "gridIndex": 82,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.991
+    },
+    {
+      "id": 56,
+      "time": 18.093069,
+      "sourceTime": 18.091247,
+      "gridIndex": 83,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.455
+    },
+    {
+      "id": 57,
+      "time": 18.309644,
+      "sourceTime": 18.337959,
+      "gridIndex": 84,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.4
+    },
+    {
+      "id": 58,
+      "time": 18.526219,
+      "sourceTime": 18.532426,
+      "gridIndex": 85,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.989
+    },
+    {
+      "id": 59,
+      "time": 18.742794,
+      "sourceTime": 18.741406,
+      "gridIndex": 86,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 60,
+      "time": 18.959369,
+      "sourceTime": 18.95619,
+      "gridIndex": 87,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.628
+    },
+    {
+      "id": 61,
+      "time": 19.175945,
+      "sourceTime": 19.179683,
+      "gridIndex": 88,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.989
+    },
+    {
+      "id": 62,
+      "time": 19.39252,
+      "sourceTime": 19.391565,
+      "gridIndex": 89,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.635
+    },
+    {
+      "id": 63,
+      "time": 19.609095,
+      "sourceTime": 19.606349,
+      "gridIndex": 90,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 64,
+      "time": 19.82567,
+      "sourceTime": 19.838549,
+      "gridIndex": 91,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.486
+    },
+    {
+      "id": 65,
+      "time": 20.042246,
+      "sourceTime": 20.047528,
+      "gridIndex": 92,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.95
+    },
+    {
+      "id": 66,
+      "time": 20.475396,
+      "sourceTime": 20.477098,
+      "gridIndex": 94,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 67,
+      "time": 20.908546,
+      "sourceTime": 20.912472,
+      "gridIndex": 96,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.916
+    },
+    {
+      "id": 68,
+      "time": 21.125122,
+      "sourceTime": 21.121451,
+      "gridIndex": 97,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.563
+    },
+    {
+      "id": 69,
+      "time": 21.341697,
+      "sourceTime": 21.342041,
+      "gridIndex": 98,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.964
+    },
+    {
+      "id": 70,
+      "time": 21.558272,
+      "sourceTime": 21.556825,
+      "gridIndex": 99,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.491
+    },
+    {
+      "id": 71,
+      "time": 21.774847,
+      "sourceTime": 21.797732,
+      "gridIndex": 100,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.504
+    },
+    {
+      "id": 72,
+      "time": 21.991423,
+      "sourceTime": 21.995102,
+      "gridIndex": 101,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 73,
+      "time": 22.207998,
+      "sourceTime": 22.206984,
+      "gridIndex": 102,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 74,
+      "time": 22.424573,
+      "sourceTime": 22.439184,
+      "gridIndex": 103,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.674
+    },
+    {
+      "id": 75,
+      "time": 22.641148,
+      "sourceTime": 22.645261,
+      "gridIndex": 104,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 76,
+      "time": 22.857723,
+      "sourceTime": 22.85424,
+      "gridIndex": 105,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.648
+    },
+    {
+      "id": 77,
+      "time": 23.074299,
+      "sourceTime": 23.071927,
+      "gridIndex": 106,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 78,
+      "time": 23.290874,
+      "sourceTime": 23.304127,
+      "gridIndex": 107,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.465
+    },
+    {
+      "id": 79,
+      "time": 23.507449,
+      "sourceTime": 23.504399,
+      "gridIndex": 108,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.599
+    },
+    {
+      "id": 80,
+      "time": 23.724024,
+      "sourceTime": 23.727891,
+      "gridIndex": 109,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.924
+    },
+    {
+      "id": 81,
+      "time": 23.9406,
+      "sourceTime": 23.939773,
+      "gridIndex": 110,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 82,
+      "time": 24.157175,
+      "sourceTime": 24.154558,
+      "gridIndex": 111,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.607
+    },
+    {
+      "id": 83,
+      "time": 24.37375,
+      "sourceTime": 24.37805,
+      "gridIndex": 112,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.979
+    },
+    {
+      "id": 84,
+      "time": 24.590325,
+      "sourceTime": 24.587029,
+      "gridIndex": 113,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.582
+    },
+    {
+      "id": 85,
+      "time": 24.806901,
+      "sourceTime": 24.804717,
+      "gridIndex": 114,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.977
+    },
+    {
+      "id": 86,
+      "time": 25.023476,
+      "sourceTime": 25.019501,
+      "gridIndex": 115,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.486
+    },
+    {
+      "id": 87,
+      "time": 25.240051,
+      "sourceTime": 25.269116,
+      "gridIndex": 116,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.313
+    },
+    {
+      "id": 88,
+      "time": 25.456626,
+      "sourceTime": 25.46068,
+      "gridIndex": 117,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 89,
+      "time": 25.673201,
+      "sourceTime": 25.672562,
+      "gridIndex": 118,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 90,
+      "time": 25.889777,
+      "sourceTime": 25.887347,
+      "gridIndex": 119,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.597
+    },
+    {
+      "id": 91,
+      "time": 26.106352,
+      "sourceTime": 26.110839,
+      "gridIndex": 120,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.973
+    },
+    {
+      "id": 92,
+      "time": 26.322927,
+      "sourceTime": 26.322721,
+      "gridIndex": 121,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.647
+    },
+    {
+      "id": 93,
+      "time": 26.539502,
+      "sourceTime": 26.537506,
+      "gridIndex": 122,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 94,
+      "time": 26.756078,
+      "sourceTime": 26.769705,
+      "gridIndex": 123,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.483
+    },
+    {
+      "id": 95,
+      "time": 26.972653,
+      "sourceTime": 26.978685,
+      "gridIndex": 124,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.976
+    },
+    {
+      "id": 96,
+      "time": 27.189228,
+      "sourceTime": 27.193469,
+      "gridIndex": 125,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.805
+    },
+    {
+      "id": 97,
+      "time": 27.405803,
+      "sourceTime": 27.422766,
+      "gridIndex": 126,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.873
+    },
+    {
+      "id": 98,
+      "time": 27.622378,
+      "sourceTime": 27.620136,
+      "gridIndex": 127,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.224
+    },
+    {
+      "id": 99,
+      "time": 27.838954,
+      "sourceTime": 27.843628,
+      "gridIndex": 128,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.935
+    },
+    {
+      "id": 100,
+      "time": 28.055529,
+      "sourceTime": 28.052608,
+      "gridIndex": 129,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.586
+    },
+    {
+      "id": 101,
+      "time": 28.272104,
+      "sourceTime": 28.270295,
+      "gridIndex": 130,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.979
+    },
+    {
+      "id": 102,
+      "time": 28.488679,
+      "sourceTime": 28.485079,
+      "gridIndex": 131,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.495
+    },
+    {
+      "id": 103,
+      "time": 28.705255,
+      "sourceTime": 28.728889,
+      "gridIndex": 132,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.511
+    },
+    {
+      "id": 104,
+      "time": 28.92183,
+      "sourceTime": 28.926259,
+      "gridIndex": 133,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 105,
+      "time": 29.138405,
+      "sourceTime": 29.135238,
+      "gridIndex": 134,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 106,
+      "time": 29.35498,
+      "sourceTime": 29.350023,
+      "gridIndex": 135,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.62
+    },
+    {
+      "id": 107,
+      "time": 29.571555,
+      "sourceTime": 29.576417,
+      "gridIndex": 136,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.965
+    },
+    {
+      "id": 108,
+      "time": 29.788131,
+      "sourceTime": 29.797007,
+      "gridIndex": 137,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.613
+    },
+    {
+      "id": 109,
+      "time": 30.004706,
+      "sourceTime": 30.003084,
+      "gridIndex": 138,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.969
+    },
+    {
+      "id": 110,
+      "time": 30.221281,
+      "sourceTime": 30.235283,
+      "gridIndex": 139,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.479
+    },
+    {
+      "id": 111,
+      "time": 30.437856,
+      "sourceTime": 30.435556,
+      "gridIndex": 140,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.568
+    },
+    {
+      "id": 112,
+      "time": 30.654432,
+      "sourceTime": 30.659048,
+      "gridIndex": 141,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.956
+    },
+    {
+      "id": 113,
+      "time": 30.871007,
+      "sourceTime": 30.868027,
+      "gridIndex": 142,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 114,
+      "time": 31.087582,
+      "sourceTime": 31.082812,
+      "gridIndex": 143,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.59
+    },
+    {
+      "id": 115,
+      "time": 31.304157,
+      "sourceTime": 31.320816,
+      "gridIndex": 144,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.688
+    },
+    {
+      "id": 116,
+      "time": 31.520732,
+      "sourceTime": 31.518186,
+      "gridIndex": 145,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.566
+    },
+    {
+      "id": 117,
+      "time": 31.737308,
+      "sourceTime": 31.732971,
+      "gridIndex": 146,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.512
+    },
+    {
+      "id": 118,
+      "time": 31.953883,
+      "sourceTime": 31.962268,
+      "gridIndex": 147,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.44
+    },
+    {
+      "id": 119,
+      "time": 32.170458,
+      "sourceTime": 32.182857,
+      "gridIndex": 148,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.173
+    },
+    {
+      "id": 120,
+      "time": 32.387033,
+      "sourceTime": 32.383129,
+      "gridIndex": 149,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.648
+    },
+    {
+      "id": 121,
+      "time": 32.603609,
+      "sourceTime": 32.603719,
+      "gridIndex": 150,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.794
+    },
+    {
+      "id": 122,
+      "time": 32.820184,
+      "sourceTime": 32.815601,
+      "gridIndex": 151,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.642
+    },
+    {
+      "id": 123,
+      "time": 33.253334,
+      "sourceTime": 33.250975,
+      "gridIndex": 153,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.634
+    },
+    {
+      "id": 124,
+      "time": 33.469909,
+      "sourceTime": 33.46576,
+      "gridIndex": 154,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.66
+    },
+    {
+      "id": 125,
+      "time": 33.686485,
+      "sourceTime": 33.695057,
+      "gridIndex": 155,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.47
+    },
+    {
+      "id": 126,
+      "time": 33.90306,
+      "sourceTime": 33.898231,
+      "gridIndex": 156,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.642
+    },
+    {
+      "id": 127,
+      "time": 34.119635,
+      "sourceTime": 34.124626,
+      "gridIndex": 157,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.968
+    },
+    {
+      "id": 128,
+      "time": 34.33621,
+      "sourceTime": 34.333605,
+      "gridIndex": 158,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 129,
+      "time": 34.552786,
+      "sourceTime": 34.54839,
+      "gridIndex": 159,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.604
+    },
+    {
+      "id": 130,
+      "time": 34.769361,
+      "sourceTime": 34.774785,
+      "gridIndex": 160,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.968
+    },
+    {
+      "id": 131,
+      "time": 34.985936,
+      "sourceTime": 34.980862,
+      "gridIndex": 161,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.518
+    },
+    {
+      "id": 132,
+      "time": 35.202511,
+      "sourceTime": 35.201451,
+      "gridIndex": 162,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 133,
+      "time": 35.419086,
+      "sourceTime": 35.416236,
+      "gridIndex": 163,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.569
+    },
+    {
+      "id": 134,
+      "time": 35.635662,
+      "sourceTime": 35.63102,
+      "gridIndex": 164,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.527
+    },
+    {
+      "id": 135,
+      "time": 35.852237,
+      "sourceTime": 35.857415,
+      "gridIndex": 165,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.956
+    },
+    {
+      "id": 136,
+      "time": 36.068812,
+      "sourceTime": 36.066395,
+      "gridIndex": 166,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.978
+    },
+    {
+      "id": 137,
+      "time": 36.285387,
+      "sourceTime": 36.281179,
+      "gridIndex": 167,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.653
+    },
+    {
+      "id": 138,
+      "time": 36.501963,
+      "sourceTime": 36.507574,
+      "gridIndex": 168,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.934
+    },
+    {
+      "id": 139,
+      "time": 36.718538,
+      "sourceTime": 36.725261,
+      "gridIndex": 169,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.622
+    },
+    {
+      "id": 140,
+      "time": 36.935113,
+      "sourceTime": 36.93424,
+      "gridIndex": 170,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.994
+    },
+    {
+      "id": 141,
+      "time": 37.151688,
+      "sourceTime": 37.149025,
+      "gridIndex": 171,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.52
+    },
+    {
+      "id": 142,
+      "time": 37.368263,
+      "sourceTime": 37.36381,
+      "gridIndex": 172,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.603
+    },
+    {
+      "id": 143,
+      "time": 37.584839,
+      "sourceTime": 37.590204,
+      "gridIndex": 173,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.995
+    },
+    {
+      "id": 144,
+      "time": 37.801414,
+      "sourceTime": 37.799184,
+      "gridIndex": 174,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 145,
+      "time": 38.017989,
+      "sourceTime": 38.013968,
+      "gridIndex": 175,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.656
+    },
+    {
+      "id": 146,
+      "time": 38.234564,
+      "sourceTime": 38.23746,
+      "gridIndex": 176,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 147,
+      "time": 38.45114,
+      "sourceTime": 38.44644,
+      "gridIndex": 177,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.602
+    },
+    {
+      "id": 148,
+      "time": 38.667715,
+      "sourceTime": 38.667029,
+      "gridIndex": 178,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 149,
+      "time": 38.88429,
+      "sourceTime": 38.881814,
+      "gridIndex": 179,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.464
+    },
+    {
+      "id": 150,
+      "time": 39.100865,
+      "sourceTime": 39.096599,
+      "gridIndex": 180,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.528
+    },
+    {
+      "id": 151,
+      "time": 39.317441,
+      "sourceTime": 39.322993,
+      "gridIndex": 181,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.908
+    },
+    {
+      "id": 152,
+      "time": 39.534016,
+      "sourceTime": 39.531973,
+      "gridIndex": 182,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.946
+    },
+    {
+      "id": 153,
+      "time": 39.750591,
+      "sourceTime": 39.746757,
+      "gridIndex": 183,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.585
+    },
+    {
+      "id": 154,
+      "time": 39.967166,
+      "sourceTime": 39.970249,
+      "gridIndex": 184,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.938
+    },
+    {
+      "id": 155,
+      "time": 40.183741,
+      "sourceTime": 40.179229,
+      "gridIndex": 185,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.618
+    },
+    {
+      "id": 156,
+      "time": 40.400317,
+      "sourceTime": 40.396916,
+      "gridIndex": 186,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.988
+    },
+    {
+      "id": 157,
+      "time": 40.616892,
+      "sourceTime": 40.611701,
+      "gridIndex": 187,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.517
+    },
+    {
+      "id": 158,
+      "time": 40.833467,
+      "sourceTime": 40.829388,
+      "gridIndex": 188,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.418
+    },
+    {
+      "id": 159,
+      "time": 41.050042,
+      "sourceTime": 41.05288,
+      "gridIndex": 189,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 160,
+      "time": 41.266618,
+      "sourceTime": 41.264762,
+      "gridIndex": 190,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 161,
+      "time": 41.483193,
+      "sourceTime": 41.479546,
+      "gridIndex": 191,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.443
+    },
+    {
+      "id": 162,
+      "time": 41.699768,
+      "sourceTime": 41.703039,
+      "gridIndex": 192,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.989
+    },
+    {
+      "id": 163,
+      "time": 41.916343,
+      "sourceTime": 41.912018,
+      "gridIndex": 193,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.521
+    },
+    {
+      "id": 164,
+      "time": 42.132918,
+      "sourceTime": 42.129705,
+      "gridIndex": 194,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 165,
+      "time": 42.349494,
+      "sourceTime": 42.34449,
+      "gridIndex": 195,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.513
+    },
+    {
+      "id": 166,
+      "time": 42.566069,
+      "sourceTime": 42.562177,
+      "gridIndex": 196,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.557
+    },
+    {
+      "id": 167,
+      "time": 42.782644,
+      "sourceTime": 42.785669,
+      "gridIndex": 197,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.995
+    },
+    {
+      "id": 168,
+      "time": 42.999219,
+      "sourceTime": 42.997551,
+      "gridIndex": 198,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.997
+    },
+    {
+      "id": 169,
+      "time": 43.215795,
+      "sourceTime": 43.212336,
+      "gridIndex": 199,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.467
+    },
+    {
+      "id": 170,
+      "time": 43.43237,
+      "sourceTime": 43.435828,
+      "gridIndex": 200,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.944
+    },
+    {
+      "id": 171,
+      "time": 43.648945,
+      "sourceTime": 43.644807,
+      "gridIndex": 201,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.562
+    },
+    {
+      "id": 172,
+      "time": 43.86552,
+      "sourceTime": 43.862494,
+      "gridIndex": 202,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.969
+    },
+    {
+      "id": 173,
+      "time": 44.082095,
+      "sourceTime": 44.077279,
+      "gridIndex": 203,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.461
+    },
+    {
+      "id": 174,
+      "time": 44.298671,
+      "sourceTime": 44.294966,
+      "gridIndex": 204,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.606
+    },
+    {
+      "id": 175,
+      "time": 44.515246,
+      "sourceTime": 44.509751,
+      "gridIndex": 205,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.595
+    },
+    {
+      "id": 176,
+      "time": 44.731821,
+      "sourceTime": 44.727438,
+      "gridIndex": 206,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.638
+    },
+    {
+      "id": 177,
+      "time": 44.948396,
+      "sourceTime": 44.945125,
+      "gridIndex": 207,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.666
+    },
+    {
+      "id": 178,
+      "time": 45.164972,
+      "sourceTime": 45.159909,
+      "gridIndex": 208,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.66
+    },
+    {
+      "id": 179,
+      "time": 45.381547,
+      "sourceTime": 45.377596,
+      "gridIndex": 209,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.611
+    },
+    {
+      "id": 180,
+      "time": 45.598122,
+      "sourceTime": 45.595283,
+      "gridIndex": 210,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 181,
+      "time": 45.814697,
+      "sourceTime": 45.810068,
+      "gridIndex": 211,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.501
+    },
+    {
+      "id": 182,
+      "time": 46.031272,
+      "sourceTime": 46.027755,
+      "gridIndex": 212,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.589
+    },
+    {
+      "id": 183,
+      "time": 46.247848,
+      "sourceTime": 46.251247,
+      "gridIndex": 213,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.967
+    },
+    {
+      "id": 184,
+      "time": 46.464423,
+      "sourceTime": 46.463129,
+      "gridIndex": 214,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 185,
+      "time": 46.680998,
+      "sourceTime": 46.677914,
+      "gridIndex": 215,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.537
+    },
+    {
+      "id": 186,
+      "time": 46.897573,
+      "sourceTime": 46.901406,
+      "gridIndex": 216,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.944
+    },
+    {
+      "id": 187,
+      "time": 47.114149,
+      "sourceTime": 47.110385,
+      "gridIndex": 217,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.614
+    },
+    {
+      "id": 188,
+      "time": 47.330724,
+      "sourceTime": 47.328073,
+      "gridIndex": 218,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 189,
+      "time": 47.547299,
+      "sourceTime": 47.542857,
+      "gridIndex": 219,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.516
+    },
+    {
+      "id": 190,
+      "time": 47.763874,
+      "sourceTime": 47.760544,
+      "gridIndex": 220,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.573
+    },
+    {
+      "id": 191,
+      "time": 47.980449,
+      "sourceTime": 47.984036,
+      "gridIndex": 221,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 192,
+      "time": 48.197025,
+      "sourceTime": 48.195918,
+      "gridIndex": 222,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 193,
+      "time": 48.4136,
+      "sourceTime": 48.410703,
+      "gridIndex": 223,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.508
+    },
+    {
+      "id": 194,
+      "time": 48.630175,
+      "sourceTime": 48.634195,
+      "gridIndex": 224,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 195,
+      "time": 48.84675,
+      "sourceTime": 48.843175,
+      "gridIndex": 225,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.522
+    },
+    {
+      "id": 196,
+      "time": 49.063326,
+      "sourceTime": 49.060862,
+      "gridIndex": 226,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 197,
+      "time": 49.279901,
+      "sourceTime": 49.275646,
+      "gridIndex": 227,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.555
+    },
+    {
+      "id": 198,
+      "time": 49.496476,
+      "sourceTime": 49.493333,
+      "gridIndex": 228,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.561
+    },
+    {
+      "id": 199,
+      "time": 49.713051,
+      "sourceTime": 49.716825,
+      "gridIndex": 229,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.959
+    },
+    {
+      "id": 200,
+      "time": 49.929626,
+      "sourceTime": 49.928707,
+      "gridIndex": 230,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 201,
+      "time": 50.146202,
+      "sourceTime": 50.14059,
+      "gridIndex": 231,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.56
+    },
+    {
+      "id": 202,
+      "time": 50.362777,
+      "sourceTime": 50.366984,
+      "gridIndex": 232,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.952
+    },
+    {
+      "id": 203,
+      "time": 50.579352,
+      "sourceTime": 50.575964,
+      "gridIndex": 233,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.618
+    },
+    {
+      "id": 204,
+      "time": 50.795927,
+      "sourceTime": 50.793651,
+      "gridIndex": 234,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.936
+    },
+    {
+      "id": 205,
+      "time": 51.012503,
+      "sourceTime": 51.008435,
+      "gridIndex": 235,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.589
+    },
+    {
+      "id": 206,
+      "time": 51.229078,
+      "sourceTime": 51.226122,
+      "gridIndex": 236,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.596
+    },
+    {
+      "id": 207,
+      "time": 51.445653,
+      "sourceTime": 51.449615,
+      "gridIndex": 237,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.967
+    },
+    {
+      "id": 208,
+      "time": 51.662228,
+      "sourceTime": 51.658594,
+      "gridIndex": 238,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.982
+    },
+    {
+      "id": 209,
+      "time": 51.878803,
+      "sourceTime": 51.873379,
+      "gridIndex": 239,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.63
+    },
+    {
+      "id": 210,
+      "time": 52.095379,
+      "sourceTime": 52.099773,
+      "gridIndex": 240,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.981
+    },
+    {
+      "id": 211,
+      "time": 52.311954,
+      "sourceTime": 52.308753,
+      "gridIndex": 241,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.576
+    },
+    {
+      "id": 212,
+      "time": 52.528529,
+      "sourceTime": 52.52644,
+      "gridIndex": 242,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 213,
+      "time": 52.745104,
+      "sourceTime": 52.741224,
+      "gridIndex": 243,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.511
+    },
+    {
+      "id": 214,
+      "time": 52.96168,
+      "sourceTime": 52.956009,
+      "gridIndex": 244,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.479
+    },
+    {
+      "id": 215,
+      "time": 53.178255,
+      "sourceTime": 53.182404,
+      "gridIndex": 245,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.964
+    },
+    {
+      "id": 216,
+      "time": 53.39483,
+      "sourceTime": 53.391383,
+      "gridIndex": 246,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.998
+    },
+    {
+      "id": 217,
+      "time": 53.611405,
+      "sourceTime": 53.606168,
+      "gridIndex": 247,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.584
+    },
+    {
+      "id": 218,
+      "time": 53.827981,
+      "sourceTime": 53.832562,
+      "gridIndex": 248,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.97
+    },
+    {
+      "id": 219,
+      "time": 54.044556,
+      "sourceTime": 54.041542,
+      "gridIndex": 249,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.593
+    },
+    {
+      "id": 220,
+      "time": 54.261131,
+      "sourceTime": 54.259229,
+      "gridIndex": 250,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 221,
+      "time": 54.477706,
+      "sourceTime": 54.474014,
+      "gridIndex": 251,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.527
+    },
+    {
+      "id": 222,
+      "time": 55.560582,
+      "sourceTime": 55.565351,
+      "gridIndex": 256,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.914
+    },
+    {
+      "id": 223,
+      "time": 55.777158,
+      "sourceTime": 55.771429,
+      "gridIndex": 257,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.505
+    },
+    {
+      "id": 224,
+      "time": 55.993733,
+      "sourceTime": 55.992018,
+      "gridIndex": 258,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 225,
+      "time": 56.210308,
+      "sourceTime": 56.206803,
+      "gridIndex": 259,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.506
+    },
+    {
+      "id": 226,
+      "time": 56.426883,
+      "sourceTime": 56.421587,
+      "gridIndex": 260,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.566
+    },
+    {
+      "id": 227,
+      "time": 56.643458,
+      "sourceTime": 56.647982,
+      "gridIndex": 261,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.973
+    },
+    {
+      "id": 228,
+      "time": 56.860034,
+      "sourceTime": 56.856961,
+      "gridIndex": 262,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.954
+    },
+    {
+      "id": 229,
+      "time": 57.076609,
+      "sourceTime": 57.071746,
+      "gridIndex": 263,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.518
+    },
+    {
+      "id": 230,
+      "time": 57.293184,
+      "sourceTime": 57.301043,
+      "gridIndex": 264,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.99
+    },
+    {
+      "id": 231,
+      "time": 57.509759,
+      "sourceTime": 57.504218,
+      "gridIndex": 265,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.452
+    },
+    {
+      "id": 232,
+      "time": 57.726335,
+      "sourceTime": 57.721905,
+      "gridIndex": 266,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.905
+    },
+    {
+      "id": 233,
+      "time": 57.94291,
+      "sourceTime": 57.939592,
+      "gridIndex": 267,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.543
+    },
+    {
+      "id": 234,
+      "time": 58.159485,
+      "sourceTime": 58.154376,
+      "gridIndex": 268,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.604
+    },
+    {
+      "id": 235,
+      "time": 58.37606,
+      "sourceTime": 58.380771,
+      "gridIndex": 269,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.913
+    },
+    {
+      "id": 236,
+      "time": 58.592635,
+      "sourceTime": 58.589751,
+      "gridIndex": 270,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.991
+    },
+    {
+      "id": 237,
+      "time": 58.809211,
+      "sourceTime": 58.804535,
+      "gridIndex": 271,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.562
+    },
+    {
+      "id": 238,
+      "time": 59.025786,
+      "sourceTime": 59.028027,
+      "gridIndex": 272,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.922
+    },
+    {
+      "id": 239,
+      "time": 59.242361,
+      "sourceTime": 59.237007,
+      "gridIndex": 273,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.592
+    },
+    {
+      "id": 240,
+      "time": 59.458936,
+      "sourceTime": 59.454694,
+      "gridIndex": 274,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.979
+    },
+    {
+      "id": 241,
+      "time": 59.675512,
+      "sourceTime": 59.669478,
+      "gridIndex": 275,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.453
+    },
+    {
+      "id": 242,
+      "time": 59.892087,
+      "sourceTime": 59.887166,
+      "gridIndex": 276,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.561
+    },
+    {
+      "id": 243,
+      "time": 60.108662,
+      "sourceTime": 60.110658,
+      "gridIndex": 277,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.993
+    },
+    {
+      "id": 244,
+      "time": 60.325237,
+      "sourceTime": 60.32254,
+      "gridIndex": 278,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.953
+    },
+    {
+      "id": 245,
+      "time": 60.541812,
+      "sourceTime": 60.537324,
+      "gridIndex": 279,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.601
+    },
+    {
+      "id": 246,
+      "time": 60.758388,
+      "sourceTime": 60.760816,
+      "gridIndex": 280,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.997
+    },
+    {
+      "id": 247,
+      "time": 60.974963,
+      "sourceTime": 60.969796,
+      "gridIndex": 281,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.587
+    },
+    {
+      "id": 248,
+      "time": 61.191538,
+      "sourceTime": 61.190385,
+      "gridIndex": 282,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 249,
+      "time": 61.408113,
+      "sourceTime": 61.402268,
+      "gridIndex": 283,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.386
+    },
+    {
+      "id": 250,
+      "time": 61.624689,
+      "sourceTime": 61.619955,
+      "gridIndex": 284,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.585
+    },
+    {
+      "id": 251,
+      "time": 61.841264,
+      "sourceTime": 61.843447,
+      "gridIndex": 285,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.949
+    },
+    {
+      "id": 252,
+      "time": 62.057839,
+      "sourceTime": 62.055329,
+      "gridIndex": 286,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.971
+    },
+    {
+      "id": 253,
+      "time": 62.274414,
+      "sourceTime": 62.270113,
+      "gridIndex": 287,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.539
+    },
+    {
+      "id": 254,
+      "time": 62.490989,
+      "sourceTime": 62.493605,
+      "gridIndex": 288,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.922
+    },
+    {
+      "id": 255,
+      "time": 62.92414,
+      "sourceTime": 62.920272,
+      "gridIndex": 290,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 256,
+      "time": 63.140715,
+      "sourceTime": 63.137959,
+      "gridIndex": 291,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.302
+    },
+    {
+      "id": 257,
+      "time": 63.573866,
+      "sourceTime": 63.576236,
+      "gridIndex": 293,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 258,
+      "time": 63.790441,
+      "sourceTime": 63.788118,
+      "gridIndex": 294,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 259,
+      "time": 64.223591,
+      "sourceTime": 64.226395,
+      "gridIndex": 296,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.96
+    },
+    {
+      "id": 260,
+      "time": 66.389343,
+      "sourceTime": 66.345215,
+      "gridIndex": 306,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.374
+    },
+    {
+      "id": 261,
+      "time": 66.822494,
+      "sourceTime": 66.873469,
+      "gridIndex": 308,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.421
+    },
+    {
+      "id": 262,
+      "time": 67.039069,
+      "sourceTime": 67.102766,
+      "gridIndex": 309,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.252
+    },
+    {
+      "id": 263,
+      "time": 67.255644,
+      "sourceTime": 67.256599,
+      "gridIndex": 310,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.475
+    },
+    {
+      "id": 264,
+      "time": 68.121945,
+      "sourceTime": 68.220227,
+      "gridIndex": 314,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.162
+    },
+    {
+      "id": 265,
+      "time": 68.771671,
+      "sourceTime": 68.765896,
+      "gridIndex": 317,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.194
+    },
+    {
+      "id": 266,
+      "time": 68.988246,
+      "sourceTime": 68.989388,
+      "gridIndex": 318,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.496
+    },
+    {
+      "id": 267,
+      "time": 69.637972,
+      "sourceTime": 69.598912,
+      "gridIndex": 321,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.153
+    },
+    {
+      "id": 268,
+      "time": 69.854547,
+      "sourceTime": 69.854331,
+      "gridIndex": 322,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.199
+    },
+    {
+      "id": 269,
+      "time": 70.071122,
+      "sourceTime": 70.045896,
+      "gridIndex": 323,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.232
+    },
+    {
+      "id": 270,
+      "time": 70.720848,
+      "sourceTime": 70.722177,
+      "gridIndex": 326,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.441
+    },
+    {
+      "id": 271,
+      "time": 71.587149,
+      "sourceTime": 71.581315,
+      "gridIndex": 330,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.214
+    },
+    {
+      "id": 272,
+      "time": 71.803724,
+      "sourceTime": 71.775782,
+      "gridIndex": 331,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.124
+    },
+    {
+      "id": 273,
+      "time": 72.45345,
+      "sourceTime": 72.454966,
+      "gridIndex": 334,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.37
+    },
+    {
+      "id": 274,
+      "time": 72.8866,
+      "sourceTime": 72.96,
+      "gridIndex": 336,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.211
+    },
+    {
+      "id": 275,
+      "time": 73.752901,
+      "sourceTime": 73.717551,
+      "gridIndex": 340,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.329
+    },
+    {
+      "id": 276,
+      "time": 74.186052,
+      "sourceTime": 74.179048,
+      "gridIndex": 342,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.399
+    },
+    {
+      "id": 277,
+      "time": 74.402627,
+      "sourceTime": 74.486712,
+      "gridIndex": 343,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.298
+    },
+    {
+      "id": 278,
+      "time": 75.268928,
+      "sourceTime": 75.241361,
+      "gridIndex": 347,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.208
+    },
+    {
+      "id": 279,
+      "time": 75.918653,
+      "sourceTime": 75.920544,
+      "gridIndex": 350,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.381
+    },
+    {
+      "id": 280,
+      "time": 77.001529,
+      "sourceTime": 76.971247,
+      "gridIndex": 355,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.286
+    },
+    {
+      "id": 281,
+      "time": 77.651255,
+      "sourceTime": 77.653333,
+      "gridIndex": 358,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.433
+    },
+    {
+      "id": 282,
+      "time": 78.517556,
+      "sourceTime": 78.515374,
+      "gridIndex": 362,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.385
+    },
+    {
+      "id": 283,
+      "time": 78.734131,
+      "sourceTime": 78.706939,
+      "gridIndex": 363,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.244
+    },
+    {
+      "id": 284,
+      "time": 79.383857,
+      "sourceTime": 79.377415,
+      "gridIndex": 366,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.58
+    },
+    {
+      "id": 285,
+      "time": 79.817007,
+      "sourceTime": 79.818594,
+      "gridIndex": 368,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.987
+    },
+    {
+      "id": 286,
+      "time": 80.033583,
+      "sourceTime": 80.027574,
+      "gridIndex": 369,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.533
+    },
+    {
+      "id": 287,
+      "time": 80.250158,
+      "sourceTime": 80.248163,
+      "gridIndex": 370,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.901
+    },
+    {
+      "id": 288,
+      "time": 80.466733,
+      "sourceTime": 80.462948,
+      "gridIndex": 371,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.462
+    },
+    {
+      "id": 289,
+      "time": 80.683308,
+      "sourceTime": 80.677732,
+      "gridIndex": 372,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.535
+    },
+    {
+      "id": 290,
+      "time": 80.899883,
+      "sourceTime": 80.907029,
+      "gridIndex": 373,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.917
+    },
+    {
+      "id": 291,
+      "time": 81.116459,
+      "sourceTime": 81.113107,
+      "gridIndex": 374,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.951
+    },
+    {
+      "id": 292,
+      "time": 81.333034,
+      "sourceTime": 81.327891,
+      "gridIndex": 375,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.509
+    },
+    {
+      "id": 293,
+      "time": 81.549609,
+      "sourceTime": 81.551383,
+      "gridIndex": 376,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.899
+    },
+    {
+      "id": 294,
+      "time": 81.766184,
+      "sourceTime": 81.760363,
+      "gridIndex": 377,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.559
+    },
+    {
+      "id": 295,
+      "time": 81.98276,
+      "sourceTime": 81.97805,
+      "gridIndex": 378,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.901
+    },
+    {
+      "id": 296,
+      "time": 82.199335,
+      "sourceTime": 82.172517,
+      "gridIndex": 379,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.447
+    },
+    {
+      "id": 297,
+      "time": 82.41591,
+      "sourceTime": 82.410522,
+      "gridIndex": 380,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.514
+    },
+    {
+      "id": 298,
+      "time": 82.632485,
+      "sourceTime": 82.634014,
+      "gridIndex": 381,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.979
+    },
+    {
+      "id": 299,
+      "time": 82.84906,
+      "sourceTime": 82.845896,
+      "gridIndex": 382,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 300,
+      "time": 83.065636,
+      "sourceTime": 83.06068,
+      "gridIndex": 383,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.49
+    },
+    {
+      "id": 301,
+      "time": 83.282211,
+      "sourceTime": 83.284172,
+      "gridIndex": 384,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.993
+    },
+    {
+      "id": 302,
+      "time": 83.498786,
+      "sourceTime": 83.493152,
+      "gridIndex": 385,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.583
+    },
+    {
+      "id": 303,
+      "time": 83.715361,
+      "sourceTime": 83.710839,
+      "gridIndex": 386,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.996
+    },
+    {
+      "id": 304,
+      "time": 83.931937,
+      "sourceTime": 83.905306,
+      "gridIndex": 387,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.455
+    },
+    {
+      "id": 305,
+      "time": 84.148512,
+      "sourceTime": 84.143311,
+      "gridIndex": 388,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.581
+    },
+    {
+      "id": 306,
+      "time": 84.365087,
+      "sourceTime": 84.366803,
+      "gridIndex": 389,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.943
+    },
+    {
+      "id": 307,
+      "time": 84.581662,
+      "sourceTime": 84.578685,
+      "gridIndex": 390,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 308,
+      "time": 84.798238,
+      "sourceTime": 84.793469,
+      "gridIndex": 391,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.524
+    },
+    {
+      "id": 309,
+      "time": 85.014813,
+      "sourceTime": 85.016961,
+      "gridIndex": 392,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.989
+    },
+    {
+      "id": 310,
+      "time": 85.231388,
+      "sourceTime": 85.225941,
+      "gridIndex": 393,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.559
+    },
+    {
+      "id": 311,
+      "time": 85.447963,
+      "sourceTime": 85.443628,
+      "gridIndex": 394,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 312,
+      "time": 85.664538,
+      "sourceTime": 85.661315,
+      "gridIndex": 395,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.448
+    },
+    {
+      "id": 313,
+      "time": 85.881114,
+      "sourceTime": 85.884807,
+      "gridIndex": 396,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.919
+    },
+    {
+      "id": 314,
+      "time": 86.097689,
+      "sourceTime": 86.093787,
+      "gridIndex": 397,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.531
+    },
+    {
+      "id": 315,
+      "time": 86.314264,
+      "sourceTime": 86.311474,
+      "gridIndex": 398,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 316,
+      "time": 86.530839,
+      "sourceTime": 86.526259,
+      "gridIndex": 399,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.554
+    },
+    {
+      "id": 317,
+      "time": 86.747415,
+      "sourceTime": 86.749751,
+      "gridIndex": 400,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.948
+    },
+    {
+      "id": 318,
+      "time": 86.96399,
+      "sourceTime": 86.95873,
+      "gridIndex": 401,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.576
+    },
+    {
+      "id": 319,
+      "time": 87.180565,
+      "sourceTime": 87.176417,
+      "gridIndex": 402,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.964
+    },
+    {
+      "id": 320,
+      "time": 87.39714,
+      "sourceTime": 87.370884,
+      "gridIndex": 403,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.485
+    },
+    {
+      "id": 321,
+      "time": 87.613715,
+      "sourceTime": 87.608889,
+      "gridIndex": 404,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.582
+    },
+    {
+      "id": 322,
+      "time": 87.830291,
+      "sourceTime": 87.832381,
+      "gridIndex": 405,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.915
+    },
+    {
+      "id": 323,
+      "time": 88.046866,
+      "sourceTime": 88.044263,
+      "gridIndex": 406,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 324,
+      "time": 88.263441,
+      "sourceTime": 88.259048,
+      "gridIndex": 407,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.506
+    },
+    {
+      "id": 325,
+      "time": 88.480016,
+      "sourceTime": 88.48254,
+      "gridIndex": 408,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.925
+    },
+    {
+      "id": 326,
+      "time": 88.696592,
+      "sourceTime": 88.691519,
+      "gridIndex": 409,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.581
+    },
+    {
+      "id": 327,
+      "time": 88.913167,
+      "sourceTime": 88.909206,
+      "gridIndex": 410,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.948
+    },
+    {
+      "id": 328,
+      "time": 89.129742,
+      "sourceTime": 89.126893,
+      "gridIndex": 411,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.512
+    },
+    {
+      "id": 329,
+      "time": 89.346317,
+      "sourceTime": 89.341678,
+      "gridIndex": 412,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.504
+    },
+    {
+      "id": 330,
+      "time": 89.562892,
+      "sourceTime": 89.56517,
+      "gridIndex": 413,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.959
+    },
+    {
+      "id": 331,
+      "time": 89.779468,
+      "sourceTime": 89.777052,
+      "gridIndex": 414,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 332,
+      "time": 89.996043,
+      "sourceTime": 89.991837,
+      "gridIndex": 415,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.412
+    },
+    {
+      "id": 333,
+      "time": 90.212618,
+      "sourceTime": 90.215329,
+      "gridIndex": 416,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.969
+    },
+    {
+      "id": 334,
+      "time": 90.429193,
+      "sourceTime": 90.424308,
+      "gridIndex": 417,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.467
+    },
+    {
+      "id": 335,
+      "time": 90.645769,
+      "sourceTime": 90.641995,
+      "gridIndex": 418,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.922
+    },
+    {
+      "id": 336,
+      "time": 90.862344,
+      "sourceTime": 90.836463,
+      "gridIndex": 419,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.443
+    },
+    {
+      "id": 337,
+      "time": 91.078919,
+      "sourceTime": 91.074467,
+      "gridIndex": 420,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.485
+    },
+    {
+      "id": 338,
+      "time": 91.295494,
+      "sourceTime": 91.297959,
+      "gridIndex": 421,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.932
+    },
+    {
+      "id": 339,
+      "time": 91.512069,
+      "sourceTime": 91.509841,
+      "gridIndex": 422,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.913
+    },
+    {
+      "id": 340,
+      "time": 91.728645,
+      "sourceTime": 91.724626,
+      "gridIndex": 423,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.356
+    },
+    {
+      "id": 341,
+      "time": 91.94522,
+      "sourceTime": 91.948118,
+      "gridIndex": 424,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.927
+    },
+    {
+      "id": 342,
+      "time": 92.161795,
+      "sourceTime": 92.157098,
+      "gridIndex": 425,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.485
+    },
+    {
+      "id": 343,
+      "time": 92.37837,
+      "sourceTime": 92.374785,
+      "gridIndex": 426,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.916
+    },
+    {
+      "id": 344,
+      "time": 92.594946,
+      "sourceTime": 92.589569,
+      "gridIndex": 427,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.388
+    },
+    {
+      "id": 345,
+      "time": 92.811521,
+      "sourceTime": 92.807256,
+      "gridIndex": 428,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.471
+    },
+    {
+      "id": 346,
+      "time": 93.028096,
+      "sourceTime": 93.030748,
+      "gridIndex": 429,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.976
+    },
+    {
+      "id": 347,
+      "time": 93.244671,
+      "sourceTime": 93.239728,
+      "gridIndex": 430,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.89
+    },
+    {
+      "id": 348,
+      "time": 93.461246,
+      "sourceTime": 93.454512,
+      "gridIndex": 431,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.438
+    },
+    {
+      "id": 349,
+      "time": 93.677822,
+      "sourceTime": 93.680907,
+      "gridIndex": 432,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.91
+    },
+    {
+      "id": 350,
+      "time": 93.894397,
+      "sourceTime": 93.889887,
+      "gridIndex": 433,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.496
+    },
+    {
+      "id": 351,
+      "time": 94.110972,
+      "sourceTime": 94.107574,
+      "gridIndex": 434,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 352,
+      "time": 94.327547,
+      "sourceTime": 94.325261,
+      "gridIndex": 435,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.487
+    },
+    {
+      "id": 353,
+      "time": 94.544123,
+      "sourceTime": 94.540045,
+      "gridIndex": 436,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.572
+    },
+    {
+      "id": 354,
+      "time": 94.760698,
+      "sourceTime": 94.75483,
+      "gridIndex": 437,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.597
+    },
+    {
+      "id": 355,
+      "time": 94.977273,
+      "sourceTime": 94.972517,
+      "gridIndex": 438,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.917
+    },
+    {
+      "id": 356,
+      "time": 95.193848,
+      "sourceTime": 95.187302,
+      "gridIndex": 439,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.66
+    },
+    {
+      "id": 357,
+      "time": 95.410423,
+      "sourceTime": 95.404989,
+      "gridIndex": 440,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.644
+    },
+    {
+      "id": 358,
+      "time": 95.626999,
+      "sourceTime": 95.622676,
+      "gridIndex": 441,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.631
+    },
+    {
+      "id": 359,
+      "time": 95.843574,
+      "sourceTime": 95.83746,
+      "gridIndex": 442,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.883
+    },
+    {
+      "id": 360,
+      "time": 96.060149,
+      "sourceTime": 96.031927,
+      "gridIndex": 443,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.587
+    },
+    {
+      "id": 361,
+      "time": 96.276724,
+      "sourceTime": 96.281542,
+      "gridIndex": 444,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.129
+    },
+    {
+      "id": 362,
+      "time": 96.4933,
+      "sourceTime": 96.496327,
+      "gridIndex": 445,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.968
+    },
+    {
+      "id": 363,
+      "time": 96.709875,
+      "sourceTime": 96.705306,
+      "gridIndex": 446,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.952
+    },
+    {
+      "id": 364,
+      "time": 97.143025,
+      "sourceTime": 97.146485,
+      "gridIndex": 448,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.948
+    },
+    {
+      "id": 365,
+      "time": 97.3596,
+      "sourceTime": 97.358367,
+      "gridIndex": 449,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.305
+    },
+    {
+      "id": 366,
+      "time": 97.576176,
+      "sourceTime": 97.573152,
+      "gridIndex": 450,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.971
+    },
+    {
+      "id": 367,
+      "time": 97.792751,
+      "sourceTime": 97.787937,
+      "gridIndex": 451,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.509
+    },
+    {
+      "id": 368,
+      "time": 98.009326,
+      "sourceTime": 98.005624,
+      "gridIndex": 452,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.226
+    },
+    {
+      "id": 369,
+      "time": 98.225901,
+      "sourceTime": 98.229116,
+      "gridIndex": 453,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.981
+    },
+    {
+      "id": 370,
+      "time": 98.442477,
+      "sourceTime": 98.438095,
+      "gridIndex": 454,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.924
+    },
+    {
+      "id": 371,
+      "time": 98.659052,
+      "sourceTime": 98.65288,
+      "gridIndex": 455,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.216
+    },
+    {
+      "id": 372,
+      "time": 98.875627,
+      "sourceTime": 98.882177,
+      "gridIndex": 456,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 373,
+      "time": 99.092202,
+      "sourceTime": 99.096961,
+      "gridIndex": 457,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.537
+    },
+    {
+      "id": 374,
+      "time": 99.308777,
+      "sourceTime": 99.305941,
+      "gridIndex": 458,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 375,
+      "time": 99.525353,
+      "sourceTime": 99.523628,
+      "gridIndex": 459,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.499
+    },
+    {
+      "id": 376,
+      "time": 99.741928,
+      "sourceTime": 99.73551,
+      "gridIndex": 460,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.626
+    },
+    {
+      "id": 377,
+      "time": 99.958503,
+      "sourceTime": 99.973515,
+      "gridIndex": 461,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.953
+    },
+    {
+      "id": 378,
+      "time": 100.175078,
+      "sourceTime": 100.170884,
+      "gridIndex": 462,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.947
+    },
+    {
+      "id": 379,
+      "time": 100.608229,
+      "sourceTime": 100.609161,
+      "gridIndex": 464,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.944
+    },
+    {
+      "id": 380,
+      "time": 100.824804,
+      "sourceTime": 100.818141,
+      "gridIndex": 465,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.547
+    },
+    {
+      "id": 381,
+      "time": 101.041379,
+      "sourceTime": 101.035828,
+      "gridIndex": 466,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 382,
+      "time": 101.257955,
+      "sourceTime": 101.265125,
+      "gridIndex": 467,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.595
+    },
+    {
+      "id": 383,
+      "time": 101.691105,
+      "sourceTime": 101.694694,
+      "gridIndex": 469,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.992
+    },
+    {
+      "id": 384,
+      "time": 101.90768,
+      "sourceTime": 101.903673,
+      "gridIndex": 470,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.933
+    },
+    {
+      "id": 385,
+      "time": 102.124255,
+      "sourceTime": 102.118458,
+      "gridIndex": 471,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.616
+    },
+    {
+      "id": 386,
+      "time": 102.340831,
+      "sourceTime": 102.34195,
+      "gridIndex": 472,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.986
+    },
+    {
+      "id": 387,
+      "time": 102.557406,
+      "sourceTime": 102.553832,
+      "gridIndex": 473,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.468
+    },
+    {
+      "id": 388,
+      "time": 102.773981,
+      "sourceTime": 102.768617,
+      "gridIndex": 474,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.966
+    },
+    {
+      "id": 389,
+      "time": 102.990556,
+      "sourceTime": 102.997914,
+      "gridIndex": 475,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.684
+    },
+    {
+      "id": 390,
+      "time": 103.207132,
+      "sourceTime": 103.201088,
+      "gridIndex": 476,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.315
+    },
+    {
+      "id": 391,
+      "time": 103.423707,
+      "sourceTime": 103.42458,
+      "gridIndex": 477,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.956
+    },
+    {
+      "id": 392,
+      "time": 103.640282,
+      "sourceTime": 103.636463,
+      "gridIndex": 478,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.915
+    },
+    {
+      "id": 393,
+      "time": 103.856857,
+      "sourceTime": 103.752562,
+      "gridIndex": 479,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.338
+    },
+    {
+      "id": 394,
+      "time": 104.073432,
+      "sourceTime": 104.074739,
+      "gridIndex": 480,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.919
+    },
+    {
+      "id": 395,
+      "time": 104.290008,
+      "sourceTime": 104.283719,
+      "gridIndex": 481,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.515
+    },
+    {
+      "id": 396,
+      "time": 104.506583,
+      "sourceTime": 104.501406,
+      "gridIndex": 482,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.984
+    },
+    {
+      "id": 397,
+      "time": 104.723158,
+      "sourceTime": 104.719093,
+      "gridIndex": 483,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.601
+    },
+    {
+      "id": 398,
+      "time": 104.939733,
+      "sourceTime": 104.933878,
+      "gridIndex": 484,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.428
+    },
+    {
+      "id": 399,
+      "time": 105.156309,
+      "sourceTime": 105.15737,
+      "gridIndex": 485,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 400,
+      "time": 105.372884,
+      "sourceTime": 105.369252,
+      "gridIndex": 486,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.992
+    },
+    {
+      "id": 401,
+      "time": 105.589459,
+      "sourceTime": 105.584036,
+      "gridIndex": 487,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.321
+    },
+    {
+      "id": 402,
+      "time": 105.806034,
+      "sourceTime": 105.807528,
+      "gridIndex": 488,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.986
+    },
+    {
+      "id": 403,
+      "time": 106.022609,
+      "sourceTime": 106.028118,
+      "gridIndex": 489,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.68
+    },
+    {
+      "id": 404,
+      "time": 106.239185,
+      "sourceTime": 106.234195,
+      "gridIndex": 490,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 405,
+      "time": 106.45576,
+      "sourceTime": 106.451882,
+      "gridIndex": 491,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.633
+    },
+    {
+      "id": 406,
+      "time": 106.672335,
+      "sourceTime": 106.666667,
+      "gridIndex": 492,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.438
+    },
+    {
+      "id": 407,
+      "time": 106.88891,
+      "sourceTime": 106.890159,
+      "gridIndex": 493,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.979
+    },
+    {
+      "id": 408,
+      "time": 107.105486,
+      "sourceTime": 107.102041,
+      "gridIndex": 494,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.975
+    },
+    {
+      "id": 409,
+      "time": 107.322061,
+      "sourceTime": 107.316825,
+      "gridIndex": 495,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.256
+    },
+    {
+      "id": 410,
+      "time": 107.538636,
+      "sourceTime": 107.540317,
+      "gridIndex": 496,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.974
+    },
+    {
+      "id": 411,
+      "time": 107.971786,
+      "sourceTime": 107.966984,
+      "gridIndex": 498,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.72
+    },
+    {
+      "id": 412,
+      "time": 108.188362,
+      "sourceTime": 108.196281,
+      "gridIndex": 499,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.687
+    },
+    {
+      "id": 413,
+      "time": 108.404937,
+      "sourceTime": 108.399456,
+      "gridIndex": 500,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.576
+    },
+    {
+      "id": 414,
+      "time": 108.621512,
+      "sourceTime": 108.622948,
+      "gridIndex": 501,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 415,
+      "time": 108.838087,
+      "sourceTime": 108.83483,
+      "gridIndex": 502,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.942
+    },
+    {
+      "id": 416,
+      "time": 109.054663,
+      "sourceTime": 109.049615,
+      "gridIndex": 503,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.363
+    },
+    {
+      "id": 417,
+      "time": 109.271238,
+      "sourceTime": 109.273107,
+      "gridIndex": 504,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.988
+    },
+    {
+      "id": 418,
+      "time": 109.487813,
+      "sourceTime": 109.484989,
+      "gridIndex": 505,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.455
+    },
+    {
+      "id": 419,
+      "time": 109.704388,
+      "sourceTime": 109.699773,
+      "gridIndex": 506,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.853
+    },
+    {
+      "id": 420,
+      "time": 109.920963,
+      "sourceTime": 109.91746,
+      "gridIndex": 507,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.511
+    },
+    {
+      "id": 421,
+      "time": 110.137539,
+      "sourceTime": 110.132245,
+      "gridIndex": 508,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.338
+    },
+    {
+      "id": 422,
+      "time": 110.354114,
+      "sourceTime": 110.355737,
+      "gridIndex": 509,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.937
+    },
+    {
+      "id": 423,
+      "time": 110.570689,
+      "sourceTime": 110.567619,
+      "gridIndex": 510,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.991
+    },
+    {
+      "id": 424,
+      "time": 110.787264,
+      "sourceTime": 110.782404,
+      "gridIndex": 511,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.423
+    },
+    {
+      "id": 425,
+      "time": 111.00384,
+      "sourceTime": 111.005896,
+      "gridIndex": 512,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.94
+    },
+    {
+      "id": 426,
+      "time": 111.220415,
+      "sourceTime": 111.214875,
+      "gridIndex": 513,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.201
+    },
+    {
+      "id": 427,
+      "time": 111.43699,
+      "sourceTime": 111.432562,
+      "gridIndex": 514,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.943
+    },
+    {
+      "id": 428,
+      "time": 111.653565,
+      "sourceTime": 111.650249,
+      "gridIndex": 515,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.584
+    },
+    {
+      "id": 429,
+      "time": 111.87014,
+      "sourceTime": 111.865034,
+      "gridIndex": 516,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.342
+    },
+    {
+      "id": 430,
+      "time": 112.086716,
+      "sourceTime": 112.088526,
+      "gridIndex": 517,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 431,
+      "time": 112.303291,
+      "sourceTime": 112.297506,
+      "gridIndex": 518,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.92
+    },
+    {
+      "id": 432,
+      "time": 112.519866,
+      "sourceTime": 112.515193,
+      "gridIndex": 519,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.398
+    },
+    {
+      "id": 433,
+      "time": 112.736441,
+      "sourceTime": 112.738685,
+      "gridIndex": 520,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.984
+    },
+    {
+      "id": 434,
+      "time": 112.953017,
+      "sourceTime": 112.959274,
+      "gridIndex": 521,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.258
+    },
+    {
+      "id": 435,
+      "time": 113.169592,
+      "sourceTime": 113.165351,
+      "gridIndex": 522,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.955
+    },
+    {
+      "id": 436,
+      "time": 113.386167,
+      "sourceTime": 113.383039,
+      "gridIndex": 523,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.642
+    },
+    {
+      "id": 437,
+      "time": 113.602742,
+      "sourceTime": 113.597823,
+      "gridIndex": 524,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.531
+    },
+    {
+      "id": 438,
+      "time": 113.819317,
+      "sourceTime": 113.821315,
+      "gridIndex": 525,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.94
+    },
+    {
+      "id": 439,
+      "time": 114.035893,
+      "sourceTime": 114.030295,
+      "gridIndex": 526,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.927
+    },
+    {
+      "id": 440,
+      "time": 114.252468,
+      "sourceTime": 114.245079,
+      "gridIndex": 527,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.662
+    },
+    {
+      "id": 441,
+      "time": 114.469043,
+      "sourceTime": 114.471474,
+      "gridIndex": 528,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.994
+    },
+    {
+      "id": 442,
+      "time": 114.685618,
+      "sourceTime": 114.680454,
+      "gridIndex": 529,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.625
+    },
+    {
+      "id": 443,
+      "time": 114.902194,
+      "sourceTime": 114.898141,
+      "gridIndex": 530,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.922
+    },
+    {
+      "id": 444,
+      "time": 115.118769,
+      "sourceTime": 115.115828,
+      "gridIndex": 531,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.581
+    },
+    {
+      "id": 445,
+      "time": 115.335344,
+      "sourceTime": 115.330612,
+      "gridIndex": 532,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.536
+    },
+    {
+      "id": 446,
+      "time": 115.551919,
+      "sourceTime": 115.554104,
+      "gridIndex": 533,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.983
+    },
+    {
+      "id": 447,
+      "time": 115.768495,
+      "sourceTime": 115.763084,
+      "gridIndex": 534,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.894
+    },
+    {
+      "id": 448,
+      "time": 115.98507,
+      "sourceTime": 116.009796,
+      "gridIndex": 535,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.399
+    },
+    {
+      "id": 449,
+      "time": 116.201645,
+      "sourceTime": 116.204263,
+      "gridIndex": 536,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.931
+    },
+    {
+      "id": 450,
+      "time": 116.41822,
+      "sourceTime": 116.413243,
+      "gridIndex": 537,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.451
+    },
+    {
+      "id": 451,
+      "time": 116.634795,
+      "sourceTime": 116.63093,
+      "gridIndex": 538,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.897
+    },
+    {
+      "id": 452,
+      "time": 116.851371,
+      "sourceTime": 116.848617,
+      "gridIndex": 539,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.639
+    },
+    {
+      "id": 453,
+      "time": 117.284521,
+      "sourceTime": 117.286893,
+      "gridIndex": 541,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.957
+    },
+    {
+      "id": 454,
+      "time": 117.501096,
+      "sourceTime": 117.495873,
+      "gridIndex": 542,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.897
+    },
+    {
+      "id": 455,
+      "time": 117.934247,
+      "sourceTime": 117.937052,
+      "gridIndex": 544,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.983
+    },
+    {
+      "id": 456,
+      "time": 118.150822,
+      "sourceTime": 118.146032,
+      "gridIndex": 545,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.564
+    },
+    {
+      "id": 457,
+      "time": 118.367397,
+      "sourceTime": 118.363719,
+      "gridIndex": 546,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.965
+    },
+    {
+      "id": 458,
+      "time": 118.583972,
+      "sourceTime": 118.590113,
+      "gridIndex": 547,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.614
+    },
+    {
+      "id": 459,
+      "time": 118.800548,
+      "sourceTime": 118.804898,
+      "gridIndex": 548,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.121
+    },
+    {
+      "id": 460,
+      "time": 119.017123,
+      "sourceTime": 119.019683,
+      "gridIndex": 549,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 461,
+      "time": 119.233698,
+      "sourceTime": 119.228662,
+      "gridIndex": 550,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.954
+    },
+    {
+      "id": 462,
+      "time": 119.450273,
+      "sourceTime": 119.426032,
+      "gridIndex": 551,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.304
+    },
+    {
+      "id": 463,
+      "time": 119.666849,
+      "sourceTime": 119.669841,
+      "gridIndex": 552,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.947
+    },
+    {
+      "id": 464,
+      "time": 119.883424,
+      "sourceTime": 119.890431,
+      "gridIndex": 553,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.647
+    },
+    {
+      "id": 465,
+      "time": 120.099999,
+      "sourceTime": 120.096508,
+      "gridIndex": 554,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.943
+    },
+    {
+      "id": 466,
+      "time": 120.316574,
+      "sourceTime": 120.314195,
+      "gridIndex": 555,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.572
+    },
+    {
+      "id": 467,
+      "time": 120.749725,
+      "sourceTime": 120.752472,
+      "gridIndex": 557,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.978
+    },
+    {
+      "id": 468,
+      "time": 120.9663,
+      "sourceTime": 120.961451,
+      "gridIndex": 558,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.973
+    },
+    {
+      "id": 469,
+      "time": 121.39945,
+      "sourceTime": 121.40263,
+      "gridIndex": 560,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.97
+    },
+    {
+      "id": 470,
+      "time": 121.832601,
+      "sourceTime": 121.829297,
+      "gridIndex": 562,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.99
+    },
+    {
+      "id": 471,
+      "time": 122.049176,
+      "sourceTime": 122.046984,
+      "gridIndex": 563,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.497
+    },
+    {
+      "id": 472,
+      "time": 122.265751,
+      "sourceTime": 122.258866,
+      "gridIndex": 564,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.564
+    },
+    {
+      "id": 473,
+      "time": 122.482326,
+      "sourceTime": 122.485261,
+      "gridIndex": 565,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.935
+    },
+    {
+      "id": 474,
+      "time": 122.698902,
+      "sourceTime": 122.69424,
+      "gridIndex": 566,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.938
+    },
+    {
+      "id": 475,
+      "time": 122.915477,
+      "sourceTime": 122.909025,
+      "gridIndex": 567,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.622
+    },
+    {
+      "id": 476,
+      "time": 123.132052,
+      "sourceTime": 123.132517,
+      "gridIndex": 568,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.942
+    },
+    {
+      "id": 477,
+      "time": 123.348627,
+      "sourceTime": 123.341497,
+      "gridIndex": 569,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.568
+    },
+    {
+      "id": 478,
+      "time": 123.565203,
+      "sourceTime": 123.559184,
+      "gridIndex": 570,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.977
+    },
+    {
+      "id": 479,
+      "time": 123.781778,
+      "sourceTime": 123.788481,
+      "gridIndex": 571,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.547
+    },
+    {
+      "id": 480,
+      "time": 123.998353,
+      "sourceTime": 123.991655,
+      "gridIndex": 572,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.388
+    },
+    {
+      "id": 481,
+      "time": 124.214928,
+      "sourceTime": 124.21805,
+      "gridIndex": 573,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.987
+    },
+    {
+      "id": 482,
+      "time": 124.431503,
+      "sourceTime": 124.427029,
+      "gridIndex": 574,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.95
+    },
+    {
+      "id": 483,
+      "time": 124.648079,
+      "sourceTime": 124.641814,
+      "gridIndex": 575,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.565
+    },
+    {
+      "id": 484,
+      "time": 124.864654,
+      "sourceTime": 124.865306,
+      "gridIndex": 576,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 485,
+      "time": 125.081229,
+      "sourceTime": 125.074286,
+      "gridIndex": 577,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.503
+    },
+    {
+      "id": 486,
+      "time": 125.297804,
+      "sourceTime": 125.291973,
+      "gridIndex": 578,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.957
+    },
+    {
+      "id": 487,
+      "time": 125.51438,
+      "sourceTime": 125.52127,
+      "gridIndex": 579,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.539
+    },
+    {
+      "id": 488,
+      "time": 125.730955,
+      "sourceTime": 125.750567,
+      "gridIndex": 580,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.312
+    },
+    {
+      "id": 489,
+      "time": 125.94753,
+      "sourceTime": 125.953741,
+      "gridIndex": 581,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.975
+    },
+    {
+      "id": 490,
+      "time": 126.164105,
+      "sourceTime": 126.159819,
+      "gridIndex": 582,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 491,
+      "time": 126.38068,
+      "sourceTime": 126.374603,
+      "gridIndex": 583,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.601
+    },
+    {
+      "id": 492,
+      "time": 126.597256,
+      "sourceTime": 126.598095,
+      "gridIndex": 584,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.976
+    },
+    {
+      "id": 493,
+      "time": 126.813831,
+      "sourceTime": 126.807075,
+      "gridIndex": 585,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.556
+    },
+    {
+      "id": 494,
+      "time": 127.030406,
+      "sourceTime": 127.024762,
+      "gridIndex": 586,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.887
+    },
+    {
+      "id": 495,
+      "time": 127.246981,
+      "sourceTime": 127.256961,
+      "gridIndex": 587,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.426
+    },
+    {
+      "id": 496,
+      "time": 127.463557,
+      "sourceTime": 127.457234,
+      "gridIndex": 588,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.531
+    },
+    {
+      "id": 497,
+      "time": 127.680132,
+      "sourceTime": 127.680726,
+      "gridIndex": 589,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 498,
+      "time": 127.896707,
+      "sourceTime": 127.892608,
+      "gridIndex": 590,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 499,
+      "time": 128.113282,
+      "sourceTime": 128.107392,
+      "gridIndex": 591,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.619
+    },
+    {
+      "id": 500,
+      "time": 128.329857,
+      "sourceTime": 128.330884,
+      "gridIndex": 592,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 501,
+      "time": 128.546433,
+      "sourceTime": 128.539864,
+      "gridIndex": 593,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.31
+    },
+    {
+      "id": 502,
+      "time": 128.763008,
+      "sourceTime": 128.757551,
+      "gridIndex": 594,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.929
+    },
+    {
+      "id": 503,
+      "time": 128.979583,
+      "sourceTime": 128.986848,
+      "gridIndex": 595,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.458
+    },
+    {
+      "id": 504,
+      "time": 129.196158,
+      "sourceTime": 129.22195,
+      "gridIndex": 596,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.228
+    },
+    {
+      "id": 505,
+      "time": 129.412734,
+      "sourceTime": 129.413515,
+      "gridIndex": 597,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.963
+    },
+    {
+      "id": 506,
+      "time": 129.629309,
+      "sourceTime": 129.625397,
+      "gridIndex": 598,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 507,
+      "time": 129.845884,
+      "sourceTime": 129.840181,
+      "gridIndex": 599,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.665
+    },
+    {
+      "id": 508,
+      "time": 130.062459,
+      "sourceTime": 130.063673,
+      "gridIndex": 600,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.956
+    },
+    {
+      "id": 509,
+      "time": 130.279035,
+      "sourceTime": 130.275556,
+      "gridIndex": 601,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.583
+    },
+    {
+      "id": 510,
+      "time": 130.49561,
+      "sourceTime": 130.49034,
+      "gridIndex": 602,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 511,
+      "time": 130.712185,
+      "sourceTime": 130.719637,
+      "gridIndex": 603,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.476
+    },
+    {
+      "id": 512,
+      "time": 130.92876,
+      "sourceTime": 130.922812,
+      "gridIndex": 604,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.342
+    },
+    {
+      "id": 513,
+      "time": 131.145335,
+      "sourceTime": 131.146304,
+      "gridIndex": 605,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.989
+    },
+    {
+      "id": 514,
+      "time": 131.361911,
+      "sourceTime": 131.358186,
+      "gridIndex": 606,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.941
+    },
+    {
+      "id": 515,
+      "time": 131.578486,
+      "sourceTime": 131.572971,
+      "gridIndex": 607,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.397
+    },
+    {
+      "id": 516,
+      "time": 131.795061,
+      "sourceTime": 131.796463,
+      "gridIndex": 608,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 517,
+      "time": 132.011636,
+      "sourceTime": 132.005442,
+      "gridIndex": 609,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.255
+    },
+    {
+      "id": 518,
+      "time": 132.228212,
+      "sourceTime": 132.223129,
+      "gridIndex": 610,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.836
+    },
+    {
+      "id": 519,
+      "time": 132.444787,
+      "sourceTime": 132.452426,
+      "gridIndex": 611,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.496
+    },
+    {
+      "id": 520,
+      "time": 132.661362,
+      "sourceTime": 132.681723,
+      "gridIndex": 612,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.428
+    },
+    {
+      "id": 521,
+      "time": 132.877937,
+      "sourceTime": 132.879093,
+      "gridIndex": 613,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.941
+    },
+    {
+      "id": 522,
+      "time": 133.094512,
+      "sourceTime": 133.090975,
+      "gridIndex": 614,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.945
+    },
+    {
+      "id": 523,
+      "time": 133.311088,
+      "sourceTime": 133.302857,
+      "gridIndex": 615,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.435
+    },
+    {
+      "id": 524,
+      "time": 133.527663,
+      "sourceTime": 133.529252,
+      "gridIndex": 616,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.95
+    },
+    {
+      "id": 525,
+      "time": 133.744238,
+      "sourceTime": 133.749841,
+      "gridIndex": 617,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.585
+    },
+    {
+      "id": 526,
+      "time": 133.960813,
+      "sourceTime": 133.955918,
+      "gridIndex": 618,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.996
+    },
+    {
+      "id": 527,
+      "time": 134.177389,
+      "sourceTime": 134.173605,
+      "gridIndex": 619,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.358
+    },
+    {
+      "id": 528,
+      "time": 134.393964,
+      "sourceTime": 134.38839,
+      "gridIndex": 620,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.319
+    },
+    {
+      "id": 529,
+      "time": 134.610539,
+      "sourceTime": 134.611882,
+      "gridIndex": 621,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.996
+    },
+    {
+      "id": 530,
+      "time": 134.827114,
+      "sourceTime": 134.820862,
+      "gridIndex": 622,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.927
+    },
+    {
+      "id": 531,
+      "time": 135.043689,
+      "sourceTime": 135.038549,
+      "gridIndex": 623,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.338
+    },
+    {
+      "id": 532,
+      "time": 135.260265,
+      "sourceTime": 135.262041,
+      "gridIndex": 624,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.961
+    },
+    {
+      "id": 533,
+      "time": 135.47684,
+      "sourceTime": 135.47102,
+      "gridIndex": 625,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.538
+    },
+    {
+      "id": 534,
+      "time": 135.693415,
+      "sourceTime": 135.688707,
+      "gridIndex": 626,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.962
+    },
+    {
+      "id": 535,
+      "time": 135.90999,
+      "sourceTime": 135.906395,
+      "gridIndex": 627,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.425
+    },
+    {
+      "id": 536,
+      "time": 136.126566,
+      "sourceTime": 136.153107,
+      "gridIndex": 628,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.374
+    },
+    {
+      "id": 537,
+      "time": 136.343141,
+      "sourceTime": 136.344671,
+      "gridIndex": 629,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.949
+    },
+    {
+      "id": 538,
+      "time": 136.559716,
+      "sourceTime": 136.556553,
+      "gridIndex": 630,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 539,
+      "time": 136.776291,
+      "sourceTime": 136.768435,
+      "gridIndex": 631,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.647
+    },
+    {
+      "id": 540,
+      "time": 136.992866,
+      "sourceTime": 136.99483,
+      "gridIndex": 632,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.958
+    },
+    {
+      "id": 541,
+      "time": 137.209442,
+      "sourceTime": 137.20381,
+      "gridIndex": 633,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.495
+    },
+    {
+      "id": 542,
+      "time": 137.426017,
+      "sourceTime": 137.421497,
+      "gridIndex": 634,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 543,
+      "time": 137.642592,
+      "sourceTime": 137.639184,
+      "gridIndex": 635,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.488
+    },
+    {
+      "id": 544,
+      "time": 137.859167,
+      "sourceTime": 137.853968,
+      "gridIndex": 636,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.43
+    },
+    {
+      "id": 545,
+      "time": 138.075743,
+      "sourceTime": 138.07746,
+      "gridIndex": 637,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.98
+    },
+    {
+      "id": 546,
+      "time": 138.292318,
+      "sourceTime": 138.28644,
+      "gridIndex": 638,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.951
+    },
+    {
+      "id": 547,
+      "time": 138.508893,
+      "sourceTime": 138.501224,
+      "gridIndex": 639,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.504
+    },
+    {
+      "id": 548,
+      "time": 145.655875,
+      "sourceTime": 145.652971,
+      "gridIndex": 672,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.505
+    },
+    {
+      "id": 549,
+      "time": 145.872451,
+      "sourceTime": 145.867755,
+      "gridIndex": 673,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.471
+    },
+    {
+      "id": 550,
+      "time": 146.089026,
+      "sourceTime": 146.09415,
+      "gridIndex": 674,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.592
+    },
+    {
+      "id": 551,
+      "time": 146.305601,
+      "sourceTime": 146.300227,
+      "gridIndex": 675,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.437
+    },
+    {
+      "id": 552,
+      "time": 146.522176,
+      "sourceTime": 146.517914,
+      "gridIndex": 676,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.431
+    },
+    {
+      "id": 553,
+      "time": 146.738752,
+      "sourceTime": 146.735601,
+      "gridIndex": 677,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.53
+    },
+    {
+      "id": 554,
+      "time": 146.955327,
+      "sourceTime": 146.953288,
+      "gridIndex": 678,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.7
+    },
+    {
+      "id": 555,
+      "time": 147.171902,
+      "sourceTime": 147.168073,
+      "gridIndex": 679,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.486
+    },
+    {
+      "id": 556,
+      "time": 147.388477,
+      "sourceTime": 147.38576,
+      "gridIndex": 680,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.547
+    },
+    {
+      "id": 557,
+      "time": 147.605052,
+      "sourceTime": 147.600544,
+      "gridIndex": 681,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.423
+    },
+    {
+      "id": 558,
+      "time": 147.821628,
+      "sourceTime": 147.818231,
+      "gridIndex": 682,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.711
+    },
+    {
+      "id": 559,
+      "time": 148.038203,
+      "sourceTime": 148.033016,
+      "gridIndex": 683,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.473
+    },
+    {
+      "id": 560,
+      "time": 148.254778,
+      "sourceTime": 148.250703,
+      "gridIndex": 684,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.372
+    },
+    {
+      "id": 561,
+      "time": 148.471353,
+      "sourceTime": 148.46839,
+      "gridIndex": 685,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.403
+    },
+    {
+      "id": 562,
+      "time": 148.687929,
+      "sourceTime": 148.686077,
+      "gridIndex": 686,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.602
+    },
+    {
+      "id": 563,
+      "time": 148.904504,
+      "sourceTime": 148.900862,
+      "gridIndex": 687,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.435
+    },
+    {
+      "id": 564,
+      "time": 149.121079,
+      "sourceTime": 149.118549,
+      "gridIndex": 688,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.524
+    },
+    {
+      "id": 565,
+      "time": 149.337654,
+      "sourceTime": 149.333333,
+      "gridIndex": 689,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.395
+    },
+    {
+      "id": 566,
+      "time": 149.554229,
+      "sourceTime": 149.55102,
+      "gridIndex": 690,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.625
+    },
+    {
+      "id": 567,
+      "time": 149.770805,
+      "sourceTime": 149.765805,
+      "gridIndex": 691,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.4
+    },
+    {
+      "id": 568,
+      "time": 149.98738,
+      "sourceTime": 149.983492,
+      "gridIndex": 692,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.383
+    },
+    {
+      "id": 569,
+      "time": 150.203955,
+      "sourceTime": 150.201179,
+      "gridIndex": 693,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.361
+    },
+    {
+      "id": 570,
+      "time": 150.42053,
+      "sourceTime": 150.418866,
+      "gridIndex": 694,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.655
+    },
+    {
+      "id": 571,
+      "time": 150.637106,
+      "sourceTime": 150.633651,
+      "gridIndex": 695,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.41
+    },
+    {
+      "id": 572,
+      "time": 150.853681,
+      "sourceTime": 150.845533,
+      "gridIndex": 696,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.565
+    },
+    {
+      "id": 573,
+      "time": 151.070256,
+      "sourceTime": 151.066122,
+      "gridIndex": 697,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.44
+    },
+    {
+      "id": 574,
+      "time": 151.286831,
+      "sourceTime": 151.28381,
+      "gridIndex": 698,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.714
+    },
+    {
+      "id": 575,
+      "time": 151.503406,
+      "sourceTime": 151.498594,
+      "gridIndex": 699,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.369
+    },
+    {
+      "id": 576,
+      "time": 151.719982,
+      "sourceTime": 151.716281,
+      "gridIndex": 700,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.318
+    },
+    {
+      "id": 577,
+      "time": 151.936557,
+      "sourceTime": 151.933968,
+      "gridIndex": 701,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.127
+    },
+    {
+      "id": 578,
+      "time": 152.153132,
+      "sourceTime": 152.151655,
+      "gridIndex": 702,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.53
+    },
+    {
+      "id": 579,
+      "time": 152.369707,
+      "sourceTime": 152.36644,
+      "gridIndex": 703,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.32
+    },
+    {
+      "id": 580,
+      "time": 152.586283,
+      "sourceTime": 152.601542,
+      "gridIndex": 704,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.133
+    },
+    {
+      "id": 581,
+      "time": 152.802858,
+      "sourceTime": 152.798912,
+      "gridIndex": 705,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.23
+    },
+    {
+      "id": 582,
+      "time": 153.019433,
+      "sourceTime": 153.016599,
+      "gridIndex": 706,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.589
+    },
+    {
+      "id": 583,
+      "time": 153.236008,
+      "sourceTime": 153.231383,
+      "gridIndex": 707,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.451
+    },
+    {
+      "id": 584,
+      "time": 153.452583,
+      "sourceTime": 153.44907,
+      "gridIndex": 708,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.307
+    },
+    {
+      "id": 585,
+      "time": 153.669159,
+      "sourceTime": 153.666757,
+      "gridIndex": 709,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.319
+    },
+    {
+      "id": 586,
+      "time": 153.885734,
+      "sourceTime": 153.881542,
+      "gridIndex": 710,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.609
+    },
+    {
+      "id": 587,
+      "time": 154.102309,
+      "sourceTime": 154.099229,
+      "gridIndex": 711,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.37
+    },
+    {
+      "id": 588,
+      "time": 154.318884,
+      "sourceTime": 154.296599,
+      "gridIndex": 712,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.142
+    },
+    {
+      "id": 589,
+      "time": 154.53546,
+      "sourceTime": 154.531701,
+      "gridIndex": 713,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.322
+    },
+    {
+      "id": 590,
+      "time": 154.752035,
+      "sourceTime": 154.749388,
+      "gridIndex": 714,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.599
+    },
+    {
+      "id": 591,
+      "time": 154.96861,
+      "sourceTime": 154.964172,
+      "gridIndex": 715,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.39
+    },
+    {
+      "id": 592,
+      "time": 155.185185,
+      "sourceTime": 155.181859,
+      "gridIndex": 716,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.114
+    },
+    {
+      "id": 593,
+      "time": 155.40176,
+      "sourceTime": 155.399546,
+      "gridIndex": 717,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.328
+    },
+    {
+      "id": 594,
+      "time": 155.618336,
+      "sourceTime": 155.614331,
+      "gridIndex": 718,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.521
+    },
+    {
+      "id": 595,
+      "time": 155.834911,
+      "sourceTime": 155.832018,
+      "gridIndex": 719,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.336
+    },
+    {
+      "id": 596,
+      "time": 156.051486,
+      "sourceTime": 156.049705,
+      "gridIndex": 720,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.254
+    },
+    {
+      "id": 597,
+      "time": 156.268061,
+      "sourceTime": 156.26449,
+      "gridIndex": 721,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.371
+    },
+    {
+      "id": 598,
+      "time": 156.484637,
+      "sourceTime": 156.482177,
+      "gridIndex": 722,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.63
+    },
+    {
+      "id": 599,
+      "time": 156.917787,
+      "sourceTime": 156.917551,
+      "gridIndex": 724,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.224
+    },
+    {
+      "id": 600,
+      "time": 157.134362,
+      "sourceTime": 157.132336,
+      "gridIndex": 725,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.166
+    },
+    {
+      "id": 601,
+      "time": 157.350937,
+      "sourceTime": 157.34712,
+      "gridIndex": 726,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.566
+    },
+    {
+      "id": 602,
+      "time": 157.567513,
+      "sourceTime": 157.564807,
+      "gridIndex": 727,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.38
+    },
+    {
+      "id": 603,
+      "time": 157.784088,
+      "sourceTime": 157.782494,
+      "gridIndex": 728,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.332
+    },
+    {
+      "id": 604,
+      "time": 158.000663,
+      "sourceTime": 157.997279,
+      "gridIndex": 729,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.353
+    },
+    {
+      "id": 605,
+      "time": 158.217238,
+      "sourceTime": 158.214966,
+      "gridIndex": 730,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.732
+    },
+    {
+      "id": 606,
+      "time": 159.083539,
+      "sourceTime": 159.079909,
+      "gridIndex": 734,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.468
+    },
+    {
+      "id": 607,
+      "time": 159.300114,
+      "sourceTime": 159.297596,
+      "gridIndex": 735,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.362
+    },
+    {
+      "id": 608,
+      "time": 159.51669,
+      "sourceTime": 159.512381,
+      "gridIndex": 736,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.191
+    },
+    {
+      "id": 609,
+      "time": 159.733265,
+      "sourceTime": 159.730068,
+      "gridIndex": 737,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.135
+    },
+    {
+      "id": 610,
+      "time": 159.94984,
+      "sourceTime": 159.947755,
+      "gridIndex": 738,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.297
+    },
+    {
+      "id": 611,
+      "time": 160.166415,
+      "sourceTime": 160.16254,
+      "gridIndex": 739,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.415
+    },
+    {
+      "id": 612,
+      "time": 160.816141,
+      "sourceTime": 160.812698,
+      "gridIndex": 742,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.638
+    },
+    {
+      "id": 613,
+      "time": 161.032716,
+      "sourceTime": 161.030385,
+      "gridIndex": 743,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.241
+    },
+    {
+      "id": 614,
+      "time": 161.249292,
+      "sourceTime": 161.248073,
+      "gridIndex": 744,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.424
+    },
+    {
+      "id": 615,
+      "time": 161.682442,
+      "sourceTime": 161.677642,
+      "gridIndex": 746,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.528
+    },
+    {
+      "id": 616,
+      "time": 161.899017,
+      "sourceTime": 161.895329,
+      "gridIndex": 747,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.2
+    },
+    {
+      "id": 617,
+      "time": 162.115592,
+      "sourceTime": 162.113016,
+      "gridIndex": 748,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.114
+    },
+    {
+      "id": 618,
+      "time": 162.332168,
+      "sourceTime": 162.3278,
+      "gridIndex": 749,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.274
+    },
+    {
+      "id": 619,
+      "time": 162.548743,
+      "sourceTime": 162.54839,
+      "gridIndex": 750,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.325
+    },
+    {
+      "id": 620,
+      "time": 162.765318,
+      "sourceTime": 162.760272,
+      "gridIndex": 751,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.31
+    },
+    {
+      "id": 621,
+      "time": 163.415044,
+      "sourceTime": 163.410431,
+      "gridIndex": 754,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.508
+    },
+    {
+      "id": 622,
+      "time": 163.631619,
+      "sourceTime": 163.628118,
+      "gridIndex": 755,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.344
+    },
+    {
+      "id": 623,
+      "time": 163.848194,
+      "sourceTime": 163.842902,
+      "gridIndex": 756,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.237
+    },
+    {
+      "id": 624,
+      "time": 164.064769,
+      "sourceTime": 164.06059,
+      "gridIndex": 757,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.152
+    },
+    {
+      "id": 625,
+      "time": 164.281345,
+      "sourceTime": 164.278277,
+      "gridIndex": 758,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.45
+    },
+    {
+      "id": 626,
+      "time": 164.49792,
+      "sourceTime": 164.472744,
+      "gridIndex": 759,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.317
+    },
+    {
+      "id": 627,
+      "time": 164.714495,
+      "sourceTime": 164.681723,
+      "gridIndex": 760,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.809
+    },
+    {
+      "id": 628,
+      "time": 164.93107,
+      "sourceTime": 164.928435,
+      "gridIndex": 761,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.434
+    },
+    {
+      "id": 629,
+      "time": 165.147646,
+      "sourceTime": 165.14322,
+      "gridIndex": 762,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.632
+    },
+    {
+      "id": 630,
+      "time": 165.364221,
+      "sourceTime": 165.358005,
+      "gridIndex": 763,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.557
+    },
+    {
+      "id": 631,
+      "time": 165.580796,
+      "sourceTime": 165.575692,
+      "gridIndex": 764,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.16
+    },
+    {
+      "id": 632,
+      "time": 165.797371,
+      "sourceTime": 165.784671,
+      "gridIndex": 765,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.371
+    },
+    {
+      "id": 633,
+      "time": 166.230522,
+      "sourceTime": 166.217143,
+      "gridIndex": 767,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.62
+    },
+    {
+      "id": 634,
+      "time": 166.447097,
+      "sourceTime": 166.44644,
+      "gridIndex": 768,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.947
+    },
+    {
+      "id": 635,
+      "time": 166.663672,
+      "sourceTime": 166.681542,
+      "gridIndex": 769,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.273
+    },
+    {
+      "id": 636,
+      "time": 166.880247,
+      "sourceTime": 166.876009,
+      "gridIndex": 770,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.888
+    },
+    {
+      "id": 637,
+      "time": 167.096823,
+      "sourceTime": 167.090794,
+      "gridIndex": 771,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.51
+    },
+    {
+      "id": 638,
+      "time": 167.313398,
+      "sourceTime": 167.291066,
+      "gridIndex": 772,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.41
+    },
+    {
+      "id": 639,
+      "time": 167.529973,
+      "sourceTime": 167.534875,
+      "gridIndex": 773,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.921
+    },
+    {
+      "id": 640,
+      "time": 167.746548,
+      "sourceTime": 167.740952,
+      "gridIndex": 774,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.871
+    },
+    {
+      "id": 641,
+      "time": 167.963123,
+      "sourceTime": 167.961542,
+      "gridIndex": 775,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.522
+    },
+    {
+      "id": 642,
+      "time": 168.179699,
+      "sourceTime": 168.179229,
+      "gridIndex": 776,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.878
+    },
+    {
+      "id": 643,
+      "time": 168.396274,
+      "sourceTime": 168.391111,
+      "gridIndex": 777,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.386
+    },
+    {
+      "id": 644,
+      "time": 168.612849,
+      "sourceTime": 168.605896,
+      "gridIndex": 778,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.885
+    },
+    {
+      "id": 645,
+      "time": 168.829424,
+      "sourceTime": 168.82068,
+      "gridIndex": 779,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.51
+    },
+    {
+      "id": 646,
+      "time": 169.046,
+      "sourceTime": 169.026757,
+      "gridIndex": 780,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.305
+    },
+    {
+      "id": 647,
+      "time": 169.262575,
+      "sourceTime": 169.261859,
+      "gridIndex": 781,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.979
+    },
+    {
+      "id": 648,
+      "time": 169.47915,
+      "sourceTime": 169.473741,
+      "gridIndex": 782,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.79
+    },
+    {
+      "id": 649,
+      "time": 169.695725,
+      "sourceTime": 169.688526,
+      "gridIndex": 783,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.484
+    },
+    {
+      "id": 650,
+      "time": 169.9123,
+      "sourceTime": 169.912018,
+      "gridIndex": 784,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.972
+    },
+    {
+      "id": 651,
+      "time": 170.128876,
+      "sourceTime": 170.120998,
+      "gridIndex": 785,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.406
+    },
+    {
+      "id": 652,
+      "time": 170.345451,
+      "sourceTime": 170.338685,
+      "gridIndex": 786,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.924
+    },
+    {
+      "id": 653,
+      "time": 170.562026,
+      "sourceTime": 170.550567,
+      "gridIndex": 787,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.369
+    },
+    {
+      "id": 654,
+      "time": 170.778601,
+      "sourceTime": 170.771156,
+      "gridIndex": 788,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.384
+    },
+    {
+      "id": 655,
+      "time": 170.995177,
+      "sourceTime": 170.994649,
+      "gridIndex": 789,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.926
+    },
+    {
+      "id": 656,
+      "time": 171.211752,
+      "sourceTime": 171.206531,
+      "gridIndex": 790,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.958
+    },
+    {
+      "id": 657,
+      "time": 171.428327,
+      "sourceTime": 171.421315,
+      "gridIndex": 791,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.496
+    },
+    {
+      "id": 658,
+      "time": 171.644902,
+      "sourceTime": 171.644807,
+      "gridIndex": 792,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.946
+    },
+    {
+      "id": 659,
+      "time": 171.861477,
+      "sourceTime": 171.853787,
+      "gridIndex": 793,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.613
+    },
+    {
+      "id": 660,
+      "time": 172.078053,
+      "sourceTime": 172.071474,
+      "gridIndex": 794,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 661,
+      "time": 172.294628,
+      "sourceTime": 172.289161,
+      "gridIndex": 795,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.428
+    },
+    {
+      "id": 662,
+      "time": 172.511203,
+      "sourceTime": 172.515556,
+      "gridIndex": 796,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.913
+    },
+    {
+      "id": 663,
+      "time": 172.727778,
+      "sourceTime": 172.721633,
+      "gridIndex": 797,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.513
+    },
+    {
+      "id": 664,
+      "time": 172.944354,
+      "sourceTime": 172.93932,
+      "gridIndex": 798,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.971
+    },
+    {
+      "id": 665,
+      "time": 173.160929,
+      "sourceTime": 173.142494,
+      "gridIndex": 799,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.65
+    },
+    {
+      "id": 666,
+      "time": 173.377504,
+      "sourceTime": 173.377596,
+      "gridIndex": 800,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.965
+    },
+    {
+      "id": 667,
+      "time": 173.594079,
+      "sourceTime": 173.586576,
+      "gridIndex": 801,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.475
+    },
+    {
+      "id": 668,
+      "time": 173.810654,
+      "sourceTime": 173.804263,
+      "gridIndex": 802,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.771
+    },
+    {
+      "id": 669,
+      "time": 174.02723,
+      "sourceTime": 174.03356,
+      "gridIndex": 803,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.406
+    },
+    {
+      "id": 670,
+      "time": 174.243805,
+      "sourceTime": 174.236735,
+      "gridIndex": 804,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.392
+    },
+    {
+      "id": 671,
+      "time": 174.46038,
+      "sourceTime": 174.460227,
+      "gridIndex": 805,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.896
+    },
+    {
+      "id": 672,
+      "time": 174.676955,
+      "sourceTime": 174.672109,
+      "gridIndex": 806,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.922
+    },
+    {
+      "id": 673,
+      "time": 174.893531,
+      "sourceTime": 174.875283,
+      "gridIndex": 807,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.406
+    },
+    {
+      "id": 674,
+      "time": 175.110106,
+      "sourceTime": 175.110385,
+      "gridIndex": 808,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.9
+    },
+    {
+      "id": 675,
+      "time": 175.326681,
+      "sourceTime": 175.319365,
+      "gridIndex": 809,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.363
+    },
+    {
+      "id": 676,
+      "time": 175.543256,
+      "sourceTime": 175.537052,
+      "gridIndex": 810,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.842
+    },
+    {
+      "id": 677,
+      "time": 175.759831,
+      "sourceTime": 175.766349,
+      "gridIndex": 811,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.512
+    },
+    {
+      "id": 678,
+      "time": 175.976407,
+      "sourceTime": 175.969524,
+      "gridIndex": 812,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.482
+    },
+    {
+      "id": 679,
+      "time": 176.192982,
+      "sourceTime": 176.193016,
+      "gridIndex": 813,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.971
+    },
+    {
+      "id": 680,
+      "time": 176.409557,
+      "sourceTime": 176.404898,
+      "gridIndex": 814,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.966
+    },
+    {
+      "id": 681,
+      "time": 176.626132,
+      "sourceTime": 176.634195,
+      "gridIndex": 815,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.218
+    },
+    {
+      "id": 682,
+      "time": 176.842708,
+      "sourceTime": 176.843175,
+      "gridIndex": 816,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.872
+    },
+    {
+      "id": 683,
+      "time": 177.059283,
+      "sourceTime": 177.052154,
+      "gridIndex": 817,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.432
+    },
+    {
+      "id": 684,
+      "time": 177.275858,
+      "sourceTime": 177.269841,
+      "gridIndex": 818,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.889
+    },
+    {
+      "id": 685,
+      "time": 177.492433,
+      "sourceTime": 177.490431,
+      "gridIndex": 819,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.596
+    },
+    {
+      "id": 686,
+      "time": 177.709009,
+      "sourceTime": 177.705215,
+      "gridIndex": 820,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.407
+    },
+    {
+      "id": 687,
+      "time": 177.925584,
+      "sourceTime": 177.925805,
+      "gridIndex": 821,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.943
+    },
+    {
+      "id": 688,
+      "time": 178.142159,
+      "sourceTime": 178.137687,
+      "gridIndex": 822,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.909
+    },
+    {
+      "id": 689,
+      "time": 178.358734,
+      "sourceTime": 178.352472,
+      "gridIndex": 823,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.383
+    },
+    {
+      "id": 690,
+      "time": 178.575309,
+      "sourceTime": 178.575964,
+      "gridIndex": 824,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.933
+    },
+    {
+      "id": 691,
+      "time": 178.791885,
+      "sourceTime": 178.784943,
+      "gridIndex": 825,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.5
+    },
+    {
+      "id": 692,
+      "time": 179.00846,
+      "sourceTime": 179.008435,
+      "gridIndex": 826,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.967
+    },
+    {
+      "id": 693,
+      "time": 179.225035,
+      "sourceTime": 179.220317,
+      "gridIndex": 827,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.476
+    },
+    {
+      "id": 694,
+      "time": 179.44161,
+      "sourceTime": 179.440907,
+      "gridIndex": 828,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.907
+    },
+    {
+      "id": 695,
+      "time": 179.658186,
+      "sourceTime": 179.765986,
+      "gridIndex": 829,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.924
+    },
+    {
+      "id": 696,
+      "time": 179.874761,
+      "sourceTime": 179.867574,
+      "gridIndex": 830,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.855
+    },
+    {
+      "id": 697,
+      "time": 180.091336,
+      "sourceTime": 180.091066,
+      "gridIndex": 831,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.815
+    },
+    {
+      "id": 698,
+      "time": 180.307911,
+      "sourceTime": 180.308753,
+      "gridIndex": 832,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.919
+    },
+    {
+      "id": 699,
+      "time": 180.524486,
+      "sourceTime": 180.517732,
+      "gridIndex": 833,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.549
+    },
+    {
+      "id": 700,
+      "time": 180.741062,
+      "sourceTime": 180.73542,
+      "gridIndex": 834,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.815
+    },
+    {
+      "id": 701,
+      "time": 180.957637,
+      "sourceTime": 180.953107,
+      "gridIndex": 835,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.521
+    },
+    {
+      "id": 702,
+      "time": 181.174212,
+      "sourceTime": 181.167891,
+      "gridIndex": 836,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.388
+    },
+    {
+      "id": 703,
+      "time": 181.390787,
+      "sourceTime": 181.391383,
+      "gridIndex": 837,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.948
+    },
+    {
+      "id": 704,
+      "time": 181.607363,
+      "sourceTime": 181.600363,
+      "gridIndex": 838,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.928
+    },
+    {
+      "id": 705,
+      "time": 181.823938,
+      "sourceTime": 181.81805,
+      "gridIndex": 839,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.384
+    },
+    {
+      "id": 706,
+      "time": 182.040513,
+      "sourceTime": 182.041542,
+      "gridIndex": 840,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.934
+    },
+    {
+      "id": 707,
+      "time": 182.257088,
+      "sourceTime": 182.250522,
+      "gridIndex": 841,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.444
+    },
+    {
+      "id": 708,
+      "time": 182.473663,
+      "sourceTime": 182.468209,
+      "gridIndex": 842,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.965
+    },
+    {
+      "id": 709,
+      "time": 182.690239,
+      "sourceTime": 182.694603,
+      "gridIndex": 843,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.549
+    },
+    {
+      "id": 710,
+      "time": 182.906814,
+      "sourceTime": 182.90068,
+      "gridIndex": 844,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.353
+    },
+    {
+      "id": 711,
+      "time": 183.123389,
+      "sourceTime": 183.124172,
+      "gridIndex": 845,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.919
+    },
+    {
+      "id": 712,
+      "time": 183.339964,
+      "sourceTime": 183.333152,
+      "gridIndex": 846,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.96
+    },
+    {
+      "id": 713,
+      "time": 183.55654,
+      "sourceTime": 183.550839,
+      "gridIndex": 847,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.417
+    },
+    {
+      "id": 714,
+      "time": 183.773115,
+      "sourceTime": 183.774331,
+      "gridIndex": 848,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.941
+    },
+    {
+      "id": 715,
+      "time": 183.98969,
+      "sourceTime": 183.983311,
+      "gridIndex": 849,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.168
+    },
+    {
+      "id": 716,
+      "time": 184.206265,
+      "sourceTime": 184.200998,
+      "gridIndex": 850,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.899
+    },
+    {
+      "id": 717,
+      "time": 184.42284,
+      "sourceTime": 184.418685,
+      "gridIndex": 851,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.483
+    },
+    {
+      "id": 718,
+      "time": 184.639416,
+      "sourceTime": 184.633469,
+      "gridIndex": 852,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.341
+    },
+    {
+      "id": 719,
+      "time": 184.855991,
+      "sourceTime": 184.856961,
+      "gridIndex": 853,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.942
+    },
+    {
+      "id": 720,
+      "time": 185.072566,
+      "sourceTime": 185.065941,
+      "gridIndex": 854,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.931
+    },
+    {
+      "id": 721,
+      "time": 185.289141,
+      "sourceTime": 185.283628,
+      "gridIndex": 855,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.307
+    },
+    {
+      "id": 722,
+      "time": 185.505717,
+      "sourceTime": 185.510023,
+      "gridIndex": 856,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.926
+    },
+    {
+      "id": 723,
+      "time": 185.938867,
+      "sourceTime": 185.933787,
+      "gridIndex": 858,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.845
+    },
+    {
+      "id": 724,
+      "time": 186.155442,
+      "sourceTime": 186.151474,
+      "gridIndex": 859,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.388
+    },
+    {
+      "id": 725,
+      "time": 186.372017,
+      "sourceTime": 186.363356,
+      "gridIndex": 860,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.463
+    },
+    {
+      "id": 726,
+      "time": 186.588593,
+      "sourceTime": 186.589751,
+      "gridIndex": 861,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 727,
+      "time": 186.805168,
+      "sourceTime": 186.79873,
+      "gridIndex": 862,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.864
+    },
+    {
+      "id": 728,
+      "time": 187.238318,
+      "sourceTime": 187.239909,
+      "gridIndex": 864,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.87
+    },
+    {
+      "id": 729,
+      "time": 187.671469,
+      "sourceTime": 187.666576,
+      "gridIndex": 866,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.944
+    },
+    {
+      "id": 730,
+      "time": 187.888044,
+      "sourceTime": 187.884263,
+      "gridIndex": 867,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.468
+    },
+    {
+      "id": 731,
+      "time": 188.104619,
+      "sourceTime": 188.099048,
+      "gridIndex": 868,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.326
+    },
+    {
+      "id": 732,
+      "time": 188.321194,
+      "sourceTime": 188.32254,
+      "gridIndex": 869,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.975
+    },
+    {
+      "id": 733,
+      "time": 188.53777,
+      "sourceTime": 188.531519,
+      "gridIndex": 870,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.976
+    },
+    {
+      "id": 734,
+      "time": 189.187495,
+      "sourceTime": 189.187483,
+      "gridIndex": 873,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.466
+    },
+    {
+      "id": 735,
+      "time": 189.404071,
+      "sourceTime": 189.396463,
+      "gridIndex": 874,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.572
+    },
+    {
+      "id": 736,
+      "time": 189.620646,
+      "sourceTime": 189.617052,
+      "gridIndex": 875,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.627
+    },
+    {
+      "id": 737,
+      "time": 189.837221,
+      "sourceTime": 189.857959,
+      "gridIndex": 876,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.131
+    },
+    {
+      "id": 738,
+      "time": 190.270371,
+      "sourceTime": 190.264308,
+      "gridIndex": 878,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.301
+    },
+    {
+      "id": 739,
+      "time": 190.703522,
+      "sourceTime": 190.705488,
+      "gridIndex": 880,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.924
+    },
+    {
+      "id": 740,
+      "time": 190.920097,
+      "sourceTime": 190.91737,
+      "gridIndex": 881,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.297
+    },
+    {
+      "id": 741,
+      "time": 191.136672,
+      "sourceTime": 191.129252,
+      "gridIndex": 882,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.978
+    },
+    {
+      "id": 742,
+      "time": 191.353248,
+      "sourceTime": 191.346939,
+      "gridIndex": 883,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.457
+    },
+    {
+      "id": 743,
+      "time": 191.786398,
+      "sourceTime": 191.788118,
+      "gridIndex": 885,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.987
+    },
+    {
+      "id": 744,
+      "time": 192.002973,
+      "sourceTime": 191.997098,
+      "gridIndex": 886,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 745,
+      "time": 192.219549,
+      "sourceTime": 192.211882,
+      "gridIndex": 887,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.265
+    },
+    {
+      "id": 746,
+      "time": 192.436124,
+      "sourceTime": 192.435374,
+      "gridIndex": 888,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.993
+    },
+    {
+      "id": 747,
+      "time": 192.652699,
+      "sourceTime": 192.655964,
+      "gridIndex": 889,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.362
+    },
+    {
+      "id": 748,
+      "time": 192.869274,
+      "sourceTime": 192.862041,
+      "gridIndex": 890,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.964
+    },
+    {
+      "id": 749,
+      "time": 193.085849,
+      "sourceTime": 193.091338,
+      "gridIndex": 891,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.563
+    },
+    {
+      "id": 750,
+      "time": 193.519,
+      "sourceTime": 193.520907,
+      "gridIndex": 893,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.948
+    },
+    {
+      "id": 751,
+      "time": 193.735575,
+      "sourceTime": 193.729887,
+      "gridIndex": 894,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.934
+    },
+    {
+      "id": 752,
+      "time": 193.95215,
+      "sourceTime": 193.944671,
+      "gridIndex": 895,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.523
+    },
+    {
+      "id": 753,
+      "time": 194.168726,
+      "sourceTime": 194.168163,
+      "gridIndex": 896,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.994
+    },
+    {
+      "id": 754,
+      "time": 194.385301,
+      "sourceTime": 194.377143,
+      "gridIndex": 897,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.413
+    },
+    {
+      "id": 755,
+      "time": 194.601876,
+      "sourceTime": 194.59483,
+      "gridIndex": 898,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.931
+    },
+    {
+      "id": 756,
+      "time": 194.818451,
+      "sourceTime": 194.824127,
+      "gridIndex": 899,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.618
+    },
+    {
+      "id": 757,
+      "time": 195.251602,
+      "sourceTime": 195.250794,
+      "gridIndex": 901,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 758,
+      "time": 195.468177,
+      "sourceTime": 195.462676,
+      "gridIndex": 902,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 759,
+      "time": 195.684752,
+      "sourceTime": 195.67746,
+      "gridIndex": 903,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.612
+    },
+    {
+      "id": 760,
+      "time": 195.901327,
+      "sourceTime": 195.900952,
+      "gridIndex": 904,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.99
+    },
+    {
+      "id": 761,
+      "time": 196.117903,
+      "sourceTime": 196.109932,
+      "gridIndex": 905,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.602
+    },
+    {
+      "id": 762,
+      "time": 196.334478,
+      "sourceTime": 196.327619,
+      "gridIndex": 906,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 763,
+      "time": 196.551053,
+      "sourceTime": 196.556916,
+      "gridIndex": 907,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.566
+    },
+    {
+      "id": 764,
+      "time": 196.767628,
+      "sourceTime": 196.760091,
+      "gridIndex": 908,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.501
+    },
+    {
+      "id": 765,
+      "time": 196.984203,
+      "sourceTime": 196.99229,
+      "gridIndex": 909,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.939
+    },
+    {
+      "id": 766,
+      "time": 197.200779,
+      "sourceTime": 197.195465,
+      "gridIndex": 910,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 767,
+      "time": 197.417354,
+      "sourceTime": 197.410249,
+      "gridIndex": 911,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.544
+    },
+    {
+      "id": 768,
+      "time": 197.633929,
+      "sourceTime": 197.633741,
+      "gridIndex": 912,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.923
+    },
+    {
+      "id": 769,
+      "time": 197.850504,
+      "sourceTime": 197.842721,
+      "gridIndex": 913,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.355
+    },
+    {
+      "id": 770,
+      "time": 198.06708,
+      "sourceTime": 198.060408,
+      "gridIndex": 914,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.992
+    },
+    {
+      "id": 771,
+      "time": 198.283655,
+      "sourceTime": 198.278095,
+      "gridIndex": 915,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.532
+    },
+    {
+      "id": 772,
+      "time": 198.716805,
+      "sourceTime": 198.716372,
+      "gridIndex": 917,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 773,
+      "time": 198.93338,
+      "sourceTime": 198.928254,
+      "gridIndex": 918,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 774,
+      "time": 199.149956,
+      "sourceTime": 199.143039,
+      "gridIndex": 919,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.398
+    },
+    {
+      "id": 775,
+      "time": 199.366531,
+      "sourceTime": 199.366531,
+      "gridIndex": 920,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 776,
+      "time": 199.583106,
+      "sourceTime": 199.57551,
+      "gridIndex": 921,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.335
+    },
+    {
+      "id": 777,
+      "time": 199.799681,
+      "sourceTime": 199.793197,
+      "gridIndex": 922,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.99
+    },
+    {
+      "id": 778,
+      "time": 200.016257,
+      "sourceTime": 200.010884,
+      "gridIndex": 923,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.553
+    },
+    {
+      "id": 779,
+      "time": 200.449407,
+      "sourceTime": 200.449161,
+      "gridIndex": 925,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.947
+    },
+    {
+      "id": 780,
+      "time": 200.665982,
+      "sourceTime": 200.661043,
+      "gridIndex": 926,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.923
+    },
+    {
+      "id": 781,
+      "time": 200.882557,
+      "sourceTime": 200.875828,
+      "gridIndex": 927,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.533
+    },
+    {
+      "id": 782,
+      "time": 201.532283,
+      "sourceTime": 201.525986,
+      "gridIndex": 930,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.722
+    },
+    {
+      "id": 783,
+      "time": 201.748858,
+      "sourceTime": 201.755283,
+      "gridIndex": 931,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.585
+    },
+    {
+      "id": 784,
+      "time": 202.398584,
+      "sourceTime": 202.393832,
+      "gridIndex": 934,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.823
+    },
+    {
+      "id": 785,
+      "time": 203.264885,
+      "sourceTime": 203.258776,
+      "gridIndex": 938,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.671
+    },
+    {
+      "id": 786,
+      "time": 203.48146,
+      "sourceTime": 203.476463,
+      "gridIndex": 939,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.554
+    },
+    {
+      "id": 787,
+      "time": 204.131186,
+      "sourceTime": 204.126621,
+      "gridIndex": 942,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.832
+    },
+    {
+      "id": 788,
+      "time": 204.564336,
+      "sourceTime": 204.564898,
+      "gridIndex": 944,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.94
+    },
+    {
+      "id": 789,
+      "time": 204.780911,
+      "sourceTime": 204.773878,
+      "gridIndex": 945,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.463
+    },
+    {
+      "id": 790,
+      "time": 204.997487,
+      "sourceTime": 204.991565,
+      "gridIndex": 946,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.978
+    },
+    {
+      "id": 791,
+      "time": 205.214062,
+      "sourceTime": 205.209252,
+      "gridIndex": 947,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.58
+    },
+    {
+      "id": 792,
+      "time": 205.430637,
+      "sourceTime": 205.450159,
+      "gridIndex": 948,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.508
+    },
+    {
+      "id": 793,
+      "time": 205.647212,
+      "sourceTime": 205.647528,
+      "gridIndex": 949,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 794,
+      "time": 205.863788,
+      "sourceTime": 205.85941,
+      "gridIndex": 950,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 795,
+      "time": 206.080363,
+      "sourceTime": 206.074195,
+      "gridIndex": 951,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.564
+    },
+    {
+      "id": 796,
+      "time": 206.296938,
+      "sourceTime": 206.297687,
+      "gridIndex": 952,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 1
+    },
+    {
+      "id": 797,
+      "time": 206.513513,
+      "sourceTime": 206.515374,
+      "gridIndex": 953,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.643
+    },
+    {
+      "id": 798,
+      "time": 206.730088,
+      "sourceTime": 206.724354,
+      "gridIndex": 954,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 799,
+      "time": 206.946664,
+      "sourceTime": 206.942041,
+      "gridIndex": 955,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.501
+    },
+    {
+      "id": 800,
+      "time": 207.163239,
+      "sourceTime": 207.156825,
+      "gridIndex": 956,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.538
+    },
+    {
+      "id": 801,
+      "time": 207.379814,
+      "sourceTime": 207.380317,
+      "gridIndex": 957,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.953
+    },
+    {
+      "id": 802,
+      "time": 207.596389,
+      "sourceTime": 207.589297,
+      "gridIndex": 958,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 803,
+      "time": 207.812965,
+      "sourceTime": 207.806984,
+      "gridIndex": 959,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.543
+    },
+    {
+      "id": 804,
+      "time": 208.02954,
+      "sourceTime": 208.030476,
+      "gridIndex": 960,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.986
+    },
+    {
+      "id": 805,
+      "time": 208.246115,
+      "sourceTime": 208.239456,
+      "gridIndex": 961,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.257
+    },
+    {
+      "id": 806,
+      "time": 208.46269,
+      "sourceTime": 208.457143,
+      "gridIndex": 962,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.898
+    },
+    {
+      "id": 807,
+      "time": 208.679266,
+      "sourceTime": 208.67483,
+      "gridIndex": 963,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.424
+    },
+    {
+      "id": 808,
+      "time": 208.895841,
+      "sourceTime": 208.918639,
+      "gridIndex": 964,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.168
+    },
+    {
+      "id": 809,
+      "time": 209.112416,
+      "sourceTime": 209.113107,
+      "gridIndex": 965,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.977
+    },
+    {
+      "id": 810,
+      "time": 209.328991,
+      "sourceTime": 209.324989,
+      "gridIndex": 966,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.912
+    },
+    {
+      "id": 811,
+      "time": 209.545566,
+      "sourceTime": 209.536871,
+      "gridIndex": 967,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.295
+    },
+    {
+      "id": 812,
+      "time": 209.762142,
+      "sourceTime": 209.763265,
+      "gridIndex": 968,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.971
+    },
+    {
+      "id": 813,
+      "time": 209.978717,
+      "sourceTime": 209.975147,
+      "gridIndex": 969,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.447
+    },
+    {
+      "id": 814,
+      "time": 210.195292,
+      "sourceTime": 210.189932,
+      "gridIndex": 970,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 815,
+      "time": 210.411867,
+      "sourceTime": 210.416327,
+      "gridIndex": 971,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.525
+    },
+    {
+      "id": 816,
+      "time": 210.628443,
+      "sourceTime": 210.622404,
+      "gridIndex": 972,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.404
+    },
+    {
+      "id": 817,
+      "time": 210.845018,
+      "sourceTime": 210.845896,
+      "gridIndex": 973,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.961
+    },
+    {
+      "id": 818,
+      "time": 211.061593,
+      "sourceTime": 211.054875,
+      "gridIndex": 974,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 819,
+      "time": 211.278168,
+      "sourceTime": 211.26966,
+      "gridIndex": 975,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.432
+    },
+    {
+      "id": 820,
+      "time": 211.494743,
+      "sourceTime": 211.496054,
+      "gridIndex": 976,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.983
+    },
+    {
+      "id": 821,
+      "time": 211.711319,
+      "sourceTime": 211.705034,
+      "gridIndex": 977,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.372
+    },
+    {
+      "id": 822,
+      "time": 211.927894,
+      "sourceTime": 211.922721,
+      "gridIndex": 978,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.853
+    },
+    {
+      "id": 823,
+      "time": 212.144469,
+      "sourceTime": 212.140408,
+      "gridIndex": 979,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.544
+    },
+    {
+      "id": 824,
+      "time": 212.361044,
+      "sourceTime": 212.378413,
+      "gridIndex": 980,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.466
+    },
+    {
+      "id": 825,
+      "time": 212.57762,
+      "sourceTime": 212.578685,
+      "gridIndex": 981,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.999
+    },
+    {
+      "id": 826,
+      "time": 212.794195,
+      "sourceTime": 212.787664,
+      "gridIndex": 982,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 1
+    },
+    {
+      "id": 827,
+      "time": 213.01077,
+      "sourceTime": 213.002449,
+      "gridIndex": 983,
+      "pose": "rightHip",
+      "instrument": "hiHat",
+      "strength": 0.481
+    },
+    {
+      "id": 828,
+      "time": 213.227345,
+      "sourceTime": 213.228844,
+      "gridIndex": 984,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.969
+    },
+    {
+      "id": 829,
+      "time": 213.44392,
+      "sourceTime": 213.449433,
+      "gridIndex": 985,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.329
+    },
+    {
+      "id": 830,
+      "time": 213.660496,
+      "sourceTime": 213.65551,
+      "gridIndex": 986,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.91
+    },
+    {
+      "id": 831,
+      "time": 213.877071,
+      "sourceTime": 213.88771,
+      "gridIndex": 987,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.459
+    },
+    {
+      "id": 832,
+      "time": 214.093646,
+      "sourceTime": 214.087982,
+      "gridIndex": 988,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.205
+    },
+    {
+      "id": 833,
+      "time": 214.310221,
+      "sourceTime": 214.311474,
+      "gridIndex": 989,
+      "pose": "leftHand",
+      "instrument": "bass",
+      "strength": 0.889
+    },
+    {
+      "id": 834,
+      "time": 214.526797,
+      "sourceTime": 214.520454,
+      "gridIndex": 990,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.923
+    },
+    {
+      "id": 835,
+      "time": 214.743372,
+      "sourceTime": 214.735238,
+      "gridIndex": 991,
+      "pose": "rightHand",
+      "instrument": "crash",
+      "strength": 0.13
+    },
+    {
+      "id": 836,
+      "time": 214.959947,
+      "sourceTime": 214.97034,
+      "gridIndex": 992,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.245
+    },
+    {
+      "id": 837,
+      "time": 215.393097,
+      "sourceTime": 215.385397,
+      "gridIndex": 994,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.673
+    },
+    {
+      "id": 838,
+      "time": 215.609673,
+      "sourceTime": 215.605986,
+      "gridIndex": 995,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.574
+    },
+    {
+      "id": 839,
+      "time": 216.259398,
+      "sourceTime": 216.25034,
+      "gridIndex": 998,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.741
+    },
+    {
+      "id": 840,
+      "time": 217.125699,
+      "sourceTime": 217.118186,
+      "gridIndex": 1002,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.765
+    },
+    {
+      "id": 841,
+      "time": 217.342274,
+      "sourceTime": 217.338776,
+      "gridIndex": 1003,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.512
+    },
+    {
+      "id": 842,
+      "time": 217.992,
+      "sourceTime": 217.986032,
+      "gridIndex": 1006,
+      "pose": "leftHip",
+      "instrument": "snare",
+      "strength": 0.833
+    }
+  ]
+}

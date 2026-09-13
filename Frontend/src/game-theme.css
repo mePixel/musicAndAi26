@@ -221,3 +221,24 @@
 @media (prefers-reduced-motion: reduce) {
   .game-character .avatar-trail { display: none; }
 }
+
+/* Keep transport and round information beside the playfield. */
+.game-page .game-columns { grid-template-columns: minmax(0, 1fr) 300px; align-items: start; }
+.game-sidebar { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.game-sidebar .game-topbar { display: flex; flex-direction: column; align-items: stretch; gap: 16px; margin: 0; }
+.game-sidebar .game-toolbar { display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
+.game-sidebar .playing-title { text-align: left; }
+.game-sidebar .inline-actions { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 8px; }
+.game-sidebar .back-to-songs { background: var(--pink); color: var(--ink); }
+.game-sidebar .back-to-songs:hover { background: #ff54b0; }
+.game-sidebar .session-header { padding: 0; border: 0; flex-wrap: wrap; gap: 8px; }
+.game-sidebar .session-label { display: none; }
+.game-sidebar .site-footer { padding: 0; border: 0; }
+.game-sidebar .footer-inner { width: 100%; flex-direction: column; align-items: stretch; gap: 10px; padding: 0; }
+.game-sidebar .camera-panel { width: 100%; }
+.game-sidebar .camera-preview { aspect-ratio: 4/3; }
+.game-page .highway-panel { height: max(420px, calc(100dvh - 32px)); }
+@media (max-width: 700px) {
+  .game-page .game-columns { grid-template-columns: minmax(0, 1fr); }
+  .game-page .highway-panel { height: 65dvh; min-height: 420px; }
+}

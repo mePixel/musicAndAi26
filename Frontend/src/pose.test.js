@@ -134,3 +134,21 @@ test('the model control pose is not a playable chart lane', () => {
     ['rightHand','crash'],
   ]);
 });
+
+
+test('Left Hip uses the shared confidence thresholds without an extra geometry gate', () => {
+  const recognizer = createPoseRecognizer();
+  const predictHip = confidence => [
+    { className: 'Right Hip', probability: confidence },
+    { className: 'Default', probability: 1 - confidence },
+  ];
+  const joints = points();
+  recognizer.update(predictHip(.75), joints, 0);
+  const entered = recognizer.update(predictHip(.75), joints, 120);
+  assert.equal(entered.pose, 'leftHip');
+  assert.equal(entered.event, 'leftHip');
+  assert.equal(entered.fresh, true);
+  assert.equal(recognizer.update(predictHip(.55), joints, 180).fresh, true);
+  joints[10].score = 0;
+  assert.equal(recognizer.update(predictHip(.95), joints, 240).fresh, false);
+});

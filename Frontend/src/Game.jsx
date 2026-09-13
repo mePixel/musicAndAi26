@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Camera, Keyboard, Pause, Play, RotateCcw, Square } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/components/ui/empty';
 import { Spinner } from '@/components/ui/spinner';
@@ -15,7 +14,7 @@ import { loadSongNotes } from './beatmaps.js';
 
 const initialHud = { score:0, combo:0, elapsed:0, countdown:3, judgement:'', hits:0, misses:0, bestCombo:0 };
 
-export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboard }) {
+export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboard, sidebarHeader, sidebarUtilities }) {
   const canvas = useRef(null), video = useRef(null), overlay = useRef(null), trigger = useRef(() => {});
   const transport = useRef(() => {});
   const cameraFrame = useRef(null), keyboardFrame = useRef(null);
@@ -101,7 +100,8 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
         ]);
         if (!active) return;
         if (chart.error) console.warn(`Using authored fallback chart for ${song.title}:`,chart.error);
-        buffer = loaded; duration = buffer.duration; round = createRound(notesForMode(chart.notes,mode)); cameraGrace = createCameraPoseGrace(round,mode); cameraReady = input === 'keyboard' || enabled;
+        buffer = loaded; duration = buffer.duration; round = createRound(notesForMode(chart.notes,mode));
+        cameraGrace = createCameraPoseGrace(round,mode); cameraReady = input === 'keyboard' || enabled;
         setCameraState(previous => ({ ...previous, enabled }));
         status = 'framing'; setPhase('framing'); camera.reset();
         if (input === 'keyboard') begin();
@@ -163,23 +163,6 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
   const waiting = phase === 'loading' || phase === 'framing';
   const detected = cameraState.pose === controlPose.id ? controlPose : poses.find(pose => pose.id === cameraState.pose);
   return <main className="game-page">
-    <div className="game-topbar">
-    <nav className="game-toolbar" aria-label="Game controls">
-      <Button variant="outline" onClick={onExit}><ArrowLeft data-icon="inline-start" /><span>Back to songs</span></Button>
-      <div className="playing-title"><h1>{song.title}</h1><p>{song.bpm} BPM <span aria-hidden="true">·</span> {GAME_MODES[mode]?.label ?? GAME_MODES.hard.label}</p></div>
-      <div className="inline-actions">
-        {phase === 'playing' || phase === 'paused' ? <Button variant="outline" onClick={() => transport.current()}>
-          {phase === 'paused' ? <Play data-icon="inline-start" /> : <Pause data-icon="inline-start" />}{phase === 'paused' ? 'Resume' : 'Pause'}
-        </Button> : null}
-        <Button variant="outline" onClick={() => setAttempt(value => value+1)} disabled={waiting}><RotateCcw data-icon="inline-start" /><span>Restart</span></Button>
-      </div>
-    </nav>
-    <div className="score-strip" aria-label="Round score">
-      <div><span>Score</span><strong id="score">{hud.score.toLocaleString()}</strong></div>
-      <div><span>Combo</span><strong id="combo">{hud.combo}×</strong></div>
-      <div className="time-readout"><span className="sr-only">Song time</span><strong><span id="elapsed">{formatTime(hud.elapsed)}</span> <span className="duration">/ {formatTime(song.duration)}</span></strong></div>
-    </div>
-    </div>
     <div className="game-columns" data-input={input}>
       <section className="highway-panel rhythm-stage" aria-label="Corner pose game">
         <div className="canvas-wrap">
@@ -215,7 +198,28 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
           </section> : null}
         </div>
       </section>
-      <aside className="camera-panel" aria-label={input === 'camera' ? 'Camera preview' : 'Keyboard controls'}>
+      <aside className="game-sidebar" aria-label="Game settings and camera">
+        {sidebarHeader}
+    <div className="game-topbar">
+    <nav className="game-toolbar" aria-label="Game controls">
+      <Button className="back-to-songs" variant="outline" onClick={onExit}><ArrowLeft data-icon="inline-start" /><span>Back to songs</span></Button>
+      <div className="playing-title"><h1>{song.title}</h1><p>{song.bpm} BPM <span aria-hidden="true">·</span> {GAME_MODES[mode]?.label ?? GAME_MODES.hard.label}</p></div>
+      <div className="inline-actions">
+        {phase === 'playing' || phase === 'paused' ? <Button variant="outline" onClick={() => transport.current()}>
+          {phase === 'paused' ? <Play data-icon="inline-start" /> : <Pause data-icon="inline-start" />}{phase === 'paused' ? 'Resume' : 'Pause'}
+        </Button> : null}
+        <Button variant="outline" onClick={() => setAttempt(value => value+1)} disabled={waiting}><RotateCcw data-icon="inline-start" /><span>Restart</span></Button>
+        <Button variant="outline" onClick={onExit}><Square data-icon="inline-start" />Stop</Button>
+      </div>
+    </nav>
+    <div className="score-strip" aria-label="Round score">
+      <div><span>Score</span><strong id="score">{hud.score.toLocaleString()}</strong></div>
+      <div><span>Combo</span><strong id="combo">{hud.combo}×</strong></div>
+      <div className="time-readout"><span className="sr-only">Song time</span><strong><span id="elapsed">{formatTime(hud.elapsed)}</span> <span className="duration">/ {formatTime(song.duration)}</span></strong></div>
+    </div>
+    </div>
+        {sidebarUtilities}
+      <section className="camera-panel" aria-label={input === 'camera' ? 'Camera preview' : 'Keyboard controls'}>
         <div className="camera-heading"><h2>{input === 'camera' ? 'Camera' : 'Keyboard'}</h2>{input === 'camera' ? <span role="status">{cameraState.enabled ? cameraState.tracked ? 'Tracking' : 'Not in frame' : phase === 'finished' ? 'Off' : phase === 'error' ? 'Unavailable' : 'Connecting'}</span> : null}</div>
         <div className="camera-preview" data-enabled={cameraState.enabled}>
           <video ref={video} autoPlay playsInline muted aria-label="Mirrored webcam preview" />
@@ -223,9 +227,9 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
           {!cameraState.enabled ? <Empty><EmptyHeader><EmptyMedia variant="icon">{input === 'camera' ? <Camera /> : <Keyboard />}</EmptyMedia><EmptyTitle>{input === 'camera' ? phase === 'finished' ? 'Camera off' : 'Camera preview' : 'Use keys 1–4'}</EmptyTitle><EmptyDescription>{input === 'camera' ? 'Your video appears here.' : 'Press a key as its cue reaches its ring. You can tap the buttons, too.'}</EmptyDescription></EmptyHeader></Empty> : null}
           {cameraState.enabled ? <span className="detected-pose">{cameraState.tracked ? detected?.label ?? 'Ready' : 'Step into frame'}</span> : null}
         </div>
-        <p>{input === 'camera' ? cameraState.hint || `Prepare a pose early and hold it through the beat. The ${controlPose.label} pose starts the round; use the buttons to pause and resume.` : 'Left hip · Right hip · Left hand · Right hand'}</p>
+        <p>{input === 'camera' ? cameraState.hint || `Prepare a pose early and hold it through the beat. For repeated cues, move your hand away and back. The ${controlPose.label} pose starts the round; use the buttons to pause and resume.` : 'Left hip · Right hip · Left hand · Right hand'}</p>
+      </section>
       </aside>
     </div>
-    <div className="game-progress"><Progress id="progress" value={Math.min(hud.elapsed/song.duration*100,100)} aria-label="Song progress" /><Button variant="outline" onClick={onExit}><Square data-icon="inline-start" />Stop</Button></div>
   </main>;
 }

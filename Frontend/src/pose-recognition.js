@@ -8,6 +8,17 @@ const DROPOUT_MS = 150;
 const ENTER_CONFIDENCE = .7;
 const KEEP_CONFIDENCE = .5;
 
+function relativeWrist(keypoints, pose) {
+  if (!pose || pose === 'default' || trackingHint(keypoints, pose)) return null;
+  const right = pose.startsWith('left'); // mirrored screen direction
+  const [a, b, wrist, origin] = [5, 6, right ? 10 : 9,
+    pose.endsWith('Hip') ? right ? 12 : 11 : right ? 6 : 5]
+    .map(index => keypoints?.[index]?.position);
+  if (![a, b, wrist, origin].every(point => Number.isFinite(point?.x) && Number.isFinite(point?.y))) return null;
+  const width = Math.hypot(a.x - b.x, a.y - b.y);
+  return width > 0 ? [(wrist.x - origin.x) / width, (wrist.y - origin.y) / width] : null;
+}
+
 export function trackingHint(keypoints, pose) {
   const visible = index => keypoints?.[index]?.score >= .45;
   if (!visible(5) || !visible(6)) return 'Step into frame so both shoulders are visible.';
@@ -57,6 +68,7 @@ export function createPoseLatch() {
 export function createPoseRecognizer() {
   const latch = createPoseLatch();
   let scores = {}, lastEvaluation = -Infinity, locked = null;
+  let entry = null, releaseSince = null, released = false;
   return {
     update(predictions, keypoints, now) {
       const elapsed = now - lastEvaluation;
@@ -77,12 +89,38 @@ export function createPoseRecognizer() {
       const hint = trackingHint(keypoints, detected ?? best);
       // Smoothed scores cannot turn missing joints or old evidence into a hit.
       if (hint || (raw[detected] ?? 0) < KEEP_CONFIDENCE) detected = null;
+
+      // Repeating a move needs a visible release and return, not another model
+      // class. Measure against the body so stepping sideways cannot rearm it.
+      const wrist = entry && relativeWrist(keypoints, entry.pose);
+      if (!wrist) releaseSince = null;
+      if (wrist) {
+        const distance = Math.hypot(wrist[0] - entry.wrist[0], wrist[1] - entry.wrist[1]);
+        if (distance >= .3) {
+          if (releaseSince === null) releaseSince = now;
+          if (now - releaseSince >= 60) released = true;
+          // A classifier that stays on the same label while the hand moves
+          // away must not confirm or refresh that pose until the hand returns.
+          if (detected === entry.pose) detected = null;
+        } else {
+          releaseSince = null;
+          if (released && distance <= .15 && detected === entry.pose) {
+            latch.reset(); locked = null; entry = null; released = false;
+          } else if (released && detected === entry.pose) detected = null;
+        }
+      }
       const result = latch.update(detected, now);
       locked = result.pose;
+      if (result.event) {
+        const wrist = relativeWrist(keypoints, result.event);
+        entry = wrist ? { pose: result.event, wrist } : null;
+        releaseSince = null; released = false;
+      }
       return { ...result, tracked, hint };
     },
     reset() {
       latch.reset(); scores = {}; lastEvaluation = -Infinity; locked = null;
+      entry = null; releaseSince = null; released = false;
     },
   };
 }

@@ -1,12 +1,14 @@
 # Bodybeat
 
 A small Guitar Hero-style game played with your body. Match four webcam poses
-to flying notes, keep a combo, and play through two original short tracks.
+to flying notes, keep a combo, and play through two original short tracks plus
+the supplied Minimal Sounds version of Gorillaz’s Feel Good Inc.
 Keyboard and touch controls are available too.
 
 ## Run it
 
 ```sh
+git lfs pull
 cd Frontend
 npm install
 npm run dev
@@ -75,10 +77,17 @@ settle for 100 ms before it triggers. These values can be tuned in `game.js` and
 
 ## Assets
 
-Both tracks are original synthesized arrangements created for this project,
+First Groove and Disco Circuit are original synthesized arrangements created for this project,
 without sampled recordings. `Frontend/scripts/make-tracks.py` reproduces them
 with Python, NumPy, and ffmpeg; those tools are only needed to regenerate audio.
 Regular installation and playback use the existing MP3 files.
+
+Feel Good Inc. is also built in. Its backing WAV combines the supplied bass,
+other, and vocals stems, with the drums removed. The chart in
+`Frontend/src/feel-good-inc.json` was prepared from the drums stem using the
+same `generateBrowserBeatmap` function and Medium settings as manual stem
+uploads. All three game difficulty modes work with it. No upload or analysis is
+needed to play this bundled song. WAV assets use Git LFS.
 
 - [MediaPipe Pose Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker):
   Google pretrained Lite pose model and Tasks Vision runtime.

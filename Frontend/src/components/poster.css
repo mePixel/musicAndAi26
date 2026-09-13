@@ -81,7 +81,6 @@
 @keyframes pose-pop-b { 0% { opacity: 0; transform: translateY(6px); } 20%,70% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-6px); } }
 .poster-home[data-motion='off'] *, .poster-home[data-motion='off'] *::after { animation: none !important; transition: none !important; }
 .poster-home[data-motion='off'] .poster-art { transform: none; rotate: none; }
-@media (min-width: 1650px) { .poster-title { top: 10%; }.poster-art { left: 35%; width: 41%; }.poster-play-area { width: 20%; } }
 @media (max-width: 1000px) {
   .poster-stage { height: 620px; }
   .poster-title { top: 12%; font-size: 13vw; }
@@ -126,7 +125,6 @@
 .poster-art .pose-dancer > svg > .avatar-trail-pink { fill: var(--pink); stroke: var(--pink); }
 
 /* Keep the selected title and camera control in the same flow. */
-.poster-stage { min-height: max(580px, calc(32vw + 220px)); }
 .poster-play-caption { overflow-wrap: anywhere; }
 .poster-play-area .poster-camera { position: relative; inset: auto; width: 100%; margin-top: 18px; }
 .poster-play-area .camera-is-on { flex-direction: column; }
@@ -153,4 +151,73 @@
   .poster-track-list .poster-track-info strong { font-size: 22px; }
   .poster-track-list .poster-track-info > span { font-size: 10px; }
   .poster-track-list .poster-wave { display: none; }
+}
+
+/* Desktop keeps the reference's three-part poster at every aspect ratio.
+   Fit its 1800 × 800 artwork to BOTH stage dimensions; extra space stays yellow.
+   The header and song strip remain readable independently of the artwork size. */
+@media (min-width: 1001px) {
+  .poster-home { --poster-chrome: clamp(.8px, min(.055556vw, .095602svh), 1.5px); }
+  .poster-header { height: calc(76 * var(--poster-chrome)); padding-block: 0; }
+  .poster-brand { font-size: calc(38 * var(--poster-chrome)); }
+  .poster-brand svg { width: calc(37 * var(--poster-chrome)); height: calc(37 * var(--poster-chrome)); }
+  .poster-header nav { gap: calc(28 * var(--poster-chrome)); }
+  .poster-header nav button { font-size: max(13px, calc(15 * var(--poster-chrome))); }
+  .poster-home > main {
+    display: grid;
+    grid-template-rows: minmax(480px, 1fr) auto;
+    min-height: calc(100svh - 76 * var(--poster-chrome));
+  }
+  .poster-stage {
+    container-type: size;
+    height: auto;
+    min-height: 0;
+    --poster-unit: min(.055556cqw, .125cqh);
+  }
+  .poster-title {
+    top: calc(50% - 320 * var(--poster-unit));
+    font-size: calc(175 * var(--poster-unit));
+  }
+  .poster-title span:last-child { margin-top: calc(12 * var(--poster-unit)); }
+  .poster-title span:last-child::after { margin-top: calc(15 * var(--poster-unit)); height: calc(7 * var(--poster-unit)); }
+  .poster-art {
+    left: 55.5%; top: 50%;
+    width: calc(738 * var(--poster-unit)); height: calc(752 * var(--poster-unit));
+    margin-left: calc(-369 * var(--poster-unit)); margin-top: calc(-352 * var(--poster-unit));
+  }
+  .scribble-top { top: calc(50% - 368 * var(--poster-unit)); font-size: max(14px, calc(19 * var(--poster-unit))); }
+  .poster-controls { top: min(3%, 24px); width: max(260px, calc(300 * var(--poster-chrome))); }
+  .poster-controls [data-slot='toggle-group-item'] {
+    height: max(36px, calc(42 * var(--poster-chrome)));
+    padding: 8px max(14px, calc(20 * var(--poster-chrome)));
+    font-size: max(12px, calc(14 * var(--poster-chrome)));
+  }
+  .poster-controls p { font-size: max(11px, calc(11 * var(--poster-chrome))); }
+  .poster-play-area {
+    right: 14%; top: calc(50% - 152 * var(--poster-unit));
+    width: calc(360 * var(--poster-unit)); margin-right: calc(-180 * var(--poster-unit));
+  }
+  .poster-home .poster-play { gap: calc(18 * var(--poster-unit)); }
+  .poster-play span { font-size: calc(42 * var(--poster-unit)); }
+  .poster-play > svg:last-child { width: calc(32 * var(--poster-unit)); height: calc(32 * var(--poster-unit)); }
+  .poster-play-caption { margin-top: 12px; font-size: max(11px, calc(12 * var(--poster-chrome))); }
+  .poster-play-area .poster-camera { width: max(240px, 100%); margin: 14px 0 0 50%; translate: -50% 0; }
+  .poster-camera-copy button { font-size: max(12px, calc(13 * var(--poster-chrome))); }
+  .poster-camera-copy p { font-size: max(11px, calc(11 * var(--poster-chrome))); }
+  .poster-play-area .camera-is-on { flex-direction: row; width: max(260px, 100%); }
+  .poster-camera-preview { width: 72px; }
+  .poster-track-carousel { grid-template-columns: calc(44 * var(--poster-chrome)) minmax(0, 1fr) calc(44 * var(--poster-chrome)); }
+  .poster-track { height: max(124px, calc(124 * var(--poster-chrome))); padding-block: 10px; gap: calc(24 * var(--poster-chrome)); }
+  .poster-track-number { font-size: calc(80 * var(--poster-chrome)); }
+  .poster-track-info strong {
+    font-size: clamp(22px, 2.111vw, calc(38 * var(--poster-chrome)));
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+  }
+  .poster-track-info > span { font-size: max(12px, calc(14 * var(--poster-chrome))); }
+  .poster-track-info small { font-size: max(9px, calc(9 * var(--poster-chrome))); }
+  .poster-track .poster-wave { height: calc(45 * var(--poster-chrome)); }
+  .poster-upload { min-height: calc(50 * var(--poster-chrome)); padding-block: 6px; }
+  .poster-upload button { font-size: max(13px, calc(14 * var(--poster-chrome))); }
+  .poster-upload p { font-size: max(11px, calc(11 * var(--poster-chrome))); }
+  .poster-error { grid-column: 1 / -1; }
 }

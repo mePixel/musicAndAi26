@@ -1,5 +1,21 @@
 # Bodybeat — webcam rhythm game
 
+Desktop poster sizing (2026-09-13): the headline, dancer, and circular Play
+control scale against both stage dimensions, preserving the supplied reference's
+three-part composition. The header and song strip keep readable sizing, and the
+song/upload strip ends at the viewport bottom. Extra space stays yellow; very
+short windows scroll once the stage reaches its 480px minimum. Utility controls
+remain below the main poster. Long song titles are limited to two visible lines.
+
+Verification: production build and Playwright/Chrome checks pass at ten desktop
+sizes spanning 1024×768, 4:3, 16:10, 16:9, ultrawide 3840×1080, and portrait
+1080×1920. Checks cover visible song/upload strips, circular Play, separated
+controls, song selection, input/difficulty changes, carousel, instructions, and
+no browser errors/warnings. The existing mobile layout was smoke-checked at
+390×844; its crowded top controls remain outside this desktop change. Camera
+tracking and audible timing were not rechecked for this CSS change. The existing
+bundle-size warning remains.
+
 Repeated-pose input: moving the active hand away and returning to the recognized
 position now creates another entry even if the model never changes its class.
 Release requires a visible wrist displacement of 0.3 shoulder widths for at least
@@ -266,8 +282,8 @@ to the body; individual finger gestures are outside this MVP.
 - Play opens the game, loads the selected song, and requests the camera if used.
   In Camera mode, make the Default pose once tracking is ready to begin the countdown.
   Results offer Retry / Choose song.
-- Practice poses opens a full-viewport mirrored camera with a skeleton overlay,
-  the detected stance, and a guide that highlights the matching pose. Practice
+- Playground opens a full-viewport mirrored camera with a skeleton overlay,
+  the detected stance, and a guide that highlights the matching pose. Playground
   always uses the camera, independently of the game input choice, with no song,
   countdown, or scoring. The complete camera frame stays visible without cropping.
   Arms down and missing tracking have their own feedback. Retry handles camera
@@ -433,7 +449,7 @@ for one-person camera classification. Keep its model, metadata, and weights loca
 Request video only and process it locally, without recording or uploading frames.
 Camera access requires browser permission and HTTPS or localhost; see
 [MDN's camera API documentation](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia).
-Request access when the player presses Play in Camera mode or Practice poses and show a useful message if permission,
+Request access when the player presses Play in Camera mode or Playground and show a useful message if permission,
 hardware, or asset loading prevents play.
 
 Start at a modest camera resolution and about 15–20 pose evaluations per second,
@@ -502,7 +518,7 @@ Use ordinary functions and a small state object. Leave `Backend/` unused.
   by an arbitrary metronome fallback when detection is weak.
 - Stop silences playback; leaving gameplay releases the camera; Retry starts clean.
 - Camera/model/audio errors explain what happened and missing tracking is visible.
-- Practice opens from the pose guide, recognizes all four poses, clears stale
+- Playground opens from the main navigation, recognizes all four poses, clears stale
   feedback when tracking is lost, and releases the camera when leaving. Returning
   to songs preserves the selected track and game input mode.
 - The production build passes. Verify with a real webcam and audible playback

@@ -70,7 +70,7 @@ export function App() {
   const exitGame = useCallback(() => { setScreen('songs'); window.scrollTo(0,0); },[]);
   const useKeyboard = useCallback(() => setInput('keyboard'),[]);
   useEffect(() => {
-    document.title = screen === 'songs' ? 'Bodybeat — Choose a song' : screen === 'practice' ? 'Practice — Bodybeat' : `${song.title} — Bodybeat`;
+    document.title = screen === 'songs' ? 'Bodybeat — Choose a song' : screen === 'practice' ? 'Playground — Bodybeat' : `${song.title} — Bodybeat`;
   },[screen,song.title]);
 
   async function prepareSongForPlay(selectedSong) {

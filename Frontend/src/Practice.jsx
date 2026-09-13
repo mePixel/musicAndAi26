@@ -73,7 +73,7 @@ export function Practice({ audio, onExit }) {
     <video ref={video} autoPlay muted playsInline className="practice-video" aria-label="Mirrored live camera" />
     <canvas ref={overlay} className="practice-skeleton" aria-hidden="true" />
     <BrandHeader>
-      <h1 id="practice-heading" ref={heading} tabIndex={-1}>Practice poses</h1>
+      <h1 id="practice-heading" ref={heading} tabIndex={-1}>Playground</h1>
       <Button variant="outline" onClick={onExit}>
         <ArrowLeft data-icon="inline-start" />
         <span>Back to songs</span>

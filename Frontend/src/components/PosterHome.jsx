@@ -99,7 +99,7 @@ export function PosterHome({ song, tracks, onSong, input, onInput, mode, onMode,
   return <div ref={root} className="poster-home" data-motion={motion ? 'on' : 'off'} style={{ '--beat': `${60 / song.bpm}s` }}>
     <header className="poster-header">
       <a href="#" className="poster-brand" aria-label="Bodybeat home">bodybeat<Zap aria-hidden="true" /></a>
-      <nav aria-label="Main navigation"><Button variant="ghost" onClick={onPractice} disabled={starting}>Practice</Button>{instructions}</nav>
+      <nav aria-label="Main navigation"><Button variant="ghost" onClick={onPractice} disabled={starting}>Playground</Button>{instructions}</nav>
     </header>
     <main>
       <section className="poster-stage" aria-label="Move to the music">

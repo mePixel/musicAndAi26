@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createRound, judge, expireNotes, nextCuePose } from './game.js';
+import { createRound, judge, expireNotes } from './game.js';
 import { notesForMode } from './difficulty.js';
 import { songs } from './songs.js';
 import { playablePoses as poses, controlPose } from './poses.js';
@@ -77,14 +77,6 @@ test('new rounds do not mutate song charts or retain previous results', () => {
   const retry = createRound(chart);
   assert.equal(retry.score,0); assert.equal(retry.notes[0].result,null);
   assert.equal(chart[0].result,undefined);
-});
-test('the center character previews the next unscored cue', () => {
-  const round = createRound(chart);
-  assert.equal(nextCuePose(round, 2), 'leftHip');
-  judge(round,'leftHip',3);
-  assert.equal(nextCuePose(round, 3), 'rightHip');
-  expireNotes(round, 5);
-  assert.equal(nextCuePose(round, 5), null);
 });
 test('both authored charts give a player time to move and finish before the audio ends', () => {
   assert.equal(songs.length,2);

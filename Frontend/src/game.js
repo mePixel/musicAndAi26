@@ -58,11 +58,6 @@ export function expireNotes(round, time, mode = 'hard') {
   return expired;
 }
 
-export function nextCuePose(round, time, mode = 'hard') {
-  const timing = timingForMode(mode);
-  return round.notes.find(note => !note.result && note.time + timing.good >= time)?.pose ?? null;
-}
-
 // Left/right are screen directions, matching the mirrored player preview.
 export const cueCorners = {
   leftHip: [-1, 1], rightHip: [1, 1],

@@ -20,14 +20,7 @@ function HeadDetails({ nodeRef, trail = false }) {
   </g>;
 }
 
-function avatarForPose(poseId) {
-  const poseIndex = sequence.findIndex(pose => pose.id === poseId);
-  if (poseIndex < 0) return null;
-  const [left, right] = armPoses[poseIndex];
-  return { ...restingAvatar, leftElbow: left.slice(2,4), leftWrist: left.slice(4), rightElbow: right.slice(2,4), rightWrist: right.slice(4) };
-}
-
-export function PoseDancer({ paused = false, live = false, cameraFrame, keyboardFrame, gameplay = false, previewPose = null }) {
+export function PoseDancer({ paused = false, live = false, cameraFrame, keyboardFrame, gameplay = false }) {
   const [index, setIndex] = useState(0);
   const armNodes = useRef([]);
   const body = useRef(null);
@@ -76,14 +69,18 @@ export function PoseDancer({ paused = false, live = false, cameraFrame, keyboard
       const delta = last === null ? 16 : Math.min(now - last, 50);
       if (last !== null) elapsed.current += Math.min(now - last, 50);
       last = now;
-      if (previewPose || live || keyboardFrame) {
+      if (live || keyboardFrame) {
         const frame = cameraFrame?.current;
         const freshFrame = frame && now - frame.time < 500 ? frame : null;
-        let target = previewPose ? avatarForPose(previewPose) ?? restingAvatar : freshFrame ? mapAvatar(freshFrame.keypoints) || restingAvatar : restingAvatar;
+        let target = freshFrame ? mapAvatar(freshFrame.keypoints) || restingAvatar : restingAvatar;
         const key = keyboardFrame?.current;
-        colorCharacter(previewPose ?? (live ? freshFrame?.pose : key && now - key.time < 450 ? key.pose : null));
-        if (!previewPose && !live && key && now - key.time < 450) {
-          target = avatarForPose(key.pose) ?? target;
+        colorCharacter(live ? freshFrame?.pose : key && now - key.time < 450 ? key.pose : null);
+        if (!live && key && now - key.time < 450) {
+          const poseIndex = sequence.findIndex(pose => pose.id === key.pose);
+          if (poseIndex >= 0) {
+            const [left, right] = armPoses[poseIndex];
+            target = { ...restingAvatar, leftElbow: left.slice(2,4), leftWrist: left.slice(4), rightElbow: right.slice(2,4), rightWrist: right.slice(4) };
+          }
         }
         const blend = 1 - Math.exp(-delta / 65);
         for (const key of Object.keys(target)) joints.current[key] = joints.current[key].map((v, axis) => v + (target[key][axis] - v) * blend);
@@ -134,13 +131,12 @@ export function PoseDancer({ paused = false, live = false, cameraFrame, keyboard
       preference.removeEventListener('change', update);
       document.removeEventListener('visibilitychange', update);
     };
-  }, [paused, live, cameraFrame, keyboardFrame, gameplay, previewPose]);
+  }, [paused, live, cameraFrame, keyboardFrame, gameplay]);
   const pose = sequence[index];
-  const preview = poses.find(pose => pose.id === previewPose);
   // Keep each arm on the same side while interpolating between poses.
   const arms = armPoses[0];
-  return <section className="pose-dancer" aria-label={preview ? `Next pose: ${preview.label}` : live ? 'Character mirroring your camera movements' : keyboardFrame ? 'Character following your pose controls' : 'Animated demonstration of the game poses'}>
-    <svg viewBox="0 0 80 76" role="img" aria-label={preview ? `Next pose: ${preview.label}` : live || keyboardFrame ? 'Your movement' : pose.label}>
+  return <section className="pose-dancer" aria-label={live ? 'Character mirroring your camera movements' : keyboardFrame ? 'Character following your pose controls' : 'Animated demonstration of the game poses'}>
+    <svg viewBox="0 0 80 76" role="img" aria-label={live || keyboardFrame ? 'Your movement' : pose.label}>
       {['white', 'pink'].map((color, index) => <g key={color} className={`avatar-trail avatar-trail-${color}`} transform={`translate(${index === 0 ? 8 : 4} 0)`} aria-hidden="true" strokeLinecap="round" strokeLinejoin="round">
         <g ref={node => { trailNodes.current[index] = node; }} transform="translate(8 0)">
           <circle cx="32" cy="11" r="6" stroke="none" />

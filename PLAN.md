@@ -1,5 +1,18 @@
 # Bodybeat — webcam rhythm game
 
+Character behavior restored from `ae74ab91ea6f40bec47b14cde4e239bad3a598cf`:
+the rhythm-mode character mirrors live joints and takes the current recognized
+pose's color. Keyboard input animates the selected pose briefly; missing input
+returns the character to rest. Upcoming chart notes no longer pose or color the
+character. The next-pose preview prop, state, helper, and status label were removed.
+Difficulty modes, generated charts, recognition smoothing, and scoring remain.
+
+Verification: 54 Node tests and the production build pass. Desktop/mobile browser
+checks with simulated camera input confirmed joint-driven motion without a named
+pose, detected-pose colors, clearing on lost tracking, keyboard activation and
+expiry, and no upcoming-note control or browser errors. Physical webcam input
+and audible timing were not rechecked for this restoration.
+
 Merge integration (2026-09-13): the difficulty modes and next-cue preview now
 work with smoothed recognition and on-beat camera scoring. Camera grace uses the
 selected mode's Good window and only fresh accepted observations refresh it.

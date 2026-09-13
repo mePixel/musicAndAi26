@@ -8,7 +8,7 @@ function setup(notes = [{ time: 3, pose: 'leftHip' }]) {
 }
 const seen = (pose, event = pose) => ({ tracked: true, pose, event });
 
-test('camera grace keeps a matching early pose through a 300 ms recognition gap', () => {
+test('camera grace keeps a matching early pose through a short recognition gap', () => {
   const { round, grace } = setup();
   grace.update(seen('leftHip'), 2.7);
   assert.equal(grace.judge(2.7), null);
@@ -20,9 +20,9 @@ test('camera grace keeps a matching early pose through a 300 ms recognition gap'
   assert.equal(grace.judge(3), null);
 });
 
-test('camera grace expires after 300 ms without confident detection', () => {
+test('camera grace expires after the hit window without confident detection', () => {
   const { round, grace } = setup();
-  grace.update(seen('leftHip'), 2.699);
+  grace.update(seen('leftHip'), 2.579);
   assert.equal(grace.judge(2.7), null);
   assert.equal(grace.judge(3), null);
   assert.equal(round.score, 0);
@@ -56,9 +56,9 @@ test('camera grace cannot skip the next cue or transfer a held pose to a later c
   const { round, grace } = setup([{ time: 3, pose: 'rightHip' }, { time: 3.4, pose: 'leftHip' }]);
   grace.update(seen('leftHip'), 2.9);
   assert.equal(grace.judge(3.1), null);
-  expireNotes(round, 3.31);
-  grace.update(seen('leftHip', null), 3.35);
-  assert.equal(grace.judge(3.4), null);
+  expireNotes(round, 3.43);
+  grace.update(seen('leftHip', null), 3.44);
+  assert.equal(grace.judge(3.45), null);
   assert.equal(round.hits, 0);
 });
 
@@ -95,8 +95,8 @@ test('early camera poses wait for the beat and held entries cannot score twice',
 
 test('retained visual locks cannot extend scoring grace', () => {
   const { round, grace } = setup();
-  grace.update({ ...seen('leftHip'), fresh: true }, 2.6);
-  grace.update({ ...seen('leftHip', null), fresh: false }, 2.75);
+  grace.update({ ...seen('leftHip'), fresh: true }, 2.5);
+  grace.update({ ...seen('leftHip', null), fresh: false }, 2.8);
   assert.equal(grace.judge(3), null);
   assert.equal(round.score, 0);
 });
@@ -111,9 +111,33 @@ test('a changed pose before the beat cancels the buffered hit', () => {
 });
 
 test('late camera entries retain the normal Perfect and Good windows', () => {
-  for (const [time, expected] of [[3.1, 'Perfect'], [3.25, 'Good'], [3.31, undefined]]) {
+  for (const [time, expected] of [[3.1, 'Perfect'], [3.25, 'Good'], [3.421, undefined]]) {
     const { grace } = setup();
     grace.update(seen('leftHip'), time);
     assert.equal(grace.judge(time)?.result, expected);
+  }
+});
+
+test('every difficulty buffers early poses until the beat and uses its own grace window', () => {
+  for (const [mode, window] of [['easy', 1.2], ['medium', .9], ['hard', .42]]) {
+    const round = createRound([{ time: 3, pose: 'leftHip' }, { time: 5, pose: 'leftHip' }]);
+    const grace = createCameraPoseGrace(round, mode);
+    grace.update({ ...seen('leftHip'), fresh: true }, 3 - window + .01);
+    assert.equal(grace.judge(2.99), null, mode);
+    assert.equal(grace.judge(3)?.result, 'Perfect', mode);
+    grace.update({ ...seen('leftHip', null), fresh: true }, 4.99);
+    assert.equal(grace.judge(5), null, mode);
+    assert.equal(round.hits, 1, mode);
+  }
+});
+
+test('retained visual locks cannot extend any difficulty’s scoring grace', () => {
+  for (const [mode, window] of [['easy', 1.2], ['medium', .9], ['hard', .42]]) {
+    const round = createRound([{ time: 3, pose: 'leftHip' }]);
+    const grace = createCameraPoseGrace(round, mode);
+    grace.update({ ...seen('leftHip'), fresh: true }, 3 - window - .01);
+    grace.update({ ...seen('leftHip', null), fresh: false }, 2.99);
+    assert.equal(grace.judge(3), null, mode);
+    assert.equal(round.score, 0, mode);
   }
 });

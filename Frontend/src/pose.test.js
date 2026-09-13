@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createPoseLatch, createPoseRecognizer, trackingHint } from './pose-recognition.js';
+import { controlPose, playablePoses } from './poses.js';
 
 const points = () => Array.from({ length: 17 }, () => ({ score: .95 }));
 const predictions = (left = .95, right = .01) => [
@@ -119,4 +120,17 @@ test('lost tracking clears a lock and fresh evidence must confirm again after a 
   const recovered = recognizer.update(predictions(), points(), 540);
   assert.equal(recovered.pose, 'leftHand'); assert.equal(recovered.event, null);
   recognizer.reset(); assert.equal(lock(recognizer).event, 'leftHand');
+});
+
+test('the model control pose is not a playable chart lane', () => {
+  assert.deepEqual(playablePoses.map(pose => pose.id), [
+    'leftHip', 'rightHip', 'leftHand', 'rightHand',
+  ]);
+  assert.equal(controlPose.playable,false);
+  assert.deepEqual(playablePoses.map(pose => [pose.id,pose.instrument]),[
+    ['leftHip','snare'],
+    ['rightHip','hiHat'],
+    ['leftHand','bass'],
+    ['rightHand','crash'],
+  ]);
 });

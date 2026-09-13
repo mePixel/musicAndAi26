@@ -1,0 +1,247 @@
+{
+  "version": 1,
+  "metadata": {
+    "title": "disco-circuit",
+    "duration": 36.0,
+    "bpm": 120.185,
+    "difficulty": "easy",
+    "seed": 42,
+    "poseCount": 4
+  },
+  "poses": [
+    "leftHip",
+    "rightHip",
+    "leftHand",
+    "rightHand"
+  ],
+  "events": [
+    {
+      "id": 0,
+      "time": 3.019,
+      "pose": "leftHand",
+      "strength": 0.65
+    },
+    {
+      "id": 1,
+      "time": 4.017,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 2,
+      "time": 4.76,
+      "pose": "leftHip",
+      "strength": 0.278
+    },
+    {
+      "id": 3,
+      "time": 5.515,
+      "pose": "rightHip",
+      "strength": 0.922
+    },
+    {
+      "id": 4,
+      "time": 6.513,
+      "pose": "leftHand",
+      "strength": 0.97
+    },
+    {
+      "id": 5,
+      "time": 7.512,
+      "pose": "leftHand",
+      "strength": 0.892
+    },
+    {
+      "id": 6,
+      "time": 8.51,
+      "pose": "rightHand",
+      "strength": 0.743
+    },
+    {
+      "id": 7,
+      "time": 9.509,
+      "pose": "leftHip",
+      "strength": 0.716
+    },
+    {
+      "id": 8,
+      "time": 10.019,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 9,
+      "time": 11.018,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 10,
+      "time": 11.761,
+      "pose": "leftHip",
+      "strength": 0.345
+    },
+    {
+      "id": 11,
+      "time": 12.516,
+      "pose": "leftHand",
+      "strength": 0.87
+    },
+    {
+      "id": 12,
+      "time": 13.514,
+      "pose": "leftHip",
+      "strength": 0.959
+    },
+    {
+      "id": 13,
+      "time": 14.512,
+      "pose": "leftHip",
+      "strength": 1.0
+    },
+    {
+      "id": 14,
+      "time": 15.511,
+      "pose": "leftHand",
+      "strength": 0.808
+    },
+    {
+      "id": 15,
+      "time": 16.509,
+      "pose": "rightHip",
+      "strength": 0.652
+    },
+    {
+      "id": 16,
+      "time": 17.02,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 17,
+      "time": 18.019,
+      "pose": "leftHand",
+      "strength": 0.65
+    },
+    {
+      "id": 18,
+      "time": 19.017,
+      "pose": "rightHand",
+      "strength": 0.65
+    },
+    {
+      "id": 19,
+      "time": 19.76,
+      "pose": "leftHip",
+      "strength": 0.293
+    },
+    {
+      "id": 20,
+      "time": 20.515,
+      "pose": "rightHand",
+      "strength": 0.904
+    },
+    {
+      "id": 21,
+      "time": 21.513,
+      "pose": "leftHand",
+      "strength": 0.914
+    },
+    {
+      "id": 22,
+      "time": 22.512,
+      "pose": "rightHip",
+      "strength": 0.97
+    },
+    {
+      "id": 23,
+      "time": 23.51,
+      "pose": "leftHip",
+      "strength": 0.772
+    },
+    {
+      "id": 24,
+      "time": 24.021,
+      "pose": "rightHand",
+      "strength": 0.65
+    },
+    {
+      "id": 25,
+      "time": 25.02,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 26,
+      "time": 26.018,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 27,
+      "time": 27.016,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 28,
+      "time": 27.759,
+      "pose": "rightHand",
+      "strength": 0.259
+    },
+    {
+      "id": 29,
+      "time": 28.514,
+      "pose": "leftHand",
+      "strength": 0.933
+    },
+    {
+      "id": 30,
+      "time": 29.513,
+      "pose": "rightHand",
+      "strength": 0.963
+    },
+    {
+      "id": 31,
+      "time": 30.511,
+      "pose": "leftHand",
+      "strength": 0.868
+    },
+    {
+      "id": 32,
+      "time": 31.509,
+      "pose": "rightHip",
+      "strength": 0.759
+    },
+    {
+      "id": 33,
+      "time": 32.02,
+      "pose": "rightHand",
+      "strength": 0.65
+    },
+    {
+      "id": 34,
+      "time": 33.019,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 35,
+      "time": 34.017,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 36,
+      "time": 34.76,
+      "pose": "rightHand",
+      "strength": 0.306
+    },
+    {
+      "id": 37,
+      "time": 35.515,
+      "pose": "leftHand",
+      "strength": 0.894
+    }
+  ]
+}

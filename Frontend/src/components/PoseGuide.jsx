@@ -1,4 +1,4 @@
-import { poses, controlPose } from '../poses.js';
+import { playablePoses as poses, controlPose } from '../poses.js';
 
 export function PoseIcon({ pose }) {
   return <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

@@ -1,40 +1,45 @@
-import { poses, drawPose } from './poses.js';
+import { playablePoses as poses, drawPose } from './poses.js';
+import { timingForMode } from './difficulty.js';
+
+const CUE_TRAVEL_SECONDS = 4.5;
 
 export function createRound(notes) {
   return { notes: notes.map(note => ({ ...note, result: null })), score: 0, combo: 0, bestCombo: 0, hits: 0, misses: 0 };
 }
 
-export function judge(round, pose, time) {
-  const note = round.notes.filter(note => !note.result && note.pose === pose && Math.abs(note.time - time) <= .300001)
+export function judge(round, pose, time, mode = 'hard') {
+  const timing = timingForMode(mode);
+  const note = round.notes.filter(note => !note.result && note.pose === pose && Math.abs(note.time - time) <= timing.good)
     .sort((a,b) => Math.abs(a.time-time) - Math.abs(b.time-time))[0];
   if (!note) return null;
-  note.result = Math.abs(note.time - time) <= .150001 ? 'Perfect' : 'Good';
+  note.result = Math.abs(note.time - time) <= timing.perfect ? 'Perfect' : 'Good';
   round.score += note.result === 'Perfect' ? 100 : 50;
   round.hits++; round.combo++; round.bestCombo = Math.max(round.combo, round.bestCombo);
   return note;
 }
 
 // Prepare early and score on the beat. Only fresh observations extend the
-// 300 ms scoring grace; the detector's retained visual lock cannot extend it.
-export function createCameraPoseGrace(round) {
+// mode's scoring grace; the detector's retained visual lock cannot extend it.
+export function createCameraPoseGrace(round, mode = 'hard') {
+  const timing = timingForMode(mode);
   let entered = null, pending = null, lastSeen = -Infinity;
   return {
     update({ tracked, pose, event, fresh }, time) {
       if (!tracked || !pose || fresh === false || time < 0) return;
       if (pose !== entered || event === pose) {
         entered = pose;
-        const next = round.notes.find(note => !note.result && time - note.time <= .300001);
+        const next = round.notes.find(note => !note.result && time - note.time <= timing.good);
         pending = cueCorners[pose] && next?.pose === pose ? next : null;
       }
       if (pending) lastSeen = time;
     },
     judge(time) {
-      if (!pending || time < pending.time || time - lastSeen > .300001) return null;
+      if (!pending || time < pending.time || time - lastSeen > timing.good) return null;
       if (pending !== round.notes.find(note => !note.result)) {
         pending = null;
         return null;
       }
-      const note = judge(round, pending.pose, time);
+      const note = judge(round, pending.pose, time, mode);
       if (note) pending = null;
       return note;
     },
@@ -42,14 +47,20 @@ export function createCameraPoseGrace(round) {
   };
 }
 
-export function expireNotes(round, time) {
+export function expireNotes(round, time, mode = 'hard') {
+  const timing = timingForMode(mode);
   let expired = false;
   for (const note of round.notes) {
-    if (!note.result && time - note.time > .300001) {
+    if (!note.result && time - note.time > timing.good) {
       note.result = 'Miss'; round.misses++; round.combo = 0; expired = true;
     }
   }
   return expired;
+}
+
+export function nextCuePose(round, time, mode = 'hard') {
+  const timing = timingForMode(mode);
+  return round.notes.find(note => !note.result && note.time + timing.good >= time)?.pose ?? null;
 }
 
 // Left/right are screen directions, matching the mirrored player preview.
@@ -62,7 +73,7 @@ export function cuePosition(poseId, secondsUntilBeat, width, height) {
   const [side, level] = cueCorners[poseId];
   const origin = { x: width * (.5 + side * .42), y: height * (.5 + level * .36) };
   const target = { x: width * (.5 + side * .21), y: height * (.5 + level * .17) };
-  const progress = 1 - secondsUntilBeat / 2.5;
+  const progress = 1 - secondsUntilBeat / CUE_TRAVEL_SECONDS;
   return {
     origin, target,
     x: origin.x + (target.x - origin.x) * progress,
@@ -111,12 +122,12 @@ export function createStage(canvas) {
     for (const note of notes) {
       if (note.result === 'Perfect' || note.result === 'Good' || !cueCorners[note.pose]) continue;
       const delta = note.time - time;
-      if (delta > 2.5 || delta < -.3) continue;
+      if (delta > CUE_TRAVEL_SECONDS || delta < -1.2) continue;
       const pose = poses.find(pose => pose.id === note.pose);
       const { x, y } = cuePosition(note.pose, delta, width, height);
       ctx.save(); ctx.globalAlpha = delta < 0 ? Math.max(.25, 1 + delta * 2) : 1;
       ctx.fillStyle = pose.color; ctx.strokeStyle = '#11100f'; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.roundRect(x-size/2, y-size/2, size, size, size*.18); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x, y, size * .5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
       drawPose(ctx, pose, x, y, size*.9, '#11100f');
       ctx.restore();
     }

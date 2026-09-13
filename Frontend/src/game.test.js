@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createRound, judge, expireNotes } from './game.js';
+import { createRound, judge, expireNotes, nextCuePose } from './game.js';
+import { notesForMode } from './difficulty.js';
 import { songs } from './songs.js';
-import { poses, controlPose } from './poses.js';
+import { playablePoses as poses, controlPose } from './poses.js';
 
-const chart = [{ time: 3, pose: 'leftUp' }, { time: 4.25, pose: 'rightUp' }];
+const chart = [{ time: 3, pose: 'leftHip' }, { time: 4.25, pose: 'rightHip' }];
 
 test('the starting pose is never an instrument cue or chart note', () => {
   const instruments = poses.filter(pose => pose.id !== controlPose.id);
@@ -15,31 +16,75 @@ test('the starting pose is never an instrument cue or chart note', () => {
 });
 
 test('timing boundaries award Perfect, Good, or no hit', () => {
-  for (const [offset,expected] of [[-.301,null],[-.3,'Good'],[-.15,'Perfect'],[0,'Perfect'],[.15,'Perfect'],[.3,'Good'],[.301,null]]) {
-    assert.equal(judge(createRound(chart),'leftUp',3+offset)?.result ?? null,expected);
+  for (const [offset,expected] of [[-.421,null],[-.42,'Good'],[-.2,'Perfect'],[0,'Perfect'],[.2,'Perfect'],[.42,'Good'],[.421,null]]) {
+    assert.equal(judge(createRound(chart),'leftHip',3+offset)?.result ?? null,expected);
   }
+});
+test('easy mode widens timing windows', () => {
+  assert.equal(judge(createRound(chart),'leftHip',3.5)?.result ?? null,null);
+  assert.equal(judge(createRound(chart),'leftHip',3.7,'easy')?.result ?? null,'Good');
+  assert.equal(judge(createRound(chart),'leftHip',3.59,'easy')?.result ?? null,'Perfect');
+});
+test('medium mode spaces out notes while keeping all four poses available', () => {
+  const denseChart = [
+    { time:3, pose:'leftHand' },
+    { time:3.2, pose:'rightHand' },
+    { time:3.4, pose:'rightHip' },
+    { time:4.1, pose:'leftHip' },
+    { time:5.05, pose:'rightHand' },
+    { time:5.65, pose:'rightHip' },
+  ];
+  assert.deepEqual(notesForMode(denseChart,'medium'),[
+    { time:3, pose:'leftHand' },
+    { time:5.05, pose:'rightHand' },
+  ]);
+  assert.equal(judge(createRound(chart),'leftHip',3.5)?.result ?? null,null);
+  assert.equal(judge(createRound(chart),'leftHip',3.5,'medium')?.result ?? null,'Good');
+  assert.equal(judge(createRound(chart),'leftHip',3.44,'medium')?.result ?? null,'Perfect');
+});
+test('easy mode reduces charts to alternating hip poses with more breathing room', () => {
+  const hardChart = [
+    { time:3, pose:'leftHand' },
+    { time:3.4, pose:'rightHand' },
+    { time:4, pose:'rightHip' },
+    { time:5.2, pose:'leftHand' },
+    { time:6.6, pose:'rightHand' },
+    { time:8.9, pose:'leftHand' },
+  ];
+  assert.deepEqual(notesForMode(hardChart,'easy'),[
+    { time:3, pose:'leftHip' },
+    { time:6.6, pose:'rightHip' },
+  ]);
 });
 test('a wrong pose and a held/repeated event cannot consume a note twice', () => {
   const round = createRound(chart);
-  assert.equal(judge(round,'rightUp',3),null);
-  assert.ok(judge(round,'leftUp',3));
-  assert.equal(judge(round,'leftUp',3.1),null);
+  assert.equal(judge(round,'rightHip',3),null);
+  assert.ok(judge(round,'leftHip',3));
+  assert.equal(judge(round,'leftHip',3.1),null);
   assert.equal(round.score,100); assert.equal(round.hits,1);
 });
 test('overdue notes miss once, reset combo, and cannot be hit afterward', () => {
   const round = createRound(chart);
-  judge(round,'leftUp',3);
-  assert.equal(expireNotes(round,4.55),false);
-  assert.equal(expireNotes(round,4.56),true);
+  judge(round,'leftHip',3);
+  assert.equal(expireNotes(round,4.66),false);
+  assert.equal(expireNotes(round,4.68),true);
   assert.equal(round.combo,0); assert.equal(round.bestCombo,1);
   assert.equal(round.misses,1); assert.equal(expireNotes(round,20),false);
-  assert.equal(judge(round,'rightUp',4.25),null);
+  assert.equal(judge(round,'rightHip',4.25),null);
 });
 test('new rounds do not mutate song charts or retain previous results', () => {
-  const first = createRound(chart); judge(first,'leftUp',3);
+  const first = createRound(chart); judge(first,'leftHip',3);
   const retry = createRound(chart);
   assert.equal(retry.score,0); assert.equal(retry.notes[0].result,null);
   assert.equal(chart[0].result,undefined);
+});
+test('the center character previews the next unscored cue', () => {
+  const round = createRound(chart);
+  assert.equal(nextCuePose(round, 2), 'leftHip');
+  judge(round,'leftHip',3);
+  assert.equal(nextCuePose(round, 3), 'rightHip');
+  expireNotes(round, 5);
+  assert.equal(nextCuePose(round, 5), null);
 });
 test('both authored charts give a player time to move and finish before the audio ends', () => {
   assert.equal(songs.length,2);
@@ -59,7 +104,7 @@ test('corner cues converge on their targets exactly at the audio beat on every v
   const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-9);
   for (const [width, height] of [[1200, 660], [354, 440]]) {
     for (const [pose, [side, level]] of Object.entries(cueCorners)) {
-      const incoming = cuePosition(pose, 2.5, width, height);
+      const incoming = cuePosition(pose, 4.5, width, height);
       assert.equal(incoming.x, incoming.origin.x);
       assert.equal(incoming.y, incoming.origin.y);
       assert.equal(Math.sign(incoming.x - width / 2), side);
@@ -67,7 +112,7 @@ test('corner cues converge on their targets exactly at the audio beat on every v
       const onBeat = cuePosition(pose, 0, width, height);
       close(onBeat.x, onBeat.target.x);
       close(onBeat.y, onBeat.target.y);
-      const halfway = cuePosition(pose, 1.25, width, height);
+      const halfway = cuePosition(pose, 2.25, width, height);
       close(halfway.x, (incoming.x + onBeat.x) / 2);
       close(halfway.y, (incoming.y + onBeat.y) / 2);
       const late = cuePosition(pose, -.3, width, height);

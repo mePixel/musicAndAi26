@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Camera, CameraOff, Check, Keyboard, Pause, Play, Volume2, Zap } from 'lucide-react';
+import { ArrowUpRight, Camera, CameraOff, Check, Keyboard, Pause, Play, Upload, Volume2, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Slider } from '@/components/ui/slider';
 import { createCamera } from '../pose.js';
-import { poses, controlPose } from '../poses.js';
-import { songs } from '../songs.js';
+import { playablePoses as poses, controlPose } from '../poses.js';
+import { GAME_MODES } from '../difficulty.js';
 import waveforms from '../waveforms.json';
 import { formatTime } from '@/lib/utils';
 import { PoseDancer } from './PoseDancer.jsx';
 import './poster.css';
 
-export function PosterHome({ song, onSong, input, onInput, onPlay, onPractice, starting, error, instructions, volume, onVolume }) {
-  const root = useRef(null), video = useRef(null), overlay = useRef(null);
+export function PosterHome({ song, tracks, onSong, input, onInput, mode, onMode, onUpload, uploading, onPlay, onPractice, starting, error, instructions, volume, onVolume }) {
+  const root = useRef(null), video = useRef(null), overlay = useRef(null), uploadInput = useRef(null);
   const cameraFrame = useRef(null);
   const [cameraOn, setCameraOn] = useState(false);
   const [cameraPhase, setCameraPhase] = useState('off');
@@ -92,7 +92,10 @@ export function PosterHome({ song, onSong, input, onInput, onPlay, onPractice, s
           <ToggleGroup value={[input]} onValueChange={values => { if (values.length) { onInput(values[0]); if (values[0] === 'keyboard') { setCameraOn(false); setCameraPhase('off'); } } }} aria-label="Game controls">
             <ToggleGroupItem value="camera"><Camera />Camera</ToggleGroupItem><ToggleGroupItem value="keyboard"><Keyboard />Keyboard</ToggleGroupItem>
           </ToggleGroup>
-          <p>{input === 'keyboard' ? 'Your keys. Your beat. Press 1–4.' : 'Four poses. A whole lot of rhythm.'}</p>
+          <ToggleGroup value={[mode]} onValueChange={values => { if (values.length) onMode(values[0]); }} aria-label="Game mode">
+            {Object.entries(GAME_MODES).map(([id,config]) => <ToggleGroupItem key={id} value={id}>{config.label}</ToggleGroupItem>)}
+          </ToggleGroup>
+          <p>{GAME_MODES[mode]?.description ?? (input === 'keyboard' ? 'Your keys. Your beat. Press 1–4.' : 'Four poses. A whole lot of rhythm.')}</p>
         </div>
         <div className="poster-play-area">
           <Button className="poster-play" onClick={onPlay} disabled={starting} aria-label={`Play ${song.title}`}><Play aria-hidden="true" /><span>{starting ? 'One sec…' : <>LET’S<br />PLAY</>}</span><ArrowUpRight aria-hidden="true" /></Button>
@@ -109,13 +112,23 @@ export function PosterHome({ song, onSong, input, onInput, onPlay, onPractice, s
       </section>
       <section className="poster-tracks" aria-label="Choose a song">
         <ToggleGroup value={[song.id]} onValueChange={values => { if (values.length) onSong(values[0]); }} aria-label="Choose a song">
-          {songs.map((track, index) => <ToggleGroupItem className="poster-track" key={track.id} value={track.id} aria-label={`Select ${track.title}`}>
+          {tracks.map((track, index) => {
+            const waveform = waveforms[track.id] ?? waveforms['first-groove'] ?? [];
+            return <ToggleGroupItem className="poster-track" key={track.id} value={track.id} aria-label={`Select ${track.title}`}>
             <span className="poster-track-number">0{index + 1}</span>
             <span className="poster-track-info"><strong>{track.title}</strong><span>{track.bpm} BPM · {formatTime(track.duration)}</span><small>{song.id === track.id ? <><Check /> SELECTED</> : 'PICK YOUR BEAT'} </small></span>
-            <svg className="poster-wave" viewBox="0 0 240 70" preserveAspectRatio="none" role="img" aria-label={`${track.title} audio waveform`}>{waveforms[track.id].filter((_,i) => i % 3 === 0).map((amplitude,i) => <rect key={i} x={i * 6} y={35 - Math.max(2, amplitude * 30)} width="3" height={Math.max(4, amplitude * 60)} rx="1" />)}</svg>
+            <svg className="poster-wave" viewBox="0 0 240 70" preserveAspectRatio="none" role="img" aria-label={`${track.title} audio waveform`}>{waveform.filter((_,i) => i % 3 === 0).map((amplitude,i) => <rect key={i} x={i * 6} y={35 - Math.max(2, amplitude * 30)} width="3" height={Math.max(4, amplitude * 60)} rx="1" />)}</svg>
             <ArrowUpRight className="track-arrow" aria-hidden="true" />
-          </ToggleGroupItem>)}
+          </ToggleGroupItem>;
+          })}
         </ToggleGroup>
+        <div className="poster-upload">
+          <input ref={uploadInput} type="file" accept="audio/*" multiple webkitdirectory="" directory="" onChange={onUpload} hidden />
+          <Button variant="ghost" onClick={() => uploadInput.current?.click()} disabled={uploading || starting}>
+            <Upload />{uploading ? 'Analyzing stems...' : 'Upload stem folder'}
+          </Button>
+          <p>Use a folder with drums, bass, other, and vocals stems. Nothing uploads.</p>
+        </div>
       </section>
       {error && <p className="poster-error" role="alert">{error}</p>}
     </main>

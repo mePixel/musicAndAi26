@@ -127,8 +127,14 @@ restart, and exit. Fourteen focused tests and the build pass; the older pose tes
 file still imports the removed `classifyPose` export. Physical gesture control
 and audible pause/resume timing still need a human playtest.
 
-Status: implemented. Scope is the rhythm game only. The production build and
-nine focused tests pass. The latest UI uses React and customized shadcn controls,
+Latest charting/audio update: browser-local stem analysis can add a generated
+song from drums, bass, other, and vocals stems; hit effects now load from the
+pose metadata and use the copied `*_01.wav` samples in `public/audio`. Easy mode
+limits charts to the two hip poses, spaces notes out, and widens the timing
+window while Normal keeps all four lanes.
+
+Status: implemented. Scope is the rhythm game and browser-local chart generation.
+The production build and focused tests pass. The latest UI uses React and customized shadcn controls,
 with a separate song-selection page and focused game screen. Browser checks
 cover keyboard scoring, song selection, results, restart, the instructions dialog,
 desktop/mobile layouts, and the camera loading/framing state. Before the redesign, a live camera round
@@ -194,17 +200,15 @@ available beside the game. Missing tracking clears the character’s live pose.
 
 | Lane | Pose | Initial recognition rule |
 | --- | --- | --- |
-| 1 | Left hand up | Left wrist above its shoulder; right hand lowered |
-| 2 | Right hand up | Right wrist above its shoulder; left hand lowered |
-| 3 | Both hands up | Both wrists above their shoulders |
-| 4 | Arms spread | Both arms extended outward around shoulder height |
+| 1 | Left hand at left hip | Trained class: Left hand - left hip |
+| 2 | Right hand at right hip | Trained class: Right hand - right hip |
+| 3 | Left hand at chest/shoulder | Trained class: Left hand - chest/shoulder |
+| 4 | Right hand at chest/shoulder | Trained class: Right hand - chest/shoulder |
 
-Use shoulders, elbows, and wrists, with distances relative to shoulder width.
-Leave a clear margin between raised, spread, and lowered positions. Treat
-intermediate positions as no pose; check Both hands up before single-hand poses.
-Tune simple thresholds on the demo laptop. Left/right mean the player's
-anatomical left/right; mirror preview and cue figures consistently and confirm
-this during playtesting.
+The trained model also exposes `startStop` as a control gesture. It is not a
+playable lane and must never be assigned by the beatmap generator. Left/right
+mean the player's anatomical left/right; mirror preview and cue figures
+consistently and confirm this during playtesting.
 
 A pose must remain stable for about 100 ms before it counts. Emit one event
 on entry using the song time when the pose is confirmed. Holding it emits no
@@ -244,9 +248,10 @@ ignore held-key repeats and typing in fields.
 
 ## Songs and maps
 
-Ship two tracks of roughly 30–60 seconds with manually timed charts. Use original
-or freely usable bundled audio and retain required attribution. No music account,
-beat detection, or Guitar Hero file import is needed.
+Ship two tracks of roughly 30–60 seconds with prepared charts. Use original or
+freely usable bundled audio and retain required attribution. No music account or
+Guitar Hero file import is needed. Players may also select a local audio file;
+that file is decoded and analyzed entirely in the browser.
 
 Beginner charts have notes at least one second apart, the first note at three
 seconds or later, no simultaneous notes, and no consecutive identical poses.
@@ -272,13 +277,58 @@ Times are seconds from audio start. Keep charts sorted and note results in
 session memory. Four fixed pose-to-lane and pose-to-sound assignments are enough.
 No database or persistent score storage is required.
 
+### Browser-local song generation
+
+For the current implementation, the song-selection page accepts a manually
+separated stem folder. Recognize four files by their filename suffixes:
+`_drums`, `_bass`, `_other`, and `_vocals`. Decode the aligned stems in the
+browser, mix only bass, other, and vocals for playback, and use the isolated
+drums stem only for beatmap analysis. Triggered pose samples replace the omitted
+drum layer instead of doubling it. Nothing is uploaded or persisted. Automated browser-side stem
+separation remains a later enhancement.
+
+Analyze the drums stem with four cascaded biquad configurations: kick/bass drum
+uses a low-pass, snare a mid-band pass, hi-hat an upper high-pass, and crash a
+high-mid band. Build one shared onset timeline, then classify each hit from its
+low/mid/high energy balance. Distinguish crash from hi-hat with a 70-160 ms
+high-frequency decay window that ends before the next possible eighth-note hit.
+Require each candidate to have a meaningful band-to-full-spectrum energy ratio.
+
+`POSSIBLE_GESTURES` in `poses.js` is the top-level source for every gesture, its gameplay
+status, drum instrument, sample, and analysis filter. The required mapping is:
+
+| Gesture | Instrument |
+| --- | --- |
+| Left hip | Snare |
+| Right hip | Hi-hat |
+| Left chest | Kick / bass drum |
+| Right chest | Crash |
+| Start/stop | Control only; no chart instrument |
+
+An instrument onset maps directly to its configured gesture. Pose assignment is
+not random, and the start/stop control must never appear as a chart note.
+
+Estimate tempo with a whole-track BPM search scored against the shared onset
+timeline, refine the winning BPM, then estimate phase for the requested grid.
+Quantize every playable event before filtering. Easy uses quarter notes, medium eighth notes, and hard
+sixteenth notes. Keep the original detected timestamp as `sourceTime` and include
+the BPM, subdivision, high-precision step and phase, and each event's integer
+`gridIndex` for tuning and exact long-track reconstruction. Do not invent
+periodic fallback notes when detection is weak. Reject a track with a useful
+message when fewer than four drum-like impacts are found.
+
+Derive event spacing from the estimated grid rather than a fixed number of
+seconds. This preserves eighth-note hi-hats at common tempos such as the roughly
+110 BPM kick/hat/snare/hat pattern in the separated calibration track.
+
+Validate pose IDs and keep events sorted. The decoded buffer, generated notes,
+and derived waveform remain in tab memory; nothing is sent to a server or persisted.
+
 ## Small implementation
 
 Use Vite, React with JavaScript, customized shadcn/ui, Tailwind CSS, Canvas 2D,
-and Web Audio. Use `@mediapipe/tasks-vision` for tracking, with the pretrained Pose Landmarker Lite
-model in video mode for one person. Bundle the model and matching WASM assets.
-Google's [Pose Landmarker web guide](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/web_js)
-documents the package, model loading, video inference, and body landmarks.
+and Web Audio. Use the bundled Teachable Machine pose model with TensorFlow.js
+for one-person camera classification. Keep its model, metadata, and weights local.
 
 Request video only and process it locally, without recording or uploading frames.
 Camera access requires browser permission and HTTPS or localhost; see
@@ -306,13 +356,15 @@ Frontend/
     pose.js             webcam, landmarks, four-pose classification
     game.js             corner cue canvas, hit judging, score
     audio.js            audio clock, track playback, synthesized hit sounds
+    browserBeatmap.js   browser-only instrument-onset chart generation
+    beatmaps.js         generated-chart loading and validation
     poses.js            pose metadata and cue pictograms
     songs.js            song metadata and hand-authored charts
     style.css
   public/
     audio/              two original tracks
-    models/             pretrained pose model
-    wasm/               matching MediaPipe runtime assets
+    models/             pretrained Teachable Machine pose model
+    wasm/               retained local MediaPipe runtime assets
 ```
 
 Use ordinary functions and a small state object. Leave `Backend/` unused.
@@ -327,6 +379,9 @@ Use ordinary functions and a small state object. Leave `Backend/` unused.
    animation uses the audio clock; React updates the surrounding controls.
 4. Results show hits, misses, and best combo. Retry creates a fresh round;
    Back to songs and Stop release resources and return to selection.
+5. Upload stem folder decodes four local separated files, rebuilds a drumless
+   backing track, derives a waveform and drum-stem onset chart, adds it to the in-memory
+   track list, and uses the same game screen and clock.
 
 ## Done means
 
@@ -341,6 +396,10 @@ Use ordinary functions and a small state object. Leave `Backend/` unused.
 - Holding a pose or briefly losing tracking cannot generate repeated hits.
 - Notes and audio stay aligned through a full track and after Restart.
 - Both songs have playable charts with enough time to change poses.
+- A local four-file stem folder can be decoded and charted without Python, a
+  backend, or a network upload.
+- Generated timings are quantized to the declared beat grid and are never replaced
+  by an arbitrary metronome fallback when detection is weak.
 - Stop silences playback; leaving gameplay releases the camera; Retry starts clean.
 - Camera/model/audio errors explain what happened and missing tracking is visible.
 - Practice opens from the pose guide, recognizes all four poses, clears stale
@@ -350,5 +409,5 @@ Use ordinary functions and a small state object. Leave `Backend/` unused.
   on the demo laptop; keyboard-only checks are insufficient.
 
 Keep the MVP here: no full dance recognition, finger tracking, custom training,
-3D character, multiplayer, chart editor, uploads, automatic song mapping,
-accounts, or backend. Add none of these without a scope change.
+3D character, multiplayer, chart editor, server uploads, accounts, or backend.
+Add none of these without a scope change.

@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { GripHorizontal } from 'lucide-react';
 import './index.css';
 import { PoseIcon } from '../PoseGuide.jsx';
-import { poses } from '../../poses.js';
+import { playablePoses as poses } from '../../poses.js';
 
 const EDGE_ZONE = 0.25;
 

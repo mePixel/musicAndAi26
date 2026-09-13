@@ -3,3 +3,6 @@ dist/
 Frontend/public/wasm/
 .DS_Store
 .claude/
+__pycache__/
+*.pyc
+generated/

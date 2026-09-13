@@ -1,9 +1,15 @@
-export const poses = [
+export const POSSIBLE_GESTURES = [
   {
     id: "leftHip",
     label: "Left Hip",
     short: "Left hip",
     color: "#ffd12e",
+    difficulty: 1,
+    weight: 1,
+    playable: true,
+    instrument: "snare",
+    sampleUrl: "/audio/snare_01.wav",
+    filter: { type: "bandpass", lowHz: 180, highHz: 2500, frame: 1024, hop: 256, minBandRatio: 0.12, minRelativeToLow: 0.48 },
 
     arms: [
       [32, 23, 44, 31, 48, 43],
@@ -16,6 +22,12 @@ export const poses = [
     label: "Right hip",
     short: "Right hip",
     color: "#49b6ff",
+    difficulty: 1,
+    weight: 1,
+    playable: true,
+    instrument: "hiHat",
+    sampleUrl: "/audio/hihat_01.wav",
+    filter: { type: "highpass", lowHz: 5000, frame: 512, hop: 128, minBandRatio: 0.1, minDominance: 1.25, maxSustain: 0.18 },
 
     arms: [
       [32, 23, 20, 31, 16, 43],
@@ -28,6 +40,12 @@ export const poses = [
     label: "Left Hand",
     short: "Left Hand",
     color: "#ff6f98",
+    difficulty: 2,
+    weight: 0.8,
+    playable: true,
+    instrument: "bass",
+    sampleUrl: "/audio/kick_01.wav",
+    filter: { type: "lowpass", highHz: 180, frame: 1024, hop: 256, minBandRatio: 0.08, minClassificationRatio: 0.3 },
 
     arms: [
       [32, 23, 20, 31, 30, 30],
@@ -40,6 +58,12 @@ export const poses = [
     label: "Right Hand",
     short: "Right Hand",
     color: "#27deb2",
+    difficulty: 2,
+    weight: 0.8,
+    playable: true,
+    instrument: "crash",
+    sampleUrl: "/audio/crash_01.wav",
+    filter: { type: "bandpass", lowHz: 2500, highHz: 8000, frame: 2048, hop: 256, minBandRatio: 0.1, minClassificationRatio: 0.28, minDominance: 1.1, minSustain: 0.18 },
 
     arms: [
       [32, 23, 20, 31, 18, 43],
@@ -52,6 +76,12 @@ export const poses = [
     label: "Default",
     short: "Default",
     color: "#e36414",
+    difficulty: 1,
+    weight: 0,
+    playable: false,
+    instrument: null,
+    sampleUrl: null,
+    filter: null,
 
     arms: [
       [32, 23, 20, 31, 18, 43],
@@ -65,12 +95,21 @@ export const controlPose = {
   label: "Default",
   short: "Default",
   color: "#e36414",
+  playable: false,
+  instrument: null,
+  sampleUrl: null,
+  filter: null,
 
   arms: [
     [32, 23, 20, 31, 18, 43],
     [32, 23, 44, 31, 46, 43],
   ],
 };
+
+export const poses = POSSIBLE_GESTURES;
+export const playablePoses = POSSIBLE_GESTURES.filter(pose => pose.playable);
+export const gestureById = new Map(POSSIBLE_GESTURES.map(gesture => [gesture.id,gesture]));
+export const GESTURES = POSSIBLE_GESTURES;
 
 export function drawPose(ctx, pose, x, y, size, color) {
   ctx.save();

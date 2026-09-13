@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createRound, judge, expireNotes } from './game.js';
+import { notesForMode } from './difficulty.js';
 import { songs } from './songs.js';
-import { poses, controlPose } from './poses.js';
+import { playablePoses as poses, controlPose } from './poses.js';
 
-const chart = [{ time: 3, pose: 'leftUp' }, { time: 4.25, pose: 'rightUp' }];
+const chart = [{ time: 3, pose: 'leftHip' }, { time: 4.25, pose: 'rightHip' }];
 
 test('the starting pose is never an instrument cue or chart note', () => {
   const instruments = poses.filter(pose => pose.id !== controlPose.id);
@@ -16,27 +17,56 @@ test('the starting pose is never an instrument cue or chart note', () => {
 
 test('timing boundaries award Perfect, Good, or no hit', () => {
   for (const [offset,expected] of [[-.301,null],[-.3,'Good'],[-.15,'Perfect'],[0,'Perfect'],[.15,'Perfect'],[.3,'Good'],[.301,null]]) {
-    assert.equal(judge(createRound(chart),'leftUp',3+offset)?.result ?? null,expected);
+    assert.equal(judge(createRound(chart),'leftHip',3+offset)?.result ?? null,expected);
   }
+});
+test('easy mode widens timing windows', () => {
+  assert.equal(judge(createRound(chart),'leftHip',3.4)?.result ?? null,null);
+  assert.equal(judge(createRound(chart),'leftHip',3.4,'easy')?.result ?? null,'Good');
+  assert.equal(judge(createRound(chart),'leftHip',3.2,'easy')?.result ?? null,'Perfect');
+});
+test('medium mode keeps all notes but softens timing', () => {
+  const denseChart = [
+    { time:3, pose:'leftHand' },
+    { time:3.2, pose:'rightHand' },
+    { time:3.4, pose:'rightHip' },
+  ];
+  assert.deepEqual(notesForMode(denseChart,'medium'),denseChart);
+  assert.equal(judge(createRound(chart),'leftHip',3.34)?.result ?? null,null);
+  assert.equal(judge(createRound(chart),'leftHip',3.34,'medium')?.result ?? null,'Good');
+  assert.equal(judge(createRound(chart),'leftHip',3.17,'medium')?.result ?? null,'Perfect');
+});
+test('easy mode reduces charts to alternating hip poses with more breathing room', () => {
+  const hardChart = [
+    { time:3, pose:'leftHand' },
+    { time:3.4, pose:'rightHand' },
+    { time:4, pose:'rightHip' },
+    { time:5.2, pose:'leftHand' },
+  ];
+  assert.deepEqual(notesForMode(hardChart,'easy'),[
+    { time:3, pose:'leftHip' },
+    { time:4, pose:'rightHip' },
+    { time:5.2, pose:'leftHip' },
+  ]);
 });
 test('a wrong pose and a held/repeated event cannot consume a note twice', () => {
   const round = createRound(chart);
-  assert.equal(judge(round,'rightUp',3),null);
-  assert.ok(judge(round,'leftUp',3));
-  assert.equal(judge(round,'leftUp',3.1),null);
+  assert.equal(judge(round,'rightHip',3),null);
+  assert.ok(judge(round,'leftHip',3));
+  assert.equal(judge(round,'leftHip',3.1),null);
   assert.equal(round.score,100); assert.equal(round.hits,1);
 });
 test('overdue notes miss once, reset combo, and cannot be hit afterward', () => {
   const round = createRound(chart);
-  judge(round,'leftUp',3);
+  judge(round,'leftHip',3);
   assert.equal(expireNotes(round,4.55),false);
   assert.equal(expireNotes(round,4.56),true);
   assert.equal(round.combo,0); assert.equal(round.bestCombo,1);
   assert.equal(round.misses,1); assert.equal(expireNotes(round,20),false);
-  assert.equal(judge(round,'rightUp',4.25),null);
+  assert.equal(judge(round,'rightHip',4.25),null);
 });
 test('new rounds do not mutate song charts or retain previous results', () => {
-  const first = createRound(chart); judge(first,'leftUp',3);
+  const first = createRound(chart); judge(first,'leftHip',3);
   const retry = createRound(chart);
   assert.equal(retry.score,0); assert.equal(retry.notes[0].result,null);
   assert.equal(chart[0].result,undefined);

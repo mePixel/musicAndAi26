@@ -22,10 +22,18 @@ npm run build  # static site in Frontend/dist
 npm run preview
 ```
 
+## Upload a song
+
+Choose **Upload song** on the song-selection page and select a local audio file.
+The browser decodes it with Web Audio and generates pose timings through separate
+bass, snare, hi-hat, and crash filters. Audio stays in the tab; there is no
+upload, backend, or Python step. Detected instrument onsets are quantized to a
+song-derived beat grid before they become playable notes.
+
 ## Play
 
-1. Choose **First Groove** (96 BPM, 40 seconds) or **Disco Circuit** (120 BPM,
-   36 seconds) on the song-selection page. Choose Camera or Keyboard.
+1. Choose **First Groove**, **Disco Circuit**, or upload a local song on the
+   song-selection page. Choose Camera or Keyboard.
 2. Press **Play** to open the game. In Camera mode, allow camera access and step
    back until your shoulders and hands fit. Tracking starts the countdown.
 3. Make the matching pose when its note reaches the target. Perfect earns 100
@@ -50,14 +58,16 @@ are processed locally; there are no uploads, accounts, or backend calls.
 - `Frontend/src/App.jsx`: song selection, input choice, instructions, and volume.
 - `Frontend/src/Game.jsx`: game screen, countdown, input, and round lifecycle.
 - `Frontend/src/components/ui/`: customized shadcn components from its official CLI.
-- `Frontend/src/pose.js`: camera, MediaPipe, four-pose rules, and stable-entry latch.
+- `Frontend/src/pose.js`: camera, trained pose classification, and stable-entry latch.
 - `Frontend/src/game.js`: hit windows, score, misses, and canvas note highway.
-- `Frontend/src/audio.js`: audio clock, music playback, and short hit sounds.
-- `Frontend/src/poses.js` and `songs.js`: pose icons and hand-authored charts.
+- `Frontend/src/audio.js`: audio clock, music playback, local decoding, and hit sounds.
+- `Frontend/src/browserBeatmap.js`: browser-only instrument filtering and chart generation.
+- `Frontend/src/beatmaps.js`: generated-chart loading and validation.
+- `Frontend/src/poses.js` and `songs.js`: pose icons and bundled track metadata.
 
 The UI uses React with JavaScript, shadcn/ui (Base UI primitives), Tailwind CSS,
-and Vite. The game stays in small Canvas 2D, Web Audio, and MediaPipe modules.
-`Backend/` is unused; this version is just the rhythm game.
+and Vite. The game stays in small Canvas 2D, Web Audio, and local pose-model modules.
+`Backend/` is unused; this version is the rhythm game plus browser-local song generation.
 
 The initial windows are ±150 ms for Perfect and ±300 ms for Good. A pose must
 settle for 100 ms before it triggers. These values can be tuned in `game.js` and

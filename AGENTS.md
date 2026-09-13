@@ -4,7 +4,8 @@
 
 Build a small webcam rhythm game for a hackathon. Flying notes cue body and hand
 poses; the player matches them on the beat to trigger hit sounds, visual feedback,
-and points. Each song has a hand-authored timeline of pose cues. Read
+and points. Bundled songs use prepared pose charts, while uploaded songs generate
+a chart locally in the browser. Read
 [PLAN.md](PLAN.md) for the game behavior and verification status.
 
 The implementation lives in `Frontend/`, with two bundled original tracks and
@@ -18,7 +19,8 @@ rhythm game; MIDI and a separate instrument mode were explicitly dropped.
   with JavaScript/JSX, shadcn components, Tailwind CSS, and Vite in `Frontend/`.
   Installing their required dependencies is part of that requested migration.
   This supersedes the original no-UI-framework restriction. Keep Canvas 2D,
-  native Web Audio, and `@mediapipe/tasks-vision` for the existing game logic.
+  native Web Audio, and the pulled Teachable Machine/TensorFlow pose model for
+  the existing game logic.
 - Show song selection first; Play opens a focused game screen. Customize shadcn
   for clean, readable controls inspired by sampler hardware: a silver panel,
   orange transport controls, and a dark waveform display. Use real audio waveform
@@ -32,8 +34,9 @@ rhythm game; MIDI and a separate instrument mode were explicitly dropped.
   cloud storage, analytics, generative AI, and deployment infrastructure.
 - Use shadcn controls, CSS, and a canvas animation loop. No game engine, 3D avatar
   system, extra state library, or custom machine-learning training.
-- Hand-author short song charts as data. No automatic chart generation, song
-  imports, or chart editor. Keep the four supported poses fixed for the demo.
+- Keep uploaded-song generation browser-only with Web Audio and instrument-band
+  onset analysis. Do not add Python services, upload endpoints, or a chart editor.
+  Keep the four supported poses fixed for the demo.
 - Use the song's audio clock for note movement and hit timing. One pose entry
   can consume at most one note; holding a pose must not repeatedly score.
 - Handle errors a player can encounter: camera denied, tracking lost, or audio

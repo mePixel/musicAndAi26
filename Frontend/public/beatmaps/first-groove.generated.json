@@ -1,0 +1,373 @@
+{
+  "version": 1,
+  "metadata": {
+    "title": "first-groove",
+    "duration": 40.0,
+    "bpm": 95.703,
+    "difficulty": "easy",
+    "seed": 42,
+    "poseCount": 4
+  },
+  "poses": [
+    "leftHip",
+    "rightHip",
+    "leftChest",
+    "rightChest"
+  ],
+  "events": [
+    {
+      "id": 0,
+      "time": 3.135,
+      "pose": "leftChest",
+      "strength": 0.866
+    },
+    {
+      "id": 1,
+      "time": 3.762,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 2,
+      "time": 4.389,
+      "pose": "leftHip",
+      "strength": 1.0
+    },
+    {
+      "id": 3,
+      "time": 5.016,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 4,
+      "time": 5.642,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 5,
+      "time": 6.269,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 6,
+      "time": 6.885,
+      "pose": "rightChest",
+      "strength": 0.763
+    },
+    {
+      "id": 7,
+      "time": 7.512,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 8,
+      "time": 8.139,
+      "pose": "rightHip",
+      "strength": 0.929
+    },
+    {
+      "id": 9,
+      "time": 8.766,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 10,
+      "time": 9.392,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 11,
+      "time": 10.019,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 12,
+      "time": 10.635,
+      "pose": "leftHip",
+      "strength": 0.672
+    },
+    {
+      "id": 13,
+      "time": 11.262,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 14,
+      "time": 11.889,
+      "pose": "leftChest",
+      "strength": 0.944
+    },
+    {
+      "id": 15,
+      "time": 12.516,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 16,
+      "time": 13.142,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 17,
+      "time": 13.769,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 18,
+      "time": 14.385,
+      "pose": "rightChest",
+      "strength": 0.777
+    },
+    {
+      "id": 19,
+      "time": 15.012,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 20,
+      "time": 15.639,
+      "pose": "rightChest",
+      "strength": 0.868
+    },
+    {
+      "id": 21,
+      "time": 16.266,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 22,
+      "time": 16.893,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 23,
+      "time": 17.519,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 24,
+      "time": 18.135,
+      "pose": "rightChest",
+      "strength": 0.731
+    },
+    {
+      "id": 25,
+      "time": 18.762,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 26,
+      "time": 19.389,
+      "pose": "leftHip",
+      "strength": 0.903
+    },
+    {
+      "id": 27,
+      "time": 20.016,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 28,
+      "time": 20.643,
+      "pose": "rightChest",
+      "strength": 0.65
+    },
+    {
+      "id": 29,
+      "time": 21.269,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 30,
+      "time": 21.885,
+      "pose": "rightChest",
+      "strength": 0.766
+    },
+    {
+      "id": 31,
+      "time": 22.512,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 32,
+      "time": 23.139,
+      "pose": "rightHip",
+      "strength": 0.878
+    },
+    {
+      "id": 33,
+      "time": 23.766,
+      "pose": "rightChest",
+      "strength": 0.65
+    },
+    {
+      "id": 34,
+      "time": 24.393,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 35,
+      "time": 25.02,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 36,
+      "time": 25.635,
+      "pose": "rightChest",
+      "strength": 0.681
+    },
+    {
+      "id": 37,
+      "time": 26.262,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 38,
+      "time": 26.889,
+      "pose": "rightChest",
+      "strength": 0.888
+    },
+    {
+      "id": 39,
+      "time": 27.516,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 40,
+      "time": 28.143,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 41,
+      "time": 28.77,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 42,
+      "time": 29.385,
+      "pose": "leftHip",
+      "strength": 0.801
+    },
+    {
+      "id": 43,
+      "time": 30.012,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 44,
+      "time": 30.639,
+      "pose": "leftHip",
+      "strength": 0.858
+    },
+    {
+      "id": 45,
+      "time": 31.266,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 46,
+      "time": 31.893,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 47,
+      "time": 32.52,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 48,
+      "time": 33.135,
+      "pose": "leftChest",
+      "strength": 0.746
+    },
+    {
+      "id": 49,
+      "time": 33.762,
+      "pose": "rightHip",
+      "strength": 0.65
+    },
+    {
+      "id": 50,
+      "time": 34.389,
+      "pose": "rightHip",
+      "strength": 0.906
+    },
+    {
+      "id": 51,
+      "time": 35.016,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 52,
+      "time": 35.643,
+      "pose": "leftHip",
+      "strength": 0.65
+    },
+    {
+      "id": 53,
+      "time": 36.27,
+      "pose": "rightChest",
+      "strength": 0.65
+    },
+    {
+      "id": 54,
+      "time": 36.885,
+      "pose": "leftChest",
+      "strength": 0.778
+    },
+    {
+      "id": 55,
+      "time": 37.512,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 56,
+      "time": 38.139,
+      "pose": "leftHip",
+      "strength": 0.9
+    },
+    {
+      "id": 57,
+      "time": 38.766,
+      "pose": "leftChest",
+      "strength": 0.65
+    },
+    {
+      "id": 58,
+      "time": 39.393,
+      "pose": "leftHip",
+      "strength": 0.65
+    }
+  ]
+}

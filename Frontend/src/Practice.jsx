@@ -9,7 +9,7 @@ import { PoseIcon } from './components/PoseGuide.jsx';
 import { BrandHeader } from './components/BrandHeader.jsx';
 import { createCamera } from './pose.js';
 import { createPracticeSoundTrigger } from './audio.js';
-import { poses, controlPose } from './poses.js';
+import { playablePoses as poses, controlPose } from './poses.js';
 
 const practicePoses = [...poses, controlPose];
 
@@ -18,8 +18,7 @@ const instructions = {
   rightHip: 'Right hand on your right hip — hi-hat.',
   leftHand: 'Left hand at your chest or shoulder — bass.',
   rightHand: 'Right hand at your chest or shoulder — crash.',
-  default: 'Both hands down - ...', // change to what it should be
-  // startStop: 'Starts, pauses, or resumes the rhythm game. No instrument sound.',
+  default: 'Both hands down. This starts the rhythm game.',
 };
 
 export function Practice({ audio, onExit }) {

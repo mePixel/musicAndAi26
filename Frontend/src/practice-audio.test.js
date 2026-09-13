@@ -36,8 +36,8 @@ test('only the currently held pose plays after cooldown, never an abandoned pose
   trigger({ tracked: false, pose: null }, 700);
   trigger({ tracked: true, pose: 'rightHip' }, 900);
   assert.deepEqual(played, ['rightHip']);
-  trigger({ tracked: true, pose: 'rightChest' }, 1000);
-  assert.deepEqual(played, ['rightHip', 'rightChest']);
+  trigger({ tracked: true, pose: 'rightHand' }, 1000);
+  assert.deepEqual(played, ['rightHip', 'rightHand']);
 });
 
 test('missing tracking and silent poses do not consume the training cooldown', () => {

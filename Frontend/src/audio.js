@@ -1,17 +1,11 @@
-const hitSamples = {
-  rightHip: '/audio/hi hat (1).WAV',
-  leftHip: '/audio/snare.WAV',
-  rightHand: '/audio/ crash.mp3',
-  leftHand: '/audio/bass.wav',
-  default: ''
-};
+import { gestureById, playablePoses } from './poses.js';
 
 export function createPracticeSoundTrigger(play) {
   let lastHit = -Infinity, lastPose = null;
   return ({ tracked, pose }, now) => {
     if (!tracked || !pose) return;
     if (pose === 'default') { lastPose = pose; return; }
-    if (!Object.hasOwn(hitSamples, pose) || pose === lastPose || now - lastHit < 600) return;
+    if (!gestureById.get(pose)?.playable || pose === lastPose || now - lastHit < 600) return;
     lastHit = now;
     lastPose = pose;
     play(pose);
@@ -20,8 +14,9 @@ export function createPracticeSoundTrigger(play) {
 
 export function createAudio() {
   let context, master, source = null, startedAt = 0, trackBuffer = null, pausedTime = null;
+  let hitLoadPromise = null;
   let volume = .55, analyser;
-  const buffers = new Map(), hits = new Set();
+  const buffers = new Map(), hitBuffers = new Map(), hits = new Set();
 
   async function ensure() {
     if (!context) {
@@ -32,6 +27,7 @@ export function createAudio() {
   }
 
   async function load(url) {
+    await ensure();
     if (buffers.has(url)) return buffers.get(url);
     const response = await fetch(url);
     if (!response.ok) throw new Error('This audio file could not load. Try again.');
@@ -41,7 +37,7 @@ export function createAudio() {
 
   function hit(poseId) {
     if (context?.state !== 'running') return;
-    const buffer = buffers.get(hitSamples[poseId]);
+    const gesture = gestureById.get(poseId), buffer = hitBuffers.get(gesture?.instrument);
     if (!buffer) return;
     const sample = context.createBufferSource(), gain = context.createGain();
     sample.buffer = buffer; gain.gain.value = .65;
@@ -55,7 +51,7 @@ export function createAudio() {
   }
 
   function stopHits() {
-    for (const sample of hits) sample.stop();
+    for (const sample of hits) { try { sample.stop(); } catch {} }
     hits.clear();
   }
 
@@ -70,9 +66,49 @@ export function createAudio() {
       return analyser;
     },
     async loadHits() {
-      await Promise.all(Object.values(hitSamples).filter(Boolean).map(url => load(url).catch(() => {
-        throw new Error(`The hit sound ${url.split('/').pop().trim()} could not load. Try again.`);
-      })));
+      await ensure();
+      if (!hitLoadPromise) {
+        hitLoadPromise = Promise.all(playablePoses.map(async gesture => {
+          const buffer = await load(gesture.sampleUrl).catch(() => {
+            throw new Error(`The hit sound ${gesture.sampleUrl.split('/').pop().trim()} could not load. Try again.`);
+          });
+          hitBuffers.set(gesture.instrument, buffer);
+        }));
+      }
+      await hitLoadPromise;
+    },
+    async decode(arrayBuffer) {
+      await ensure();
+      return context.decodeAudioData(arrayBuffer.slice(0));
+    },
+    mix(stemBuffers) {
+      if (!stemBuffers.length) throw new Error('No audio stems were provided.');
+      const sampleRate = stemBuffers[0].sampleRate;
+      const channels = Math.max(...stemBuffers.map(buffer => buffer.numberOfChannels));
+      const length = Math.max(...stemBuffers.map(buffer => buffer.length));
+      if (stemBuffers.some(buffer => buffer.sampleRate !== sampleRate)) {
+        throw new Error('The separated stems must use the same sample rate.');
+      }
+      const mixed = context.createBuffer(channels,length,sampleRate);
+      let peak = 0;
+      for (let channel = 0; channel < channels; channel++) {
+        const output = mixed.getChannelData(channel);
+        for (const stem of stemBuffers) {
+          const input = stem.getChannelData(Math.min(channel,stem.numberOfChannels-1));
+          for (let index = 0; index < input.length; index++) {
+            output[index] += input[index];
+            peak = Math.max(peak,Math.abs(output[index]));
+          }
+        }
+      }
+      if (peak > .99) {
+        const gain = .99/peak;
+        for (let channel = 0; channel < channels; channel++) {
+          const output = mixed.getChannelData(channel);
+          for (let index = 0; index < output.length; index++) output[index] *= gain;
+        }
+      }
+      return mixed;
     },
     startTrack(buffer) {
       stopTrack(); stopHits(); trackBuffer = buffer; pausedTime = null;

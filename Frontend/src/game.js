@@ -1,14 +1,16 @@
-import { poses, drawPose } from './poses.js';
+import { playablePoses as poses, drawPose } from './poses.js';
+import { timingForMode } from './difficulty.js';
 
 export function createRound(notes) {
   return { notes: notes.map(note => ({ ...note, result: null })), score: 0, combo: 0, bestCombo: 0, hits: 0, misses: 0 };
 }
 
-export function judge(round, pose, time) {
-  const note = round.notes.filter(note => !note.result && note.pose === pose && Math.abs(note.time - time) <= .300001)
+export function judge(round, pose, time, mode = 'hard') {
+  const timing = timingForMode(mode);
+  const note = round.notes.filter(note => !note.result && note.pose === pose && Math.abs(note.time - time) <= timing.good)
     .sort((a,b) => Math.abs(a.time-time) - Math.abs(b.time-time))[0];
   if (!note) return null;
-  note.result = Math.abs(note.time - time) <= .150001 ? 'Perfect' : 'Good';
+  note.result = Math.abs(note.time - time) <= timing.perfect ? 'Perfect' : 'Good';
   round.score += note.result === 'Perfect' ? 100 : 50;
   round.hits++; round.combo++; round.bestCombo = Math.max(round.combo, round.bestCombo);
   return note;
@@ -16,25 +18,26 @@ export function judge(round, pose, time) {
 
 // One camera pose entry can wait for the next cue. Confidence gaps get 300 ms
 // of grace, but a different pose or a consumed entry cannot claim another cue.
-export function createCameraPoseGrace(round) {
+export function createCameraPoseGrace(round, mode = 'hard') {
+  const timing = timingForMode(mode);
   let entered = null, pending = null, lastSeen = -Infinity;
   return {
     update({ tracked, pose, event }, time) {
       if (!tracked || !pose || time < 0) return;
       if (pose !== entered || event === pose) {
         entered = pose;
-        const next = round.notes.find(note => !note.result && time - note.time <= .300001);
+        const next = round.notes.find(note => !note.result && time - note.time <= timing.good);
         pending = cueCorners[pose] && next?.pose === pose ? next : null;
       }
       if (pending) lastSeen = time;
     },
     judge(time) {
-      if (!pending || time < 0 || time - lastSeen > .300001) return null;
+      if (!pending || time < 0 || time - lastSeen > timing.good) return null;
       if (pending !== round.notes.find(note => !note.result)) {
         pending = null;
         return null;
       }
-      const note = judge(round, pending.pose, time);
+      const note = judge(round, pending.pose, time, mode);
       if (note) pending = null;
       return note;
     },
@@ -42,10 +45,11 @@ export function createCameraPoseGrace(round) {
   };
 }
 
-export function expireNotes(round, time) {
+export function expireNotes(round, time, mode = 'hard') {
+  const timing = timingForMode(mode);
   let expired = false;
   for (const note of round.notes) {
-    if (!note.result && time - note.time > .300001) {
+    if (!note.result && time - note.time > timing.good) {
       note.result = 'Miss'; round.misses++; round.combo = 0; expired = true;
     }
   }

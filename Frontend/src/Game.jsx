@@ -5,15 +5,17 @@ import { Progress } from '@/components/ui/progress';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/components/ui/empty';
 import { Spinner } from '@/components/ui/spinner';
-import { poses, controlPose } from './poses.js';
+import { playablePoses as poses, controlPose } from './poses.js';
 import { createCamera } from './pose.js';
 import { createRound, createStage, createCameraPoseGrace, expireNotes, judge } from './game.js';
 import { PoseDancer } from './components/PoseDancer.jsx';
+import { GAME_MODES, notesForMode } from './difficulty.js';
 import { formatTime } from '@/lib/utils';
+import { loadSongNotes } from './beatmaps.js';
 
 const initialHud = { score:0, combo:0, elapsed:0, countdown:3, judgement:'', hits:0, misses:0, bestCombo:0 };
 
-export function Game({ song, input, audio, onExit, onUseKeyboard }) {
+export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboard }) {
   const canvas = useRef(null), video = useRef(null), overlay = useRef(null), trigger = useRef(() => {});
   const transport = useRef(() => {});
   const cameraFrame = useRef(null), keyboardFrame = useRef(null);
@@ -26,9 +28,9 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
 
   useEffect(() => {
     let active = true, frame, status = 'loading', buffer = null, cameraReady = input === 'keyboard';
-    let tracked = false, duration = song.duration, round = createRound(song.notes), judgement = '', feedbackUntil = 0, lastHud = 0;
+    let tracked = false, duration = song.duration, round = createRound(notesForMode(song.notes,mode)), judgement = '', feedbackUntil = 0, lastHud = 0;
     const stage = createStage(canvas.current);
-    const cameraGrace = createCameraPoseGrace(round);
+    let cameraGrace = createCameraPoseGrace(round,mode);
     setHud(initialHud); setError(''); setPhase('loading');
     cameraFrame.current = null; keyboardFrame.current = null;
     setCameraState({ enabled:false, tracked:false, pose:null });
@@ -71,8 +73,8 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
       if (time < 0) return;
       const index = poses.findIndex(pose => pose.id === poseId);
       if (index < 0) return;
-      expireNotes(round,time);
-      const note = judge(round,poseId,time);
+      expireNotes(round,time,mode);
+      const note = judge(round,poseId,time,mode);
       showHit(poseId, note);
     }
     trigger.current = hit;
@@ -91,13 +93,15 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
       try {
         await audio.ensure();
         if (!active) return;
-        const [loaded,enabled] = await Promise.all([
-          audio.load(song.audioUrl),
+        const [loaded,chart,enabled] = await Promise.all([
+          song.buffer ? Promise.resolve(song.buffer) : audio.load(song.audioUrl),
+          song.generated ? Promise.resolve({ notes:song.notes }) : loadSongNotes(song),
           input === 'camera' ? camera.start() : Promise.resolve(false),
           audio.loadHits(),
         ]);
         if (!active) return;
-        buffer = loaded; duration = buffer.duration; cameraReady = input === 'keyboard' || enabled;
+        if (chart.error) console.warn(`Using authored fallback chart for ${song.title}:`,chart.error);
+        buffer = loaded; duration = buffer.duration; round = createRound(notesForMode(chart.notes,mode)); cameraGrace = createCameraPoseGrace(round,mode); cameraReady = input === 'keyboard' || enabled;
         setCameraState(previous => ({ ...previous, enabled }));
         status = 'framing'; setPhase('framing'); camera.reset();
         if (input === 'keyboard') begin();
@@ -112,12 +116,12 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
         time = audio.songTime();
         if (!audio.running) { fail('Audio was interrupted. Restart the track to continue.'); }
         else if (time >= duration) {
-          expireNotes(round,duration+1); audio.stop(); status = 'finished'; setPhase('finished'); camera.stop();
+          expireNotes(round,duration+1,mode); audio.stop(); status = 'finished'; setPhase('finished'); camera.stop();
           cameraFrame.current = null; keyboardFrame.current = null;
           setCameraState({ enabled:false, tracked:false, pose:null });
           setHud({ ...round, elapsed:duration, countdown:0, judgement:'' });
         } else {
-          if (expireNotes(round,time)) { judgement = 'Miss'; feedbackUntil = now+500; }
+          if (expireNotes(round,time,mode)) { judgement = 'Miss'; feedbackUntil = now+500; }
           if (input === 'camera') {
             const note = cameraGrace.judge(time);
             if (note) showHit(note.pose, note);
@@ -152,7 +156,7 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
       document.removeEventListener('visibilitychange',hidden);
       window.removeEventListener('pagehide',leavePage);
     };
-  },[song,input,audio,attempt,onExit]);
+  },[song,input,mode,audio,attempt,onExit]);
 
   useEffect(() => { if (phase === 'finished') resultHeading.current?.focus(); },[phase]);
 
@@ -162,7 +166,7 @@ export function Game({ song, input, audio, onExit, onUseKeyboard }) {
     <div className="game-topbar">
     <nav className="game-toolbar" aria-label="Game controls">
       <Button variant="outline" onClick={onExit}><ArrowLeft data-icon="inline-start" /><span>Back to songs</span></Button>
-      <div className="playing-title"><h1>{song.title}</h1><p>{song.bpm} BPM</p></div>
+      <div className="playing-title"><h1>{song.title}</h1><p>{song.bpm} BPM <span aria-hidden="true">·</span> {GAME_MODES[mode]?.label ?? GAME_MODES.hard.label}</p></div>
       <div className="inline-actions">
         {phase === 'playing' || phase === 'paused' ? <Button variant="outline" onClick={() => transport.current()}>
           {phase === 'paused' ? <Play data-icon="inline-start" /> : <Pause data-icon="inline-start" />}{phase === 'paused' ? 'Resume' : 'Pause'}

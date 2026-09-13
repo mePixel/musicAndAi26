@@ -78,4 +78,4 @@ def render(name, bpm, bars, roots, melody):
     print(f'{name}: {duration:.0f}s at {bpm} BPM')
 
 render('first-groove', 96, 16, [48, 44, 51, 46], [0, 7, 10, 7, 3, 7, 12, 10])
-render('disco-circuit', 120, 18, [45, 41, 48, 43], [0, 3, 7, 12, 10, 7, 3, 7])
+render('disco-circuit', 156, 18, [45, 41, 48, 43], [0, 3, 7, 12, 10, 7, 3, 7])

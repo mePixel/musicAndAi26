@@ -108,8 +108,19 @@ export const controlPose = {
 
 export const poses = POSSIBLE_GESTURES;
 export const playablePoses = POSSIBLE_GESTURES.filter(pose => pose.playable);
+export const keyboardPoseLanes = [
+  { key: "1", altKey: "W", poseId: "leftHand" },
+  { key: "2", altKey: "D", poseId: "rightHand" },
+  { key: "3", altKey: "S", poseId: "rightHip" },
+  { key: "4", altKey: "A", poseId: "leftHip" },
+].map(lane => ({ ...lane, pose: playablePoses.find(pose => pose.id === lane.poseId) }));
 export const gestureById = new Map(POSSIBLE_GESTURES.map(gesture => [gesture.id,gesture]));
 export const GESTURES = POSSIBLE_GESTURES;
+
+export function poseIdForKeyboardKey(key) {
+  const normalized = key.length === 1 ? key.toUpperCase() : key;
+  return keyboardPoseLanes.find(lane => lane.key === normalized || lane.altKey === normalized)?.poseId ?? null;
+}
 
 export function drawPose(ctx, pose, x, y, size, color) {
   ctx.save();

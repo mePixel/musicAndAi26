@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createRound, judge, expireNotes } from './game.js';
 import { notesForMode } from './difficulty.js';
 import { songs } from './songs.js';
-import { playablePoses as poses, controlPose } from './poses.js';
+import { playablePoses as poses, controlPose, keyboardPoseLanes, poseIdForKeyboardKey } from './poses.js';
 
 const chart = [{ time: 3, pose: 'leftHip' }, { time: 4.25, pose: 'rightHip' }];
 
@@ -112,4 +112,19 @@ test('corner cues converge on their targets exactly at the audio beat on every v
       assert.ok(Math.abs(late.x - width/2) < Math.abs(onBeat.x - width/2));
     }
   }
+});
+
+test('keyboard lanes are numbered clockwise from top left and support WASD', () => {
+  assert.deepEqual(keyboardPoseLanes.map(lane => [lane.key, lane.altKey, lane.poseId]), [
+    ['1', 'W', 'leftHand'],
+    ['2', 'D', 'rightHand'],
+    ['3', 'S', 'rightHip'],
+    ['4', 'A', 'leftHip'],
+  ]);
+  assert.equal(poseIdForKeyboardKey('1'), 'leftHand');
+  assert.equal(poseIdForKeyboardKey('w'), 'leftHand');
+  assert.equal(poseIdForKeyboardKey('D'), 'rightHand');
+  assert.equal(poseIdForKeyboardKey('s'), 'rightHip');
+  assert.equal(poseIdForKeyboardKey('a'), 'leftHip');
+  assert.equal(poseIdForKeyboardKey('5'), null);
 });

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription } from '@/components/ui/empty';
 import { Spinner } from '@/components/ui/spinner';
-import { playablePoses as poses, controlPose } from './poses.js';
+import { playablePoses as poses, controlPose, keyboardPoseLanes, poseIdForKeyboardKey } from './poses.js';
 import { createCamera } from './pose.js';
 import { createRound, createStage, createCameraPoseGrace, expireNotes, judge } from './game.js';
 import { PoseDancer } from './components/PoseDancer.jsx';
@@ -141,8 +141,8 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
     function keydown(event) {
       if (event.key === 'Escape') { onExit(); return; }
       if (input !== 'keyboard' || event.repeat || event.ctrlKey || event.metaKey || event.altKey || event.target.closest('input,textarea,select,[contenteditable="true"],[role="slider"]')) return;
-      const index = Number(event.key)-1;
-      if (Number.isInteger(index) && index >= 0 && index < 4) { event.preventDefault(); hit(poses[index].id); }
+      const poseId = poseIdForKeyboardKey(event.key);
+      if (poseId) { event.preventDefault(); hit(poseId); }
     }
     function leavePage() { audio.stop(); camera.stop(); }
     function hidden() { if (document.hidden) { leavePage(); onExit(); } }
@@ -172,11 +172,11 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
           <canvas ref={canvas} aria-label="Hand cues fly from the upper corners; hip cues from the lower corners. Match the pose as its cue enters the ring beside your character." />
           <p className="stage-instruction">Match the pose<br /><strong>when it meets the ring.</strong></p>
           <div className="corner-controls" aria-label="Pose targets">
-            {poses.slice(0,4).map((pose,i) => <div key={pose.id} data-corner={pose.id} style={{ '--cue-color': pose.color }}>
-              <Button variant="outline" aria-label={`Play ${pose.label}`} disabled={input !== 'keyboard' || phase !== 'playing'} onClick={() => trigger.current(pose.id)}><kbd>{i+1}</kbd>{pose.short}</Button>
+            {keyboardPoseLanes.map(({ pose, key, altKey }) => <div key={pose.id} data-corner={pose.id} style={{ '--cue-color': pose.color }}>
+              <Button variant="outline" aria-label={`Play ${pose.label}`} disabled={input !== 'keyboard' || phase !== 'playing'} onClick={() => trigger.current(pose.id)}><kbd>{key}/{altKey}</kbd>{pose.short}</Button>
             </div>)}
           </div>
-          {phase === 'playing' && hud.countdown === 0 ? <p className="character-status" role="status">{input === 'camera' ? cameraState.hint || (cameraState.tracked ? detected?.short ?? 'Following your movement' : 'Step into frame') : 'Use keys 1–4 or tap a corner'}</p> : null}
+          {phase === 'playing' && hud.countdown === 0 ? <p className="character-status" role="status">{input === 'camera' ? cameraState.hint || (cameraState.tracked ? detected?.short ?? 'Following your movement' : 'Step into frame') : 'Use 1–4, WASD, or tap a corner'}</p> : null}
           {waiting ? <div className="stage-overlay" role="status">
             {phase === 'loading' ? <Spinner /> : <Camera aria-hidden="true" />}
             <h2>{phase === 'loading' ? input === 'camera' ? 'Opening your camera' : 'Loading your track' : cameraState.tracked ? 'Ready to start' : 'Step into frame'}</h2>
@@ -224,10 +224,10 @@ export function Game({ song, input, mode = 'medium', audio, onExit, onUseKeyboar
         <div className="camera-preview" data-enabled={cameraState.enabled}>
           <video ref={video} autoPlay playsInline muted aria-label="Mirrored webcam preview" />
           <canvas ref={overlay} aria-hidden="true" />
-          {!cameraState.enabled ? <Empty><EmptyHeader><EmptyMedia variant="icon">{input === 'camera' ? <Camera /> : <Keyboard />}</EmptyMedia><EmptyTitle>{input === 'camera' ? phase === 'finished' ? 'Camera off' : 'Camera preview' : 'Use keys 1–4'}</EmptyTitle><EmptyDescription>{input === 'camera' ? 'Your video appears here.' : 'Press a key as its cue reaches its ring. You can tap the buttons, too.'}</EmptyDescription></EmptyHeader></Empty> : null}
+          {!cameraState.enabled ? <Empty><EmptyHeader><EmptyMedia variant="icon">{input === 'camera' ? <Camera /> : <Keyboard />}</EmptyMedia><EmptyTitle>{input === 'camera' ? phase === 'finished' ? 'Camera off' : 'Camera preview' : 'Use 1–4 or WASD'}</EmptyTitle><EmptyDescription>{input === 'camera' ? 'Your video appears here.' : 'Press a key as its cue reaches its ring. You can tap the buttons, too.'}</EmptyDescription></EmptyHeader></Empty> : null}
           {cameraState.enabled ? <span className="detected-pose">{cameraState.tracked ? detected?.label ?? 'Ready' : 'Step into frame'}</span> : null}
         </div>
-        <p>{input === 'camera' ? cameraState.hint || `Prepare a pose early and hold it through the beat. For repeated cues, move your hand away and back. The ${controlPose.label} pose starts the round; use the buttons to pause and resume.` : 'Left hip · Right hip · Left hand · Right hand'}</p>
+        <p>{input === 'camera' ? cameraState.hint || `Prepare a pose early and hold it through the beat. For repeated cues, move your hand away and back. The ${controlPose.label} pose starts the round; use the buttons to pause and resume.` : '1/W top left · 2/D top right · 3/S bottom right · 4/A bottom left'}</p>
       </section>
       </aside>
     </div>

@@ -43,8 +43,15 @@ test('loads generated song notes and falls back to authored notes on failure', a
   assert.ok(fallback.error);
 });
 
+<<<<<<< HEAD
 test('both bundled generated charts load with current playable pose IDs', async () => {
   for (const song of songs.filter(song => song.beatmapUrl)) {
+=======
+test('bundled generated charts load with current playable pose IDs', async () => {
+  const generatedSongs = songs.filter(song => song.beatmapUrl);
+  assert.ok(generatedSongs.length > 0);
+  for (const song of generatedSongs) {
+>>>>>>> origin/add-pasted-songs
     const beatmap = JSON.parse(await readFile(new URL(`../public${song.beatmapUrl}`, import.meta.url), 'utf8'));
     const result = await loadSongNotes(song, async () => ({ ok: true, json: async () => beatmap }));
     assert.equal(result.source, 'generated', song.id);

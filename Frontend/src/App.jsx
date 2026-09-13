@@ -23,6 +23,18 @@ function titleFromStem(file) {
   return file.name.replace(/_(drums|bass|other|vocals)\.[^.]+$/i,'') || 'Uploaded stems';
 }
 
+function analyzeStems(audio, decodedEntries, options = {}) {
+  const stems = Object.fromEntries(decodedEntries);
+  const durationSpread = Math.max(...decodedEntries.map(([,stem]) => stem.duration))-Math.min(...decodedEntries.map(([,stem]) => stem.duration));
+  if (durationSpread > .1) throw new Error('The separated stems do not have matching durations.');
+  const buffer = audio.mix(decodedEntries.filter(([name]) => name !== 'drums').map(([,stem]) => stem));
+  if (buffer.duration < 5) throw new Error('Choose a song that is at least five seconds long.');
+  const beatmap = generateBrowserBeatmap(buffer, { difficulty:'medium', seed:options.seed ?? 42, stems });
+  const notes = beatmapToNotes(beatmap);
+  if (notes.length < 4) throw new Error('Not enough drum-like impacts were found. Try a track with clearer percussion.');
+  return { beatmap, buffer, notes };
+}
+
 function Instructions() {
   return <Dialog>
     <DialogTrigger render={<Button variant="outline" size="sm" />}>How to play</DialogTrigger>
@@ -61,12 +73,29 @@ export function App() {
     document.title = screen === 'songs' ? 'Bodybeat — Choose a song' : screen === 'practice' ? 'Practice — Bodybeat' : `${song.title} — Bodybeat`;
   },[screen,song.title]);
 
+  async function prepareSongForPlay(selectedSong) {
+    if (!selectedSong.stemUrls || selectedSong.generated) return selectedSong;
+    const decodedEntries = await Promise.all(REQUIRED_STEMS.map(async name => [name,await audio.load(selectedSong.stemUrls[name])]));
+    const { beatmap, buffer, notes } = analyzeStems(audio, decodedEntries, { seed:selectedSong.id.length });
+    const prepared = {
+      ...selectedSong,
+      bpm:beatmap.metadata.bpm,
+      duration:buffer.duration,
+      buffer,
+      notes,
+      generated:true,
+    };
+    setTracks(current => current.map(track => track.id === selectedSong.id ? prepared : track));
+    return prepared;
+  }
+
   async function play(nextScreen = 'game') {
     setStarting(true); setError('');
     try {
       await audio.ensure();
+      if (nextScreen === 'game') await prepareSongForPlay(song);
       setScreen(nextScreen); window.scrollTo(0,0);
-    } catch { setError('Sound could not start. Please try again.'); }
+    } catch (playError) { setError(playError.message || 'Sound could not start. Please try again.'); }
     finally { setStarting(false); }
   }
 
@@ -84,14 +113,7 @@ export function App() {
       const missing = REQUIRED_STEMS.filter(name => !stemFiles.has(name));
       if (missing.length) throw new Error(`This folder is missing: ${missing.map(name => `${name}.wav`).join(', ')}.`);
       const decodedEntries = await Promise.all(REQUIRED_STEMS.map(async name => [name,await audio.decode(await stemFiles.get(name).arrayBuffer())]));
-      const stems = Object.fromEntries(decodedEntries);
-      const durationSpread = Math.max(...decodedEntries.map(([,stem]) => stem.duration))-Math.min(...decodedEntries.map(([,stem]) => stem.duration));
-      if (durationSpread > .1) throw new Error('The separated stems do not have matching durations.');
-      const buffer = audio.mix(decodedEntries.filter(([name]) => name !== 'drums').map(([,stem]) => stem));
-      if (buffer.duration < 5) throw new Error('Choose a song that is at least five seconds long.');
-      const beatmap = generateBrowserBeatmap(buffer, { difficulty:'medium', seed:42, stems });
-      const notes = beatmapToNotes(beatmap);
-      if (notes.length < 4) throw new Error('Not enough drum-like impacts were found. Try a track with clearer percussion.');
+      const { beatmap, buffer, notes } = analyzeStems(audio, decodedEntries);
       const drumsFile = stemFiles.get('drums');
       const uploaded = {
         id:`upload-${Date.now()}`,

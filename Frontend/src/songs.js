@@ -15,6 +15,38 @@ const originalSongs = [
       [12,3],[13,0],[14,2],[15,1],[16,0],[17,3],[18,2],[19,1],
       [21,0],[22,1],[23,2],[24,3],[25,2],[26,0],[27,3],[28,1],
       [30,2],[31,3],[32,0],[33,1],[34,2]] },
+  { id: 'another-one-bites-the-dust', title: 'Another One Bites The Dust', bpm: 110, duration: 215, mood: 'Classic bassline. Built from separated stems.',
+    color: '#f6c85f', stemUrls: {
+      drums: encodeURI('/songs/Queen - Another One Bites The Dust/Queen - Another One Bites The Dust [Lyrics] - GlyphoricVibes (youtube)_drums.wav'),
+      bass: encodeURI('/songs/Queen - Another One Bites The Dust/Queen - Another One Bites The Dust [Lyrics] - GlyphoricVibes (youtube)_bass.wav'),
+      other: encodeURI('/songs/Queen - Another One Bites The Dust/Queen - Another One Bites The Dust [Lyrics] - GlyphoricVibes (youtube)_other.wav'),
+      vocals: encodeURI('/songs/Queen - Another One Bites The Dust/Queen - Another One Bites The Dust [Lyrics] - GlyphoricVibes (youtube)_vocals.wav'),
+    },
+    notes: [] },
+  { id: 'feel-good-inc', title: 'Feel Good Inc.', bpm: 138, duration: 223, mood: 'A loose, crunchy groove from separated stems.',
+    color: '#8bd6c2', stemUrls: {
+      drums: encodeURI('/songs/Gorillaz - Feel Good Inc./Gorillaz - Feel Good Inc. - Minimal Sounds (youtube)_drums.wav'),
+      bass: encodeURI('/songs/Gorillaz - Feel Good Inc./Gorillaz - Feel Good Inc. - Minimal Sounds (youtube)_bass.wav'),
+      other: encodeURI('/songs/Gorillaz - Feel Good Inc./Gorillaz - Feel Good Inc. - Minimal Sounds (youtube)_other.wav'),
+      vocals: encodeURI('/songs/Gorillaz - Feel Good Inc./Gorillaz - Feel Good Inc. - Minimal Sounds (youtube)_vocals.wav'),
+    },
+    notes: [] },
+  { id: 'beast-of-burden', title: 'Beast Of Burden', bpm: 101, duration: 211, mood: 'Laid-back Stones sway from separated stems.',
+    color: '#f08c7d', stemUrls: {
+      drums: encodeURI('/songs/The Rolling Stones - Beast Of Burden/Beast Of Burden by The Rolling Stones - StonesFan85 (youtube)_drums.wav'),
+      bass: encodeURI('/songs/The Rolling Stones - Beast Of Burden/Beast Of Burden by The Rolling Stones - StonesFan85 (youtube)_bass.wav'),
+      other: encodeURI('/songs/The Rolling Stones - Beast Of Burden/Beast Of Burden by The Rolling Stones - StonesFan85 (youtube)_other.wav'),
+      vocals: encodeURI('/songs/The Rolling Stones - Beast Of Burden/Beast Of Burden by The Rolling Stones - StonesFan85 (youtube)_vocals.wav'),
+    },
+    notes: [] },
+  { id: 'pumped-up-kicks', title: 'Pumped Up Kicks', bpm: 128, duration: 237, mood: 'Bright indie pulse from separated stems.',
+    color: '#82b7f5', stemUrls: {
+      drums: encodeURI('/songs/Foster The People - Pumped Up Kicks/Foster The People - Pumped Up Kicks (Lyrics) - 7clouds (youtube)_drums.wav'),
+      bass: encodeURI('/songs/Foster The People - Pumped Up Kicks/Foster The People - Pumped Up Kicks (Lyrics) - 7clouds (youtube)_bass.wav'),
+      other: encodeURI('/songs/Foster The People - Pumped Up Kicks/Foster The People - Pumped Up Kicks (Lyrics) - 7clouds (youtube)_other.wav'),
+      vocals: encodeURI('/songs/Foster The People - Pumped Up Kicks/Foster The People - Pumped Up Kicks (Lyrics) - 7clouds (youtube)_vocals.wav'),
+    },
+    notes: [] },
 ].map(song => ({ ...song, notes: song.notes.map(([time, index]) => ({ time, pose: poses[index].id })) }));
 
 // Prepared from the supplied stems with the same chart generator as uploads.

@@ -18,8 +18,7 @@ const instructions = {
   rightHip: 'Right hand on your right hip — hi-hat.',
   leftHand: 'Left hand at your chest or shoulder — bass.',
   rightHand: 'Right hand at your chest or shoulder — crash.',
-  default: 'Both hands down - ...', // change to what it should be
-  // startStop: 'Starts, pauses, or resumes the rhythm game. No instrument sound.',
+  default: 'Starts, pauses, or resumes the rhythm game. No instrument sound.',
 };
 
 export function Practice({ audio, onExit }) {

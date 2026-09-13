@@ -9,8 +9,7 @@ const CLASS_TO_POSE = {
   "Left Hip": "rightHip",
   "Right Hand": "leftHand",
   "Left Hand": "rightHand",
-  "Default": "default",
-  // "Start/Stop": "startStop",
+  "Start/Stop": "default",
 };
 
 const MIN_CLASS_CONFIDENCE = 0.65;

@@ -49,8 +49,8 @@ export const poses = [
 
   {
     id: "default",
-    label: "Default",
-    short: "Default",
+    label: "Start/Stop",
+    short: "Start/Stop",
     color: "#e36414",
 
     arms: [
@@ -62,8 +62,8 @@ export const poses = [
 
 export const controlPose = {
   id: "default",
-  label: "Default",
-  short: "Default",
+  label: "Start/Stop",
+  short: "Start/Stop",
   color: "#e36414",
 
   arms: [

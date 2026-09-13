@@ -37,19 +37,9 @@ play. Left Hip again uses the shared 70% entry / 50% retention thresholds, witho
 the extra wrist-distance or elbow-angle gate. Joint visibility checks and the
 repeated-pose release/return behavior remain.
 
-Feel Good Inc. is now the third bundled song. The supplied Minimal Sounds stems
-were prepared into a drumless backing WAV (bass + other + vocals), a saved pose
-chart generated from the drums stem with the existing browser generator, and a
-real RMS waveform preview. It appears in song selection after every reload and
-uses the regular Easy / Medium / Hard flow without uploading or reanalyzing stems.
-The original stem files remain available; the new backing WAV uses existing LFS
-rules. Backing duration is 222.824 seconds.
-
-Verification: all 55 Node tests and the production build pass. Desktop/mobile
-browser checks verified song selection and waveform, persistence in the bundled
-list after refresh, real WAV decoding, keyboard scoring, pause/resume, restart,
-and return to songs, with no browser errors or warnings. Audible timing and a
-physical camera playthrough of this track still need a human check.
+Feel Good Inc. has been removed from the bundled song selection, along with its
+prepared chart, waveform, backing audio, and public stem copies. The supplied
+source stems and ZIP outside `Frontend/` remain available.
 
 Character behavior restored from `ae74ab91ea6f40bec47b14cde4e239bad3a598cf`:
 the rhythm-mode character mirrors live joints and takes the current recognized

@@ -80,9 +80,15 @@ test('new rounds do not mutate song charts or retain previous results', () => {
 });
 test('both authored charts give a player time to move and finish before the audio ends', () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
   const originals = songs.filter(song => !song.generated);
   assert.equal(originals.length,2);
   for (const song of originals) {
+=======
+  const authoredSongs = songs.filter(song => !song.stemUrls);
+  assert.equal(authoredSongs.length,2);
+  for (const song of authoredSongs) {
+>>>>>>> origin/add-pasted-songs
 =======
   const authoredSongs = songs.filter(song => !song.stemUrls);
   assert.equal(authoredSongs.length,2);
